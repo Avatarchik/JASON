@@ -25,11 +25,14 @@ public class CharacterMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		rigidbody.velocity = Vector3.zero;
+		rigidbody2D.velocity = Vector3.zero;
 		CheckTouch();
 	}
 	void CheckTouch(){
 		Vector2 mousePosition;
+		if(Input.touchCount == 0){
+			hitname = "Idle";
+		}
 		for (int i = 0; i < Input.touchCount; i++){
 			if (Input.GetTouch(i).phase == TouchPhase.Stationary ||Input.GetTouch(i).phase == TouchPhase.Moved){	
 				mousePosition = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);	
@@ -38,13 +41,12 @@ public class CharacterMovement : MonoBehaviour {
 		}
 	}
 	void CheckTouchPosition(Vector2 position){
-		RaycastHit hit;
-		hitname = "nohitfound";
-		if (Physics.Raycast (position,new Vector3(position.x,position.y,2),out hit)) {
+		RaycastHit2D hit = Physics2D.Raycast(position,position);
+		if (hit == true) {
 			//Check if it Hits Player or Enemy
 			Transform rayhit = hit.transform;
 			if(rayhit.tag == "Player"){
-
+				Defence();
 			}else if(rayhit.tag == "Enemy"){
 
 			}else{
@@ -54,10 +56,13 @@ public class CharacterMovement : MonoBehaviour {
 			MovePlayer(position);
 		}
 	}
-
+	void Defence(){
+		hitname = "Defence";
+	}
 	void MovePlayer(Vector2 position){
 		float step = 5 * Time.deltaTime;
 		transform.position = Vector2.MoveTowards(transform.position,position,step);
+		hitname = "Walking";
 	}
 
 
