@@ -44,9 +44,11 @@ public class Button {
 	public void Update() {
 		if(callback == null)
 			throw new System.ArgumentException("The callback of the button can\'t be null");
-			
-		if(GUI.Button(position, content, style)) {
-			callback(this);
+		
+		if(!DebugSettings.Instance.DisableGUI) {
+			if(GUI.Button(position, content, style)) {
+				callback(this);
+			}
 		}
 	}
 	

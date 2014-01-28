@@ -150,7 +150,8 @@ PlayerSettings:
   ps3TrialMode: 0
   flashStrippingLevel: 2
   spritePackerPolicy: 
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    2: 4
   metroPackageName: AndroidAPP
   metroPackageLogo: 
   metroPackageVersion: 
