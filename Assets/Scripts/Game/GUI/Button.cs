@@ -4,6 +4,8 @@ using System.Collections;
 public delegate void Callback(Button button);
 
 public class Button {
+	private static ArrayList buttons = new ArrayList();
+
 	private event Callback callback;
 
 	private GUIContent content;
@@ -30,6 +32,8 @@ public class Button {
 		style.normal.background = normal;
 		style.hover.background = hover;
 		style.active.background = down;
+		
+		buttons.Add(this);
 	}
 	
 	/** Create a button */
@@ -38,18 +42,8 @@ public class Button {
 		this.callback += callback;
 		this.content = content;
 		this.style = style;
-	}
-	
-	/** Update the button to check for clicks. Must be called from the OnGUI method */
-	public void Update() {
-		if(callback == null)
-			throw new System.ArgumentException("The callback of the button can\'t be null");
 		
-		if(!DebugSettings.Instance.DisableGUI) {
-			if(GUI.Button(position, content, style)) {
-				callback(this);
-			}
-		}
+		buttons.Add(this);
 	}
 	
 	public GUIContent Content { get { return content; } }
@@ -57,4 +51,25 @@ public class Button {
 	public GUIStyle Style { get { return style; } }
 	
 	public Rect Position { get { return position; } }
+	
+	/** Draw all buttons that are registered */
+	public static void Update() {
+		if(!DebugSettings.Instance.DisableGUI) {
+			foreach(Button button in buttons) {
+				if(button.callback == null)
+					throw new System.ArgumentException("The callback of a button can\'t be null");
+				
+				if(!DebugSettings.Instance.DisableGUI) {
+					if(GUI.Button(button.position, button.content, button.style)) {
+						button.callback(button);
+					}
+				}
+			}
+		}
+	}
+	
+	/** Dispose of all buttons */
+	public static void Clear() {
+		buttons.Clear();
+	}
 }

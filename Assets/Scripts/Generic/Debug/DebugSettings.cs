@@ -15,9 +15,9 @@ public class DebugSettings:Singleton<DebugSettings> {
 	[SerializeField]
 	private bool disableGUI;
 	
-	public void Logger(LogLevel priority, string text) {
+	public void Logger(LogLevel priority, object message) {
 		if((int)priority >= (int)loggingLevel) {
-			Debug.Log("Logger: " + text);
+			Debug.Log("[Logger] " + message);
 		}
 	}
 	
