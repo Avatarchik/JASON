@@ -163,13 +163,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 258076824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8230e36936165b489167e221556e5a1, type: 3}
+  m_Script: {fileID: 11500000, guid: bd95c3cdcd465a14f88ac2c392285b8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureNormal: {fileID: 2800000, guid: fbda707fb5e618c468ccef7fad34af5f, type: 3}
-  textureHover: {fileID: 2800000, guid: 7fd15b0d643f5fb44a95a252c66f83ae, type: 3}
-  textureActive: {fileID: 2800000, guid: a6691d418674a6f4e8e9d64cdf65be6a, type: 3}
-  position: {x: 100, y: 100}
+  button:
+    position: {x: 0, y: 0}
+    textureNormal: {fileID: 2800000, guid: fbda707fb5e618c468ccef7fad34af5f, type: 3}
+    textureActive: {fileID: 2800000, guid: 7fd15b0d643f5fb44a95a252c66f83ae, type: 3}
+    text: 
+    tooltip: 
+    textureToggle: {fileID: 2800000, guid: a6691d418674a6f4e8e9d64cdf65be6a, type: 3}
 --- !u!1 &628315614
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8a88272542eadb498fea116bf65c630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggingLevel: 0
   disableGUI: 0
 --- !u!1 &1254751283
 GameObject:

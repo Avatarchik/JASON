@@ -6,7 +6,6 @@ public class Button {
 	[SerializeField] private Vector2 position;
 	
 	[SerializeField] private Texture2D textureNormal;
-	[SerializeField] private Texture2D textureHover;
 	[SerializeField] private Texture2D textureActive;
 	
 	[SerializeField] private string text;
@@ -35,9 +34,6 @@ public class Button {
 				if(style.normal.background != null) {
 					width = (uint)style.normal.background.width;
 					height = (uint)style.normal.background.height; 
-				} else if(style.hover.background != null) {
-					width = (uint)style.hover.background.width;
-					height = (uint)style.hover.background.height; 
 				} else if(style.active.background != null) {
 					width = (uint)style.active.background.width;
 					height = (uint)style.active.background.height; 
@@ -98,7 +94,6 @@ public class Button {
 		style = new GUIStyle();
 		
 		style.normal.background = textureNormal;
-		style.hover.background = textureHover;
 		style.active.background = textureActive;
 	}
 	

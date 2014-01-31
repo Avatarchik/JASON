@@ -26,22 +26,9 @@ class ButtonCreator:PropertyDrawer {
 		Rect oldPosition = position;
 		
 		position.y += 16f;
-		position.width /= 3f;
-		
-		EditorGUI.indentLevel = 0;
-		EditorGUIUtility.labelWidth = 55f;
-		
-		EditorGUI.PropertyField(position, property.FindPropertyRelative("textureNormal"), new GUIContent("Normal"));
-		position.x += position.width;
-		EditorGUI.PropertyField(position, property.FindPropertyRelative("textureHover"), new GUIContent("Hover"));
-		position.x += position.width;
-		EditorGUI.PropertyField(position, property.FindPropertyRelative("textureActive"), new GUIContent("Active"));
-		
-		position.x = oldPosition.x;
-		position.width = oldPosition.width;
-		position.y += 19f;
 		position.width /= 2f;
 		
+		EditorGUI.indentLevel = 0;
 		EditorGUIUtility.labelWidth = 55f;
 		
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("position.x"));
@@ -52,9 +39,9 @@ class ButtonCreator:PropertyDrawer {
 		position.width = oldPosition.width;
 		position.y += 19f;
 		position.width /= 2f;
-
+		
 		EditorGUIUtility.labelWidth = 55f;
-				
+		
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("text"), new GUIContent("Text"));
 		position.x += position.width;
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("tooltip"), new GUIContent("Tooltip"));
@@ -62,16 +49,20 @@ class ButtonCreator:PropertyDrawer {
 		position.x = oldPosition.x;
 		position.width = oldPosition.width;
 		position.y += 19f;
-		position.width /= 2f;
-		
+		position.width /= 3f;
+
 		EditorGUIUtility.labelWidth = 55f;
 		
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("textureNormal"), new GUIContent("Normal"));
+		position.x += position.width;
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("textureActive"), new GUIContent("Active"));
+		position.x += position.width;
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("textureToggle"), new GUIContent("Toggle"));
 		
 		EditorGUI.indentLevel = oldIndent;
 	}
 	
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-		return property.isExpanded ? 89f : 16f;	
+		return property.isExpanded ? 70f : 16f;	
 	}
 }

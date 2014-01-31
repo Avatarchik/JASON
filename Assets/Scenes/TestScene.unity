@@ -86,7 +86,7 @@ GameObject:
   - 61: {fileID: 548101926}
   m_Layer: 0
   m_Name: New Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -297,10 +297,10 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2038436182}
-  - 114: {fileID: 2038436178}
+  - 212: {fileID: 2038436179}
   - 61: {fileID: 2038436181}
   - 50: {fileID: 2038436180}
-  - 212: {fileID: 2038436179}
+  - 114: {fileID: 2038436178}
   - 114: {fileID: 2038436183}
   m_Layer: 0
   m_Name: Player
@@ -320,10 +320,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54429b4bdc506c442b61a6ff286eff44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  playerData:
+    health: 0
+    speed: 0
+  touchPoint: {fileID: 0}
   fingerPosition: {x: 0, y: 0}
-  hitname: 
-  touchpoint: {fileID: 0}
+  hitName: 
 --- !u!212 &2038436179
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -407,7 +409,7 @@ GameObject:
   - 212: {fileID: 2053982016}
   m_Layer: 0
   m_Name: New Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
