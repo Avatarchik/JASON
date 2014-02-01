@@ -1,38 +1,62 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
 
-public class Player:MonoBehaviour {
+public class Player:MonoBehaviour {	
 	[Serializable]
 	public class PlayerData {
 		public int health;
 		public int speed;
+		public int attackDamage;
+		
+		public float attackDelay;
 	}
-	
+
 	[SerializeField] private PlayerData playerData;
 	
-	public GameObject touchPoint;	
-	public Vector2 fingerPosition;
-	public string hitName;
+	private Vector3 targetPosition;
 	
-	private PlayerCombat playerCombat;
+	private Transform attackTarget;
+	
+	private bool canAttack;
+	private bool attacking;
 	
 	void Start() {
-		playerCombat = GetComponent<PlayerCombat>();
+		targetPosition = transform.position;
 	}
 	
 	void Update() {
-		CheckForTouch();
-	}
+		canAttack = false;
 	
-	void FixedUpdate() {
-		rigidbody2D.velocity = Vector2.zero;
+		CheckForTouch();
+		
+		if(attackTarget != null) {
+			if(Vector3.Distance(transform.position, attackTarget.position) <= 1) {
+				targetPosition = transform.position;
+				
+				canAttack = true;
+			} else {
+				targetPosition = attackTarget.position;
+			}
+		}
+		
+		if(targetPosition != transform.position) {
+			float step = playerData.speed * Time.deltaTime;
+			
+			transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
+		}
+		
+		if(canAttack && !attacking)
+			StartCoroutine("Attack");
 	}
 	
 	private void CheckForTouch() {
-		if(Input.touchCount == 0) {
-			hitName = "Idle";
-			return;
+		if(Input.GetMouseButtonDown(0)) {
+			CheckTouchPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 		}
+		
+		if(Input.touchCount == 0)
+			return;
 		
 		for(int i = 0; i < Input.touchCount; i++) {
 			Touch touch = Input.GetTouch(i);
@@ -44,17 +68,15 @@ public class Player:MonoBehaviour {
 	}
 	
 	private void CheckTouchPosition(Vector2 position) {
-		RaycastHit2D hit = Physics2D.Raycast(position, position);
+		RaycastHit2D hit = Physics2D.Raycast(position, -Vector2.up);
 		
 		if(hit) {
-			Debug.Log(hit.transform.tag);
-		
 			switch(hit.transform.tag) {
 			case "Player":
-				playerCombat.Defend();
+				Defend();
 				break;
 			case "Enemy":
-				playerCombat.Attack();
+				InitAttack(hit.transform);
 				break;
 			default:
 				Move(position);
@@ -66,15 +88,30 @@ public class Player:MonoBehaviour {
 	}
 	
 	private void Move(Vector2 position) {
-		float step = 5 * Time.deltaTime;
-		
-		transform.position = Vector2.MoveTowards(transform.position, position, step);
-		
-		hitName = "Walking";
+		attackTarget = null;
+	
+		targetPosition = position;
 	}
-
-	void OnGUI (){
-		GUI.Label(new Rect(0,0,100,100), "" + transform.position.x + " : " + transform.position.y); 
-		GUI.Label(new Rect(0,50,100,100), "" + hitName); 
+	
+	private void Defend() {
+		attackTarget = null;
+	
+		Debug.Log("defend");
+	}
+	
+	private void InitAttack(Transform target) {
+		attackTarget = target;
+		targetPosition = attackTarget.position;
+	}
+	
+	private IEnumerator Attack() {
+		attacking = true;
+	
+		yield return new WaitForSeconds(playerData.attackDelay);
+		
+		if(attackTarget != null)
+			attackTarget.GetComponent<Enemy>().TakeDamage(playerData.attackDamage);
+		
+		attacking = false;
 	}
 }

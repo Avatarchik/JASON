@@ -38,6 +38,14 @@ TagManager:
   User Layer 30: 
   User Layer 31: 
   m_SortingLayers:
+  - name: Background
+    userID: 2
+    uniqueID: 3992498695
+    locked: 0
+  - name: Enemies
+    userID: 1
+    uniqueID: 54986865
+    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0

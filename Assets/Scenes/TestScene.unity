@@ -84,6 +84,7 @@ GameObject:
   - 4: {fileID: 548101928}
   - 212: {fileID: 548101927}
   - 61: {fileID: 548101926}
+  - 114: {fileID: 548101929}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Enemy
@@ -100,7 +101,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: .639999986, y: .639999986}
   m_Center: {x: 0, y: 0}
 --- !u!212 &548101927
 SpriteRenderer:
@@ -120,9 +121,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
+  m_SortingLayer: -1
   m_SortingOrder: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 54986865
   m_Sprite: {fileID: 21300000, guid: 526fbc1fb0814e24c9f94c0efa0d6d45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &548101928
@@ -132,10 +133,26 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 548101925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.80281258, y: .328997135, z: .832763672}
-  m_LocalScale: {x: 6.8824172, y: 6.88241911, z: 1}
+  m_LocalPosition: {x: -8.80281258, y: .328997135, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &548101929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548101925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e93938bee368bf4a9ec84c52e9ce70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData:
+    health: 10
+    speed: 0
+    attackDamage: 0
+    attackDelay: 0
 --- !u!1 &1021482067
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +231,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1021482067}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -4, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -224,7 +241,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1021482067}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: cb220073cd0659346a7498cfddba5985, type: 3}
   m_PlayOnAwake: 1
@@ -287,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c09d8220e145f49a69e205ec1de698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dampTime: .150000006
+  damping: .150000006
   target: {fileID: 2038436182}
 --- !u!1 &2038436177
 GameObject:
@@ -298,8 +315,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2038436182}
   - 212: {fileID: 2038436179}
-  - 61: {fileID: 2038436181}
-  - 50: {fileID: 2038436180}
+  - 61: {fileID: 2038436180}
   - 114: {fileID: 2038436178}
   - 114: {fileID: 2038436183}
   m_Layer: 0
@@ -321,11 +337,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
-    health: 0
-    speed: 0
-  touchPoint: {fileID: 0}
-  fingerPosition: {x: 0, y: 0}
-  hitName: 
+    health: 10
+    speed: 5
+    attackDamage: 1
+    attackDelay: .5
 --- !u!212 &2038436179
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -349,22 +364,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_Sprite: {fileID: 21300238, guid: 526fbc1fb0814e24c9f94c0efa0d6d45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!50 &2038436180
-Rigidbody2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2038436177}
-  m_Mass: 9.99999975e-05
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_FixedAngle: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
---- !u!61 &2038436181
+--- !u!61 &2038436180
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -373,7 +373,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: .639999986, y: .639999986}
   m_Center: {x: 0, y: 0}
 --- !u!4 &2038436182
 Transform:
@@ -381,8 +381,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2038436177}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 4.2989509e-06}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -407,6 +407,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 2053982017}
   - 212: {fileID: 2053982016}
+  - 61: {fileID: 2053982018}
+  - 114: {fileID: 2053982019}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Enemy
@@ -432,9 +434,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
+  m_SortingLayer: -1
   m_SortingOrder: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 54986865
   m_Sprite: {fileID: 21300000, guid: 526fbc1fb0814e24c9f94c0efa0d6d45, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &2053982017
@@ -444,7 +446,34 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2053982015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .197187901, y: -.671003103, z: .832763672}
-  m_LocalScale: {x: 6.8824172, y: 6.88241911, z: 1}
+  m_LocalPosition: {x: .197187901, y: -.671003103, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!61 &2053982018
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2053982015}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Size: {x: .639999986, y: .639999986}
+  m_Center: {x: 0, y: 0}
+--- !u!114 &2053982019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2053982015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e93938bee368bf4a9ec84c52e9ce70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyData:
+    health: 10
+    speed: 0
+    attackDamage: 0
+    attackDelay: 0
