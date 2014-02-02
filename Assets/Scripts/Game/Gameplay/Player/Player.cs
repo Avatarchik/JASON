@@ -3,51 +3,36 @@ using System;
 using System.Collections;
 
 public class Player:MonoBehaviour {	
-	[Serializable]
-	public class PlayerData {
-		public int health;
-		public int speed;
-		public int attackDamage;
-		
-		public float attackDelay;
-	}
-
-	[SerializeField] private PlayerData playerData;
+	[SerializeField]
+	private PlayerData data;
+	private PlayerCombat playerCombat;
 	
 	private Vector3 targetPosition;
 	
-	private Transform attackTarget;
-	
-	private bool canAttack;
-	private bool attacking;
-	
 	void Start() {
+		playerCombat = GetComponent<PlayerCombat>();
+	
 		targetPosition = transform.position;
 	}
 	
-	void Update() {
-		canAttack = false;
-	
+	void Update() {	
 		CheckForTouch();
 		
-		if(attackTarget != null) {
-			if(Vector3.Distance(transform.position, attackTarget.position) <= 1) {
-				targetPosition = transform.position;
-				
-				canAttack = true;
-			} else {
-				targetPosition = attackTarget.position;
-			}
-		}
-		
 		if(targetPosition != transform.position) {
-			float step = playerData.speed * Time.deltaTime;
+			float step = data.speed * Time.deltaTime;
 			
 			transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
 		}
-		
-		if(canAttack && !attacking)
-			StartCoroutine("Attack");
+	}
+	
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.tag == "Room")
+			other.GetComponent<Room>().Show();
+	}
+	
+	void OnTriggerExit2D(Collider2D other) {
+		if(other.tag == "Room")
+			other.GetComponent<Room>().Hide();
 	}
 	
 	private void CheckForTouch() {
@@ -73,10 +58,10 @@ public class Player:MonoBehaviour {
 		if(hit) {
 			switch(hit.transform.tag) {
 			case "Player":
-				Defend();
+				playerCombat.Defend();
 				break;
 			case "Enemy":
-				InitAttack(hit.transform);
+				playerCombat.StartAttack(hit.transform);
 				break;
 			default:
 				Move(position);
@@ -88,30 +73,25 @@ public class Player:MonoBehaviour {
 	}
 	
 	private void Move(Vector2 position) {
-		attackTarget = null;
+		Debug.Log ("Move");
+		playerCombat.Target = null;
 	
 		targetPosition = position;
 	}
 	
-	private void Defend() {
-		attackTarget = null;
+	public PlayerData Data { get { return data; } }
 	
-		Debug.Log("defend");
+	public Vector3 TargetPosition {
+		get { return targetPosition; }
+		set { targetPosition = value; }
 	}
 	
-	private void InitAttack(Transform target) {
-		attackTarget = target;
-		targetPosition = attackTarget.position;
-	}
-	
-	private IEnumerator Attack() {
-		attacking = true;
-	
-		yield return new WaitForSeconds(playerData.attackDelay);
+	[Serializable]
+	public class PlayerData {
+		public int health;
+		public int speed;
+		public int attackDamage;
 		
-		if(attackTarget != null)
-			attackTarget.GetComponent<Enemy>().TakeDamage(playerData.attackDamage);
-		
-		attacking = false;
+		public float attackDelay;
 	}
 }
