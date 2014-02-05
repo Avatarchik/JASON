@@ -1294,7 +1294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fe8fb7bc58398945b5e75aeaf71b003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {x: 0, y: 0}
 --- !u!50 &2038436184
 Rigidbody2D:
   m_ObjectHideFlags: 0
