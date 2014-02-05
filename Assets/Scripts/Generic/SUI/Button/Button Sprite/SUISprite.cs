@@ -20,6 +20,15 @@ public class SUISprite {
 		);
 	}
 
-	/** Return the size of the sprite */
-	public Vector2 Size { get { return size; } }
+	/** Set or get the texture coordinates of the sprite */
+	public Vector2 TexCoords {
+		set { texCoords = value; }
+		get { return texCoords; }
+	}
+
+	/** Set or get the size of the sprite */
+	public Vector2 Size {
+		set { size = value; }
+		get { return size; }
+	}
 }

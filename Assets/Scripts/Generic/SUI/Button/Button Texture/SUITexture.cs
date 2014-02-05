@@ -15,6 +15,9 @@ public class SUITexture {
 		GUI.DrawTexture(new Rect(position.x, position.y, texture.width, texture.height), texture);
 	}
 
-	/** Return the texture */
-	public Texture Texture { get { return texture; } }
+	/** Set or get the texture */
+	public Texture Texture {
+		set { texture = value; }
+		get { return texture; }
+	}
 }

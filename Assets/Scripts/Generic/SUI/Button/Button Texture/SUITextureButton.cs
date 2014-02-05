@@ -55,4 +55,13 @@ public class SUITextureButton:SUIButton {
 			break;
 		}
 	}
+
+	/** Return the normal SUITexture attached to the button */
+	public SUITexture TextureNormal { get { return textureNormal; } }
+
+	/** Return the hover SUITexture attached to the button */
+	public SUITexture TextureHover { get { return textureHover; } }
+
+	/** Return the click SUITexture attached to the button */
+	public SUITexture TextureClick { get { return textureClick; } } 
 }

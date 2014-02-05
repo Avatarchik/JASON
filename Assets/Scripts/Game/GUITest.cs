@@ -3,6 +3,8 @@
 public class GUITest:MonoBehaviour {
 	public SUISpriteButton spriteButton;
 	public SUITextureButton textureButton;
+
+	public SUILabel label;
 	
 	void OnGUI() {
 		GUIManager.UpdateGUIMatrix();
@@ -20,5 +22,7 @@ public class GUITest:MonoBehaviour {
 		if(textureButton.OnClick) {
 			Debug.Log("On Click");
 		}
+
+		label.Draw();
 	}
 }

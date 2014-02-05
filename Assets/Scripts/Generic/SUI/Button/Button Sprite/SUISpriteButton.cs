@@ -56,4 +56,13 @@ public class SUISpriteButton:SUIButton {
 			break;
 		}
 	}
+
+	/** Return the normal SUISprite attached to the button */
+	public SUISprite SpriteNormal { get { return spriteNormal; } }
+	
+	/** Return the hover SUISprite attached to the button */
+	public SUISprite SpriteHover { get { return spriteHover; } }
+	
+	/** Return the click SUISprite attached to the button */
+	public SUISprite SpriteClick { get { return spriteClick; } } 
 }

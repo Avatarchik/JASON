@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class XPeriaPlayer:MonoBehaviour {
+public class XperiaPlayer:MonoBehaviour {
 	public Vector2 movement;
 
 	void Update() {
