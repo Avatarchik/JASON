@@ -17,7 +17,7 @@ public class SUITextureEditor:PropertyDrawer {
 		
 		if(!property.isExpanded)
 			return;
-		
+
 		position = EditorGUI.IndentedRect(position);
 		
 		int oldIndent = EditorGUI.indentLevel;
