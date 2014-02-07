@@ -246,9 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - itemName: yus
-    itemModel: {fileID: 100000, guid: bcff1a00914630047a221ea065216477, type: 2}
-    itemType: 1
+  - itemName: 797573
+    itemType: 0
 --- !u!1 &967509366
 GameObject:
   m_ObjectHideFlags: 0
