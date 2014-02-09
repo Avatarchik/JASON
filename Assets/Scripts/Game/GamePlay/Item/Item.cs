@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
-using System;
 
-[Serializable]
 public class Item {
 	public enum ItemType {
 		Equipable,
-		Weapon,
 		Power,
 		Special
 	}
 
-	public string itemName;
 	public ItemType itemType;
+	public string itemName;	
+	
+	public Item() { }
+	
+	public Item(ItemType itemType, string itemName) {
+		this.itemType = itemType;
+		this.itemName = itemName;
+	}
 }

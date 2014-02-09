@@ -9,10 +9,12 @@ public class ItemPower:Item {
 	}
 
 	public PowerType powerType;
-	public int buffTime;
+	public int time;
+	
+	public ItemPower() { }
 
-	public ItemPower(ItemPower.PowerType powerType, int buffTime) {
+	public ItemPower(string itemName, PowerType powerType, int time):base(Item.ItemType.Power, itemName) {
 		this.powerType = powerType;
-		this.buffTime = buffTime;
+		this.time = time;
 	}
 }

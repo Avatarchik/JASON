@@ -3,114 +3,89 @@ using UnityEditor;
 using System.Collections.Generic;
 
 public class ItemCreator:EditorWindow {
-	[MenuItem("Window/Item Adder")]
+	private Item item = new Item();
+	private ItemEquipable itemEquipable = new ItemEquipable();
+	private ItemPower itemPower = new ItemPower();
+	private ItemSpecial itemSpecial = new ItemSpecial();
+	private ItemWeapon itemWeapon = new ItemWeapon();
+
+	[MenuItem("Window/Item Manager")]
 	static void Init() {
 		ItemCreator window = (ItemCreator)EditorWindow.GetWindow(typeof(ItemCreator));
 	}
-
-	private Item.ItemType itemType;
-	private string itemName;	
+	
+	void OnEnable() {
+		itemEquipable.stats = new ItemEquipable.ItemEquipableStats();
+		itemWeapon.stats = new ItemEquipable.ItemEquipableStats();
+	}
+	
 	void OnGUI() {
 		GUILayout.Label("General Settings", EditorStyles.boldLabel);
-
-		itemType = (Item.ItemType)EditorGUILayout.EnumPopup("Item Type", itemType);
-		itemName = EditorGUILayout.TextField("Item Name", itemName);
-
-		switch(itemType) {
+		
+		DrawGeneralSettings();
+	}
+	
+	private void DrawGeneralSettings() {
+		item.itemType = (Item.ItemType)EditorGUILayout.EnumPopup("Item Type", item.itemType);
+		item.itemName = EditorGUILayout.TextField("Item Name", item.itemName);
+		
+		switch(item.itemType) {
 		case Item.ItemType.Equipable:
-			DrawEquipable();
-			break;
-		case Item.ItemType.Weapon:
-			DrawWeapon();
+			DrawEquipableSettings();
 			break;
 		case Item.ItemType.Power:
-			DrawPower();
+			DrawPowerSettings();
 			break;
 		case Item.ItemType.Special:
-			DrawSpecial();
+			DrawSpecialSettings();
 			break;
 		}
 	}
-
-	private ItemEquipable.EquipableType equipableType;
-	private GameObject equipableModel;
-	private int equipableDefence;
-	private int equipableSpeed;
-	private int equipableStorePrice;
-	private bool equipableStoreObject;
-	private void DrawEquipable() {
+	
+	private void DrawEquipableSettings() {
 		GUILayout.Label("Equipable Settings", EditorStyles.boldLabel);
-
-		equipableStoreObject = EditorGUILayout.Toggle("Store Object", equipableStoreObject);
-		equipableModel = (GameObject)EditorGUILayout.ObjectField("Model", equipableModel, typeof(GameObject), false);
-		equipableDefence = EditorGUILayout.IntField("Defence", equipableDefence);
-		equipableSpeed = EditorGUILayout.IntField("Speed", equipableSpeed);
-
-		if(equipableStoreObject) {
-			equipableStorePrice = EditorGUILayout.IntField("Store Price", equipableSpeed);
+	
+		itemEquipable.equipableType = (ItemEquipable.EquipableType)EditorGUILayout.EnumPopup("Equipable Type", itemEquipable.equipableType);
+		itemEquipable.element = (ItemEquipable.EquipableElement)EditorGUILayout.EnumPopup("Element", itemEquipable.element);
+		itemEquipable.model = (GameObject)EditorGUILayout.ObjectField("Model", itemEquipable.model, typeof(GameObject), false);
+		itemEquipable.stats.speed = EditorGUILayout.IntField("Speed", itemEquipable.stats.speed);
+		itemEquipable.stats.defence = EditorGUILayout.IntField("Defence", itemEquipable.stats.defence);
+		itemEquipable.stats.storePrice = EditorGUILayout.IntField("Store Price", itemEquipable.stats.storePrice);
+		
+		if(itemEquipable.equipableType == ItemEquipable.EquipableType.Weapon) {
+			DrawWeaponSettings();
+		} else {
+			//if(GUILayout.Button("Create"))
+				// Add item
 		}
-
-		if(GUILayout.Button("Create"))
-			CreateEquipable();
 	}
-
-	private ItemWeapon.WeaponType weaponType;
-	private int weaponDamage;
-	private int weaponSpeed;
-	private void DrawWeapon() {
+	
+	private void DrawWeaponSettings() {
 		GUILayout.Label("Weapon Settings", EditorStyles.boldLabel);
-
-		weaponType = (ItemWeapon.WeaponType)EditorGUILayout.EnumPopup ("Weapon Type", weaponType);
-		equipableStoreObject = EditorGUILayout.Toggle("Store Object", equipableStoreObject);
-		equipableModel = (GameObject)EditorGUILayout.ObjectField("Model", equipableModel, typeof(GameObject), false);
-		weaponDamage = EditorGUILayout.IntField("Damage", weaponDamage);
-		weaponSpeed = EditorGUILayout.IntField("Speed", weaponSpeed);
-
-		if(equipableStoreObject) {
-			equipableStorePrice = EditorGUILayout.IntField("Store Price", equipableSpeed);
-		}
-
-		if(GUILayout.Button("Create"))
-			CreateWeapon();
+		
+		itemWeapon.weaponType = (ItemWeapon.WeaponType)EditorGUILayout.EnumPopup("Weapon Type", itemWeapon.weaponType);
+		itemWeapon.stats.damage = EditorGUILayout.IntField("Damage", itemWeapon.stats.damage);
+		
+		//if(GUILayout.Button("Create"))
+			// Add item
 	}
-
-	private ItemPower.PowerType powerType;
-	private int buffTime;
-	private void DrawPower() {
+	
+	private void DrawPowerSettings() {
 		GUILayout.Label("Power Settings", EditorStyles.boldLabel);
 		
-		powerType = (ItemPower.PowerType)EditorGUILayout.EnumPopup("Power Type", powerType);
-		buffTime = EditorGUILayout.IntField(powerType + " Time", buffTime);
-
-		if(GUILayout.Button("Create"))
-			CreatePower();
+		itemPower.powerType = (ItemPower.PowerType)EditorGUILayout.EnumPopup("Power Type", itemPower.powerType);
+		itemPower.time = EditorGUILayout.IntField(itemPower.powerType + " Time", itemPower.time);
+		
+		//if(GUILayout.Button("Create"))
+			// Add item
 	}
-
-	private int specialId;
-	private void DrawSpecial() {
+	
+	private void DrawSpecialSettings() {
 		GUILayout.Label("Special Settings", EditorStyles.boldLabel);
-
-		specialId = EditorGUILayout.IntField("ID", specialId);
-
-		if(GUILayout.Button("Create"))
-			CreateSpecial();
-	}
-
-	private void CreateEquipable() {
-		ItemEquipable item = new ItemEquipable(equipableType, equipableModel, equipableStoreObject ? equipableStorePrice : 0);
-
-		ItemList.Add(item);
-	}
-
-	private void CreateWeapon() {
 		
-	}
-
-	private void CreatePower() {
+		itemSpecial.id = EditorGUILayout.IntField("ID", itemSpecial.id);
 		
-	}
-
-	private void CreateSpecial() {
-		
+		//if(GUILayout.Button("Create"))
+			// Add item
 	}
 }

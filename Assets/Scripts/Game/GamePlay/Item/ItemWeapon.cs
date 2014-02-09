@@ -8,13 +8,10 @@ public class ItemWeapon:ItemEquipable {
 	}
 
 	public WeaponType weaponType;
-
-	public int damage;
-	public int speed;
-
-	public ItemWeapon(GameObject itemModel, ItemWeapon.WeaponType weaponType, int storePrice, int damage, int speed):base(EquipableType.Weapon, itemModel, storePrice) {
+	
+	public ItemWeapon() { }
+	
+	public ItemWeapon(string itemName, EquipableElement element, ItemEquipableStats stats, GameObject model, WeaponType weaponType):base(itemName, EquipableType.Weapon, element, stats, model) {
 		this.weaponType = weaponType;
-		this.damage = damage;
-		this.speed = speed;
 	}
 }
