@@ -8,7 +8,11 @@ public class Player:MonoBehaviour {
 	private PlayerCombat playerCombat;
 	
 	private Vector3 targetPosition;
+	public GameObject playerModel;
+
+	public bool ischarging;
 	
+	public int chargingMultiplier = 1;
 	void Start() {
 		playerCombat = GetComponent<PlayerCombat>();
 	
@@ -16,28 +20,41 @@ public class Player:MonoBehaviour {
 	}
 	
 	void Update() {	
+		if(ischarging){
+			StartCoroutine("ChargingTimer");
+		}else{
+			StopCoroutine("ChargingTimer");
+			StartCoroutine("ChargingPeriod");
+		}
 		CheckForTouch();
-		
 		if(targetPosition != transform.position) {
-			float step = data.speed * Time.deltaTime;
+			float step = data.speed * chargingMultiplier * Time.deltaTime;
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+
+			Vector3 lookPos = targetPosition - playerModel.transform.position;
 			
-			transform.position = Vector2.MoveTowards(transform.position, targetPosition, step);
+			Quaternion rotation = Quaternion.LookRotation(lookPos);
+			rotation.x = 0;
+			rotation.z = 0;
+
+			if(transform.position != targetPosition){
+			playerModel.transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 30);
+			}
 		}
 	}
-	
-	void OnTriggerEnter2D(Collider2D other) {
-		if(other.tag == "Room")
-			other.GetComponent<Room>().Show();
+	IEnumerator ChargingPeriod(){
+		yield return new WaitForSeconds(2);
+		chargingMultiplier = 1;
 	}
-	
-	void OnTriggerExit2D(Collider2D other) {
-		if(other.tag == "Room")
-			other.GetComponent<Room>().Hide();
+	IEnumerator ChargingTimer(){
+		yield return new WaitForSeconds(2);
+		chargingMultiplier = 2;
 	}
-	
 	private void CheckForTouch() {
 		if(Input.GetMouseButtonDown(0)) {
-			CheckTouchPosition(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			CheckTouchPosition(ray);
+
 		}
 		
 		if(Input.touchCount == 0)
@@ -45,40 +62,48 @@ public class Player:MonoBehaviour {
 		
 		for(int i = 0; i < Input.touchCount; i++) {
 			Touch touch = Input.GetTouch(i);
-		
 			if(touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-				CheckTouchPosition(Camera.main.ScreenToWorldPoint(touch.position));
+				CheckTouchPosition(Camera.main.ScreenPointToRay(touch.position));
+
+				Debug.Log(touch.position);
 			}
 		}	
 	}
 	
-	private void CheckTouchPosition(Vector2 position) {
-		RaycastHit2D hit = Physics2D.Raycast(position, -Vector2.up);
-		
-		if(hit) {
+	private void CheckTouchPosition(Ray screenRay) {
+		RaycastHit hit;
+		if (Physics.Raycast(screenRay,out hit, 100)){
+		}
+		if(hit.collider != null) {
 			switch(hit.transform.tag) {
+			case "Floor":
+				ischarging = false;
+				Move(hit.point);
+				break;
 			case "Player":
+				ischarging = true;
 				playerCombat.Defend();
 				break;
 			case "Enemy":
 				playerCombat.StartAttack(hit.transform);
 				break;
 			default:
-				Move(position);
+				ischarging = false;
 				break;
 			}
 		} else {
-			Move(position);
+			ischarging = true;
+			Move(hit.point);
 		}
 	}
 	
-	private void Move(Vector2 position) {
-		Debug.Log ("Move");
+	private void Move(Vector3 position) {
 		playerCombat.Target = null;
-	
-		targetPosition = position;
+		targetPosition = new Vector3(position.x,1,position.z);
 	}
-	
+	void OnGUI(){
+		GUI.Label(new Rect(0,0,100,100),"" + ischarging);
+	}
 	public PlayerData Data { get { return data; } }
 	
 	public Vector3 TargetPosition {
