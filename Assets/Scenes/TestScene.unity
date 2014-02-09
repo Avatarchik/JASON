@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962f832207d259145b283df376ecc5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  guiFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 3}
 --- !u!1 &495185965
 GameObject:
   m_ObjectHideFlags: 0
@@ -245,9 +245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458ce8e0e97f2084f97134c3a36f6ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items:
-  - itemName: 797573
-    itemType: 0
 --- !u!1 &967509366
 GameObject:
   m_ObjectHideFlags: 0

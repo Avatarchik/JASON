@@ -1,6 +1,35 @@
 ﻿using UnityEngine;
 
 public class ItemEquipable:Item {
+	public enum EquipableType {
+		Helmet,
+		Chest,
+		Legs,
+		Weapon,
+		Shield
+	}
+	
+	public enum EquipableElement {
+		Normal,
+		Water,
+		Earth,
+		Fire
+	}
+
+	public EquipableType equipableType;
+	public EquipableElement element;
+	public ItemEquipableStats stats;
+	public GameObject model;
+	
+	public ItemEquipable() { }
+	
+	public ItemEquipable(string itemName, EquipableType equipableType, EquipableElement element, ItemEquipableStats stats, GameObject model):base(Item.ItemType.Equipable, itemName) {
+		this.equipableType = equipableType;
+		this.element = element;
+		this.stats = stats;
+		this.model = model;
+	}
+	
 	public class ItemEquipableStats {
 		public int speed;
 		public int defence;
@@ -15,34 +44,6 @@ public class ItemEquipable:Item {
 			this.damage = damage;
 			this.storePrice = storePrice;
 		}
-	}
-
-	public enum EquipableType {
-		Helmet,
-		Chest,
-		Legs,
-		Weapon,
-		Shield
-	};
-	
-	public enum EquipableElement {
-		Normal,
-		Water,
-		Earth,
-		Fire
-	};
-
-	public EquipableType equipableType;
-	public EquipableElement element;
-	public ItemEquipableStats stats;
-	public GameObject model;
-	
-	public ItemEquipable() { }
-	
-	public ItemEquipable(string itemName, EquipableType equipableType, EquipableElement element, ItemEquipableStats stats, GameObject model):base(Item.ItemType.Equipable, itemName) {
-		this.equipableType = equipableType;
-		this.stats = stats;
-		this.model = model;
 	}
 }
 
