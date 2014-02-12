@@ -4,6 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ItemManager:EditorWindow {
+	private ItemList itemList;
+
+	private Object lastObjectSelected;
+
 	[MenuItem("Window/Item Manager")]
 	static void Init() {
 		ItemManager window = (ItemManager)EditorWindow.GetWindow(typeof(ItemManager));
@@ -11,111 +15,145 @@ public class ItemManager:EditorWindow {
 	}
 	
 	void OnGUI() {
-		List<ItemEquipable> equipable = new List<ItemEquipable>();
-		List<ItemWeapon> weapon = new List<ItemWeapon>();
-		List<ItemPower> power = new List<ItemPower>();
-		List<ItemSpecial> special = new List<ItemSpecial>();
+		if(Selection.activeGameObject == null || (Selection.activeGameObject != lastObjectSelected && lastObjectSelected != null)) {
+			Debug.LogError("You need to have a Game Object with the ItemList component selected");
+			return;
+		} else if(itemList == null) {
+			itemList = (Selection.activeGameObject).GetComponent<ItemList>();
+
+			if(itemList == null) {
+				Debug.LogError("No ItemList found on the selected Game Object");
+				return;
+			}
+		}
 	
 		if(GUILayout.Button("Add items")) {
 			ItemCreator itemCreator = (ItemCreator)EditorWindow.GetWindow(typeof(ItemCreator));
 			itemCreator.title = "Item Creator";
 			itemCreator.SetItemManager(this);
 		}
-		
-		foreach(Item item in ItemList.items) {
-			if(item.GetType() == typeof(ItemEquipable)) {
-				equipable.Add(item as ItemEquipable);
-			} else if(item.GetType() == typeof(ItemWeapon)) {
-				weapon.Add(item as ItemWeapon);
-			} else if(item.GetType() == typeof(ItemPower)) {
-				power.Add(item as ItemPower);
-			} else if(item.GetType() == typeof(ItemSpecial)) {
-				special.Add(item as ItemSpecial);
-			}
-		}
-		
-		DrawEquipable(equipable);
-		DrawWeapon(weapon);
-		DrawPower(power);
-		DrawSpecial(special);
+
+		GUILayout.Label("Equipable Items", EditorStyles.boldLabel);
+		DrawEquipable();
+		DrawWeapon();
+
+		GUILayout.Label("Powers", EditorStyles.boldLabel);
+		DrawPower();
+
+		GUILayout.Label("Special Items", EditorStyles.boldLabel);
+		DrawSpecial();
+
+		lastObjectSelected = Selection.activeGameObject;
 	}
 	
-	private void DrawEquipable(List<ItemEquipable> equipable) {
-		foreach(ItemEquipable item in equipable) {
-			Texture2D preview = AssetPreview.GetAssetPreview(item.model);
+	private void DrawEquipable() {
+		foreach(ItemEquipable item in itemList.EquipableItems) {
+			Texture2D preview = AssetPreview.GetAssetPreview(item.Model);
 		
 			EditorGUILayout.BeginHorizontal();
 				GUILayout.Label(preview, GUILayout.MaxWidth(60f), GUILayout.MaxHeight(60f));
-				
+
 				EditorGUILayout.BeginVertical();
-					GUILayout.Label(item.itemName, EditorStyles.boldLabel);
-					GUILayout.Label(item.element.ToString() + " " + item.equipableType.ToString());
+					EditorGUILayout.BeginHorizontal();
+					GUILayout.Label(item.Name, EditorStyles.boldLabel, GUILayout.Width(225f));
+
+					if(GUILayout.Button("Edit", GUILayout.Width(150f)))
+							EditItem(item);
+					EditorGUILayout.EndHorizontal();
+
+					GUILayout.Label(item.Element.ToString() + " " + item.TypeEquipable.ToString(), GUILayout.Width(225f));
 					
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label("Speed: " + item.stats.speed.ToString());
-						GUILayout.Label("Defence: " + item.stats.defence.ToString());
-						GUILayout.Label("Damage: " + item.stats.damage.ToString());
-						GUILayout.Label("Store price: " + item.stats.storePrice.ToString());
+						GUILayout.Label("Speed: " + item.Stats.Speed.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Defence: " + item.Stats.Defence.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Damage: " + item.Stats.Damage.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Store price: " + item.Stats.StorePrice.ToString(), GUILayout.Width(100f));
 					EditorGUILayout.EndHorizontal();
 				EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();
 		}
 	}
 	
-	private void DrawWeapon(List<ItemWeapon> weapon) {
-		foreach(ItemWeapon item in weapon) {
-			Texture2D preview = AssetPreview.GetAssetPreview(item.model);
+	private void DrawWeapon() {
+		foreach(ItemWeapon item in itemList.WeaponItems) {
+			Texture2D preview = AssetPreview.GetAssetPreview(item.Model);
 			
 			EditorGUILayout.BeginHorizontal();
 				GUILayout.Label(preview, GUILayout.MaxWidth(60f), GUILayout.MaxHeight(60f));
 				
 				EditorGUILayout.BeginVertical();
-					GUILayout.Label(item.itemName, EditorStyles.boldLabel);
-					GUILayout.Label(item.element.ToString() + " " + item.equipableType.ToString() + " - " + item.weaponType.ToString());
+					EditorGUILayout.BeginHorizontal();
+						GUILayout.Label(item.Name, EditorStyles.boldLabel, GUILayout.Width(225f));
+						
+					if(GUILayout.Button("Edit", GUILayout.Width(150f)))
+							EditItem(item);
+					EditorGUILayout.EndHorizontal();
+
+					GUILayout.Label(item.Element.ToString() + " " + item.TypeEquipable.ToString() + " - " + item.TypeWeapon.ToString(), GUILayout.Width(225f));
 					
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label("Speed: " + item.stats.speed.ToString());
-						GUILayout.Label("Defence: " + item.stats.defence.ToString());
-						GUILayout.Label("Damage: " + item.stats.damage.ToString());
-						GUILayout.Label("Store price: " + item.stats.storePrice.ToString());
+						GUILayout.Label("Speed: " + item.Stats.Speed.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Defence: " + item.Stats.Defence.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Damage: " + item.Stats.Damage.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Store price: " + item.Stats.StorePrice.ToString(), GUILayout.Width(100f));
 					EditorGUILayout.EndHorizontal();
 				EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();
 		}
 	}
 		
-	private void DrawPower(List<ItemPower> power) {
-		GUIStyle style = new GUIStyle(GUI.skin.label);
-		style.margin = new RectOffset(68, 0, 0, 0);
-		
-		foreach(ItemPower item in power) {
+	private void DrawPower() {
+		GUIStyle style = new GUIStyle();
+		style.fontStyle = FontStyle.Bold;
+		style.margin = new RectOffset(75, 0, 3, 0);
+
+		foreach(ItemPower item in itemList.PowerItems) {
 			EditorGUILayout.BeginHorizontal();
-				EditorGUILayout.BeginVertical(style);
-					GUILayout.Label(item.itemName, EditorStyles.boldLabel);
-				
-					EditorGUILayout.BeginHorizontal();	
-						GUILayout.Label("Type: " + item.powerType.ToString());
-						GUILayout.Label("Time: " + item.time.ToString());
+				EditorGUILayout.BeginVertical();
+					EditorGUILayout.BeginHorizontal();
+						GUILayout.Label(item.Name, style, GUILayout.Width(225f));
+
+						if(GUILayout.Button("Edit", GUILayout.Width(225f)))
+							EditItem(item);
+					EditorGUILayout.EndHorizontal();
+
+					EditorGUILayout.BeginHorizontal();
+						GUILayout.Label(item.TypePower.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Time: " + item.Time.ToString(), GUILayout.Width(100f));
 					EditorGUILayout.EndHorizontal();
 				EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();
 		}
 	}
 	
-	private void DrawSpecial(List<ItemSpecial> special) {
-		GUIStyle style = new GUIStyle(GUI.skin.label);
-		style.margin = new RectOffset(68, 0, 0, 0);
+	private void DrawSpecial() {
+		GUIStyle style = new GUIStyle();
+		GUIStyle styleHead = new GUIStyle();
+
+		styleHead.fontStyle = FontStyle.Bold;
+		styleHead.margin = new RectOffset(75, 0, 3, 0);
+		style.margin = new RectOffset(75, 0, 3, 0);
 		
-		foreach(ItemSpecial item in special) {
-			EditorGUILayout.BeginHorizontal();
-				EditorGUILayout.BeginVertical(style);
-					GUILayout.Label(item.itemName, EditorStyles.boldLabel);
-				
-					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label("Type: " + item.id.ToString());
-					EditorGUILayout.EndHorizontal();
-				EditorGUILayout.EndVertical();
+		foreach(ItemSpecial item in itemList.SpecialItems) {
+			EditorGUILayout.BeginHorizontal(style);
+				EditorGUILayout.BeginHorizontal();
+					GUILayout.Label(item.Name, EditorStyles.boldLabel, GUILayout.Width(225f));
+					
+					if(GUILayout.Button("Edit", GUILayout.Width(225f)))
+						EditItem(item);
+				EditorGUILayout.EndHorizontal();
+
+				EditorGUILayout.BeginHorizontal();
+					GUILayout.Label("ID: " + item.Id.ToString(), GUILayout.Width(100f));
+				EditorGUILayout.EndHorizontal();
 			EditorGUILayout.EndHorizontal();
 		}
+	}
+
+	private void EditItem<T>(T t) {
+		ItemCreator itemCreator = (ItemCreator)EditorWindow.GetWindow(typeof(ItemCreator));
+		itemCreator.title = "Item Creator";
+		itemCreator.SetItemManager(this);
+		itemCreator.EditItem(t);
 	}
 }

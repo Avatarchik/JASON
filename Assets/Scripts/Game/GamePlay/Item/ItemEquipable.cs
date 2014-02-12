@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System;
 
+[Serializable]
 public class ItemEquipable:Item {
 	public enum EquipableType {
 		Helmet,
@@ -16,10 +18,10 @@ public class ItemEquipable:Item {
 		Fire
 	}
 
-	public EquipableType equipableType;
-	public EquipableElement element;
-	public ItemEquipableStats stats;
-	public GameObject model;
+	[SerializeField] private EquipableType equipableType;
+	[SerializeField] private EquipableElement element;
+	[SerializeField] private GameObject model;
+	[SerializeField] private ItemEquipableStats stats;
 	
 	public ItemEquipable() { }
 	
@@ -29,12 +31,33 @@ public class ItemEquipable:Item {
 		this.stats = stats;
 		this.model = model;
 	}
-	
+
+	public EquipableType TypeEquipable {
+		set { equipableType = value; }
+		get { return equipableType; }
+	}
+
+	public EquipableElement Element {
+		set { element = value; }
+		get { return element; }
+	}
+
+	public GameObject Model {
+		set { model = value; }
+		get { return model; }
+	}
+
+	public ItemEquipableStats Stats {
+		set { stats = value; }
+		get { return stats; }
+	}
+
+	[Serializable]
 	public class ItemEquipableStats {
-		public int speed;
-		public int defence;
-		public int damage;
-		public int storePrice;
+		[SerializeField] private int speed;
+		[SerializeField] private int defence;
+		[SerializeField] private int damage;
+		[SerializeField] private int storePrice;
 		
 		public ItemEquipableStats() { }
 		
@@ -43,6 +66,26 @@ public class ItemEquipable:Item {
 			this.defence = defence;
 			this.damage = damage;
 			this.storePrice = storePrice;
+		}
+
+		public int Speed {
+			set { speed = value; }
+			get { return speed; }
+		}
+
+		public int Defence {
+			set { defence = value; }
+			get { return defence; }
+		}
+
+		public int Damage {
+			set { damage = value; }
+			get { return damage; }
+		}
+
+		public int StorePrice {
+			set { storePrice = value; }
+			get { return storePrice; }
 		}
 	}
 }
