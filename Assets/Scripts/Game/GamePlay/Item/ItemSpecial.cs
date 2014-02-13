@@ -3,6 +3,8 @@ using System;
 
 [Serializable]
 public class ItemSpecial:Item {
+	public static ItemSpecial special = new ItemSpecial();
+
 	[SerializeField] private int id;
 	
 	public ItemSpecial() { }

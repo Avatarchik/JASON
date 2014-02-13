@@ -5,56 +5,33 @@ using System.Collections.Generic;
 
 public class ItemCreator:EditorWindow {
 	private List<HelpBox> helpBoxes;
-
-	private Item item = new Item();
-	private ItemEquipable itemEquipable = new ItemEquipable();
-	private ItemPower itemPower = new ItemPower();
-	private ItemSpecial itemSpecial = new ItemSpecial();
-	private ItemWeapon itemWeapon = new ItemWeapon();
 	
-	private ItemManager itemManager;
+	private GameObject selectedGameObject;
 	private ItemList itemList;
-
-	private GameObject lastObjectSelected;
-
-	private int editArrayId;
+	
+	private bool updated;
 	
 	void OnEnable() {
-		itemEquipable.Stats = new ItemEquipable.ItemEquipableStats();
-		itemWeapon.Stats = new ItemEquipable.ItemEquipableStats();
-
 		helpBoxes = new List<HelpBox>();
-
-		editArrayId = -1;
 	}
 	
 	void OnGUI() {
-		if(Selection.activeGameObject == null || (Selection.activeGameObject != lastObjectSelected && lastObjectSelected != null)) {
-			GUILayout.Label("No Game Object with an ItemList component selected");
+		if(!CheckForItemList())
 			return;
-		} else if(itemList == null) {
-			itemList = (Selection.activeGameObject).GetComponent<ItemList>();
-
-			if(itemList == null) {
-				GUILayout.Label("Can't find an ItemList component on the selected Game Object");
-				return;
-			}
-		}
-
+		
 		foreach(HelpBox helpBox in helpBoxes)
 			helpBox.Render();
-	
-		GUILayout.Label("General Settings", EditorStyles.boldLabel);
+		
 		DrawGeneralSettings();
-
-		lastObjectSelected = Selection.activeGameObject;
 	}
 	
+	/** Draw general item settings */
 	private void DrawGeneralSettings() {
-		item.Type = (Item.ItemType)EditorGUILayout.EnumPopup("Item Type", item.Type);
-		item.Name = EditorGUILayout.TextField("Item Name", item.Name);
+		GUILayout.Label("General Settings", EditorStyles.boldLabel);
+		Item.item.Type = (Item.ItemType)EditorGUILayout.EnumPopup("Item Type", Item.item.Type);
+		Item.item.Name = EditorGUILayout.TextField("Item Name", Item.item.Name);
 		
-		switch(item.Type) {
+		switch(Item.item.Type) {
 		case Item.ItemType.Equipable:
 			DrawEquipableSettings();
 			break;
@@ -67,238 +44,176 @@ public class ItemCreator:EditorWindow {
 		}
 	}
 	
+	/** Draw the equipable item settings */
 	private void DrawEquipableSettings() {
 		GUILayout.Label("Equipable Settings", EditorStyles.boldLabel);
-
-		itemEquipable.TypeEquipable = (ItemEquipable.EquipableType)EditorGUILayout.EnumPopup("Equipable Type", itemEquipable.TypeEquipable);
-		itemEquipable.Element = (ItemEquipable.EquipableElement)EditorGUILayout.EnumPopup("Element", itemEquipable.Element);
-		itemEquipable.Model = (GameObject)EditorGUILayout.ObjectField("Model", itemEquipable.Model, typeof(GameObject), false);
-		itemEquipable.Stats.Speed = EditorGUILayout.IntField("Speed", itemEquipable.Stats.Speed);
-		itemEquipable.Stats.Defence = EditorGUILayout.IntField("Defence", itemEquipable.Stats.Defence);
-		itemEquipable.Stats.StorePrice = EditorGUILayout.IntField("Store Price", itemEquipable.Stats.StorePrice);
 		
-		if(itemEquipable.TypeEquipable == ItemEquipable.EquipableType.Weapon) {
+		ItemEquipable.equipable.TypeEquipable = (ItemEquipable.EquipableType)EditorGUILayout.EnumPopup("Equipable Type", ItemEquipable.equipable.TypeEquipable);
+		ItemEquipable.equipable.Element = (ItemEquipable.EquipableElement)EditorGUILayout.EnumPopup("Element", ItemEquipable.equipable.Element);
+		ItemEquipable.equipable.Model = (GameObject)EditorGUILayout.ObjectField("Model", ItemEquipable.equipable.Model, typeof(GameObject), false);
+		ItemEquipable.equipable.Stats.Speed = EditorGUILayout.IntField("Speed", ItemEquipable.equipable.Stats.Speed);
+		ItemEquipable.equipable.Stats.Defence = EditorGUILayout.IntField("Defence", ItemEquipable.equipable.Stats.Defence);
+		ItemEquipable.equipable.Stats.StorePrice = EditorGUILayout.IntField("Store Price", ItemEquipable.equipable.Stats.StorePrice);
+		
+		if(ItemEquipable.equipable.TypeEquipable == ItemEquipable.EquipableType.Weapon) {
 			DrawWeaponSettings();
 		} else {
-			if(GUILayout.Button("Create")) {
-				if(VerifyEquipable()) {
-					itemList.EquipableItems.Add(new ItemEquipable(item.Name, itemEquipable.TypeEquipable, itemEquipable.Element, itemEquipable.Stats, itemEquipable.Model));
-					Reset(item);
-				}
-			}
-
-			if(editArrayId >= 0)
-				if(GUILayout.Button("Delete")) {
-					itemList.EquipableItems.RemoveAt(editArrayId);
-
-					if(itemManager != null)
-						itemManager.Repaint();
-
-					editArrayId = -1;
-				}
+			if(GUILayout.Button("Create"))
+				CreateEquipable();
 		}
 	}
 	
+	/** Draw the weapon item settings */
 	private void DrawWeaponSettings() {
 		GUILayout.Label("Weapon Settings", EditorStyles.boldLabel);
 		
-		itemWeapon.TypeWeapon = (ItemWeapon.WeaponType)EditorGUILayout.EnumPopup("Weapon Type", itemWeapon.TypeWeapon);
-		itemWeapon.Stats.Damage = EditorGUILayout.IntField("Damage", itemWeapon.Stats.Damage);
+		ItemWeapon.weapon.TypeWeapon = (ItemWeapon.WeaponType)EditorGUILayout.EnumPopup("Weapon Type", ItemWeapon.weapon.TypeWeapon);
+		ItemWeapon.weapon.Stats.Damage = EditorGUILayout.IntField("Damage", ItemWeapon.equipable.Stats.Damage);
 		
-		if(GUILayout.Button("Create")) {
-			if(VerifyWeapon()) {
-				itemList.WeaponItems.Add(new ItemWeapon(item.Name, itemEquipable.Element, itemEquipable.Stats, itemEquipable.Model, itemWeapon.TypeWeapon));
-				Reset(item);
-			}
-		}
-
-		if(editArrayId >= 0)
-			if(GUILayout.Button("Delete")) {
-				itemList.WeaponItems.RemoveAt(editArrayId);
-
-				if(itemManager != null)
-					itemManager.Repaint();
-
-				editArrayId = -1;
-			}
+		if(GUILayout.Button("Create"))
+			CreateWeapon();
 	}
 	
+	/** Draw the power item settings */
 	private void DrawPowerSettings() {
 		GUILayout.Label("Power Settings", EditorStyles.boldLabel);
 		
-		itemPower.TypePower = (ItemPower.PowerType)EditorGUILayout.EnumPopup("Power Type", itemPower.TypePower);
-		itemPower.Time = EditorGUILayout.IntField(itemPower.TypePower + " Time", itemPower.Time);
+		ItemPower.power.TypePower = (ItemPower.PowerType)EditorGUILayout.EnumPopup("Power Type", ItemPower.power.TypePower);
+		ItemPower.power.Time = EditorGUILayout.IntField(ItemPower.power.TypePower + " Time", ItemPower.power.Time);
 		
-		if(GUILayout.Button("Create")) {
-			if(VerifyPower()) {
-				itemList.PowerItems.Add(new ItemPower(item.Name, itemPower.TypePower, itemPower.Time));
-				Reset(item);
-			}
-		}
-
-		if(editArrayId >= 0)
-			if(GUILayout.Button("Delete")) {
-				itemList.PowerItems.RemoveAt(editArrayId);
-			
-				if(itemManager != null)
-					itemManager.Repaint();
-
-				editArrayId = -1;
-			}
+		if(GUILayout.Button("Create"))
+			CreatePower();
 	}
 	
+	/** Draw the special item settings */
 	private void DrawSpecialSettings() {
 		GUILayout.Label("Special Settings", EditorStyles.boldLabel);
 		
-		itemSpecial.Id = EditorGUILayout.IntField("ID", itemSpecial.Id);
+		ItemSpecial.special.Id = EditorGUILayout.IntField("ID", ItemSpecial.special.Id);
 		
-		if(GUILayout.Button("Create")) {
-			if(VerifySpecial()) {
-				itemList.SpecialItems.Add(new ItemSpecial(item.Name, itemSpecial.Id));
-				Reset(item);
-			}
-		}
-
-		if(editArrayId >= 0)
-			if(GUILayout.Button("Delete")) {
-				itemList.SpecialItems.RemoveAt(editArrayId);
-			
-				if(itemManager != null)
-					itemManager.Repaint();
-
-				editArrayId = -1;
-			}
+		if(GUILayout.Button("Create"))
+			CreateSpecial();
 	}
 	
+	/** Verify an item */
 	private bool VerifyItem() {
-		helpBoxes.Clear();
-
 		bool passed = true;
-	
-		if(item.Name == "" || item.Name == null) {
+		
+		helpBoxes.Clear();
+		
+		if(Item.item.Name == "" || Item.item.Name == null) {
 			helpBoxes.Add(new HelpBox("An item needs a name!", MessageType.Error));
 			passed = false;
 		} else {
 			foreach(Item item2 in itemList.EquipableItems)
-				if(item.Name.Equals(item2.Name))
+				if(Item.item.Name.Equals(item2.Name))
 					passed = false;
-
+			
 			foreach(Item item2 in itemList.WeaponItems)
-				if(item.Name.Equals(item2.Name))
+				if(Item.item.Name.Equals(item2.Name))
 					passed = false;
-
+			
 			foreach(Item item2 in itemList.PowerItems)
-				if(item.Name.Equals(item2.Name))
+				if(Item.item.Name.Equals(item2.Name))
 					passed = false;
-
+			
 			foreach(Item item2 in itemList.SpecialItems)
-				if(item.Name.Equals(item2.Name))
+				if(Item.item.Name.Equals(item2.Name))
 					passed = false;
-
+			
 			if(!passed)
 				helpBoxes.Add(new HelpBox("An item with this name already exists", MessageType.Error));
 		}
-			
+		
 		return passed;	
 	}
 	
-	private bool VerifyEquipable() {
+	/** Try to create an equipable item */
+	private void CreateEquipable() {
 		bool passed = VerifyItem();
 		
-		if(itemEquipable.Model == null) {
+		if(ItemEquipable.equipable.Model == null) {
 			helpBoxes.Add(new HelpBox("An equipable item needs a model!", MessageType.Error));
 			passed = false;
 		}
-			
-		return passed;
+		
+		if(passed) {
+			itemList.EquipableItems.Add(new ItemEquipable(Item.item.Name, ItemEquipable.equipable.TypeEquipable, ItemEquipable.equipable.Element, ItemEquipable.equipable.Stats, ItemEquipable.equipable.Model));
+			ItemCreated();
+		}
 	}
 	
-	private bool VerifyWeapon() {
-		return VerifyEquipable();
-	}
-	
-	private bool VerifyPower() {
+	/** Try to create a weapon */
+	private void CreateWeapon() {
 		bool passed = VerifyItem();
 		
-		if(itemPower.Time == 0) {
+		if(ItemEquipable.equipable.Model == null) {
+			helpBoxes.Add(new HelpBox("An equipable item needs a model!", MessageType.Error));
+			passed = false;
+		}
+		
+		if(passed) {
+			itemList.WeaponItems.Add(new ItemWeapon(Item.item.Name, ItemEquipable.equipable.Element, ItemEquipable.equipable.Stats, ItemEquipable.equipable.Model, ItemWeapon.weapon.TypeWeapon));
+			ItemCreated();
+		}
+	}
+	
+	/** Try to create a power item */
+	private void CreatePower() {
+		bool passed = VerifyItem();
+		
+		if(ItemPower.power.Time == 0) {
 			helpBoxes.Add(new HelpBox("A power needs a time", MessageType.Error));
 			passed = false;
 		}
 		
-		return passed;
-	}
-	
-	private bool VerifySpecial() {
-		return VerifyItem();
-	}
-
-	public void Reset(Item added) {
-		if(itemManager != null)
-			itemManager.Repaint();
-
-		if(itemList != null) {
-			UnityEngine.Object prefab = PrefabUtility.CreateEmptyPrefab("Assets/Resources/Prefabs/Items/Item Manager.prefab");
-			PrefabUtility.ReplacePrefab(Selection.activeGameObject, prefab);
-			AssetDatabase.Refresh();
+		if(passed) {
+			itemList.PowerItems.Add(new ItemPower(Item.item.Name, ItemPower.power.TypePower, ItemPower.power.Time));
+			ItemCreated();
 		}
-
-		if(added != null)
-			helpBoxes.Add(new HelpBox("Item '" + item.Name + "' added!", MessageType.Info));
+	}
 	
-		item = new Item();
-		itemEquipable = new ItemEquipable();
-		itemPower = new ItemPower();
-		itemSpecial = new ItemSpecial();
-		itemWeapon = new ItemWeapon();
+	/** Try to create a special item */
+	private void CreateSpecial() {
+		bool passed = VerifyItem();
 	
-		itemEquipable.Stats = new ItemEquipable.ItemEquipableStats();
-		itemWeapon.Stats = new ItemEquipable.ItemEquipableStats();
-
-		editArrayId = -1;
+		if(passed) {
+			itemList.SpecialItems.Add(new ItemSpecial(Item.item.Name, ItemSpecial.special.Id));
+			ItemCreated();
+		}
 	}
-
-	public void SetItemManager(ItemManager itemManager) {
-		this.itemManager = itemManager;
+	
+	/** Replace the prefab when an item is created */
+	private void ItemCreated() {
+		UnityEngine.Object prefab = PrefabUtility.CreateEmptyPrefab("Assets/Resources/Prefabs/Items/Item Manager.prefab");
+		PrefabUtility.ReplacePrefab(Selection.activeGameObject, prefab);
+		AssetDatabase.Refresh();
+		
+		helpBoxes.Add(new HelpBox("Item '" + Item.item.Name + "' added!", MessageType.Info));
+		
+		updated = true;
 	}
-
-	private void EditItem(Item item) {
-		this.item = item;
+	
+	/** Check if the selected Game Object has an ItemList component attached */
+	private bool CheckForItemList() {
+		bool found = true;
+	
+		if(Selection.activeGameObject == null || (Selection.activeGameObject != selectedGameObject && selectedGameObject != null)) {
+			GUILayout.Label("No Game Object with an ItemList component selected");
+			found = false;
+		} else if(itemList == null) {
+			itemList = (Selection.activeGameObject).GetComponent<ItemList>();
+			
+			if(itemList == null) {
+				GUILayout.Label("Can't find an ItemList component on the selected Game Object");
+				found = false;
+			}
+		}
+		
+		selectedGameObject = Selection.activeGameObject;
+		
+		return found;
 	}
-
-	public void EditEquipable(ItemEquipable item) {
-		EditItem(item);
-
-		this.itemEquipable = item;
-
-		if(itemList != null)
-			editArrayId = itemList.EquipableItems.IndexOf(item);
-	}
-
-	public void EditWeapon(ItemWeapon item) {
-		EditItem(item);
-		EditEquipable(item);
-
-		this.itemWeapon = item;
-
-		if(itemList != null)
-			editArrayId = itemList.WeaponItems.IndexOf(item);
-	}
-
-	public void EditPower(ItemPower item) {
-		EditItem(item);
-
-		this.itemPower = item;
-
-		if(itemList != null)
-			editArrayId = itemList.PowerItems.IndexOf(item);
-	}
-
-	public void EditSpecial(ItemSpecial item) {
-		EditItem(item);
-
-		this.itemSpecial = item;
-
-		if(itemList != null)
-			editArrayId = itemList.SpecialItems.IndexOf(item);
-	}
+	
+	public bool Updated { get { return updated; } }
 }

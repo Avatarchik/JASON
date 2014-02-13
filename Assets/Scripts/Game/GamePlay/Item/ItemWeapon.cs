@@ -3,6 +3,8 @@ using System;
 
 [Serializable]
 public class ItemWeapon:ItemEquipable {
+	public static ItemWeapon weapon = new ItemWeapon();
+
 	public enum WeaponType {
 		Sword,
 		Spear,

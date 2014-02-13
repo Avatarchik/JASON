@@ -1,72 +1,84 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
-public class RoomWindow : EditorWindow {
 
-	GameObject itemObject;
-	bool itemSelected = false;
-
-	GameObject roomObject;
-	GameObject roomPreview;
-	string currentRoomPreview;
-	bool roomSelected = false;
-
-	List<GameObject> objectList;
-	bool foldList;
-	bool foldTexture;
-	//For ItemObject;
-	RoomObject currentObject;
-	Texture currentTexture;
-	Editor gameobjectEditor;
-
-	int roomNumber;
-	
-	enum RoomType{
+public class RoomWindow:EditorWindow {
+	private enum RoomType {
 		Default,
 		Hall,
 		Corner,
 		TRoom,
 		Plus,
-		BigRoom
-	}
-	RoomType roomtype;
-	[MenuItem ("Window/RoomEditor")]
-	static void Init(){
-		RoomWindow window = (RoomWindow)EditorWindow.GetWindow(typeof(RoomWindow));
+		Big
 	}
 
-	void OnInspectorUpdate(){
-		if(Selection.activeGameObject != null){
-			if(Selection.activeGameObject.tag == "Item" && !itemSelected){
-				itemObject = Selection.activeGameObject.gameObject;
-				itemSelected = true;
-				currentObject = itemObject.GetComponent<RoomObject>();
-				currentTexture = itemObject.renderer.sharedMaterial.mainTexture;
-				this.Repaint();
-			}else if(Selection.activeGameObject.tag != "Item"){
-				itemSelected = false;
-				itemObject = null;
-				this.Repaint();
-			}
-			if(Selection.activeGameObject.tag == "Room" && !roomSelected){
-				roomObject = Selection.activeGameObject.gameObject;
-				roomSelected = true;
-				this.Repaint();
-			}else if(Selection.activeGameObject.tag != "Room"){
-				roomSelected = false;
-				roomObject = null;
+	private List<GameObject> objects;
+
+	private RoomObject roomObject;
+	
+	private GameObject selectedGameObject;
+	
+	private Texture currentTexture;
+	
+	private RoomType roomType;
+	private int roomId;
+	
+	[MenuItem("Window/Room Editor")]
+	static void Init() {
+		RoomWindow roomWindow = (RoomWindow)EditorWindow.GetWindow(typeof(RoomWindow));
+		
+		roomWindow.title = "Room Editor";
+		
+		roomWindow.Show();
+		roomWindow.Focus();
+	}
+	
+	void OnInspectorUpdate() {
+		
+	}
+	
+	void OnGUI() {
+		if(!CheckForRoomObject())
+			return;
+			
+		EditorGUILayout.HelpBox("Here you can add content to the room", MessageType.Info);
+		EditorGUILayout.HelpBox("Make sure you've selected the corrected room type and the room ID doesn't exist!", MessageType.Warning);
+		
+		roomType = (RoomType)EditorGUILayout.EnumPopup("RoomType", roomType);
+		roomId = EditorGUILayout.IntField("RoomNumber", roomId);
+		
+	}
+	
+	private bool CheckForRoomObject() {
+		bool found = true;
+	
+		if(Selection.activeGameObject == null || (Selection.activeGameObject != selectedGameObject && selectedGameObject != null)) {
+			GUILayout.Label("No Game Object with the RoomObject component selected");
+			found = false;
+		} else if(roomObject == null) {
+			roomObject = Selection.activeGameObject.GetComponent<RoomObject>();
+			
+			if(roomObject == null) {
+				GUILayout.Label("Can't find a RoomObject component on the selected Game Object");
+				found = false;
+			} else {
+				currentTexture = roomObject.gameObject.renderer.sharedMaterial.mainTexture;
 				this.Repaint();
 			}
 		}
+		
+		selectedGameObject = Selection.activeGameObject;
+		
+		return found;
 	}
+}
+/*
 
 	void OnGUI(){
 		if(roomSelected){
-			EditorGUILayout.HelpBox("Here you can insert RoomContent in a Prefab, These content will" +
-				"be spawning within a room",MessageType.Info);
-			EditorGUILayout.HelpBox("BE SURE you selected the correct roomtype and check if your Prefab number doesnt already exist!",MessageType.Warning);
-			roomNumber = EditorGUILayout.IntField("RoomNumber",roomNumber);
-			roomtype = (RoomType)EditorGUILayout.EnumPopup("RoomType", roomtype);
+			
+			
+			
 			//if(roomPreview == null){
 			//	currentRoomPreview = "Default";
 			//}

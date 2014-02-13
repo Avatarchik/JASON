@@ -3,6 +3,8 @@ using System;
 
 [Serializable]
 public class ItemEquipable:Item {
+	public static ItemEquipable equipable = new ItemEquipable();
+
 	public enum EquipableType {
 		Helmet,
 		Chest,
@@ -23,7 +25,9 @@ public class ItemEquipable:Item {
 	[SerializeField] private GameObject model;
 	[SerializeField] private ItemEquipableStats stats;
 	
-	public ItemEquipable() { }
+	public ItemEquipable() {
+		stats = ItemEquipableStats.equipableStats;
+	}
 	
 	public ItemEquipable(string itemName, EquipableType equipableType, EquipableElement element, ItemEquipableStats stats, GameObject model):base(Item.ItemType.Equipable, itemName) {
 		this.equipableType = equipableType;
@@ -54,6 +58,8 @@ public class ItemEquipable:Item {
 
 	[Serializable]
 	public class ItemEquipableStats {
+		public static ItemEquipableStats equipableStats = new ItemEquipableStats();
+	
 		[SerializeField] private int speed;
 		[SerializeField] private int defence;
 		[SerializeField] private int damage;

@@ -3,6 +3,8 @@ using System;
 
 [Serializable]
 public class ItemPower:Item {
+	public static ItemPower power = new ItemPower();
+
 	public enum PowerType {
 		Sprint,
 		Regeneration,

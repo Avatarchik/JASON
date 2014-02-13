@@ -3,6 +3,8 @@ using System;
 
 [Serializable]
 public class Item {
+	public static Item item = new Item();
+
 	public enum ItemType {
 		Equipable,
 		Power,
