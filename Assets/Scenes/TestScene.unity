@@ -336,13 +336,13 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1021482067}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: cb220073cd0659346a7498cfddba5985, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Priority: 128
   DopplerLevel: 1
@@ -519,7 +519,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1157732357255c041b0f272f9692c8d4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: .0404702425
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1157732357255c041b0f272f9692c8d4, type: 2}
       propertyPath: m_LocalPosition.z
@@ -564,6 +564,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1439451012}
   - 114: {fileID: 1439451013}
+  - 114: {fileID: 1439451014}
   m_Layer: 0
   m_Name: Audio Manager
   m_TagString: Untagged
@@ -596,6 +597,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicVolume: 5
   soundVolume: 1
+--- !u!114 &1439451014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1439451011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca4a40fce2748354fbac7fb91d076213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  test:
+    clip: {fileID: 8300000, guid: 380c1b4ed8ec79a4298c6da70d123fbf, type: 3}
+    source: {fileID: 1021482073}
+  test2:
+    clip: {fileID: 8300000, guid: cb220073cd0659346a7498cfddba5985, type: 3}
+    source: {fileID: 1021482073}
 --- !u!1 &1532983811
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,7 +637,7 @@ Transform:
   m_PrefabInternal: {fileID: 511877888}
   m_GameObject: {fileID: 1532983811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.231318712, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1306505942}
@@ -666,7 +684,7 @@ Transform:
   m_PrefabInternal: {fileID: 1421219259}
   m_GameObject: {fileID: 1675278941}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .0404702425, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 1129663005}
