@@ -18,8 +18,6 @@ public class Test:PoolObject {
 			forceStopped = false;
 		}
 
-		Debug.Log ("Play");
-
 		source.clip = clip;
 		source.Play();
 		available = false;
