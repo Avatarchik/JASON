@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
+using System;
 
+[Serializable]
 public class SUIButton:SUI {
 	protected enum ButtonState {
 		Normal,
 		Hover,
 		Click
 	}
+
+	[SerializeField] protected int id;
+	[SerializeField] protected SUILabel label;
 
 	protected ButtonState lastState;
 	protected ButtonState state;
@@ -21,6 +26,9 @@ public class SUIButton:SUI {
 
 	/** Update the button */
 	public virtual void Update(float nativeWidth, float nativeHeight) {
+		if(label.Text != "" || label.Text != null)
+			label.Draw();
+
 		lastState = state;
 	}
 
@@ -81,4 +89,6 @@ public class SUIButton:SUI {
 
 	/** Return true the first frame when the button is clicked */
 	public bool OnClick { get { return (state == ButtonState.Click) && (lastState != ButtonState.Click); } }
+
+	public int ID { get { return id; } }
 }

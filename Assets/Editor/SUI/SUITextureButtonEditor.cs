@@ -6,10 +6,12 @@ using System.Reflection;
 
 [CustomPropertyDrawer(typeof(SUITextureButton))]
 public class SUITextureButtonEditor:PropertyDrawer {
-	private float height = 106f;
+	private float height = 125f;
+
+	private bool labelFoldout;
 	
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-		height = 106f;
+		height = 125f;
 		position.height = 16f;
 		
 		Rect foldoutPosition = position;
@@ -33,13 +35,13 @@ public class SUITextureButtonEditor:PropertyDrawer {
 		EditorGUIUtility.labelWidth = 80f;
 		
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("activated"));
-		
+		position.x += position.width;
+		EditorGUI.PropertyField (position, property.FindPropertyRelative ("id"));
+
 		position.x = oldPosition.x;
 		position.width = oldPosition.width;
 		position.y += 19f;
 		position.width /= 2f;
-		
-		EditorGUIUtility.labelWidth = 80f;
 		
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("position.x"), new GUIContent("X Position"));
 		position.x += position.width;
@@ -50,7 +52,6 @@ public class SUITextureButtonEditor:PropertyDrawer {
 		position.y += 19f;
 		
 		EditorGUI.indentLevel = 1;
-		EditorGUIUtility.labelWidth = 80f;
 		
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("textureNormal"));
 		if(property.FindPropertyRelative("textureNormal").isExpanded) {
@@ -76,6 +77,48 @@ public class SUITextureButtonEditor:PropertyDrawer {
 		if(property.FindPropertyRelative("textureClick").isExpanded) {
 			position.y += 16f;
 			height += 20f;
+		}
+
+		position.x = oldPosition.x;
+		position.width = oldPosition.width;
+		position.y += 19f;
+		
+		labelFoldout = EditorGUI.Foldout(position, labelFoldout, new GUIContent("Label"), true);
+		if(labelFoldout) {
+			height += 95f;
+
+			position.x = oldPosition.x;
+			position.width = oldPosition.width;
+			position.y += 16f;
+
+			EditorGUI.PropertyField(position, property.FindPropertyRelative("label.activated"));
+
+			position.x = oldPosition.x;
+			position.width = oldPosition.width;
+			position.y += 19f;
+			position.width /= 2f;
+			
+			EditorGUI.PropertyField(position, property.FindPropertyRelative("label.position.x"), new GUIContent("X Position"));
+			position.x += position.width;
+			EditorGUI.PropertyField(position, property.FindPropertyRelative("label.position.y"), new GUIContent("Y Position"));
+
+			position.x = oldPosition.x;
+			position.width = oldPosition.width;
+			position.y += 19f;
+			
+			EditorGUI.PropertyField(position, property.FindPropertyRelative("label.text"));
+			
+			position.x = oldPosition.x;
+			position.width = oldPosition.width;
+			position.y += 19f;
+			
+			EditorGUI.PropertyField(position, property.FindPropertyRelative("label.size"));
+			
+			position.x = oldPosition.x;
+			position.width = oldPosition.width;
+			position.y += 19f;
+			
+			EditorGUI.PropertyField(position, property.FindPropertyRelative("label.font"));
 		}
 		
 		EditorGUI.indentLevel = oldIndent;

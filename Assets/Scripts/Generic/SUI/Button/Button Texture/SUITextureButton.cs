@@ -24,8 +24,6 @@ public class SUITextureButton:SUIButton {
 		if(!initialized)
 			Initialize();
 
-		base.Update(nativeWidth, nativeHeight);
-
 		switch(Application.platform) {
 		case RuntimePlatform.Android:
 			CheckForTouch(textureActive.Texture.width, textureActive.Texture.height, nativeWidth, nativeHeight);
@@ -39,6 +37,8 @@ public class SUITextureButton:SUIButton {
 			UpdateTexture();
 
 		textureActive.Draw(position);
+
+		base.Update(nativeWidth, nativeHeight);
 	}
 
 	/** Update the texture of the button */

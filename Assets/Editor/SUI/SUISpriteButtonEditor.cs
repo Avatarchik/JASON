@@ -33,6 +33,17 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 		EditorGUIUtility.labelWidth = 80f;
 		
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("activated"));
+		position.x += position.width;
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("id"));
+
+		position.x = oldPosition.x;
+		position.width = oldPosition.width;
+		position.y += 19f;
+		position.width /= 2f;
+		
+		EditorGUIUtility.labelWidth = 80f;
+		
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("label"));
 		
 		position.x = oldPosition.x;
 		position.width = oldPosition.width;

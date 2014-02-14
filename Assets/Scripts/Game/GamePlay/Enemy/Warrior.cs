@@ -5,12 +5,12 @@ public class Warrior : Enemy {
 	public Animator enemyAnimation;
 	public bool isAttacking;
 	// Use this for initialization
-	void Start () {
+	new void Start () {
 		base.Start();
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	new void FixedUpdate () {
 		if(!isDead){
 			base.FixedUpdate();
 
