@@ -7,6 +7,12 @@ TagManager:
   - Room
   - Item
   - 
+  - Floor
+  - WeaponCollider
+  - DestroyableObject
+  - Corpse
+  - 
+  - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
   Builtin Layer 2: Ignore Raycast

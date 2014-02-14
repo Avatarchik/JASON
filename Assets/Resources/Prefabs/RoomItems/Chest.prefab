@@ -75,10 +75,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400008}
-  - 33: {fileID: 3300006}
   - 65: {fileID: 6500000}
   - 23: {fileID: 2300006}
-  - 114: {fileID: 11400000}
+  - 33: {fileID: 3300006}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -210,7 +209,7 @@ Renderer:
   m_SortingLayerID: 0
 --- !u!23 &2300006
 Renderer:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
@@ -252,7 +251,7 @@ MeshFilter:
   m_Mesh: {fileID: 4300000, guid: d031f07dd7dbecc4cb4d0f108cf53670, type: 3}
 --- !u!33 &3300006
 MeshFilter:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
@@ -283,19 +282,6 @@ Animator:
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100008}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 417791eb1fe1ab349b44bbb6835016ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  integertje: 0
-  objectTexture: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

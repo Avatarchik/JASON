@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System;
 
 public class Enemy:MonoBehaviour {
@@ -12,23 +13,36 @@ public class Enemy:MonoBehaviour {
 	}
 	
 	[SerializeField] protected EnemyData enemyData;
-
-	void Start() {
-	
+	public bool foundPlayer;
+	public Transform player;
+	public float distance;
+	public bool isDead;
+	public void Start() {
+		player = GameObject.Find("Player").transform;
 	}
-	
-	void Update() {
-	
+	public void FixedUpdate () {
+		rigidbody.velocity = new Vector3(0,0,0);
+		distance = Vector3.Distance(this.transform.position, player.transform.position);
+		if(distance < 10){
+			foundPlayer = true;
+		}else{
+			foundPlayer = false;
+		}
 	}
-	
 	public void TakeDamage(int amt) {
 		enemyData.health -= amt;
 		
 		if(enemyData.health <= 0)
 			Die();
 	}
-	
-	private void Die() {
-		Destroy(gameObject);
+	void OnTriggerEnter(Collider coll){
+		if(coll.name == "WeaponCollision"){
+			Debug.Log("Collision");
+			int dmg = player.GetComponent<Player>().Data.attackDamage;
+			TakeDamage(dmg);
+		}
+	}
+	public virtual void Die() {
+		Debug.Log("You need to overide me");
 	}
 }

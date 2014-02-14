@@ -8,7 +8,8 @@ public class PlayerCombat:MonoBehaviour {
 	
 	private bool canAttack;
 	private bool attacking;
-	
+	private bool isAttacking;
+	public GameObject weaponCollision;
 	void Start() {
 		player = GetComponent<Player>();
 	}
@@ -17,7 +18,7 @@ public class PlayerCombat:MonoBehaviour {
 		canAttack = false;
 	
 		if(target != null) {
-			if(Vector3.Distance(transform.position, target.position) <= 1) {
+			if(Vector3.Distance(transform.position, target.position) <= 2) {
 				player.TargetPosition = transform.position;
 				
 				canAttack = true;
@@ -27,7 +28,7 @@ public class PlayerCombat:MonoBehaviour {
 		}
 		
 		if(canAttack && !attacking)
-			StartCoroutine("Attack");
+			StartCoroutine(Attack(0.01f,1));
 	}
 	
 	internal void Defend() {
@@ -42,14 +43,14 @@ public class PlayerCombat:MonoBehaviour {
 		player.TargetPosition = target.position;
 	}
 	
-	private IEnumerator Attack() {
+	private IEnumerator Attack(float duration,float hitDelay) {
 		attacking = true;
-		
-		yield return new WaitForSeconds(player.Data.attackDelay);
-		
-		if(target != null)
-			target.GetComponent<Enemy>().TakeDamage(player.Data.attackDamage);
-		
+		weaponCollision.renderer.enabled = true;
+		weaponCollision.collider.enabled = true;
+		yield return new WaitForSeconds(duration);
+		weaponCollision.collider.enabled = false;
+		weaponCollision.renderer.enabled = false;
+		yield return new WaitForSeconds(hitDelay);
 		attacking = false;
 	}
 	

@@ -20,6 +20,7 @@ public class Player:MonoBehaviour {
 	}
 	
 	void Update() {	
+		rigidbody.velocity = new Vector3(0,0,0);
 		if(ischarging){
 			StartCoroutine("ChargingTimer");
 		}else{
@@ -32,13 +33,15 @@ public class Player:MonoBehaviour {
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
 			Vector3 lookPos = targetPosition - playerModel.transform.position;
-			
-			Quaternion rotation = Quaternion.LookRotation(lookPos);
+			Quaternion rotation = new Quaternion(0,0,0,0);
+			if(lookPos != Vector3.zero){
+			rotation = Quaternion.LookRotation(lookPos);
+			}
 			rotation.x = 0;
 			rotation.z = 0;
 
 			if(transform.position != targetPosition){
-			playerModel.transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 30);
+			playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, rotation, 30);
 			}
 		}
 	}
@@ -85,6 +88,9 @@ public class Player:MonoBehaviour {
 				playerCombat.Defend();
 				break;
 			case "Enemy":
+				playerCombat.StartAttack(hit.transform);
+				break;
+			case "DestroyableObject":
 				playerCombat.StartAttack(hit.transform);
 				break;
 			default:

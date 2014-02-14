@@ -1,0 +1,677 @@
+fileFormatVersion: 2
+guid: 3002ef996662b424ab52479a0558dfee
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: body.1
+    100002: crotch
+    100004: head
+    100006: lelbow
+    100008: lfeet
+    100010: lfeet.Goal
+    100012: lfinger
+    100014: lhand
+    100016: lhand.Goal
+    100018: lhip
+    100020: lknee
+    100022: lshoulder
+    100024: lshoulder.Goal
+    100026: middenrif
+    100028: neck
+    100030: neck.Goal
+    100032: Null
+    100034: relbow
+    100036: rfeet
+    100038: rfeet.Goal
+    100040: rfinger
+    100042: rhand
+    100044: rhand.Goal
+    100046: rhip
+    100048: rknee
+    100050: Root
+    100052: rshoulder
+    100054: rshoulder.Goal
+    100056: shoulder
+    100058: sword
+    100060: warrior
+    100062: //RootNode
+    400000: body.1
+    400002: crotch
+    400004: head
+    400006: lelbow
+    400008: lfeet
+    400010: lfeet.Goal
+    400012: lfinger
+    400014: lhand
+    400016: lhand.Goal
+    400018: lhip
+    400020: lknee
+    400022: lshoulder
+    400024: lshoulder.Goal
+    400026: middenrif
+    400028: neck
+    400030: neck.Goal
+    400032: Null
+    400034: relbow
+    400036: rfeet
+    400038: rfeet.Goal
+    400040: rfinger
+    400042: rhand
+    400044: rhand.Goal
+    400046: rhip
+    400048: rknee
+    400050: Root
+    400052: rshoulder
+    400054: rshoulder.Goal
+    400056: shoulder
+    400058: sword
+    400060: warrior
+    400062: //RootNode
+    2300000: shoulder
+    2300002: sword
+    3300000: shoulder
+    3300002: sword
+    4300000: body.1
+    4300002: sword
+    4300004: shoulder
+    7400000: Idle
+    7400002: Run
+    7400004: Death
+    7400006: Death_Idle
+    7400008: Attack1
+    7400010: Attack2
+    9500000: //RootNode
+    13700000: body.1
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle
+      takeName: C4D Animation Take
+      firstFrame: 70
+      lastFrame: 109
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: warrior
+        weight: 1
+      - path: warrior/body.1
+        weight: 1
+      - path: warrior/body.1/Null
+        weight: 1
+      - path: warrior/lfeet.Goal
+        weight: 1
+      - path: warrior/lhand.Goal
+        weight: 1
+      - path: warrior/lshoulder.Goal
+        weight: 1
+      - path: warrior/neck.Goal
+        weight: 1
+      - path: warrior/rfeet.Goal
+        weight: 1
+      - path: warrior/rhand.Goal
+        weight: 1
+      - path: warrior/Root
+        weight: 1
+      - path: warrior/Root/crotch
+        weight: 1
+      - path: warrior/Root/crotch/lhip
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee/lfeet
+        weight: 1
+      - path: warrior/Root/crotch/middenrif
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head/shoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand/lfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger/sword
+        weight: 1
+      - path: warrior/Root/crotch/rhip
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee/rfeet
+        weight: 1
+      - path: warrior/rshoulder.Goal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Run
+      takeName: C4D Animation Take
+      firstFrame: 120
+      lastFrame: 140
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: warrior
+        weight: 1
+      - path: warrior/body.1
+        weight: 1
+      - path: warrior/body.1/Null
+        weight: 1
+      - path: warrior/lfeet.Goal
+        weight: 1
+      - path: warrior/lhand.Goal
+        weight: 1
+      - path: warrior/lshoulder.Goal
+        weight: 1
+      - path: warrior/neck.Goal
+        weight: 1
+      - path: warrior/rfeet.Goal
+        weight: 1
+      - path: warrior/rhand.Goal
+        weight: 1
+      - path: warrior/Root
+        weight: 1
+      - path: warrior/Root/crotch
+        weight: 1
+      - path: warrior/Root/crotch/lhip
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee/lfeet
+        weight: 1
+      - path: warrior/Root/crotch/middenrif
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head/shoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand/lfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger/sword
+        weight: 1
+      - path: warrior/Root/crotch/rhip
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee/rfeet
+        weight: 1
+      - path: warrior/rshoulder.Goal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Death
+      takeName: C4D Animation Take
+      firstFrame: 150
+      lastFrame: 187
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: warrior
+        weight: 1
+      - path: warrior/body.1
+        weight: 1
+      - path: warrior/body.1/Null
+        weight: 1
+      - path: warrior/lfeet.Goal
+        weight: 1
+      - path: warrior/lhand.Goal
+        weight: 1
+      - path: warrior/lshoulder.Goal
+        weight: 1
+      - path: warrior/neck.Goal
+        weight: 1
+      - path: warrior/rfeet.Goal
+        weight: 1
+      - path: warrior/rhand.Goal
+        weight: 1
+      - path: warrior/Root
+        weight: 1
+      - path: warrior/Root/crotch
+        weight: 1
+      - path: warrior/Root/crotch/lhip
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee/lfeet
+        weight: 1
+      - path: warrior/Root/crotch/middenrif
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head/shoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand/lfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger/sword
+        weight: 1
+      - path: warrior/Root/crotch/rhip
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee/rfeet
+        weight: 1
+      - path: warrior/rshoulder.Goal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Death_Idle
+      takeName: C4D Animation Take
+      firstFrame: 186
+      lastFrame: 187
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: warrior
+        weight: 1
+      - path: warrior/body.1
+        weight: 1
+      - path: warrior/body.1/Null
+        weight: 1
+      - path: warrior/lfeet.Goal
+        weight: 1
+      - path: warrior/lhand.Goal
+        weight: 1
+      - path: warrior/lshoulder.Goal
+        weight: 1
+      - path: warrior/neck.Goal
+        weight: 1
+      - path: warrior/rfeet.Goal
+        weight: 1
+      - path: warrior/rhand.Goal
+        weight: 1
+      - path: warrior/Root
+        weight: 1
+      - path: warrior/Root/crotch
+        weight: 1
+      - path: warrior/Root/crotch/lhip
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee/lfeet
+        weight: 1
+      - path: warrior/Root/crotch/middenrif
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head/shoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand/lfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger/sword
+        weight: 1
+      - path: warrior/Root/crotch/rhip
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee/rfeet
+        weight: 1
+      - path: warrior/rshoulder.Goal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Attack1
+      takeName: C4D Animation Take
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: warrior
+        weight: 1
+      - path: warrior/body.1
+        weight: 1
+      - path: warrior/body.1/Null
+        weight: 1
+      - path: warrior/lfeet.Goal
+        weight: 1
+      - path: warrior/lhand.Goal
+        weight: 1
+      - path: warrior/lshoulder.Goal
+        weight: 1
+      - path: warrior/neck.Goal
+        weight: 1
+      - path: warrior/rfeet.Goal
+        weight: 1
+      - path: warrior/rhand.Goal
+        weight: 1
+      - path: warrior/Root
+        weight: 1
+      - path: warrior/Root/crotch
+        weight: 1
+      - path: warrior/Root/crotch/lhip
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee/lfeet
+        weight: 1
+      - path: warrior/Root/crotch/middenrif
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head/shoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand/lfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger/sword
+        weight: 1
+      - path: warrior/Root/crotch/rhip
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee/rfeet
+        weight: 1
+      - path: warrior/rshoulder.Goal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Attack2
+      takeName: C4D Animation Take
+      firstFrame: 40
+      lastFrame: 65
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: warrior
+        weight: 1
+      - path: warrior/body.1
+        weight: 1
+      - path: warrior/body.1/Null
+        weight: 1
+      - path: warrior/lfeet.Goal
+        weight: 1
+      - path: warrior/lhand.Goal
+        weight: 1
+      - path: warrior/lshoulder.Goal
+        weight: 1
+      - path: warrior/neck.Goal
+        weight: 1
+      - path: warrior/rfeet.Goal
+        weight: 1
+      - path: warrior/rhand.Goal
+        weight: 1
+      - path: warrior/Root
+        weight: 1
+      - path: warrior/Root/crotch
+        weight: 1
+      - path: warrior/Root/crotch/lhip
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee
+        weight: 1
+      - path: warrior/Root/crotch/lhip/lknee/lfeet
+        weight: 1
+      - path: warrior/Root/crotch/middenrif
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/head/shoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/lshoulder/lelbow/lhand/lfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger
+        weight: 1
+      - path: warrior/Root/crotch/middenrif/neck/rshoulder/relbow/rhand/rfinger/sword
+        weight: 1
+      - path: warrior/Root/crotch/rhip
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee
+        weight: 1
+      - path: warrior/Root/crotch/rhip/rknee/rfeet
+        weight: 1
+      - path: warrior/rshoulder.Goal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 1
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
