@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class LevelGenerator:Singleton<LevelGenerator> {
-	private static LevelGenerator instance = null;
-
 	public Object[] defaultRoomContent;
 	public Object[] hallRoomContent;
 	public Object[] cornerRoomContent;

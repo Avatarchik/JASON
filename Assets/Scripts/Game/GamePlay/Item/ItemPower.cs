@@ -17,7 +17,7 @@ public class ItemPower:Item {
 	
 	public ItemPower() { }
 
-	public ItemPower(string itemName, PowerType powerType, int time):base(Item.ItemType.Power, itemName) {
+	public ItemPower(string itemName, string itemDescription, PowerType powerType, int time):base(Item.ItemType.Power, itemName, itemDescription) {
 		this.powerType = powerType;
 		this.time = time;
 	}

@@ -30,6 +30,7 @@ public class ItemCreator:EditorWindow {
 		GUILayout.Label("General Settings", EditorStyles.boldLabel);
 		Item.item.Type = (Item.ItemType)EditorGUILayout.EnumPopup("Item Type", Item.item.Type);
 		Item.item.Name = EditorGUILayout.TextField("Item Name", Item.item.Name);
+		Item.item.Description = EditorGUILayout.TextField("Item Description", Item.item.Description);
 		
 		switch(Item.item.Type) {
 		case Item.ItemType.Equipable:
@@ -50,6 +51,7 @@ public class ItemCreator:EditorWindow {
 		
 		ItemEquipable.equipable.TypeEquipable = (ItemEquipable.EquipableType)EditorGUILayout.EnumPopup("Equipable Type", ItemEquipable.equipable.TypeEquipable);
 		ItemEquipable.equipable.Element = (ItemEquipable.EquipableElement)EditorGUILayout.EnumPopup("Element", ItemEquipable.equipable.Element);
+		ItemEquipable.equipable.Rarity = (ItemEquipable.EquipableRarity)EditorGUILayout.EnumPopup("Rarity", ItemEquipable.equipable.Rarity);
 		ItemEquipable.equipable.Model = (GameObject)EditorGUILayout.ObjectField("Model", ItemEquipable.equipable.Model, typeof(GameObject), false);
 		ItemEquipable.equipable.Stats.Speed = EditorGUILayout.IntField("Speed", ItemEquipable.equipable.Stats.Speed);
 		ItemEquipable.equipable.Stats.Defence = EditorGUILayout.IntField("Defence", ItemEquipable.equipable.Stats.Defence);
@@ -102,7 +104,7 @@ public class ItemCreator:EditorWindow {
 		helpBoxes.Clear();
 		
 		if(Item.item.Name == "" || Item.item.Name == null) {
-			helpBoxes.Add(new HelpBox("An item needs a name!", MessageType.Error));
+			helpBoxes.Add(new HelpBox("The item needs a name!", MessageType.Error));
 			passed = false;
 		} else {
 			foreach(Item item2 in itemList.EquipableItems)
@@ -124,6 +126,11 @@ public class ItemCreator:EditorWindow {
 			if(!passed)
 				helpBoxes.Add(new HelpBox("An item with this name already exists", MessageType.Error));
 		}
+
+		if(Item.item.Description == "" || Item.item.Description == null) {
+			helpBoxes.Add(new HelpBox("The item needs a description!", MessageType.Error));
+			passed = false;
+		}
 		
 		return passed;	
 	}
@@ -133,12 +140,12 @@ public class ItemCreator:EditorWindow {
 		bool passed = VerifyItem();
 		
 		if(ItemEquipable.equipable.Model == null) {
-			helpBoxes.Add(new HelpBox("An equipable item needs a model!", MessageType.Error));
+			helpBoxes.Add(new HelpBox("The item needs a model!", MessageType.Error));
 			passed = false;
 		}
 		
 		if(passed) {
-			itemList.EquipableItems.Add(new ItemEquipable(Item.item.Name, ItemEquipable.equipable.TypeEquipable, ItemEquipable.equipable.Element, ItemEquipable.equipable.Stats, ItemEquipable.equipable.Model));
+			itemList.EquipableItems.Add(new ItemEquipable(Item.item.Name, Item.item.Description, ItemEquipable.equipable.TypeEquipable, ItemEquipable.equipable.Element, ItemEquipable.equipable.Rarity, ItemEquipable.equipable.Stats, ItemEquipable.equipable.Model));
 			ItemCreated();
 		}
 	}
@@ -148,12 +155,12 @@ public class ItemCreator:EditorWindow {
 		bool passed = VerifyItem();
 		
 		if(ItemEquipable.equipable.Model == null) {
-			helpBoxes.Add(new HelpBox("An equipable item needs a model!", MessageType.Error));
+			helpBoxes.Add(new HelpBox("The equipable item needs a model!", MessageType.Error));
 			passed = false;
 		}
 		
 		if(passed) {
-			itemList.WeaponItems.Add(new ItemWeapon(Item.item.Name, ItemEquipable.equipable.Element, ItemEquipable.equipable.Stats, ItemEquipable.equipable.Model, ItemWeapon.weapon.TypeWeapon));
+			itemList.WeaponItems.Add(new ItemWeapon(Item.item.Name, Item.item.Description, ItemEquipable.equipable.Element, ItemEquipable.equipable.Rarity, ItemEquipable.equipable.Stats, ItemEquipable.equipable.Model, ItemWeapon.weapon.TypeWeapon));
 			ItemCreated();
 		}
 	}
@@ -163,12 +170,12 @@ public class ItemCreator:EditorWindow {
 		bool passed = VerifyItem();
 		
 		if(ItemPower.power.Time == 0) {
-			helpBoxes.Add(new HelpBox("A power needs a time", MessageType.Error));
+			helpBoxes.Add(new HelpBox("The power item needs a time", MessageType.Error));
 			passed = false;
 		}
 		
 		if(passed) {
-			itemList.PowerItems.Add(new ItemPower(Item.item.Name, ItemPower.power.TypePower, ItemPower.power.Time));
+			itemList.PowerItems.Add(new ItemPower(Item.item.Name, Item.item.Description, ItemPower.power.TypePower, ItemPower.power.Time));
 			ItemCreated();
 		}
 	}
@@ -178,7 +185,7 @@ public class ItemCreator:EditorWindow {
 		bool passed = VerifyItem();
 	
 		if(passed) {
-			itemList.SpecialItems.Add(new ItemSpecial(Item.item.Name, ItemSpecial.special.Id));
+			itemList.SpecialItems.Add(new ItemSpecial(Item.item.Name, Item.item.Description, ItemSpecial.special.Id));
 			ItemCreated();
 		}
 	}

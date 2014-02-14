@@ -40,27 +40,64 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipableItems:
   - itemType: 0
-    itemName: Test
-    equipableType: 1
-    element: 2
+    itemName: Common Item
+    itemDescription: 
+    equipableType: 0
+    element: 0
+    rarity: 0
     model: {fileID: 100006, guid: d031f07dd7dbecc4cb4d0f108cf53670, type: 3}
     stats:
       speed: 1
       defence: 2
       damage: 0
       storePrice: 3
+      durability: 0
   - itemType: 0
-    itemName: a
-    equipableType: 1
-    element: 1
+    itemName: Rare Item
+    itemDescription: 
+    equipableType: 0
+    element: 0
+    rarity: 1
     model: {fileID: 100006, guid: d031f07dd7dbecc4cb4d0f108cf53670, type: 3}
     stats:
       speed: 1
       defence: 2
       damage: 0
       storePrice: 3
+      durability: 0
+  - itemType: 0
+    itemName: Epic Item
+    itemDescription: 
+    equipableType: 0
+    element: 0
+    rarity: 2
+    model: {fileID: 100006, guid: d031f07dd7dbecc4cb4d0f108cf53670, type: 3}
+    stats:
+      speed: 1
+      defence: 2
+      damage: 0
+      storePrice: 3
+      durability: 0
+  - itemType: 0
+    itemName: Legendary Item
+    itemDescription: 
+    equipableType: 0
+    element: 0
+    rarity: 3
+    model: {fileID: 100006, guid: d031f07dd7dbecc4cb4d0f108cf53670, type: 3}
+    stats:
+      speed: 1
+      defence: 2
+      damage: 0
+      storePrice: 3
+      durability: 0
   weaponItems: []
-  powerItems: []
+  powerItems:
+  - itemType: 1
+    itemName: Swag
+    itemDescription: Swage
+    powerType: 1
+    time: 1
   specialItems: []
 --- !u!1001 &100100000
 Prefab:

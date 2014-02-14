@@ -20,8 +20,16 @@ public class ItemEquipable:Item {
 		Fire
 	}
 
+	public enum EquipableRarity {
+		Common,
+		Rare,
+		Epic,
+		Legendary
+	}
+
 	[SerializeField] private EquipableType equipableType;
 	[SerializeField] private EquipableElement element;
+	[SerializeField] private EquipableRarity rarity;
 	[SerializeField] private GameObject model;
 	[SerializeField] private ItemEquipableStats stats;
 	
@@ -29,9 +37,10 @@ public class ItemEquipable:Item {
 		stats = ItemEquipableStats.equipableStats;
 	}
 	
-	public ItemEquipable(string itemName, EquipableType equipableType, EquipableElement element, ItemEquipableStats stats, GameObject model):base(Item.ItemType.Equipable, itemName) {
+	public ItemEquipable(string itemName, string itemDescription, EquipableType equipableType, EquipableElement element, EquipableRarity rarity, ItemEquipableStats stats, GameObject model):base(Item.ItemType.Equipable, itemName, itemDescription) {
 		this.equipableType = equipableType;
 		this.element = element;
+		this.rarity = rarity;
 		this.stats = stats;
 		this.model = model;
 	}
@@ -46,6 +55,11 @@ public class ItemEquipable:Item {
 		get { return element; }
 	}
 
+	public EquipableRarity Rarity {
+		set { rarity = value; }
+		get { return rarity; }
+	}
+
 	public GameObject Model {
 		set { model = value; }
 		get { return model; }
@@ -56,6 +70,21 @@ public class ItemEquipable:Item {
 		get { return stats; }
 	}
 
+	public static Color RarityColor(EquipableRarity rarity) {
+		switch(rarity) {
+		case EquipableRarity.Common:
+			return new Color(1.0f, 1.0f, 1.0f);
+		case EquipableRarity.Rare:
+			return new Color(0.0f, 0.44f, 0.87f);
+		case EquipableRarity.Epic:
+			return new Color(0.64f, 0.21f, 0.93f);
+		case EquipableRarity.Legendary:
+			return new Color(1.0f, 0.5f, 0.0f);
+		default:
+			return new Color(1.0f, 1.0f, 1.0f);
+		}
+	}
+
 	[Serializable]
 	public class ItemEquipableStats {
 		public static ItemEquipableStats equipableStats = new ItemEquipableStats();
@@ -64,6 +93,7 @@ public class ItemEquipable:Item {
 		[SerializeField] private int defence;
 		[SerializeField] private int damage;
 		[SerializeField] private int storePrice;
+		[SerializeField] private byte durability;
 		
 		public ItemEquipableStats() { }
 		
@@ -72,6 +102,7 @@ public class ItemEquipable:Item {
 			this.defence = defence;
 			this.damage = damage;
 			this.storePrice = storePrice;
+			this.durability = 255;
 		}
 
 		public int Speed {
@@ -93,6 +124,8 @@ public class ItemEquipable:Item {
 			set { storePrice = value; }
 			get { return storePrice; }
 		}
+
+		public byte Durability { get { return durability; } }
 	}
 }
 

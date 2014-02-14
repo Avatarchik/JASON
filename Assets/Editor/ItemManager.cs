@@ -37,16 +37,22 @@ public class ItemManager:EditorWindow {
 	/** Draw all equipable items (except the weapons) */
 	private void DrawEquipableItems() {
 		GUILayout.Label("Equipable Items", EditorStyles.boldLabel);
+
+		GUIStyle style = new GUIStyle();
+		style.fontStyle = FontStyle.Bold;
+		style.margin = new RectOffset(5, 4, 8, 4);
 		
 		foreach(ItemEquipable item in itemList.EquipableItems) {
 			Texture2D preview = AssetPreview.GetAssetPreview(item.Model);
-			
+
+			style.normal.textColor = ItemEquipable.RarityColor(item.Rarity);
+
 			EditorGUILayout.BeginHorizontal();
 				GUILayout.Label(preview, GUILayout.MaxWidth(60f), GUILayout.MaxHeight(60f));
 				
 				EditorGUILayout.BeginVertical();
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label(item.Name, EditorStyles.boldLabel, GUILayout.Width(225f));
+						GUILayout.Label(item.Name, style, GUILayout.Width(225f));
 						
 						if(GUILayout.Button("Edit", GUILayout.Width(150f))) {
 							if(itemCreator == null)

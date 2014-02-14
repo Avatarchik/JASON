@@ -9,7 +9,7 @@ public class ItemSpecial:Item {
 	
 	public ItemSpecial() { }
 
-	public ItemSpecial(string itemName, int id):base(Item.ItemType.Special, itemName) {
+	public ItemSpecial(string itemName, string itemDescription, int id):base(Item.ItemType.Special, itemName, itemDescription) {
 		this.id = id;
 	}
 

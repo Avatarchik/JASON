@@ -15,7 +15,7 @@ public class ItemWeapon:ItemEquipable {
 	
 	public ItemWeapon() { }
 	
-	public ItemWeapon(string itemName, EquipableElement element, ItemEquipableStats stats, GameObject model, WeaponType weaponType):base(itemName, EquipableType.Weapon, element, stats, model) {
+	public ItemWeapon(string itemName, string itemDescription, EquipableElement element, EquipableRarity rarity, ItemEquipableStats stats, GameObject model, WeaponType weaponType):base(itemName, itemDescription, EquipableType.Weapon, element, rarity, stats, model) {
 		this.weaponType = weaponType;
 	}
 
