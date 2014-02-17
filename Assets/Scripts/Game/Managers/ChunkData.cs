@@ -61,6 +61,6 @@ public class ChunkData:MonoBehaviour {
 	}
 
 	void OnDrawGizmos() {
-		Gizmos.DrawWireCube(transform.position, new Vector3(100, 20, 100));
+		//Gizmos.DrawWireCube(transform.position, new Vector3(100, 20, 100));
 	}
 }

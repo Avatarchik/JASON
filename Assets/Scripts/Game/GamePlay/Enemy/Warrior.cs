@@ -4,6 +4,7 @@ using System.Collections;
 public class Warrior : Enemy {
 	public Animator enemyAnimation;
 	public bool isAttacking;
+	public GameObject overlapPosition;
 	// Use this for initialization
 	new void Start () {
 		base.Start();
@@ -59,6 +60,12 @@ public class Warrior : Enemy {
 		enemyAnimation.SetInteger("State",random);
 		yield return new WaitForSeconds(enemyAnimation.GetCurrentAnimatorStateInfo(0).length);
 		enemyAnimation.SetInteger("State",1);
+		Collider[] hits = Physics.OverlapSphere(overlapPosition.transform.position, 1);
+		for(int i = 0; i < hits.Length; i++){
+			if(hits[i].name == "Player"){
+				player.GetComponent<Player>().getDamage(enemyData.attackDamage);
+			}
+		}
 		yield return new WaitForSeconds(enemyData.attackDelay + Random.Range(0.3f,1.0f));
 		isAttacking = false;
 	}

@@ -35,13 +35,6 @@ public class Enemy:MonoBehaviour {
 		if(enemyData.health <= 0)
 			Die();
 	}
-	void OnTriggerEnter(Collider coll){
-		if(coll.name == "WeaponCollision"){
-			Debug.Log("Collision");
-			int dmg = player.GetComponent<Player>().Data.attackDamage;
-			TakeDamage(dmg);
-		}
-	}
 	public virtual void Die() {
 		Debug.Log("You need to overide me");
 	}

@@ -5,13 +5,14 @@ using System.Collections;
 public class Player:MonoBehaviour {	
 	[SerializeField]
 	private PlayerData data;
+	public PlayerCamera playerCamera;
 	private PlayerCombat playerCombat;
 	
 	private Vector3 targetPosition;
 	public GameObject playerModel;
 
 	public bool ischarging;
-	
+	public Animator playerAnimation;
 	public int chargingMultiplier = 1;
 	void Start() {
 		playerCombat = GetComponent<PlayerCombat>();
@@ -21,14 +22,9 @@ public class Player:MonoBehaviour {
 	
 	void Update() {	
 		rigidbody.velocity = new Vector3(0,0,0);
-		if(ischarging){
-			StartCoroutine("ChargingTimer");
-		}else{
-			StopCoroutine("ChargingTimer");
-			StartCoroutine("ChargingPeriod");
-		}
 		CheckForTouch();
 		if(targetPosition != transform.position) {
+			playerCamera.camDistance = 10;
 			float step = data.speed * chargingMultiplier * Time.deltaTime;
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
@@ -43,6 +39,9 @@ public class Player:MonoBehaviour {
 			if(transform.position != targetPosition){
 			playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, rotation, 30);
 			}
+		}else{
+			playerCamera.camDistance = -5;
+			playerAnimation.SetBool("IsRunning",false);
 		}
 	}
 	IEnumerator ChargingPeriod(){
@@ -78,14 +77,19 @@ public class Player:MonoBehaviour {
 		if (Physics.Raycast(screenRay,out hit, 100)){
 		}
 		if(hit.collider != null) {
+			if(hit.transform.tag != "Player"){
+				playerCombat.Defend(false);
+			}
 			switch(hit.transform.tag) {
 			case "Floor":
 				ischarging = false;
+				playerAnimation.SetBool("IsRunning",true);
 				Move(hit.point);
 				break;
 			case "Player":
 				ischarging = true;
-				playerCombat.Defend();
+				Move(transform.position);
+				playerCombat.Defend(true);
 				break;
 			case "Enemy":
 				playerCombat.StartAttack(hit.transform);
@@ -93,19 +97,31 @@ public class Player:MonoBehaviour {
 			case "DestroyableObject":
 				playerCombat.StartAttack(hit.transform);
 				break;
+			case "Test":
+				Application.LoadLevel(Application.loadedLevelName);
+				break;
 			default:
 				ischarging = false;
 				break;
 			}
 		} else {
-			ischarging = true;
-			Move(hit.point);
+			//ischarging = true;
+			//Move(hit.point);
 		}
 	}
 	
 	private void Move(Vector3 position) {
 		playerCombat.Target = null;
 		targetPosition = new Vector3(position.x,1,position.z);
+	}
+	public void getDamage(int amount){
+		playerAnimation.SetBool("GettingHit",true);
+		data.health -= amount;
+		StartCoroutine("Delay");
+	}
+	IEnumerator Delay(){
+		yield return new WaitForSeconds(0.3f);
+		playerAnimation.SetBool("GettingHit",false);
 	}
 	void OnGUI(){
 		GUI.Label(new Rect(0,0,100,100),"" + ischarging);

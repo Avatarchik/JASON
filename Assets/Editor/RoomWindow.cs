@@ -111,7 +111,7 @@ public class RoomWindow:EditorWindow {
 
 	/** Draw the props window */
 	private void DrawPropsWindow(){
-		string[] list1 = new string[] {"Pot", "Pillar", "Chest", "Rock", "Moss", "BrokenPot"};
+		string[] list1 = new string[] {"Pot", "Pillar", "Chest", "Tomb", "Moss", "BrokenPot"};
 		string[] list2 = new string[] {"Torch", "Statue", "BrkSword", "Table", "Chair", "Anvil"};
 		string[] list3 = new string[] {"Furnace", "Fountain", "Tree", "Bush", "Saw", "Crystal"};
 
@@ -183,7 +183,7 @@ public class RoomWindow:EditorWindow {
 			return;
 		}
 
-		GameObject instantiatedItem = Instantiate(Resources.Load("Prefabs/RoomItems/" + name), new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
+		GameObject instantiatedItem = Instantiate(Resources.Load("Prefabs/EditorItems/" + name), new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
 		Object[] selectedobject = new Object[1];
 
 		instantiatedItem.name = name;
@@ -197,9 +197,16 @@ public class RoomWindow:EditorWindow {
 
 	/** Create a prefab */
 	private void CreatePrefab(string id, RoomType type){
+		for(int i = 0; i < objectList.Count; i++){
+			GameObject child = objectList[i].transform.GetChild(0).gameObject;
+			DestroyImmediate(child);
+		}
 		Debug.Log("Saved " + type.ToString() + "/" + id);
 		Object prefab = PrefabUtility.CreateEmptyPrefab("Assets/Resources/Prefabs/Rooms/Content/" + type.ToString() + "/" + id + ".prefab");
 		PrefabUtility.ReplacePrefab(Selection.activeGameObject, prefab);
 		AssetDatabase.Refresh();
+		for(int i = 0; i < objectList.Count; i++){
+			DestroyImmediate(objectList[i]);
+		}
 	}
 }
