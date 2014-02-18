@@ -20,38 +20,34 @@ public class Player:MonoBehaviour {
 	private Inventory inventory;
 	
 	private Vector3 targetPosition;
+
 	void Start() {
 		playerCombat = GetComponent<PlayerCombat>();
 		inventory = GetComponent<Inventory>();
 	
 		targetPosition = transform.position;
 	}
+
 	void OnGUI() {
-		
-		if(GUI.Button(new Rect(0,0,200,200),"SHIELD")){
-			if(isDefending){
+		if(GUI.Button(new Rect(0, 0, 200, 200), "SHIELD")) {
+			if(isDefending) {
 				isDefending = false;
-			}else{
+			} else {
 				isDefending = true;
 			}
 		}
-
-
-
 	}
+
 	void Update() {	
-<<<<<<< HEAD
-		if(isDefending){
+		if(isDefending) {
 			Move(transform.position);
 			playerCombat.Defend(true);
-		}else{
+		} else {
 			playerCombat.Defend(false);
 		}
-		rigidbody.velocity = new Vector3(0,0,0);
-=======
-		rigidbody.velocity = new Vector3(0, 0, 0);
 
->>>>>>> Added inventory system and redid item system
+		rigidbody.velocity = new Vector3(0, 0, 0);
+		
 		CheckForTouch();
 
 		if(targetPosition != transform.position) {
@@ -163,14 +159,7 @@ public class Player:MonoBehaviour {
 		data.health -= amount;
 		StartCoroutine("Delay");
 	}
-<<<<<<< HEAD
-	IEnumerator Delay(){
-		yield return new WaitForSeconds(0.3f);
-		playerAnimation.SetBool("GettingHit",false);
-	}
-=======
->>>>>>> Added inventory system and redid item system
-
+	
 	public PlayerData Data { get { return data; } }
 	
 	public Vector3 TargetPosition {

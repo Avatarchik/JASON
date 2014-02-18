@@ -118,9 +118,9 @@ MonoBehaviour:
   distancex: -8
   height: 12
   damping: 5
+  camDamping: 2
   cam: {fileID: 867646846}
   camDistance: 0
-  camDamping: 2
 --- !u!1 &53507121
 GameObject:
   m_ObjectHideFlags: 0
@@ -4302,6 +4302,46 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1029562097}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1031182810
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1846745310}
+    m_Modifications:
+    - target: {fileID: 400000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.136229843
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -.307984829
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .650690556
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+  m_RootGameObject: {fileID: 1724495289}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1052127456
 GameObject:
   m_ObjectHideFlags: 0
@@ -6272,8 +6312,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0b2ce39757e3747a6024168375fa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data:
+    health: 0
+    speed: 4
+    attackDamage: 0
+    attackDelay: 0
   shieldButton:
-    activated: 0
+    activated: 1
     position: {x: 0, y: 0}
     id: 0
     label:
@@ -6282,24 +6327,19 @@ MonoBehaviour:
       text: 
       size: 0
       font: {fileID: 0}
-    spriteSheet: {fileID: 2800000, guid: d4b5d4459b91ae24eb4453ad90c9a149, type: 3}
+    spriteSheet: {fileID: 0}
     spriteNormal:
-      texCoords: {x: 1, y: 0}
-      size: {x: 400, y: 400}
+      texCoords: {x: 0, y: 0}
+      size: {x: 0, y: 0}
     spriteHover:
       texCoords: {x: 0, y: 0}
       size: {x: 0, y: 0}
     spriteClick:
       texCoords: {x: 0, y: 0}
       size: {x: 0, y: 0}
-  data:
-    health: 0
-    speed: 4
-    attackDamage: 0
-    attackDelay: 0
   playerCamera: {fileID: 20971728}
   playerModel: {fileID: 641075190}
-  ischarging: 0
+  isCharging: 0
   playerAnimation: {fileID: 977844725}
   chargingMultiplier: 1
 --- !u!65 &1530843189
@@ -7029,6 +7069,62 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1720432871}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1724495289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+  m_PrefabInternal: {fileID: 1031182810}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1724495290}
+  - 114: {fileID: 1724495291}
+  m_Layer: 0
+  m_Name: Item Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1724495290
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: e8242ea0beb0179449410a0cc4260a76, type: 2}
+  m_PrefabInternal: {fileID: 1031182810}
+  m_GameObject: {fileID: 1724495289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.136229843, y: -.307984829, z: .650690556}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1846745310}
+--- !u!114 &1724495291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: e8242ea0beb0179449410a0cc4260a76,
+    type: 2}
+  m_PrefabInternal: {fileID: 1031182810}
+  m_GameObject: {fileID: 1724495289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458ce8e0e97f2084f97134c3a36f6ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipableItems:
+  - itemType: 0
+    itemName: Penis van Gogh
+    itemDescription: Deze penis is heel groot
+    equipableType: 1
+    element: 1
+    rarity: 2
+    model: {fileID: 100008, guid: 6fc007f069331c444bafe12a48a7f325, type: 2}
+    stats:
+      speed: 15
+      defence: 20
+      damage: 0
+      storePrice: 25
+      durability: 0
+  weaponItems: []
+  powerItems: []
+  specialItems: []
 --- !u!1 &1739871215
 GameObject:
   m_ObjectHideFlags: 0
@@ -7500,6 +7596,7 @@ Transform:
   m_Children:
   - {fileID: 357603684}
   - {fileID: 1330484129}
+  - {fileID: 1724495290}
   - {fileID: 324453889}
   - {fileID: 302793081}
   m_Father: {fileID: 0}

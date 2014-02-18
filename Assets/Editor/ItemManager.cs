@@ -136,7 +136,7 @@ public class ItemManager:EditorWindow {
 					
 					EditorGUILayout.BeginHorizontal();
 						GUILayout.Label("Type: " + item.itemType.ToString(), GUILayout.Width(205f));
-						GUILayout.Label("Time: " + item.time.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Time: " + item.duration.ToString(), GUILayout.Width(100f));
 					EditorGUILayout.EndHorizontal();
 				EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();

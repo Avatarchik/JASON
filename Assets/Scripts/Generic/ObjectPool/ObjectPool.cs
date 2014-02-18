@@ -17,6 +17,7 @@ public class ObjectPool<T> where T:PoolObject {
 			obj.Update();
 	}
 
+	/** Return the first free object in the pool */
 	public T getFreeObject() {
 		foreach(T obj in objects) {
 			if(obj.Available) {

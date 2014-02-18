@@ -15,5 +15,5 @@ public class PowerData:Item {
 	}
 	
 	public PowerType powerType;
-	public int time;
+	public int duration;
 }

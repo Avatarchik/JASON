@@ -96,7 +96,7 @@ public class ItemCreator:EditorWindow {
 		GUILayout.Label("Power Settings", EditorStyles.boldLabel);
 
 		power.powerType = (PowerData.PowerType)EditorGUILayout.EnumPopup("Type", power.powerType);
-		power.time = EditorGUILayout.IntField(power.powerType.ToString() + " Time", power.time);
+		power.duration = EditorGUILayout.IntField(power.powerType.ToString() + " Duration", power.duration);
 		
 		if(GUILayout.Button("Create"))
 			CreatePower();
@@ -186,7 +186,7 @@ public class ItemCreator:EditorWindow {
 	private void CreatePower() {
 		bool passed = VerifyItem();
 		
-		if(power.time == 0) {
+		if(power.duration == 0) {
 			helpBoxes.Add(new HelpBox("The power item needs a time", MessageType.Error));
 			passed = false;
 		}
