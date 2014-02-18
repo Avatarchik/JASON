@@ -42,17 +42,17 @@ public class ItemManager:EditorWindow {
 		style.fontStyle = FontStyle.Bold;
 		style.margin = new RectOffset(5, 4, 8, 4);
 		
-		foreach(ItemEquipable item in itemList.EquipableItems) {
-			Texture2D preview = AssetPreview.GetAssetPreview(item.Model);
+		foreach(EquipableData item in itemList.EquipableItems) {
+			Texture2D preview = AssetPreview.GetAssetPreview(item.model);
 
-			style.normal.textColor = ItemEquipable.RarityColor(item.Rarity);
+			//style.normal.textColor = ItemEquipable.RarityColor(item.Rarity);
 
 			EditorGUILayout.BeginHorizontal();
 				GUILayout.Label(preview, GUILayout.MaxWidth(60f), GUILayout.MaxHeight(60f));
 				
 				EditorGUILayout.BeginVertical();
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label(item.Name, style, GUILayout.Width(225f));
+						GUILayout.Label(item.itemName, style, GUILayout.Width(225f));
 						
 						if(GUILayout.Button("Edit", GUILayout.Width(150f))) {
 							if(itemCreator == null)
@@ -62,13 +62,13 @@ public class ItemManager:EditorWindow {
 						}
 					EditorGUILayout.EndHorizontal();
 					
-					GUILayout.Label(item.Element.ToString() + " " + item.TypeEquipable.ToString(), GUILayout.Width(225f));
+					GUILayout.Label(item.element.ToString() + " " + item.equipableType.ToString(), GUILayout.Width(225f));
 					
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label("Speed: " + item.Stats.Speed.ToString(), GUILayout.Width(100f));
-						GUILayout.Label("Defence: " + item.Stats.Defence.ToString(), GUILayout.Width(100f));
-						GUILayout.Label("Damage: " + item.Stats.Damage.ToString(), GUILayout.Width(100f));
-						GUILayout.Label("Store price: " + item.Stats.StorePrice.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Speed: " + item.stats.speed.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Defence: " + item.stats.defence.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Damage: " + item.stats.damage.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Store price: " + item.stats.storePrice.ToString(), GUILayout.Width(100f));
 					EditorGUILayout.EndHorizontal();
 				EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();
@@ -79,15 +79,18 @@ public class ItemManager:EditorWindow {
 	
 	/** Draw all weapons */
 	private void DrawWeaponItems() {
-		foreach(ItemWeapon item in itemList.WeaponItems) {
-			Texture2D preview = AssetPreview.GetAssetPreview(item.Model);
+		foreach(WeaponData item in itemList.WeaponItems) {
+			if(item == null)
+				break;
+
+			Texture2D preview = AssetPreview.GetAssetPreview(item.model);
 			
 			EditorGUILayout.BeginHorizontal();
 				GUILayout.Label(preview, GUILayout.MaxWidth(60f), GUILayout.MaxHeight(60f));
 				
 				EditorGUILayout.BeginVertical();
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label(item.Name, EditorStyles.boldLabel, GUILayout.Width(225f));
+						GUILayout.Label(item.itemName, EditorStyles.boldLabel, GUILayout.Width(225f));
 						
 						if(GUILayout.Button("Edit", GUILayout.Width(150f))) {
 							if(itemCreator == null)
@@ -97,13 +100,13 @@ public class ItemManager:EditorWindow {
 						}
 					EditorGUILayout.EndHorizontal();
 					
-					GUILayout.Label(item.Element.ToString() + " " + item.TypeEquipable.ToString() + " - " + item.TypeWeapon.ToString(), GUILayout.Width(225f));
+					GUILayout.Label(item.element.ToString() + " " + item.equipableType.ToString() + " - " + item.weaponType.ToString(), GUILayout.Width(225f));
 					
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label("Speed: " + item.Stats.Speed.ToString(), GUILayout.Width(100f));
-						GUILayout.Label("Defence: " + item.Stats.Defence.ToString(), GUILayout.Width(100f));
-						GUILayout.Label("Damage: " + item.Stats.Damage.ToString(), GUILayout.Width(100f));
-						GUILayout.Label("Store price: " + item.Stats.StorePrice.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Speed: " + item.stats.speed.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Defence: " + item.stats.defence.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Damage: " + item.stats.damage.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Store price: " + item.stats.storePrice.ToString(), GUILayout.Width(100f));
 					EditorGUILayout.EndHorizontal();
 				EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();
@@ -117,11 +120,11 @@ public class ItemManager:EditorWindow {
 		GUIStyle style = new GUIStyle();
 		style.margin = new RectOffset(65, 0, 0, 0);
 		
-		foreach(ItemPower item in itemList.PowerItems) {
+		foreach(PowerData item in itemList.PowerItems) {
 			EditorGUILayout.BeginHorizontal(style);
 				EditorGUILayout.BeginVertical();
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label(item.Name, EditorStyles.boldLabel, GUILayout.Width(225f));
+						GUILayout.Label(item.itemName, EditorStyles.boldLabel, GUILayout.Width(225f));
 						
 						if(GUILayout.Button("Edit", GUILayout.Width(150f))) {
 							if(itemCreator == null)
@@ -132,8 +135,8 @@ public class ItemManager:EditorWindow {
 					EditorGUILayout.EndHorizontal();
 					
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label("Type: " + item.TypePower.ToString(), GUILayout.Width(205f));
-						GUILayout.Label("Time: " + item.Time.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("Type: " + item.itemType.ToString(), GUILayout.Width(205f));
+						GUILayout.Label("Time: " + item.time.ToString(), GUILayout.Width(100f));
 					EditorGUILayout.EndHorizontal();
 				EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();
@@ -147,11 +150,11 @@ public class ItemManager:EditorWindow {
 		GUIStyle style = new GUIStyle();
 		style.margin = new RectOffset(65, 0, 0, 0);
 		
-		foreach(ItemSpecial item in itemList.SpecialItems) {
+		foreach(SpecialData item in itemList.SpecialItems) {
 			EditorGUILayout.BeginHorizontal(style);
 				EditorGUILayout.BeginVertical();
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label(item.Name, EditorStyles.boldLabel, GUILayout.Width(225f));
+						GUILayout.Label(item.itemName, EditorStyles.boldLabel, GUILayout.Width(225f));
 						
 						if(GUILayout.Button("Edit", GUILayout.Width(150f))) {
 							if(itemCreator == null)
@@ -162,7 +165,7 @@ public class ItemManager:EditorWindow {
 					EditorGUILayout.EndHorizontal();
 					
 					EditorGUILayout.BeginHorizontal();
-						GUILayout.Label("ID: " + item.Id.ToString(), GUILayout.Width(100f));
+						GUILayout.Label("ID: " + item.id.ToString(), GUILayout.Width(100f));
 					EditorGUILayout.EndHorizontal();
 				EditorGUILayout.EndVertical();
 			EditorGUILayout.EndHorizontal();

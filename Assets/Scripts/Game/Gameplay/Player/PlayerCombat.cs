@@ -11,6 +11,7 @@ public class PlayerCombat:MonoBehaviour {
 	private bool isAttacking;
 	public bool isDefending;
 	public GameObject weaponCollision;
+
 	void Start() {
 		player = GetComponent<Player>();
 	}
@@ -21,16 +22,16 @@ public class PlayerCombat:MonoBehaviour {
 				target = null;
 				currentEnemy = null;
 				StopCoroutine("Attack");
-				Debug.Log("DOne");
-				player.playerAnimation.SetInteger("Attack",0);
+				player.playerAnimation.SetInteger("Attack", 0);
 			}
 		}
+
 		canAttack = false;
 	
 		if(target != null) {
-			if(currentEnemy == null){
+			if(currentEnemy == null)
 				currentEnemy = target.GetComponent<Enemy>();
-			}
+
 			if(Vector3.Distance(transform.position, target.position) <= 2) {
 				player.TargetPosition = transform.position;
 				
@@ -47,27 +48,32 @@ public class PlayerCombat:MonoBehaviour {
 	internal void Defend(bool state) {
 		target = null;
 		player.playerAnimation.SetBool("IsBlocking",state);
-		Debug.Log("Defend");
 	}
 	
 	internal void StartAttack(Transform target) {
-		Debug.Log("StartAttack");
 		this.target = target;
+
 		player.TargetPosition = target.position;
 	}
 	
 	private IEnumerator Attack(float duration,float hitDelay) {
-		int randomAnimation = Random.Range(1,4);
-		player.playerAnimation.SetInteger("Attack",randomAnimation);
+		int randomAnimation = Random.Range(1, 4);
+
+		player.playerAnimation.SetInteger("Attack", randomAnimation);
 		attacking = true;
+
 		Collider[] hits = Physics.OverlapSphere(weaponCollision.transform.position, 1);
-		for(int i = 0; i < hits.Length; i++){
-			if(hits[i].tag == "Enemy"){
+
+		for(int i = 0; i < hits.Length; i++) {
+			if(hits[i].tag == "Enemy") {
 				hits[i].GetComponent<Enemy>().TakeDamage(player.Data.attackDamage);
 			}
 		}
+
 		yield return new WaitForSeconds(duration);
-		player.playerAnimation.SetInteger("Attack",0);
+
+		player.playerAnimation.SetInteger("Attack", 0);
+
 		yield return new WaitForSeconds(hitDelay);
 
 		attacking = false;

@@ -2,22 +2,27 @@
 using System;
 using System.Collections;
 
-public class Player:MonoBehaviour {	
-	public SUISpriteButton shieldButton;
-	[SerializeField]
-	private PlayerData data;
-	public PlayerCamera playerCamera;
-	private PlayerCombat playerCombat;
+public class Player:MonoBehaviour {
+	[SerializeField] private PlayerData data;
 	
-	private Vector3 targetPosition;
+	public SUISpriteButton shieldButton;	
+	
+	public PlayerCamera playerCamera;
 	public GameObject playerModel;
 
-	public bool ischarging;
+	public bool isCharging;
 	public Animator playerAnimation;
 	public int chargingMultiplier = 1;
+	
 	private bool isDefending;
+
+	private PlayerCombat playerCombat;
+	private Inventory inventory;
+	
+	private Vector3 targetPosition;
 	void Start() {
 		playerCombat = GetComponent<PlayerCombat>();
+		inventory = GetComponent<Inventory>();
 	
 		targetPosition = transform.position;
 	}
@@ -35,6 +40,7 @@ public class Player:MonoBehaviour {
 
 	}
 	void Update() {	
+<<<<<<< HEAD
 		if(isDefending){
 			Move(transform.position);
 			playerCombat.Defend(true);
@@ -42,36 +48,56 @@ public class Player:MonoBehaviour {
 			playerCombat.Defend(false);
 		}
 		rigidbody.velocity = new Vector3(0,0,0);
+=======
+		rigidbody.velocity = new Vector3(0, 0, 0);
+
+>>>>>>> Added inventory system and redid item system
 		CheckForTouch();
+
 		if(targetPosition != transform.position) {
 			playerCamera.camDistance = 10;
 			float step = data.speed * Time.deltaTime;
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
 			Vector3 lookPos = targetPosition - playerModel.transform.position;
-			Quaternion rotation = new Quaternion(0,0,0,0);
-			if(lookPos != Vector3.zero){
-			rotation = Quaternion.LookRotation(lookPos);
-			}
+			Quaternion rotation = new Quaternion(0, 0, 0, 0);
+			if(lookPos != Vector3.zero)
+				rotation = Quaternion.LookRotation(lookPos);
+
 			rotation.x = 0;
 			rotation.z = 0;
 
-			if(transform.position != targetPosition){
-			playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, rotation, 30);
-			}
-		}else{
+			if(transform.position != targetPosition)
+				playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, rotation, 30);
+		} else {
 			playerCamera.camDistance = -5;
-			playerAnimation.SetBool("IsRunning",false);
+			playerAnimation.SetBool("IsRunning", false);
 		}
 	}
-	IEnumerator ChargingPeriod(){
+
+	void OnTriggerEnter(Collider collider) {
+		Debug.Log (collider.tag);
+
+		if(collider.CompareTag("Item")) {
+			inventory.PickupEquipable(collider.GetComponent<ItemEquipable>());
+		}
+	}
+
+	private IEnumerator ChargingPeriod() {
 		yield return new WaitForSeconds(2);
 		chargingMultiplier = 1;
 	}
-	IEnumerator ChargingTimer(){
+
+	private IEnumerator ChargingTimer() {
 		yield return new WaitForSeconds(2);
 		chargingMultiplier = 2;
 	}
+
+	private IEnumerator Delay(){
+		yield return new WaitForSeconds(0.3f);
+		playerAnimation.SetBool("GettingHit", false);
+	}
+
 	private void CheckForTouch() {
 		if(Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -94,20 +120,20 @@ public class Player:MonoBehaviour {
 	
 	private void CheckTouchPosition(Ray screenRay) {
 		RaycastHit hit;
-		if (Physics.Raycast(screenRay,out hit, 100)){
-		}
+		Physics.Raycast(screenRay, out hit, 100);
+
 		if(hit.collider != null) {
-			if(hit.transform.tag != "Player"){
+			if(hit.transform.tag != "Player")
 				playerCombat.Defend(false);
-			}
+
 			switch(hit.transform.tag) {
 			case "Floor":
-				ischarging = false;
-				playerAnimation.SetBool("IsRunning",true);
+				isCharging = false;
+				playerAnimation.SetBool("IsRunning", true);
 				Move(hit.point);
 				break;
 			case "Player":
-				ischarging = true;
+				isCharging = true;
 				Move(transform.position);
 				playerCombat.Defend(true);
 				break;
@@ -121,28 +147,29 @@ public class Player:MonoBehaviour {
 				Application.LoadLevel(Application.loadedLevelName);
 				break;
 			default:
-				ischarging = false;
+				isCharging = false;
 				break;
 			}
-		} else {
-			//ischarging = true;
-			//Move(hit.point);
 		}
 	}
 	
 	private void Move(Vector3 position) {
 		playerCombat.Target = null;
-		targetPosition = new Vector3(position.x,1,position.z);
+		targetPosition = new Vector3(position.x, 1, position.z);
 	}
-	public void getDamage(int amount){
+
+	public void getDamage(int amount) {
 		playerAnimation.SetBool("GettingHit",true);
 		data.health -= amount;
 		StartCoroutine("Delay");
 	}
+<<<<<<< HEAD
 	IEnumerator Delay(){
 		yield return new WaitForSeconds(0.3f);
 		playerAnimation.SetBool("GettingHit",false);
 	}
+=======
+>>>>>>> Added inventory system and redid item system
 
 	public PlayerData Data { get { return data; } }
 	

@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class ItemList:MonoBehaviour {
-	[SerializeField] private List<ItemEquipable> equipableItems = new List<ItemEquipable>();
-	[SerializeField] private List<ItemWeapon> weaponItems = new List<ItemWeapon>();
-	[SerializeField] private List<ItemPower> powerItems = new List<ItemPower>();
-	[SerializeField] private List<ItemSpecial> specialItems = new List<ItemSpecial>();
+public class ItemList:Singleton<ItemList> {
+	[SerializeField] private List<EquipableData> equipableItems = new List<EquipableData>();
+	[SerializeField] private List<WeaponData> weaponItems = new List<WeaponData>();
+	[SerializeField] private List<PowerData> powerItems = new List<PowerData>();
+	[SerializeField] private List<SpecialData> specialItems = new List<SpecialData>();
 
-	public List<ItemEquipable> EquipableItems { get { return equipableItems; } }
-	public List<ItemWeapon> WeaponItems { get { return weaponItems; } }
-	public List<ItemPower> PowerItems { get { return powerItems; } }
-	public List<ItemSpecial> SpecialItems { get { return specialItems; } }
+	public List<EquipableData> EquipableItems { get { return equipableItems; } }
+	public List<WeaponData> WeaponItems { get { return weaponItems; } }
+	public List<PowerData> PowerItems { get { return powerItems; } }
+	public List<SpecialData> SpecialItems { get { return specialItems; } }
 }
