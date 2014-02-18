@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 
 public class Player:MonoBehaviour {	
+	public SUISpriteButton shieldButton;
 	[SerializeField]
 	private PlayerData data;
 	public PlayerCamera playerCamera;
@@ -14,18 +15,37 @@ public class Player:MonoBehaviour {
 	public bool ischarging;
 	public Animator playerAnimation;
 	public int chargingMultiplier = 1;
+	private bool isDefending;
 	void Start() {
 		playerCombat = GetComponent<PlayerCombat>();
 	
 		targetPosition = transform.position;
 	}
-	
+	void OnGUI() {
+		
+		if(GUI.Button(new Rect(0,0,200,200),"SHIELD")){
+			if(isDefending){
+				isDefending = false;
+			}else{
+				isDefending = true;
+			}
+		}
+
+
+
+	}
 	void Update() {	
+		if(isDefending){
+			Move(transform.position);
+			playerCombat.Defend(true);
+		}else{
+			playerCombat.Defend(false);
+		}
 		rigidbody.velocity = new Vector3(0,0,0);
 		CheckForTouch();
 		if(targetPosition != transform.position) {
 			playerCamera.camDistance = 10;
-			float step = data.speed * chargingMultiplier * Time.deltaTime;
+			float step = data.speed * Time.deltaTime;
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
 			Vector3 lookPos = targetPosition - playerModel.transform.position;
@@ -123,9 +143,7 @@ public class Player:MonoBehaviour {
 		yield return new WaitForSeconds(0.3f);
 		playerAnimation.SetBool("GettingHit",false);
 	}
-	void OnGUI(){
-		GUI.Label(new Rect(0,0,100,100),"" + ischarging);
-	}
+
 	public PlayerData Data { get { return data; } }
 	
 	public Vector3 TargetPosition {

@@ -1012,6 +1012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nativeSize: {x: 1920, y: 1080}
+  guiFont: {fileID: 0}
 --- !u!1 &324453888
 GameObject:
   m_ObjectHideFlags: 0
@@ -5361,7 +5362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962f832207d259145b283df376ecc5bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1330637153
 GameObject:
   m_ObjectHideFlags: 0
@@ -6272,10 +6272,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0b2ce39757e3747a6024168375fa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldButton:
+    activated: 0
+    position: {x: 0, y: 0}
+    id: 0
+    label:
+      activated: 1
+      position: {x: 0, y: 0}
+      text: 
+      size: 0
+      font: {fileID: 0}
+    spriteSheet: {fileID: 2800000, guid: d4b5d4459b91ae24eb4453ad90c9a149, type: 3}
+    spriteNormal:
+      texCoords: {x: 1, y: 0}
+      size: {x: 400, y: 400}
+    spriteHover:
+      texCoords: {x: 0, y: 0}
+      size: {x: 0, y: 0}
+    spriteClick:
+      texCoords: {x: 0, y: 0}
+      size: {x: 0, y: 0}
   data:
-    health: 20
-    speed: 5
-    attackDamage: 1
+    health: 0
+    speed: 4
+    attackDamage: 0
     attackDelay: 0
   playerCamera: {fileID: 20971728}
   playerModel: {fileID: 641075190}
