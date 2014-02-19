@@ -6265,27 +6265,25 @@ MonoBehaviour:
     attackDelay: 1
   shieldButton:
     activated: 1
-    position: {x: 0, y: 0}
+    position: {x: 1010, y: 495}
     id: 0
     label:
-      activated: 1
+      activated: 0
       position: {x: 0, y: 0}
       text: 
       size: 0
       font: {fileID: 0}
     spriteSheet: {fileID: 2800000, guid: d4b5d4459b91ae24eb4453ad90c9a149, type: 3}
+    sheetSize: {x: 2, y: 1}
     spriteNormal:
-      texCoords: {x: 0, y: 0}
-      size: {x: 154.5, y: 179}
-      sheetSize: {x: 2, y: 1}
+      texCoords: {x: 1, y: 1}
+      size: {x: 115.875, y: 134.25}
     spriteHover:
-      texCoords: {x: 0, y: 0}
-      size: {x: 0, y: 0}
-      sheetSize: {x: 0, y: 0}
+      texCoords: {x: 2, y: 1}
+      size: {x: 115.875, y: 134.25}
     spriteClick:
-      texCoords: {x: 0, y: 0}
-      size: {x: 0, y: 0}
-      sheetSize: {x: 0, y: 0}
+      texCoords: {x: 2, y: 1}
+      size: {x: 115.875, y: 134.25}
 --- !u!65 &1530843189
 BoxCollider:
   m_ObjectHideFlags: 0

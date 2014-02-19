@@ -4,6 +4,7 @@ using System;
 [Serializable]
 public class SUISpriteButton:SUIButton {
 	[SerializeField] private Texture spriteSheet;
+	[SerializeField] private Vector2 sheetSize;
 	[SerializeField] private SUISprite spriteNormal;
 	[SerializeField] private SUISprite spriteHover;
 	[SerializeField] private SUISprite spriteClick;
@@ -39,7 +40,7 @@ public class SUISpriteButton:SUIButton {
 		if(lastState != state)
 			UpdateTexture();
 		
-		spriteAcive.Draw(position, spriteSheet);
+		spriteAcive.Draw(position, spriteSheet, sheetSize);
 	}
 
 	/** Update the texture of the button */

@@ -11,7 +11,7 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 	private bool labelFoldout;
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-		height = 144f;
+		height = 163f;
 		position.height = 16f;
 
 		Rect foldoutPosition = position;
@@ -54,6 +54,14 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 		position.y += 19f;
 
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("spriteSheet"));
+		
+		position.x = oldPosition.x;
+		position.y += 19f;
+		position.width /= 2f;
+		
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("sheetSize.x"), new GUIContent("Sheet rows"));
+		position.x += position.width;
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("sheetSize.y"), new GUIContent("Sheet cols"));
 
 		position.x = oldPosition.x;
 		position.width = oldPosition.width;
@@ -64,8 +72,8 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("spriteNormal"));
 		if(property.FindPropertyRelative("spriteNormal").isExpanded) {
-			position.y += 51f;
-			height += 51f;
+			position.y += 32f;
+			height += 32f;
 		}
 
 		position.x = oldPosition.x;
@@ -74,8 +82,8 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("spriteHover"));
 		if(property.FindPropertyRelative("spriteHover").isExpanded) {
-			position.y += 51f;
-			height += 51f;
+			position.y += 32f;
+			height += 32f;
 		}
 		
 		position.x = oldPosition.x;
@@ -84,8 +92,8 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("spriteClick"));
 		if(property.FindPropertyRelative("spriteClick").isExpanded) {
-			position.y += 51f;
-			height += 55f;
+			position.y += 32f;
+			height += 32f;
 		}
 
 		position.x = oldPosition.x;

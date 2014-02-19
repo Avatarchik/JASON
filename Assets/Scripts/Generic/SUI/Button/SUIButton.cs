@@ -39,6 +39,8 @@ public class SUIButton:SUI {
 
 		mousePosition.x *= nativeWidth / Screen.width;
 		mousePosition.y *= nativeHeight / Screen.height;
+		
+		Debug.Log(area + " " + mousePosition);
 
 		if(!Input.GetMouseButton(0) && area.Contains(mousePosition)) {
 			state = ButtonState.Hover;

@@ -29,7 +29,7 @@ public class SUILabel:SUI {
 		}
 
 		if(text.Equals("")) {
-			Debug.LogWarning("A SUI Label has an empty value. Deactivate it instead");
+			Debug.LogWarning("A SUI Label has an empty value and has been deactivated");
 			activated = false;
 			return;
 		}

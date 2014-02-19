@@ -5,21 +5,27 @@ using System;
 public class SUISprite {
 	[SerializeField]private Vector2 texCoords;
 	[SerializeField]private Vector2 size;
-	[SerializeField]private Vector2 sheetSize;
 
 	/** Draw the texture */
-	public void Draw(Vector2 position, Texture texture) {
+	public void Draw(Vector2 position, Texture texture, Vector2 sheetSize) {
 		if(texture == null) {
 			Debug.LogWarning("A SUI Sprite is missing a texture");
 			return;
 		}
-
-		Debug.Log(new Rect(texCoords.x / sheetSize.x, texCoords.y / sheetSize.y, size.x / (size.x * 2), size.y / (size.y * 2)));
-
+		
+		float xOffset = 1;
+		float yOffset = 1;
+		
+		if(texCoords.x.Equals(sheetSize.x) && sheetSize.x > 1)
+			xOffset = 2;
+			
+		if(texCoords.y.Equals(sheetSize.y) && sheetSize.y > 1)
+			yOffset = 2;
+			
 		GUI.DrawTextureWithTexCoords(
 			new Rect(position.x, position.y, size.x, size.y),
 		    texture,
-			new Rect(texCoords.x / sheetSize.x, texCoords.y / sheetSize.y, size.normalized.x, size.normalized.y)
+			new Rect((texCoords.x - 1) / sheetSize.x, (texCoords.y - 1) / sheetSize.y, texCoords.x / sheetSize.x / xOffset, texCoords.y / sheetSize.y / yOffset)
 		);
 	}
 
