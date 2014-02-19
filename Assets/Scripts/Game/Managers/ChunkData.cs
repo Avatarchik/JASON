@@ -17,10 +17,10 @@ public class ChunkData:MonoBehaviour {
 	}
 
 	public ChunkType type;
-	public RotationDegree rotation;
+	public RotationDegree rotationDegree;
 
 	private GameObject chunk;
-	private int setRotation;
+	private int rotation;
 
 	void Start () {
 		StartCoroutine("WaitForLevelGenerator");
@@ -29,38 +29,37 @@ public class ChunkData:MonoBehaviour {
 	private IEnumerator WaitForLevelGenerator(){
 		yield return new WaitForSeconds(0.1f);
 
+		Object generator = null;
+
 		switch(type) {
 		case ChunkType.One:
-			chunk = Instantiate(LevelGenerator.Instance.oneSideChunk[Random.Range(0,LevelGenerator.Instance.oneSideChunk.Length)],transform.position,transform.rotation) as GameObject;
+			generator = LevelGenerator.Instance.OneSideChunk[Random.Range(0, LevelGenerator.Instance.OneSideChunk.Length)];
 			break;
 		case ChunkType.Two:
-			chunk = Instantiate(LevelGenerator.Instance.twoSideChunk[Random.Range(0,LevelGenerator.Instance.twoSideChunk.Length)],transform.position,transform.rotation) as GameObject;
+			generator = LevelGenerator.Instance.TwoSideChunk[Random.Range(0, LevelGenerator.Instance.TwoSideChunk.Length)];
 			break;
 		case ChunkType.Three:
-			chunk = Instantiate(LevelGenerator.Instance.threeSideChunk[Random.Range(0,LevelGenerator.Instance.oneSideChunk.Length)],transform.position,transform.rotation) as GameObject;
+			generator = LevelGenerator.Instance.ThreeSideChunk[Random.Range(0, LevelGenerator.Instance.ThreeSideChunk.Length)];
 			break;
 		case ChunkType.Four:
-			chunk = Instantiate(LevelGenerator.Instance.fourSideChunk[Random.Range(0,LevelGenerator.Instance.oneSideChunk.Length)],transform.position,transform.rotation) as GameObject;
+			generator = LevelGenerator.Instance.FourSideChunk[Random.Range(0, LevelGenerator.Instance.FourSideChunk.Length)];
 			break;
 		}
 
-		setRotation = (int)rotation;
+		chunk = Instantiate(generator, transform.position, transform.rotation) as GameObject;
+		rotation = (int)rotationDegree;
 		
 		if(type == ChunkType.Two){
 			int random = Random.Range(1, 3);
-			setRotation += 180 * random;
+			rotation += 180 * random;
 		}
 
 		chunk.transform.eulerAngles = new Vector3(		
 			chunk.transform.eulerAngles.x,			
-			chunk.transform.eulerAngles.y + setRotation,			
+			chunk.transform.eulerAngles.y + rotation,			
 			chunk.transform.eulerAngles.z
 		);
 
 		chunk.transform.parent = transform.parent;
-	}
-
-	void OnDrawGizmos() {
-		//Gizmos.DrawWireCube(transform.position, new Vector3(100, 20, 100));
 	}
 }

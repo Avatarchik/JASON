@@ -29,25 +29,28 @@ public class SUISpriteEditor:PropertyDrawer {
 		EditorGUI.indentLevel = 0;
 		EditorGUIUtility.labelWidth = 80f;
 		
-		EditorGUI.PropertyField(position, property.FindPropertyRelative("texCoords.x"), new GUIContent("Texture row"));
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("texCoords.x"), new GUIContent("Sprite row"));
 		position.x += position.width;
-		EditorGUI.PropertyField(position, property.FindPropertyRelative("texCoords.y"), new GUIContent("Texture col"));
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("texCoords.y"), new GUIContent("Sprite col"));
 		
 		position.x = oldPosition.x;
-		position.width = oldPosition.width;
 		position.y += 19f;
-		position.width /= 2f;
 		
-		EditorGUIUtility.labelWidth = 80f;
-		
-		EditorGUI.PropertyField(position, property.FindPropertyRelative("size.x"), new GUIContent("Sprite size X"));
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("size.x"), new GUIContent("Width"));
 		position.x += position.width;
-		EditorGUI.PropertyField(position, property.FindPropertyRelative("size.y"), new GUIContent("Sprite size Y"));
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("size.y"), new GUIContent("Height"));
+
+		position.x = oldPosition.x;
+		position.y += 19f;
+		
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("sheetSize.x"), new GUIContent("Sheet rows"));
+		position.x += position.width;
+		EditorGUI.PropertyField(position, property.FindPropertyRelative("sheetSize.y"), new GUIContent("Sheet cols"));
 		
 		EditorGUI.indentLevel = oldIndent;
 	}
 	
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-		return property.isExpanded ? 70f : 16f;	
+		return property.isExpanded ? 89f : 16f;	
 	}
 }

@@ -22,21 +22,23 @@ public class SUILabel:SUI {
 		if(!activated)
 			return;
 
-		if(!initialized)
-			Initialize();
-
-		style.font = font;
-		style.fontSize = size;
-
 		if(text == null) {
 			Debug.LogWarning("A SUI Label is null");
+			activated = false;
 			return;
 		}
 
 		if(text.Equals("")) {
 			Debug.LogWarning("A SUI Label has an empty value. Deactivate it instead");
+			activated = false;
 			return;
 		}
+
+		if(!initialized)
+			Initialize();
+		
+		style.font = font;
+		style.fontSize = size;
 
 		GUI.Label(new Rect(position.x, position.y, 0, 0), new GUIContent(text), style);
 	}

@@ -18,21 +18,21 @@ public class SUISpriteButton:SUIButton {
 	}
 
 	/** Update the button */
-	public override void Update(float nativeWidth, float nativeHeight) {
+	public override void Update(Vector2 nativeSize) {
 		if(!activated)
 			return;
 
 		if(!initialized)
 			Initialize();
 
-		base.Update(nativeWidth, nativeHeight);
+		base.Update(nativeSize);
 		
 		switch(Application.platform) {
 		case RuntimePlatform.Android:
-			CheckForTouch((int)spriteAcive.Size.x, (int)spriteAcive.Size.y, nativeWidth, nativeHeight);
+			CheckForTouch((int)spriteAcive.Size.x, (int)spriteAcive.Size.y, nativeSize.x, nativeSize.y);
 			break;
 		default:
-			CheckForMouse((int)spriteAcive.Size.x, (int)spriteAcive.Size.y, nativeWidth, nativeHeight);
+			CheckForMouse((int)spriteAcive.Size.x, (int)spriteAcive.Size.y, nativeSize.x, nativeSize.y);
 			break;
 		}
 		

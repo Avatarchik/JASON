@@ -3,19 +3,17 @@ using System;
 using System.Collections;
 
 public class Player:MonoBehaviour {
+	[SerializeField] internal Animator playerAnimation;
+
+	[SerializeField] private GameObject playerModel;
+
+	[SerializeField] private PlayerCamera playerCamera;
 	[SerializeField] private PlayerData data;
-	
-	public SUISpriteButton shieldButton;	
-	
-	public PlayerCamera playerCamera;
-	public GameObject playerModel;
 
-	public bool isCharging;
-	public Animator playerAnimation;
-	public int chargingMultiplier = 1;
-	
-	private bool isDefending;
+	[SerializeField] private SUISpriteButton shieldButton;
 
+	private bool defending;
+	
 	private PlayerCombat playerCombat;
 	private Inventory inventory;
 	
@@ -29,24 +27,22 @@ public class Player:MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if(GUI.Button(new Rect(0, 0, 200, 200), "SHIELD")) {
-			if(isDefending) {
-				isDefending = false;
-			} else {
-				isDefending = true;
-			}
+		shieldButton.Update(GUIManager.Instance.NativeSize);
+
+		if(shieldButton.OnClick) {
+			defending = !defending;
 		}
 	}
 
 	void Update() {	
-		if(isDefending) {
+		if(defending) {
 			Move(transform.position);
 			playerCombat.Defend(true);
 		} else {
 			playerCombat.Defend(false);
 		}
 
-		rigidbody.velocity = new Vector3(0, 0, 0);
+		rigidbody.velocity = Vector3.zero;
 		
 		CheckForTouch();
 
@@ -56,7 +52,7 @@ public class Player:MonoBehaviour {
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
 			Vector3 lookPos = targetPosition - playerModel.transform.position;
-			Quaternion rotation = new Quaternion(0, 0, 0, 0);
+			Quaternion rotation = Quaternion.identity;
 			if(lookPos != Vector3.zero)
 				rotation = Quaternion.LookRotation(lookPos);
 
@@ -77,16 +73,6 @@ public class Player:MonoBehaviour {
 		if(collider.CompareTag("Item")) {
 			inventory.PickupEquipable(collider.GetComponent<ItemEquipable>());
 		}
-	}
-
-	private IEnumerator ChargingPeriod() {
-		yield return new WaitForSeconds(2);
-		chargingMultiplier = 1;
-	}
-
-	private IEnumerator ChargingTimer() {
-		yield return new WaitForSeconds(2);
-		chargingMultiplier = 2;
 	}
 
 	private IEnumerator Delay(){
@@ -124,12 +110,10 @@ public class Player:MonoBehaviour {
 
 			switch(hit.transform.tag) {
 			case "Floor":
-				isCharging = false;
 				playerAnimation.SetBool("IsRunning", true);
 				Move(hit.point);
 				break;
 			case "Player":
-				isCharging = true;
 				Move(transform.position);
 				playerCombat.Defend(true);
 				break;
@@ -143,7 +127,6 @@ public class Player:MonoBehaviour {
 				Application.LoadLevel(Application.loadedLevelName);
 				break;
 			default:
-				isCharging = false;
 				break;
 			}
 		}

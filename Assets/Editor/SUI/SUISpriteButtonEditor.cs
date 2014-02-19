@@ -64,8 +64,8 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("spriteNormal"));
 		if(property.FindPropertyRelative("spriteNormal").isExpanded) {
-			position.y += 32f;
-			height += 32f;
+			position.y += 51f;
+			height += 51f;
 		}
 
 		position.x = oldPosition.x;
@@ -74,8 +74,8 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("spriteHover"));
 		if(property.FindPropertyRelative("spriteHover").isExpanded) {
-			position.y += 32f;
-			height += 32f;
+			position.y += 51f;
+			height += 51f;
 		}
 		
 		position.x = oldPosition.x;
@@ -84,8 +84,8 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 
 		EditorGUI.PropertyField(position, property.FindPropertyRelative("spriteClick"));
 		if(property.FindPropertyRelative("spriteClick").isExpanded) {
-			position.y += 32f;
-			height += 36f;
+			position.y += 51f;
+			height += 55f;
 		}
 
 		position.x = oldPosition.x;

@@ -17,7 +17,7 @@ public class SUITextureButton:SUIButton {
 	}
 
 	/** Update the button */
-	public override void Update(float nativeWidth, float nativeHeight) {
+	public override void Update(Vector2 nativeSize) {
 		if(!activated)
 			return;
 
@@ -26,10 +26,10 @@ public class SUITextureButton:SUIButton {
 
 		switch(Application.platform) {
 		case RuntimePlatform.Android:
-			CheckForTouch(textureActive.Texture.width, textureActive.Texture.height, nativeWidth, nativeHeight);
+			CheckForTouch(textureActive.Texture.width, textureActive.Texture.height, nativeSize.x, nativeSize.y);
 			break;
 		default:
-			CheckForMouse(textureActive.Texture.width, textureActive.Texture.height, nativeWidth, nativeHeight);
+			CheckForMouse(textureActive.Texture.width, textureActive.Texture.height, nativeSize.x, nativeSize.y);
 			break;
 		}
 
@@ -38,7 +38,7 @@ public class SUITextureButton:SUIButton {
 
 		textureActive.Draw(position);
 
-		base.Update(nativeWidth, nativeHeight);
+		base.Update(nativeSize);
 	}
 
 	/** Update the texture of the button */

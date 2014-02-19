@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  rotation: 0
+  rotationDegree: 0
 --- !u!4 &207908859
 Transform:
   m_ObjectHideFlags: 0
@@ -1012,7 +1012,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nativeSize: {x: 1920, y: 1080}
-  guiFont: {fileID: 0}
 --- !u!1 &324453888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,17 +1050,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffae1922615683049b5ee96d359b36a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultRoomContent: []
-  hallRoomContent: []
-  cornerRoomContent: []
-  TroomRoomContent: []
-  plusRoomContent: []
-  bigRoomContent: []
-  oneSideChunk: []
-  twoSideChunk: []
-  threeSideChunk: []
-  fourSideChunk: []
-  currentMap: {fileID: 0}
 --- !u!1 &357603683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,7 +1441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  rotation: 0
+  rotationDegree: 0
 --- !u!4 &419675851
 Transform:
   m_ObjectHideFlags: 0
@@ -2394,8 +2382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eb9789cb3e49b4297762619838cb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
   effect: {fileID: 0}
+  health: 1
 --- !u!1 &659130691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2569,8 +2557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eb9789cb3e49b4297762619838cb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
   effect: {fileID: 0}
+  health: 1
 --- !u!33 &668626966
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3060,7 +3048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  rotation: 1
+  rotationDegree: 0
 --- !u!4 &805355057
 Transform:
   m_ObjectHideFlags: 0
@@ -3100,7 +3088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 2
-  rotation: 0
+  rotationDegree: 0
 --- !u!4 &824191090
 Transform:
   m_ObjectHideFlags: 0
@@ -4048,17 +4036,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9d004662ce5644cac2e18b55324885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData:
-    health: 2
-    speed: 2
-    attackDamage: 2
+  data:
+    health: 0
+    speed: 0
+    attackDamage: 0
     attackDelay: 0
-  foundPlayer: 0
-  player: {fileID: 1530843191}
-  distance: 0
-  isDead: 0
   enemyAnimation: {fileID: 1579473828}
-  isAttacking: 0
   overlapPosition: {fileID: 1501244394}
 --- !u!1001 &999815924
 Prefab:
@@ -4800,7 +4783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
-  rotation: 0
+  rotationDegree: 0
 --- !u!4 &1168835780
 Transform:
   m_ObjectHideFlags: 0
@@ -5158,7 +5141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  rotation: 3
+  rotationDegree: 0
 --- !u!4 &1254641800
 Transform:
   m_ObjectHideFlags: 0
@@ -5364,44 +5347,6 @@ Transform:
   - {fileID: 576264513}
   - {fileID: 1262437851}
   m_Father: {fileID: 405184898}
---- !u!1 &1330484128
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1330484129}
-  - 114: {fileID: 1330484130}
-  m_Layer: 0
-  m_Name: Game Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1330484129
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1330484128}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1846745310}
---- !u!114 &1330484130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1330484128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 962f832207d259145b283df376ecc5bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1330637153
 GameObject:
   m_ObjectHideFlags: 0
@@ -6277,9 +6222,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 1530843191}
   - 65: {fileID: 1530843189}
+  - 54: {fileID: 1530843192}
   - 114: {fileID: 1530843187}
   - 114: {fileID: 1530843186}
-  - 54: {fileID: 1530843192}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -6298,8 +6243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5abbc4ed9577e438077d43719854f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEnemy: {fileID: 0}
-  isDefending: 0
   weaponCollision: {fileID: 960656250}
 --- !u!114 &1530843187
 MonoBehaviour:
@@ -6312,11 +6255,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0b2ce39757e3747a6024168375fa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimation: {fileID: 977844725}
+  playerModel: {fileID: 641075190}
+  playerCamera: {fileID: 20971728}
   data:
     health: 0
     speed: 4
-    attackDamage: 0
-    attackDelay: 0
+    attackDamage: 5
+    attackDelay: 1
   shieldButton:
     activated: 1
     position: {x: 0, y: 0}
@@ -6327,21 +6273,19 @@ MonoBehaviour:
       text: 
       size: 0
       font: {fileID: 0}
-    spriteSheet: {fileID: 0}
+    spriteSheet: {fileID: 2800000, guid: d4b5d4459b91ae24eb4453ad90c9a149, type: 3}
     spriteNormal:
       texCoords: {x: 0, y: 0}
-      size: {x: 0, y: 0}
+      size: {x: 154.5, y: 179}
+      sheetSize: {x: 2, y: 1}
     spriteHover:
       texCoords: {x: 0, y: 0}
       size: {x: 0, y: 0}
+      sheetSize: {x: 0, y: 0}
     spriteClick:
       texCoords: {x: 0, y: 0}
       size: {x: 0, y: 0}
-  playerCamera: {fileID: 20971728}
-  playerModel: {fileID: 641075190}
-  isCharging: 0
-  playerAnimation: {fileID: 977844725}
-  chargingMultiplier: 1
+      sheetSize: {x: 0, y: 0}
 --- !u!65 &1530843189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6423,8 +6367,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94eb9789cb3e49b4297762619838cb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
   effect: {fileID: 0}
+  health: 1
 --- !u!33 &1538303328
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6496,7 +6440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  rotation: 2
+  rotationDegree: 0
 --- !u!4 &1548019940
 Transform:
   m_ObjectHideFlags: 0
@@ -7595,7 +7539,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 357603684}
-  - {fileID: 1330484129}
   - {fileID: 1724495290}
   - {fileID: 324453889}
   - {fileID: 302793081}

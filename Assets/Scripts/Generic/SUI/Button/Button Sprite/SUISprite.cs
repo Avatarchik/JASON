@@ -5,6 +5,7 @@ using System;
 public class SUISprite {
 	[SerializeField]private Vector2 texCoords;
 	[SerializeField]private Vector2 size;
+	[SerializeField]private Vector2 sheetSize;
 
 	/** Draw the texture */
 	public void Draw(Vector2 position, Texture texture) {
@@ -13,10 +14,12 @@ public class SUISprite {
 			return;
 		}
 
+		Debug.Log(new Rect(texCoords.x / sheetSize.x, texCoords.y / sheetSize.y, size.x / (size.x * 2), size.y / (size.y * 2)));
+
 		GUI.DrawTextureWithTexCoords(
 			new Rect(position.x, position.y, size.x, size.y),
 		    texture,
-		    new Rect((texCoords.x / 256) * size.x, (texCoords.y / 256) * size.y, size.x / 256, size.y / 256)
+			new Rect(texCoords.x / sheetSize.x, texCoords.y / sheetSize.y, size.normalized.x, size.normalized.y)
 		);
 	}
 

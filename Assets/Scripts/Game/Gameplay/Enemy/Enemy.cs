@@ -7,35 +7,40 @@ public class Enemy:MonoBehaviour {
 	public class EnemyData {
 		public int health;
 		public int speed;
+
 		public int attackDamage;
-		
 		public float attackDelay;
 	}
 	
-	[SerializeField] protected EnemyData enemyData;
-	public bool foundPlayer;
-	public Transform player;
-	public float distance;
-	public bool isDead;
-	public void Start() {
+	[SerializeField] protected EnemyData data;
+	
+	protected Transform player;
+
+	protected float distance;
+
+	protected bool foundPlayer;
+	protected bool dead;
+
+	protected virtual void Start() {
 		player = GameObject.Find("Player").transform;
 	}
-	public void FixedUpdate () {
-		rigidbody.velocity = new Vector3(0,0,0);
+
+	protected virtual void FixedUpdate() {
+		rigidbody.velocity = Vector3.zero;
+
 		distance = Vector3.Distance(this.transform.position, player.transform.position);
-		if(distance < 10){
-			foundPlayer = true;
-		}else{
-			foundPlayer = false;
-		}
+
+		foundPlayer = (distance < 10) ? true : false;
 	}
-	public void TakeDamage(int amt) {
-		enemyData.health -= amt;
+
+	public void Damage(int amt) {
+		data.health -= amt;
 		
-		if(enemyData.health <= 0)
+		if(data.health <= 0)
 			Die();
 	}
-	public virtual void Die() {
-		Debug.Log("You need to overide me");
-	}
+
+	public virtual void Die() { }
+
+	public bool IsDead { get { return dead; } }
 }

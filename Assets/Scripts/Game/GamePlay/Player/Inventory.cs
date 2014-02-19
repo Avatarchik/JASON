@@ -13,36 +13,40 @@ public class Inventory:MonoBehaviour {
 	[SerializeField] private ItemPower power;
 
 	/** Pickup an equipable item */
-	public void PickupEquipable(ItemEquipable item) {
-		Debug.Log (item.data.equipableType);
+	public int PickupEquipable(ItemEquipable item) {
+		int i = -1;
 
 		switch(item.data.equipableType) {
 		case EquipableData.EquipableType.Helmet:
-			AddHelmet(item);
+			i = AddHelmet(item);
 			break;
 		case EquipableData.EquipableType.Chest:
-			AddChest(item);
+			i = AddChest(item);
 			break;
 		case EquipableData.EquipableType.Legs:
-			AddLegs(item);
+			i = AddLegs(item);
 			break;
 		case EquipableData.EquipableType.Shield:
-			AddShield(item);
+			i = AddShield(item);
 			break;
 		}
 
 		item.collider.enabled = false;
 		item.renderer.enabled = false;
+
+		return i;
 	}
 
 	/** Pickup a weapon */
-	public void PickupWeapon(ItemWeapon weapon) {
+	public int PickupWeapon(ItemWeapon weapon) {
 		for(int i = 0; i < weapons.Length; i++) {
 			if(weapons[i] != null) {
 				weapons[i] = weapon;
-				break;
+				return i;
 			}
 		}
+
+		return -1;
 	}
 
 	/** Switch the current power with the parameter */
@@ -51,47 +55,64 @@ public class Inventory:MonoBehaviour {
 	}
 
 	/** Add a special item to the inventory */
-	public void PickupSpecial(ItemSpecial special) {
+	public int PickupSpecial(ItemSpecial special) {
 		specials.Add(special);
+
+		return specials.IndexOf(special);
 	}
 
 	/** Try to add a helmet to the inventort */
-	private void AddHelmet(ItemEquipable item) {
+	private int AddHelmet(ItemEquipable item) {
 		for(int i = 0; i < helmets.Length; i++) {
 			if(helmets[i] == null) {
 				helmets[i] = item;
-				break;
+				return i;
 			}
 		}
+
+		return -1;
 	}
 
 	/** Try to add a chestplate to the inventory */
-	private void AddChest(ItemEquipable item) {
+	private int AddChest(ItemEquipable item) {
 		for(int i = 0; i < chests.Length; i++) {
 			if(chests[i] == null) {
 				chests[i] = item;
-				break;
+				return i;
 			}
 		}
+
+		return -1;
 	}
 
 	/** Try to add a legplate to the inventory */
-	private void AddLegs(ItemEquipable item) {
+	private int AddLegs(ItemEquipable item) {
 		for(int i = 0; i < legs.Length; i++) {
 			if(legs[i] == null) {
 				legs[i] = item;
-				break;
+				return i;
 			}
 		}
+
+		return -1;
 	}
 
 	/** Try to add a shield to the inventory */
-	private void AddShield(ItemEquipable item) {
+	private int AddShield(ItemEquipable item) {
 		for(int i = 0; i < shields.Length; i++) {
 			if(shields[i] == null) {
 				shields[i] = item;
-				break;
+				return i;
 			}
 		}
+
+		return -1;
 	}
+
+	public ItemEquipable[] Helmet { get { return helmets; } }
+	public ItemEquipable[] Chests { get { return chests; } }
+	public ItemEquipable[] Legs { get { return legs; } }
+	public ItemEquipable[] Shields { get { return shields; } }
+	public ItemWeapon[] Weapons { get { return weapons; } }
+	public ItemPower Power { get { return power; } }
 }

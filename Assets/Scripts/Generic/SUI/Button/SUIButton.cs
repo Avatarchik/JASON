@@ -25,7 +25,7 @@ public class SUIButton:SUI {
 	}
 
 	/** Update the button */
-	public virtual void Update(float nativeWidth, float nativeHeight) {
+	public virtual void Update(Vector2 nativeSize) {
 		if(label.Text != "" || label.Text != null)
 			label.Draw();
 
