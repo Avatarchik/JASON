@@ -37,10 +37,10 @@ public class ChunkData:MonoBehaviour {
 			chunk = Instantiate(LevelGenerator.Instance.twoSideChunk[Random.Range(0,LevelGenerator.Instance.twoSideChunk.Length)],transform.position,transform.rotation) as GameObject;
 			break;
 		case ChunkType.Three:
-			chunk = Instantiate(LevelGenerator.Instance.threeSideChunk[Random.Range(0,LevelGenerator.Instance.oneSideChunk.Length)],transform.position,transform.rotation) as GameObject;
+			chunk = Instantiate(LevelGenerator.Instance.threeSideChunk[Random.Range(0,LevelGenerator.Instance.threeSideChunk.Length)],transform.position,transform.rotation) as GameObject;
 			break;
 		case ChunkType.Four:
-			chunk = Instantiate(LevelGenerator.Instance.fourSideChunk[Random.Range(0,LevelGenerator.Instance.oneSideChunk.Length)],transform.position,transform.rotation) as GameObject;
+			chunk = Instantiate(LevelGenerator.Instance.fourSideChunk[Random.Range(0,LevelGenerator.Instance.fourSideChunk.Length)],transform.position,transform.rotation) as GameObject;
 			break;
 		}
 

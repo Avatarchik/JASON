@@ -4,6 +4,7 @@ using System;
 [Serializable]
 public class SUISpriteButton:SUIButton {
 	[SerializeField] private Texture spriteSheet;
+	[SerializeField] private Vector2 sheetSize;
 	[SerializeField] private SUISprite spriteNormal;
 	[SerializeField] private SUISprite spriteHover;
 	[SerializeField] private SUISprite spriteClick;
@@ -18,28 +19,28 @@ public class SUISpriteButton:SUIButton {
 	}
 
 	/** Update the button */
-	public override void Update(float nativeWidth, float nativeHeight) {
+	public override void Update(Vector2 nativeSize) {
 		if(!activated)
 			return;
 
 		if(!initialized)
 			Initialize();
 
-		base.Update(nativeWidth, nativeHeight);
+		base.Update(nativeSize);
 		
 		switch(Application.platform) {
 		case RuntimePlatform.Android:
-			CheckForTouch((int)spriteAcive.Size.x, (int)spriteAcive.Size.y, nativeWidth, nativeHeight);
+			CheckForTouch((int)spriteAcive.Size.x, (int)spriteAcive.Size.y, nativeSize.x, nativeSize.y);
 			break;
 		default:
-			CheckForMouse((int)spriteAcive.Size.x, (int)spriteAcive.Size.y, nativeWidth, nativeHeight);
+			CheckForMouse((int)spriteAcive.Size.x, (int)spriteAcive.Size.y, nativeSize.x, nativeSize.y);
 			break;
 		}
 		
 		if(lastState != state)
 			UpdateTexture();
 		
-		spriteAcive.Draw(position, spriteSheet);
+		spriteAcive.Draw(position, spriteSheet, sheetSize);
 	}
 
 	/** Update the texture of the button */
