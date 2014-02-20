@@ -74,12 +74,12 @@ ModelImporter:
     4300000: body.1
     4300002: sword
     4300004: shoulder
-    7400000: Idle
-    7400002: Run
-    7400004: Death
-    7400006: Death_Idle
-    7400008: Attack1
-    7400010: Attack2
+    7400000: Warrior_Idle
+    7400002: Warrior_Run
+    7400004: Warrior_Death
+    7400006: Warrior_Death_Idle
+    7400008: Warrior_Attack1
+    7400010: Warrior_Attack2
     9500000: //RootNode
     13700000: body.1
   materials:
@@ -98,7 +98,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: Warrior_Idle
       takeName: C4D Animation Take
       firstFrame: 70
       lastFrame: 109
@@ -107,12 +107,12 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
       heightFromFeet: 0
@@ -188,7 +188,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Run
+      name: Warrior_Run
       takeName: C4D Animation Take
       firstFrame: 120
       lastFrame: 140
@@ -278,7 +278,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Death
+      name: Warrior_Death
       takeName: C4D Animation Take
       firstFrame: 150
       lastFrame: 187
@@ -368,7 +368,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Death_Idle
+      name: Warrior_Death_Idle
       takeName: C4D Animation Take
       firstFrame: 186
       lastFrame: 187
@@ -458,7 +458,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Attack1
+      name: Warrior_Attack1
       takeName: C4D Animation Take
       firstFrame: 0
       lastFrame: 40
@@ -548,7 +548,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Attack2
+      name: Warrior_Attack2
       takeName: C4D Animation Take
       firstFrame: 40
       lastFrame: 65
@@ -654,7 +654,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 30
     splitTangentsAcrossUV: 1
     normalImportMode: 1
     tangentImportMode: 1

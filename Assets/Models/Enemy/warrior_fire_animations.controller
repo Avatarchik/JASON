@@ -17,7 +17,7 @@ AnimatorController:
   - m_Name: State
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 3
+    m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: IsDead
@@ -441,7 +441,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400008, guid: 3002ef996662b424ab52479a0558dfee, type: 3}
+  - {fileID: 7400010, guid: 3002ef996662b424ab52479a0558dfee, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 48, y: -36, z: 0}
   m_IKOnFeet: 0
@@ -486,7 +486,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400010, guid: 3002ef996662b424ab52479a0558dfee, type: 3}
+  - {fileID: 7400008, guid: 3002ef996662b424ab52479a0558dfee, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: -180, y: -36, z: 0}
   m_IKOnFeet: 0
