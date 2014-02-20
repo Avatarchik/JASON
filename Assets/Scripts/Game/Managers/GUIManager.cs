@@ -2,10 +2,15 @@
 
 public class GUIManager:Singleton<GUIManager> {
 	[SerializeField] private Vector2 nativeSize;
+	[SerializeField] private Font guiFont;
 
 	public static void UpdateGUIMatrix() {
-		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(Screen.width / GUIManager.Instance.nativeSize.x, Screen.height / GUIManager.Instance.nativeSize.y, 1));
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(Screen.width / GUIManager.Instance.nativeWidth, Screen.height / GUIManager.Instance.nativeHeight, 1));
 	}
 
-	public Vector2 NativeSize { get { return nativeSize; } }
+	public float nativeWidth { get { return nativeSize.x; } }
+
+	public float nativeHeight { get { return nativeSize.y; } }
+
+	public Font GUIFont { get { return GUIManager.Instance.guiFont; } }
 }

@@ -25,7 +25,7 @@ public class SUIButton:SUI {
 	}
 
 	/** Update the button */
-	public virtual void Update(Vector2 nativeSize) {
+	public virtual void Update(float nativeWidth, float nativeHeight) {
 		if(label.Text != "" || label.Text != null)
 			label.Draw();
 
@@ -39,8 +39,6 @@ public class SUIButton:SUI {
 
 		mousePosition.x *= nativeWidth / Screen.width;
 		mousePosition.y *= nativeHeight / Screen.height;
-		
-		Debug.Log(area + " " + mousePosition);
 
 		if(!Input.GetMouseButton(0) && area.Contains(mousePosition)) {
 			state = ButtonState.Hover;

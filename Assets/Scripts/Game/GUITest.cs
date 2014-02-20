@@ -9,7 +9,7 @@ public class GUITest:MonoBehaviour {
 	void OnGUI() {
 		GUIManager.UpdateGUIMatrix();
 
-		textureButton.Update(GUIManager.Instance.NativeSize);
+		textureButton.Update(1920, 1080);
 
 		if(textureButton.OnNormal) {
 			Debug.Log("On Normal");

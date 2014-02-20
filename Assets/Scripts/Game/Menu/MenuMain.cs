@@ -7,7 +7,7 @@ public class MenuMain:MonoBehaviour {
 		GUIManager.UpdateGUIMatrix();
 
 		foreach(SUITextureButton button in buttons) {
-			button.Update(GUIManager.Instance.NativeSize);
+			button.Update(GUIManager.Instance.nativeWidth, GUIManager.Instance.nativeHeight);
 
 			if(button.OnClick)
 				HandleButton(button.ID);

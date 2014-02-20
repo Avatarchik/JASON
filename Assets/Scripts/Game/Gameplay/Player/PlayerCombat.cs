@@ -1,19 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class PlayerCombat:MonoBehaviour {
-	[SerializeField] private GameObject weaponCollision;
-
 	private Player player;
 
 	private Transform target;
-
-	private Enemy currentEnemy;
-
+	public Enemy currentEnemy;
 	private bool canAttack;
-
 	private bool attacking;
-	private bool defending;
+	private bool isAttacking;
+	public bool isDefending;
+	public GameObject weaponCollision;
 
 	void Start() {
 		player = GetComponent<Player>();
@@ -21,7 +18,7 @@ public class PlayerCombat:MonoBehaviour {
 	
 	void Update() {
 		if(currentEnemy != null){
-			if(currentEnemy.IsDead){
+			if(currentEnemy.isDead){
 				target = null;
 				currentEnemy = null;
 				StopCoroutine("Attack");
@@ -35,7 +32,7 @@ public class PlayerCombat:MonoBehaviour {
 			if(currentEnemy == null)
 				currentEnemy = target.GetComponent<Enemy>();
 
-			if(Vector3.Distance(transform.position, target.position) <= 2) {
+			if(Vector3.Distance(transform.position, target.position) <= 5) {
 				player.TargetPosition = transform.position;
 				
 				canAttack = true;
@@ -69,7 +66,7 @@ public class PlayerCombat:MonoBehaviour {
 
 		for(int i = 0; i < hits.Length; i++) {
 			if(hits[i].tag == "Enemy") {
-				hits[i].GetComponent<Enemy>().Damage(player.Data.attackDamage);
+				hits[i].GetComponent<Enemy>().TakeDamage(player.Data.attackDamage);
 			}
 		}
 
