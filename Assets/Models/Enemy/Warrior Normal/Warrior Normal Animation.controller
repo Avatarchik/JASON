@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: warrior_fire_animations
+  m_Name: Warrior Normal Animation
   serializedVersion: 2
   m_AnimatorParameters:
   - m_Name: IsWalking
