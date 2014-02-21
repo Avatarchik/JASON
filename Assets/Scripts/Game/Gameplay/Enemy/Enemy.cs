@@ -39,7 +39,7 @@ public class Enemy:MonoBehaviour {
 			Die();
 	}
 
-	public virtual void Die() { }
+	public virtual void Die() { Debug.Log ("Override me"); }
 
 	public bool IsDead { get { return isDead; } }
 }

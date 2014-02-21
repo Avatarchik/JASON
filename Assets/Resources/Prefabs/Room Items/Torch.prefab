@@ -11,6 +11,7 @@ GameObject:
   - 108: {fileID: 10800000}
   - 198: {fileID: 19800000}
   - 199: {fileID: 19900000}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Effect
   m_TagString: Untagged
@@ -148,6 +149,20 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600564717f3967a4f96596a6aeda867e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
+  color0: {r: 1, g: 0, b: 0, a: 1}
+  color1: {r: 1, g: .0647, b: 0, a: 1}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

@@ -15,7 +15,7 @@ public class Warrior:Enemy {
 				gameObject.tag = "Corpse";
 
 				Destroy(GetComponent<Rigidbody>());
-				Destroy(GetComponent<SphereCollider>());
+				Destroy(GetComponent<CapsuleCollider>());
 			}
 
 			return;

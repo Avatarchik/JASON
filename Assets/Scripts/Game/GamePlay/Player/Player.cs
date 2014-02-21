@@ -83,14 +83,10 @@ public class Player:MonoBehaviour {
 		if(Input.touchCount == 0)
 			return;
 		
-		for(int i = 0; i < Input.touchCount; i++) {
-			Touch touch = Input.GetTouch(i);
-			if(touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-				CheckTouchPosition(Camera.main.ScreenPointToRay(touch.position));
-
-				Debug.Log(touch.position);
-			}
-		}	
+		Touch touch = Input.GetTouch(0);
+		if(touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
+			CheckTouchPosition(Camera.main.ScreenPointToRay(touch.position));
+		}
 	}
 	
 	private void CheckTouchPosition(Ray screenRay) {
