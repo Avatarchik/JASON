@@ -18,7 +18,7 @@ public class PlayerCombat:MonoBehaviour {
 	
 	void Update() {
 		if(currentEnemy != null){
-			if(currentEnemy.isDead){
+			if(currentEnemy.IsDead){
 				target = null;
 				currentEnemy = null;
 				StopCoroutine("Attack");
@@ -66,7 +66,7 @@ public class PlayerCombat:MonoBehaviour {
 
 		for(int i = 0; i < hits.Length; i++) {
 			if(hits[i].tag == "Enemy") {
-				hits[i].GetComponent<Enemy>().TakeDamage(player.Data.attackDamage);
+				hits[i].GetComponent<Enemy>().Damage(player.Data.attackDamage);
 			}
 		}
 
