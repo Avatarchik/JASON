@@ -5,7 +5,7 @@ public class XperiaPlayer:MonoBehaviour {
 	public Vector2 movement;
 
 	void Update() {
-		movement = new Vector2(0, 0);
+		movement = Vector2.zero;
 		
 		if(Input.GetKey(KeyCode.UpArrow)) {
 			movement.y -= 0.1f;
