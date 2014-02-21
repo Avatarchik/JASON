@@ -56,7 +56,7 @@ public class Warrior : Enemy {
 	IEnumerator Attack(){
 		isAttacking = true;
 		int random = Random.Range(3,5);
-		Debug.Log(random);
+
 		enemyAnimation.SetInteger("State",random);
 		yield return new WaitForSeconds(enemyAnimation.GetCurrentAnimatorStateInfo(0).length);
 		enemyAnimation.SetInteger("State",1);

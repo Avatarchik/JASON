@@ -178,19 +178,15 @@ public class RoomWindow:EditorWindow {
 
 	/** Create an item */
 	private void CreateItem(string name){
-		if(Resources.Load("Prefabs/RoomItems/" + name) == null) {
-			Debug.LogError("Prefabs/RoomItems/" + name + " doesn't exist");
+		if(Resources.Load("Prefabs/Room Items/" + name) == null) {
+			Debug.LogError("Prefabs/Room Items/" + name + " doesn't exist");
 			return;
 		}
 
-		GameObject instantiatedItem = Instantiate(Resources.Load("Prefabs/EditorItems/" + name), new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
-		Object[] selectedobject = new Object[1];
+		GameObject instantiatedItem = Instantiate(Resources.Load("Prefabs/Editor Items/" + name), new Vector3(0, 1, 0), Quaternion.identity) as GameObject;
 
 		instantiatedItem.name = name;
 		instantiatedItem.transform.parent = roomObject.transform;
-		
-		selectedobject[0] = instantiatedItem;
-		Selection.objects = selectedobject;
 		
 		objectList.Add(instantiatedItem);
 	}
