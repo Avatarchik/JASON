@@ -168,12 +168,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1530843191}
   distance: 0
-  distancex: -8
+  distanceX: -7
   height: 12
   damping: 5
-  camDamping: 2
-  cam: {fileID: 867646846}
-  camDistance: 0
+  cameraDamping: 3
+  playerCamera: {fileID: 867646846}
+  cameraDistance: -5
 --- !u!1 &22212466
 GameObject:
   m_ObjectHideFlags: 0
@@ -5894,7 +5894,11 @@ MonoBehaviour:
     health: 10
     speed: 4
     attackDamage: 2
+    chargeMultiplier: 0
     attackDelay: 0
+  playerCamera: {fileID: 20971728}
+  playerModel: {fileID: 641075190}
+  playerAnimation: {fileID: 977844725}
   shieldButton:
     activated: 0
     position: {x: 0, y: 0}
@@ -5916,11 +5920,6 @@ MonoBehaviour:
     spriteClick:
       texCoords: {x: 0, y: 0}
       size: {x: 0, y: 0}
-  playerCamera: {fileID: 20971728}
-  playerModel: {fileID: 641075190}
-  isCharging: 0
-  playerAnimation: {fileID: 977844725}
-  chargingMultiplier: 1
 --- !u!65 &1530843189
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7122,9 +7121,9 @@ Transform:
   m_LocalPosition: {x: 110.332878, y: -96.6489105, z: -80.1967087}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1538303326}
   - {fileID: 668626969}
   - {fileID: 655712866}
-  - {fileID: 1538303326}
   m_Father: {fileID: 625865606}
 --- !u!1 &1971581851
 GameObject:

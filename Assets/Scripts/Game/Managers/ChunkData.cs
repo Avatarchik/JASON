@@ -22,7 +22,7 @@ public class ChunkData:MonoBehaviour {
 	private GameObject chunk;
 	private int setRotation;
 
-	void Start () {
+	void Start() {
 		StartCoroutine("WaitForLevelGenerator");
 	}
 

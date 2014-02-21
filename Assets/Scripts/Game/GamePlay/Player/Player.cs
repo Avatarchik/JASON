@@ -3,16 +3,13 @@ using System;
 using System.Collections;
 
 public class Player:MonoBehaviour {
-	[SerializeField] private PlayerData data;
-	
-	public SUISpriteButton shieldButton;	
-	
-	public PlayerCamera playerCamera;
-	public GameObject playerModel;
+	[SerializeField] internal PlayerData data;
 
-	public bool isCharging;
-	public Animator playerAnimation;
-	public int chargingMultiplier = 1;
+	[SerializeField] internal PlayerCamera playerCamera;
+	[SerializeField] internal GameObject playerModel;
+	[SerializeField] internal Animator playerAnimation;
+	
+	[SerializeField] private SUISpriteButton shieldButton;	
 	
 	private bool isDefending;
 
@@ -29,13 +26,8 @@ public class Player:MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if(GUI.Button(new Rect(0, 0, 200, 200), "SHIELD")) {
-			if(isDefending) {
-				isDefending = false;
-			} else {
-				isDefending = true;
-			}
-		}
+		if(GUI.Button(new Rect(0, 0, 200, 200), "SHIELD"))
+			isDefending = !isDefending;
 	}
 
 	void Update() {	
@@ -46,17 +38,18 @@ public class Player:MonoBehaviour {
 			playerCombat.Defend(false);
 		}
 
-		rigidbody.velocity = new Vector3(0, 0, 0);
+		rigidbody.velocity = Vector3.zero;
 		
 		CheckForTouch();
 
 		if(targetPosition != transform.position) {
-			playerCamera.camDistance = 10;
+			playerCamera.CameraDistance = 10;
 			float step = data.speed * Time.deltaTime;
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
 
 			Vector3 lookPos = targetPosition - playerModel.transform.position;
-			Quaternion rotation = new Quaternion(0, 0, 0, 0);
+			Quaternion rotation = Quaternion.identity;
+
 			if(lookPos != Vector3.zero)
 				rotation = Quaternion.LookRotation(lookPos);
 
@@ -66,40 +59,26 @@ public class Player:MonoBehaviour {
 			if(transform.position != targetPosition)
 				playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, rotation, 30);
 		} else {
-			playerCamera.camDistance = -5;
+			playerCamera.CameraDistance = -5;
 			playerAnimation.SetBool("IsRunning", false);
 		}
 	}
 
 	void OnTriggerEnter(Collider collider) {
-		Debug.Log (collider.tag);
-
 		if(collider.CompareTag("Item")) {
 			inventory.PickupEquipable(collider.GetComponent<ItemEquipable>());
 		}
 	}
 
-	private IEnumerator ChargingPeriod() {
-		yield return new WaitForSeconds(2);
-		chargingMultiplier = 1;
-	}
-
-	private IEnumerator ChargingTimer() {
-		yield return new WaitForSeconds(2);
-		chargingMultiplier = 2;
-	}
-
 	private IEnumerator Delay(){
 		yield return new WaitForSeconds(0.3f);
+
 		playerAnimation.SetBool("GettingHit", false);
 	}
 
 	private void CheckForTouch() {
-		if(Input.GetMouseButtonDown(0)) {
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			CheckTouchPosition(ray);
-
-		}
+		if(Input.GetMouseButtonDown(0))
+			CheckTouchPosition(Camera.main.ScreenPointToRay(Input.mousePosition));
 		
 		if(Input.touchCount == 0)
 			return;
@@ -124,12 +103,10 @@ public class Player:MonoBehaviour {
 
 			switch(hit.transform.tag) {
 			case "Floor":
-				isCharging = false;
 				playerAnimation.SetBool("IsRunning", true);
 				Move(hit.point);
 				break;
 			case "Player":
-				isCharging = true;
 				Move(transform.position);
 				playerCombat.Defend(true);
 				break;
@@ -141,9 +118,6 @@ public class Player:MonoBehaviour {
 				break;
 			case "Test":
 				Application.LoadLevel(Application.loadedLevelName);
-				break;
-			default:
-				isCharging = false;
 				break;
 			}
 		}
@@ -172,6 +146,8 @@ public class Player:MonoBehaviour {
 		public int health;
 		public int speed;
 		public int attackDamage;
+
+		public int chargeMultiplier;
 		
 		public float attackDelay;
 	}

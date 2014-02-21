@@ -2,29 +2,28 @@
 using System.Collections;
 
 public class PlayerCamera:MonoBehaviour {
-	public Transform target;
+	[SerializeField] private Transform target;
 
-	public float distance = 3.0f;
-	public float distancex = 3.0f;
-	public float height = 3.0f;
-	public float damping = 5.0f;
-	public float camDamping;
+	[SerializeField] private float distance;
+	[SerializeField] private float distanceX;
+	[SerializeField] private float height;
+	[SerializeField] private float damping;
+	[SerializeField] private float cameraDamping;
 
-	public Camera cam;
+	[SerializeField] private Camera playerCamera;
 
-	public int camDistance;
+	[SerializeField] private int cameraDistance;
 
 	private bool targetFound;
 
 	void Update() {
-		targetFound = target != null ? true : false;
+		if(target != null) {
+			Vector3 wantedPosition = target.transform.position + new Vector3(distanceX, height, distance);
 
-		if(targetFound) {
-			Vector3 wantedPosition;
-
-			wantedPosition = target.transform.position + new Vector3(distancex, height, distance);
 			transform.position = Vector3.Lerp (transform.position, wantedPosition, Time.deltaTime * damping);
-			cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60 + camDistance, Time.deltaTime * camDamping);
+			playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, 60 + cameraDistance, Time.deltaTime * cameraDamping);
 		}
 	}
+
+	public int CameraDistance { set { cameraDistance = value; } }
 }
