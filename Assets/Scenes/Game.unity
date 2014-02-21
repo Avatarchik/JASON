@@ -2395,7 +2395,7 @@ GameObject:
   - 4: {fileID: 655712866}
   - 65: {fileID: 655712863}
   m_Layer: 0
-  m_Name: Pot
+  m_Name: Vase
   m_TagString: DestroyableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2463,7 +2463,7 @@ GameObject:
   - 4: {fileID: 668626969}
   - 65: {fileID: 668626965}
   m_Layer: 0
-  m_Name: Pot
+  m_Name: Vase
   m_TagString: DestroyableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6042,7 +6042,7 @@ GameObject:
   - 4: {fileID: 1538303326}
   - 65: {fileID: 1538303328}
   m_Layer: 0
-  m_Name: Pot
+  m_Name: Vase
   m_TagString: DestroyableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7121,9 +7121,9 @@ Transform:
   m_LocalPosition: {x: 110.332878, y: -96.6489105, z: -80.1967087}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 655712866}
   - {fileID: 1538303326}
   - {fileID: 668626969}
-  - {fileID: 655712866}
   m_Father: {fileID: 625865606}
 --- !u!1 &1971581851
 GameObject:

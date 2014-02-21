@@ -111,16 +111,14 @@ public class RoomWindow:EditorWindow {
 
 	/** Draw the props window */
 	private void DrawPropsWindow(){
-		string[] list1 = new string[] {"Pot", "Pillar", "Chest", "Tomb", "Moss", "BrokenPot"};
-		string[] list2 = new string[] {"Torch", "Statue", "BrkSword", "Table", "Chair", "Anvil"};
-		string[] list3 = new string[] {"Furnace", "Fountain", "Tree", "Bush", "Saw", "Crystal"};
+		string[] list1 = new string[] {"Barrel", "Chest", "Gold Pile", "Pillar", "Stone Block", "Tomb"};
+		string[] list2 = new string[] {"Torch", "Vase", "Vase Broken", "Wine Keg"};
 
 		GUILayout.Label("Props", EditorStyles.objectFieldThumb);
 
 		EditorGUILayout.BeginHorizontal();
 			DrawPropList(list1);
 			DrawPropList(list2);
-			DrawPropList(list3);
 		EditorGUILayout.EndHorizontal();
 
 		GUILayout.Label("", EditorStyles.objectFieldThumb);
@@ -187,6 +185,9 @@ public class RoomWindow:EditorWindow {
 
 		instantiatedItem.name = name;
 		instantiatedItem.transform.parent = roomObject.transform;
+
+		Object[] selectedobject = new Object[] {instantiatedItem};
+		Selection.objects = selectedobject;
 		
 		objectList.Add(instantiatedItem);
 	}
