@@ -9,6 +9,7 @@ public class PlayerCamera:MonoBehaviour {
 	[SerializeField] private float height;
 	[SerializeField] private float damping;
 	[SerializeField] private float cameraDamping;
+	[SerializeField] private float cameraBuffer;
 
 	[SerializeField] private Camera playerCamera;
 
@@ -18,8 +19,16 @@ public class PlayerCamera:MonoBehaviour {
 
 	void Update() {
 		if(target != null) {
-			Vector3 wantedPosition = target.transform.position + new Vector3(distanceX, height, distance);
-
+			Vector3 wantedPosition = target.transform.position + new Vector3(distanceX + cameraBuffer, height, distance);
+			if(transform.position.x < (target.transform.position.x + distanceX + cameraBuffer)){
+				cameraBuffer = 2;
+			}else if(transform.position.x > (target.transform.position.x + distanceX + cameraBuffer)){
+				cameraBuffer = -2;
+			}
+			if((playerCamera.fieldOfView == 60 + cameraDistance)){
+				cameraBuffer = 0;
+			}
+				//Debug.Log("position: " + transform.position.x + "    wanted: " + (target.transform.position.x + distanceX));
 			transform.position = Vector3.Lerp (transform.position, wantedPosition, Time.deltaTime * damping);
 			playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, 60 + cameraDistance, Time.deltaTime * cameraDamping);
 		}
