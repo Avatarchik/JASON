@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Jason
+  m_Name: Jason Animation
   serializedVersion: 2
   m_AnimatorParameters:
   - m_Name: IsRunning
@@ -394,7 +394,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: IsDead
     m_EventTreshold: 0
-    m_ExitTime: .899999976
+    m_ExitTime: 0
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -416,7 +416,7 @@ Transition:
   - m_ConditionMode: 5
     m_ConditionEvent: IsBlocking
     m_EventTreshold: 0
-    m_ExitTime: .899999976
+    m_ExitTime: 0
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -483,6 +483,28 @@ Transition:
     m_ConditionEvent: Attack
     m_EventTreshold: 1
     m_ExitTime: .899999976
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+--- !u!1101 &110198079
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110200000}
+  m_DstState: {fileID: 110255515}
+  m_TransitionDuration: .833333313
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 5
+    m_ConditionEvent: 
+    m_EventTreshold: 0
+    m_ExitTime: .166666687
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsBlocking
+    m_EventTreshold: 0
+    m_ExitTime: .166666687
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -648,7 +670,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Blocking
-  m_Speed: 1
+  m_Speed: .400000006
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400012, guid: ed8c65d3fcda01e4f9bfa57dcb87a4b9, type: 3}
@@ -722,6 +744,7 @@ StateMachine:
       second:
       - {fileID: 110100000}
       - {fileID: 110120871}
+      - {fileID: 110198079}
     data:
       first: {fileID: 110279440}
       second:

@@ -12,8 +12,9 @@ public class Player:MonoBehaviour {
 	[SerializeField] private SUISpriteButton shieldButton;	
 	
 	private bool isDefending;
+	public bool isHit;
 
-	private PlayerCombat playerCombat;
+	public PlayerCombat playerCombat;
 	private Inventory inventory;
 	
 	private Vector3 targetPosition;
@@ -26,8 +27,9 @@ public class Player:MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if(GUI.Button(new Rect(0, 0, 200, 200), "SHIELD"))
+		if(GUI.Button(new Rect(0, 300, 200, 200), "SHIELD")){
 			isDefending = !isDefending;
+		}
 	}
 
 	void Update() {	
@@ -72,7 +74,7 @@ public class Player:MonoBehaviour {
 
 	private IEnumerator Delay(){
 		yield return new WaitForSeconds(0.3f);
-
+		isHit = false;
 		playerAnimation.SetBool("GettingHit", false);
 	}
 
@@ -127,6 +129,7 @@ public class Player:MonoBehaviour {
 	public void getDamage(int amount) {
 		playerAnimation.SetBool("GettingHit",true);
 		data.health -= amount;
+		isHit = true;
 		StartCoroutine("Delay");
 	}
 	
@@ -139,6 +142,7 @@ public class Player:MonoBehaviour {
 	
 	[Serializable]
 	public class PlayerData {
+		public int maxHealth;
 		public int health;
 		public int speed;
 		public int attackDamage;

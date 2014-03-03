@@ -112,7 +112,7 @@ public class RoomWindow:EditorWindow {
 	/** Draw the props window */
 	private void DrawPropsWindow(){
 		string[] list1 = new string[] {"Barrel", "Chest", "Gold Pile", "Pillar", "Stone Block", "Tomb"};
-		string[] list2 = new string[] {"Torch", "Vase", "Vase Broken", "Wine Keg"};
+		string[] list2 = new string[] {"Torch", "Vase", "Vase Broken", "Wine Keg","Normal Warrior"};
 
 		GUILayout.Label("Props", EditorStyles.objectFieldThumb);
 

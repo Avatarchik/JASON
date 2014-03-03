@@ -7,7 +7,7 @@ public class PlayerCombat:MonoBehaviour {
 	private Transform target;
 	public Enemy currentEnemy;
 	private bool canAttack;
-	private bool attacking;
+	public bool attacking;
 	private bool isAttacking;
 	public bool isDefending;
 	public GameObject weaponCollision;
@@ -18,7 +18,7 @@ public class PlayerCombat:MonoBehaviour {
 	
 	void Update() {
 		if(currentEnemy != null){
-			if(currentEnemy.IsDead){
+			if(currentEnemy.IsDead) {
 				target = null;
 				currentEnemy = null;
 				StopCoroutine("Attack");
@@ -42,7 +42,7 @@ public class PlayerCombat:MonoBehaviour {
 		}
 		
 		if(canAttack && !attacking && currentEnemy != null)
-			StartCoroutine(Attack(0.01f,1));
+			StartCoroutine(Attack(0.01f,player.data.attackDelay));
 	}
 	
 	internal void Defend(bool state) {

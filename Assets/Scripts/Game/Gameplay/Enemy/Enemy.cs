@@ -5,6 +5,7 @@ using System;
 public class Enemy:MonoBehaviour {
 	[Serializable]
 	public class EnemyData {
+		public int maxHealth;
 		public int health;
 		public int speed;
 		public int attackDamage;
@@ -13,7 +14,7 @@ public class Enemy:MonoBehaviour {
 		public float range;
 	}
 	
-	[SerializeField] protected EnemyData data;
+	[SerializeField] public EnemyData data;
 
 	protected Transform player;
 	protected float distanceToPlayer;
