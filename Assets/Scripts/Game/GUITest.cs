@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using SGUI;
 
 public class GUITest:MonoBehaviour {
-	public SUISpriteButton spriteButton;
+	public SUITextureButton button;
+
+	/*public SUISpriteButton spriteButton;
 	public SUITextureButton textureButton;
 
 	public SUILabel label;
@@ -24,5 +27,5 @@ public class GUITest:MonoBehaviour {
 		}
 
 		label.Draw();
-	}
+	}*/
 }
