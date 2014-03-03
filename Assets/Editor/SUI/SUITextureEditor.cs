@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 
-[CustomPropertyDrawer(typeof(SUITexture))]
+/*[CustomPropertyDrawer(typeof(SUITexture))]
 public class SUITextureEditor:PropertyDrawer {
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 		position.height = 16f;
@@ -35,4 +35,4 @@ public class SUITextureEditor:PropertyDrawer {
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
 		return property.isExpanded ? 32f : 16f;	
 	}
-}
+}*/

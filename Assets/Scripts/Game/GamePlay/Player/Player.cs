@@ -8,9 +8,7 @@ public class Player:MonoBehaviour {
 	[SerializeField] internal PlayerCamera playerCamera;
 	[SerializeField] internal GameObject playerModel;
 	[SerializeField] internal Animator playerAnimation;
-	
-	[SerializeField] private SUISpriteButton shieldButton;	
-	
+
 	private bool isDefending;
 	public bool isHit;
 

@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 
-[CustomPropertyDrawer(typeof(SUISpriteButton))]
+/*[CustomPropertyDrawer(typeof(SUISpriteButton))]
 public class SUISpriteButtonEditor:PropertyDrawer {
 	private float height = 144f;
 
@@ -144,4 +144,4 @@ public class SUISpriteButtonEditor:PropertyDrawer {
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
 		return property.isExpanded ? height : 16f;	
 	}
-}
+}*/

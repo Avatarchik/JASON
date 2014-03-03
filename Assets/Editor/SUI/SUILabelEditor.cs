@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 
-[CustomPropertyDrawer(typeof(SUILabel))]
+/*[CustomPropertyDrawer(typeof(SUILabel))]
 public class SUILabelEditor:PropertyDrawer {
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 		position.height = 16f;
@@ -65,3 +65,4 @@ public class SUILabelEditor:PropertyDrawer {
 		return property.isExpanded ? 108f : 16f;	
 	}
 }
+*/

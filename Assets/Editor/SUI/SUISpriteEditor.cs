@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 
-[CustomPropertyDrawer(typeof(SUISprite))]
+/*[CustomPropertyDrawer(typeof(SUISprite))]
 public class SUISpriteEditor:PropertyDrawer {
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 		position.height = 16f;
@@ -47,3 +47,4 @@ public class SUISpriteEditor:PropertyDrawer {
 		return property.isExpanded ? 70f : 16f;	
 	}
 }
+*/
