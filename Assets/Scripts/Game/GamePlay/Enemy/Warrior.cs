@@ -1,14 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Warrior:Enemy {
-	[SerializeField] private Animator enemyAnimation;
 	[SerializeField] private GameObject overlapPosition;
 
+	private Animator enemyAnimation;
+
 	private bool isAttacking;
+
+	protected override void Start() {
+		base.Start();
+
+		enemyAnimation = GetComponentInChildren<Animator>();
+	}
 	
 	protected override void FixedUpdate() {
-		if(isDead) {
+		if(dead) {
 			if(enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("DeadIdle")) {
 				enemyAnimation.enabled = false;
 
@@ -34,7 +41,7 @@ public class Warrior:Enemy {
 
 	/** Kill the enemy */
 	public override void Die() {
-		isDead = true;
+		dead = true;
 
 		StopCoroutine("Attack");
 
@@ -44,7 +51,7 @@ public class Warrior:Enemy {
 
 	/** Determine which animation to play */
 	private void Animate() {
-		if(distanceToPlayer > data.range) {
+		if(distanceToPlayer > data.chaseRange) {
 			enemyAnimation.SetInteger("State", 1);
 		} else if (distanceToPlayer > 4) {
 			enemyAnimation.SetInteger("State", 2);
@@ -69,7 +76,7 @@ public class Warrior:Enemy {
 
 		for(int i = 0; i < hits.Length; i++) {
 			if(hits[i].name == "Player")
-				player.GetComponent<Player>().getDamage(data.attackDamage);
+				player.GetComponent<Player>().Damage(data.attackDamage);
 		}
 
 		yield return new WaitForSeconds(data.attackDelay + Random.Range(0.3f, 1.0f));
@@ -79,8 +86,10 @@ public class Warrior:Enemy {
 
 	/** Move towards the player */
 	private void moveToPlayer() {
-		if(player.transform.position == transform.position)
+		if(Vector3.Distance(transform.position, player.transform.position) <= data.attackRange)
 			return;
+
+		moved = true;
 
 		Vector3 playerPos = player.transform.position;
 		Vector3 lookPos = playerPos - transform.position;
@@ -92,7 +101,7 @@ public class Warrior:Enemy {
 		rotation.x = 0;
 		rotation.z = 0;
 
-		if (enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("Run")) {
+		if(enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("Run")) {
 			transform.position = Vector3.MoveTowards(transform.position, playerPos, step);
 			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 0.1f);
 		}

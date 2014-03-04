@@ -3,150 +3,154 @@ using System;
 using System.Collections;
 
 public class Player:MonoBehaviour {
-	[SerializeField] internal PlayerData data;
+	[SerializeField] private PlayerData playerData;
 
-	[SerializeField] internal PlayerCamera playerCamera;
-	[SerializeField] internal GameObject playerModel;
-	[SerializeField] internal Animator playerAnimation;
+	[SerializeField] private GameObject playerModel;
+	[SerializeField] private Animator playerAnimation;
 
-	private bool isDefending;
-	public bool isHit;
+	private PlayerCamera playerCamera;
+	private PlayerCombat playerCombat;
 
-	public PlayerCombat playerCombat;
-	private Inventory inventory;
-	
 	private Vector3 targetPosition;
 
+	private bool defending;
+	private bool hit;
+
 	void Start() {
+		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
 		playerCombat = GetComponent<PlayerCombat>();
-		inventory = GetComponent<Inventory>();
-	
+
 		targetPosition = transform.position;
 	}
 
-	void OnGUI() {
-		if(GUI.Button(new Rect(0, 300, 200, 200), "SHIELD")){
-			isDefending = !isDefending;
-		}
-	}
-
-	void Update() {	
-		if(isDefending) {
-			targetPosition = transform.position;
-			playerCombat.Defend(true);
-		} else {
-			playerCombat.Defend(false);
-		}
-
+	void FixedUpdate() {
 		rigidbody.velocity = Vector3.zero;
-		
-		CheckForTouch();
 
-		if(targetPosition != transform.position) {
+		CheckForInput();
+
+		if(Vector3.Distance(transform.position, targetPosition) > 2) {
 			playerCamera.CameraDistance = 10;
-			float step = data.speed * Time.deltaTime;
-			transform.position = Vector3.MoveTowards(transform.position, targetPosition, step);
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, playerData.speed * Time.deltaTime); 
 
-			Vector3 lookPos = targetPosition - playerModel.transform.position;
-			Quaternion rotation = Quaternion.identity;
+			Vector3 lookPosition = targetPosition - playerModel.transform.position;
+			Quaternion lookRotation = Quaternion.identity;
 
-			if(lookPos != Vector3.zero)
-				rotation = Quaternion.LookRotation(lookPos);
+			if(lookPosition != Vector3.zero)
+				lookRotation = Quaternion.LookRotation(lookPosition);
 
-			rotation.x = 0;
-			rotation.z = 0;
+			lookRotation.x = 0;
+			lookRotation.z = 0;
 
 			if(transform.position != targetPosition)
-				playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, rotation, 30);
+				playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, lookRotation, 30);
 		} else {
 			playerCamera.CameraDistance = -5;
 			playerAnimation.SetBool("IsRunning", false);
 		}
 	}
 
-	void OnTriggerEnter(Collider collider) {
-		if(collider.CompareTag("Item")) {
-			inventory.PickupEquipable(collider.GetComponent<ItemEquipable>());
+	void OnGUI() {
+		if(GUI.Button(new Rect(0, 0, 100, 50), new GUIContent("Defend"))) {
+			playerCombat.Defend(!playerCombat.Defending);
+			
+			if(playerCombat.Defending)
+				targetPosition = transform.position;
 		}
 	}
 
-	private IEnumerator Delay(){
-		yield return new WaitForSeconds(0.3f);
-		isHit = false;
-		playerAnimation.SetBool("GettingHit", false);
-	}
-
-	private void CheckForTouch() {
-		if(Input.GetMouseButtonDown(0))
-			CheckTouchPosition(Camera.main.ScreenPointToRay(Input.mousePosition));
-		
-		if(Input.touchCount == 0)
-			return;
-		
-		Touch touch = Input.GetTouch(0);
-		if(touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved) {
-			CheckTouchPosition(Camera.main.ScreenPointToRay(touch.position));
-		}
-	}
-	
-	private void CheckTouchPosition(Ray screenRay) {
+	private void CheckForInput() {
 		RaycastHit hit;
-		Physics.Raycast(screenRay, out hit, 100);
+		Ray ray;
 
-		if(hit.collider != null) {
-			if(hit.transform.tag != "Player")
-				playerCombat.Defend(false);
+		if(Input.touchCount == 0) {
+			if(Input.GetMouseButtonDown(0)) {
+				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				Physics.Raycast(ray, out hit, 100);
 
-			switch(hit.transform.tag) {
-			case "Floor":
+				HandleInput(hit);
+			}
+		} else if(Input.touchCount > 0) {
+			Touch touch = Input.GetTouch(0);
+
+			ray = Camera.main.ScreenPointToRay(touch.position);
+			Physics.Raycast(ray, out hit, 100);
+
+			HandleInput(hit);
+		}
+	}
+
+	private void HandleInput(RaycastHit hit) {	
+		if(hit.collider == null)
+			return;
+
+		Debug.Log (hit.transform.tag);
+
+		switch(hit.transform.tag) {
+		case "Floor":
+			if(!playerCombat.Defending) {
 				playerAnimation.SetBool("IsRunning", true);
 				Move(hit.point);
-				break;
-			case "Player":
-				Move(transform.position);
-				playerCombat.Defend(true);
-				break;
-			case "Enemy":
-				playerCombat.StartAttack(hit.transform);
-				break;
-			case "DestroyableObject":
-				playerCombat.StartAttack(hit.transform);
-				break;
-			case "Test":
-				Application.LoadLevel(Application.loadedLevelName);
-				break;
 			}
+
+			break;
+		case "Enemy":
+		case "Destructable":
+			if(!playerCombat.Defending)
+				playerCombat.Attack(hit.transform.gameObject, hit.transform.tag);
+			break;
 		}
 	}
-	
+
+	void OnTriggerEnter(Collider collider) {
+		switch(collider.tag) {
+		case "ItemEquipable":
+			playerData.inventory.PickupEquipable(collider.GetComponent<ItemEquipable>());
+			break;
+		case "ItemWeapon":
+			playerData.inventory.PickupWeapon(collider.GetComponent<ItemWeapon>());
+			break;
+		case "ItemPower":
+			playerData.inventory.PickupPower(collider.GetComponent<ItemPower>());
+			break;
+		case "ItemSpecial":
+			playerData.inventory.PickupSpecial(collider.GetComponent<ItemSpecial>());
+			break;
+		}
+	}
+
+	public void Damage(int amount) {
+		playerAnimation.SetBool("GettingHit", true);
+		playerData.Health -= amount;
+
+		hit = true;
+
+		StartCoroutine("DamageDelay");
+	}
+
 	private void Move(Vector3 position) {
-		playerCombat.Target = null;
+		playerCombat.TargetEnemy = null;
+		playerCombat.TargetDestructable = null;
 		targetPosition = new Vector3(position.x, 1, position.z);
 	}
 
-	public void getDamage(int amount) {
-		playerAnimation.SetBool("GettingHit",true);
-		data.health -= amount;
-		isHit = true;
-		StartCoroutine("Delay");
+	private IEnumerator DamageDelay(){
+		yield return new WaitForSeconds(playerData.damageDelay);
+
+		hit = false;
+
+		playerAnimation.SetBool("GettingHit", false);
 	}
+
+	public bool Hit { get { return hit; } }
 	
-	public PlayerData Data { get { return data; } }
+	public PlayerData PlayerData { get { return playerData; } }
+
+	public PlayerCombat PlayerCombat { get { return playerCombat; } }
+
+	public Animator PlayerAnimation { get { return playerAnimation; } }
 	
 	public Vector3 TargetPosition {
-		get { return targetPosition; }
 		set { targetPosition = value; }
-	}
-	
-	[Serializable]
-	public class PlayerData {
-		public int maxHealth;
-		public int health;
-		public int speed;
-		public int attackDamage;
-
-		public int chargeMultiplier;
-		
-		public float attackDelay;
+		get { return targetPosition; }
 	}
 }

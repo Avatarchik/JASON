@@ -11,26 +11,30 @@ public class Enemy:MonoBehaviour {
 		public int attackDamage;
 		
 		public float attackDelay;
-		public float range;
+		public float attackRange;
+
+		public float chaseRange;
 	}
 	
 	[SerializeField] public EnemyData data;
 
-	protected Transform player;
+	protected GameObject player;
 	protected float distanceToPlayer;
 
-	protected bool isDead;
+	protected bool dead;
+	protected bool moved;
+
 	protected bool playerFound;
 
 	protected virtual void Start() {
-		player = GameObject.Find("Player").transform;
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	protected virtual void FixedUpdate() {
 		rigidbody.velocity = Vector3.zero;
 		distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
-		playerFound = (distanceToPlayer < data.range) ? true : false;
+		playerFound = (distanceToPlayer < data.chaseRange) ? true : false;
 	}
 
 	public void Damage(int amt) {
@@ -40,7 +44,9 @@ public class Enemy:MonoBehaviour {
 			Die();
 	}
 
-	public virtual void Die() { Debug.Log ("Override me"); }
+	public virtual void Die() { Debug.Log("Override me"); }
 
-	public bool IsDead { get { return isDead; } }
+	public bool Dead { get { return dead; } }
+
+	public bool Moved { get { return moved; } }
 }

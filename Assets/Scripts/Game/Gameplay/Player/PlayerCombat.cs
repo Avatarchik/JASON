@@ -1,86 +1,116 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerCombat:MonoBehaviour {
+	[SerializeField] private GameObject weaponCollisionArea;
+
 	private Player player;
 
-	private Transform target;
-	public Enemy currentEnemy;
-	private bool canAttack;
-	public bool attacking;
-	private bool isAttacking;
-	public bool isDefending;
-	public GameObject weaponCollision;
+	private Enemy targetEnemy;
+	private Destructable targetDestructable;
 
+	private bool canAttack;
+	private bool attacking;
+	private bool defending;
+	
 	void Start() {
 		player = GetComponent<Player>();
 	}
-	
+
 	void Update() {
-		if(currentEnemy != null){
-			if(currentEnemy.IsDead) {
-				target = null;
-				currentEnemy = null;
-				StopCoroutine("Attack");
-				player.playerAnimation.SetInteger("Attack", 0);
-			}
-		}
-
 		canAttack = false;
-	
-		if(target != null) {
-			if(currentEnemy == null)
-				currentEnemy = target.GetComponent<Enemy>();
 
-			if(Vector3.Distance(transform.position, target.position) <= 5) {
-				player.TargetPosition = transform.position;
-				
-				canAttack = true;
+		if(targetEnemy != null) {
+			if(targetEnemy.Dead) {
+				player.PlayerAnimation.SetInteger("Attack", 0);
+				targetEnemy = null;
+
+				attacking = false;
+				StopCoroutine("AttackDelay");
 			} else {
-				player.TargetPosition = target.position;
+				if(targetEnemy.Moved)
+					if(Vector3.Distance(transform.position, targetEnemy.transform.position) >= player.PlayerData.attackRange / 2)
+						player.TargetPosition = targetEnemy.transform.position;
+
+				if(Vector3.Distance(transform.position, targetEnemy.transform.position) <= player.PlayerData.attackRange) {
+					player.TargetPosition = transform.position;
+					canAttack = !defending;
+				}
 			}
 		}
-		
-		if(canAttack && !attacking && currentEnemy != null)
-			StartCoroutine(Attack(0.01f,player.data.attackDelay));
 	}
 	
-	internal void Defend(bool state) {
-		target = null;
-		player.playerAnimation.SetBool("IsBlocking",state);
-	}
-	
-	internal void StartAttack(Transform target) {
-		this.target = target;
+	public void Defend(bool state) {
+		DeselectTarget();
 
-		player.TargetPosition = target.position;
-	}
-	
-	private IEnumerator Attack(float duration,float hitDelay) {
-		int randomAnimation = Random.Range(1, 4);
+		defending = state;
 
-		player.playerAnimation.SetInteger("Attack", randomAnimation);
+		player.PlayerAnimation.SetBool("IsBlocking", state);
+	}
+
+	public void Attack(GameObject target, string type) {
+		DeselectTarget();
+
+		switch(type) {
+		case "Enemy":
+			targetEnemy = target.GetComponent<Enemy>();
+			break;
+		case "Destructable":
+			targetDestructable = target.GetComponent<Destructable>();
+			break;
+		}
+
+		player.TargetPosition = target.transform.position;
 		attacking = true;
 
-		Collider[] hits = Physics.OverlapSphere(weaponCollision.transform.position, 1);
+		StartCoroutine("AttackDelay");
 
-		for(int i = 0; i < hits.Length; i++) {
-			if(hits[i].tag == "Enemy") {
-				hits[i].GetComponent<Enemy>().Damage(player.Data.attackDamage);
+		Debug.Log ("Start attack");
+	}
+
+	private void DeselectTarget() {
+		targetEnemy = null;
+		targetDestructable = null;
+	}
+
+	private IEnumerator AttackDelay() {
+		while(attacking) {
+			if(canAttack) {
+				Debug.Log("Can Attack");
+				int randomAnimation = UnityEngine.Random.Range(1, 4);
+
+				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
+
+				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
+
+				foreach(Collider collider in hits)
+					if(collider.CompareTag("Enemy"))
+						collider.GetComponent<Enemy>().Damage(player.PlayerData.attackDamage);
+
+				yield return new WaitForSeconds(0.01f);
+
+				player.PlayerAnimation.SetInteger("Attack", 0);
+
+				yield return new WaitForSeconds(player.PlayerData.attackDelay);
+			} else {
+				Debug.Log("Cant Attack");
+				yield return new WaitForSeconds(0.01f);
 			}
 		}
-
-		yield return new WaitForSeconds(duration);
-
-		player.playerAnimation.SetInteger("Attack", 0);
-
-		yield return new WaitForSeconds(hitDelay);
-
-		attacking = false;
 	}
-	
-	public Transform Target {
-		get { return target; }
-		set { target = value; }
+
+	public Enemy TargetEnemy {
+		set { targetEnemy = value; }
+		get { return targetEnemy; }
 	}
+
+	public Destructable TargetDestructable {
+		set { targetDestructable = value; }
+		get { return targetDestructable; }
+	}
+
+	public bool Attacking {	get { return attacking; } }
+
+	public bool Defending { get { return defending; } }
 }

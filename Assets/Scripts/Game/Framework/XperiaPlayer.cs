@@ -4,9 +4,9 @@ using System.Collections;
 public class XperiaPlayer:MonoBehaviour {
 	public Vector2 movement;
 
-	void Update() {
+	void FixedUpdate() {
 		movement = Vector2.zero;
-		
+
 		if(Input.GetKey(KeyCode.UpArrow)) {
 			movement.y -= 0.1f;
 		} else if(Input.GetKey(KeyCode.DownArrow)) {

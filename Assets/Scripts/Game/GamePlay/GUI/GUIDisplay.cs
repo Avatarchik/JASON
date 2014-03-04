@@ -2,54 +2,50 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class GUIDisplay:MonoBehaviour {
+public class GUIDisplay:Singleton<GUIDisplay> {
 	[SerializeField] private Texture healthBorder;
 	[SerializeField] private Texture healthBar;
-	[SerializeField] private Texture damageOverlay;
-	[SerializeField] private Texture attackIndicator;
-	[SerializeField] private Player player;
-
+	
+	private Player player;
+	
 	private bool isOnDelay;
 	private bool showing;
 
 	private int timershit;
 	private int barLength;
 
-	private Enemy selectedEnemy;
-	void FixedUpdate(){
-		selectedEnemy = player.playerCombat.currentEnemy;
-		barLength = 300 / player.data.maxHealth * player.data.health;
-		if(player.playerCombat.attacking){
+	void Start() {
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+	}
+
+	void FixedUpdate() {
+		barLength = 300 / player.PlayerData.maxHealth * player.PlayerData.Health;
+
+		if(player.PlayerCombat.Attacking) {
 			timershit -= 10;
-		}else{
+		} else {
 			timershit = 300;
 		}
-
 	}
-	void OnGUI(){
-		if(selectedEnemy != null){
+
+	void OnGUI() {
+		if(player.PlayerCombat.TargetEnemy != null)
 			DrawEnemyHealthDisplay();
-		}
+
 		DrawPlayerHealthDisplay();
 	}
-	void DrawEnemyHealthDisplay(){
-		GUI.BeginGroup(new Rect(400,0,300,25));
-			GUI.DrawTexture(new Rect(0,0,300 / selectedEnemy.data.maxHealth * selectedEnemy.data.health,25),healthBar);
-			GUI.DrawTexture(new Rect(0,0,300,25),healthBorder);
-		//if(player.isHit){
-		//	GUI.DrawTexture(new Rect(0,0,barLength,25),damageOverlay);
-		//}
-		//GUI.DrawTexture(new Rect(0,0,timershit,25),attackIndicator);
+
+	void DrawEnemyHealthDisplay() {
+		GUI.BeginGroup(new Rect(400, 0, 300, 25));
+			GUI.DrawTexture(new Rect(0, 0, 300 / player.PlayerCombat.TargetEnemy.data.maxHealth * player.PlayerCombat.TargetEnemy.data.health, 25), healthBar);
+			GUI.DrawTexture(new Rect(0, 0, 300, 25), healthBorder);
 		GUI.EndGroup();
 	}
-	void DrawPlayerHealthDisplay(){
-		GUI.BeginGroup(new Rect(0,0,300,25));
-			GUI.DrawTexture(new Rect(0,0,barLength,25),healthBar);
-			GUI.DrawTexture(new Rect(0,0,300,25),healthBorder);
-			if(player.isHit){
-				GUI.DrawTexture(new Rect(0,0,barLength,25),damageOverlay);
-			}
-			GUI.DrawTexture(new Rect(0,0,timershit,25),attackIndicator);
+
+	void DrawPlayerHealthDisplay() {
+		GUI.BeginGroup(new Rect(0, 0, 300, 25));
+			GUI.DrawTexture(new Rect(0, 0, barLength, 25), healthBar);
+			GUI.DrawTexture(new Rect(0, 0, 300, 25), healthBorder);
 		GUI.EndGroup();
 	}
 }
