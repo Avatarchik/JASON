@@ -23,11 +23,7 @@ public class PlayerCombat:MonoBehaviour {
 
 		if(targetEnemy != null) {
 			if(targetEnemy.Dead) {
-				player.PlayerAnimation.SetInteger("Attack", 0);
-				targetEnemy = null;
-
-				attacking = false;
-				StopCoroutine("AttackDelay");
+				DeselectTarget();
 			} else {
 				if(targetEnemy.Moved)
 					if(Vector3.Distance(transform.position, targetEnemy.transform.position) >= player.PlayerData.attackRange / 2)
@@ -37,6 +33,13 @@ public class PlayerCombat:MonoBehaviour {
 					player.TargetPosition = transform.position;
 					canAttack = !defending;
 				}
+			}
+		} else if(targetDestructable != null) {
+			if(targetDestructable.Destroyed) {
+				DeselectTarget();
+			} else if(Vector3.Distance(transform.position, targetDestructable.transform.position) <= player.PlayerData.attackRange) {
+				player.TargetPosition = transform.position;
+				canAttack = !defending;
 			}
 		}
 	}
@@ -55,29 +58,34 @@ public class PlayerCombat:MonoBehaviour {
 		switch(type) {
 		case "Enemy":
 			targetEnemy = target.GetComponent<Enemy>();
+			StartCoroutine("AttackEnemyDelay");
 			break;
 		case "Destructable":
 			targetDestructable = target.GetComponent<Destructable>();
+			StartCoroutine("AttackDestructableDelay");
 			break;
 		}
 
 		player.TargetPosition = target.transform.position;
-		attacking = true;
-
-		StartCoroutine("AttackDelay");
-
-		Debug.Log ("Start attack");
 	}
 
 	private void DeselectTarget() {
+		player.PlayerAnimation.SetInteger("Attack", 0);
+
 		targetEnemy = null;
 		targetDestructable = null;
+
+		attacking = false;
+
+		StopCoroutine("AttackEnemyDelay");
+		StopCoroutine("AttackDestructableDelay");
 	}
 
-	private IEnumerator AttackDelay() {
+	private IEnumerator AttackEnemyDelay() {
+		attacking = true;
+
 		while(attacking) {
 			if(canAttack) {
-				Debug.Log("Can Attack");
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 
 				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
@@ -94,7 +102,32 @@ public class PlayerCombat:MonoBehaviour {
 
 				yield return new WaitForSeconds(player.PlayerData.attackDelay);
 			} else {
-				Debug.Log("Cant Attack");
+				yield return new WaitForSeconds(0.01f);
+			}
+		}
+	}
+
+	private IEnumerator AttackDestructableDelay() {
+		attacking = true;
+
+		while(attacking) {
+			if(canAttack) {
+				int randomAnimation = UnityEngine.Random.Range(1, 4);
+				
+				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
+				
+				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
+				
+				foreach(Collider collider in hits)
+					if(collider.CompareTag("Destructable"))
+						collider.GetComponent<Destructable>().Damage(player.PlayerData.attackDamage);
+				
+				yield return new WaitForSeconds(0.01f);
+				
+				player.PlayerAnimation.SetInteger("Attack", 0);
+				
+				yield return new WaitForSeconds(player.PlayerData.attackDelay);
+			} else {
 				yield return new WaitForSeconds(0.01f);
 			}
 		}

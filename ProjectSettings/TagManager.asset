@@ -3,16 +3,19 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - Enemy Corpse
   - Enemy
-  - Room
-  - Item
   - 
   - Floor
-  - WeaponCollider
-  - DestroyableObject
-  - Corpse
   - 
-  - Test
+  - Weapon Collision
+  - 
+  - Item Weapon
+  - Item Power
+  - Item Special
+  - Item Equipable
+  - 
+  - Destructable
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

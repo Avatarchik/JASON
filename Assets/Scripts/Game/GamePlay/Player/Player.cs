@@ -29,6 +29,8 @@ public class Player:MonoBehaviour {
 		CheckForInput();
 
 		if(Vector3.Distance(transform.position, targetPosition) > 2) {
+			playerAnimation.SetBool("IsRunning", true);
+
 			playerCamera.CameraDistance = 10;
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, playerData.speed * Time.deltaTime); 
 
@@ -83,36 +85,33 @@ public class Player:MonoBehaviour {
 		if(hit.collider == null)
 			return;
 
-		Debug.Log (hit.transform.tag);
-
 		switch(hit.transform.tag) {
 		case "Floor":
-			if(!playerCombat.Defending) {
-				playerAnimation.SetBool("IsRunning", true);
+			if(!playerCombat.Defending)
 				Move(hit.point);
-			}
 
 			break;
 		case "Enemy":
 		case "Destructable":
 			if(!playerCombat.Defending)
 				playerCombat.Attack(hit.transform.gameObject, hit.transform.tag);
+
 			break;
 		}
 	}
 
 	void OnTriggerEnter(Collider collider) {
 		switch(collider.tag) {
-		case "ItemEquipable":
+		case "Item Equipable":
 			playerData.inventory.PickupEquipable(collider.GetComponent<ItemEquipable>());
 			break;
-		case "ItemWeapon":
+		case "Item Weapon":
 			playerData.inventory.PickupWeapon(collider.GetComponent<ItemWeapon>());
 			break;
-		case "ItemPower":
+		case "Item Power":
 			playerData.inventory.PickupPower(collider.GetComponent<ItemPower>());
 			break;
-		case "ItemSpecial":
+		case "Item Special":
 			playerData.inventory.PickupSpecial(collider.GetComponent<ItemSpecial>());
 			break;
 		}

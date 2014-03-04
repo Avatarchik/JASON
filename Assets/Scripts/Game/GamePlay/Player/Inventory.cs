@@ -14,8 +14,6 @@ public class Inventory:MonoBehaviour {
 
 	/** Pickup an equipable item */
 	public void PickupEquipable(ItemEquipable item) {
-		Debug.Log (item.data.equipableType);
-
 		switch(item.data.equipableType) {
 		case EquipableData.EquipableType.Helmet:
 			AddHelmet(item);
