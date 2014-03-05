@@ -2,10 +2,13 @@ using UnityEngine;
 using System;
 using System.Collections;
 
-public class GUIDisplay:Singleton<GUIDisplay> {
+public class GUIDisplay:GUIBehaviour {
 	[SerializeField] private Texture healthBorder;
 	[SerializeField] private Texture healthBar;
-	
+	[SerializeField] private Texture damageBar;
+	[SerializeField] private Texture defendingBar;
+	[SerializeField] private Texture defendingIcon;
+	private Texture currentBar;
 	private Player player;
 	
 	private bool isOnDelay;
@@ -19,7 +22,15 @@ public class GUIDisplay:Singleton<GUIDisplay> {
 	}
 
 	void FixedUpdate() {
-		barLength = 300 / player.PlayerData.maxHealth * player.PlayerData.Health;
+		Debug.Log(barLength);
+		if(player.PlayerCombat.Defending){
+			currentBar = defendingBar;
+		}else if(player.hit){
+			currentBar = damageBar;
+		}else{
+			currentBar = healthBar; 
+		}
+		barLength = 900 / player.PlayerData.maxHealth * player.PlayerData.Health;
 
 		if(player.PlayerCombat.Attacking) {
 			timershit -= 10;
@@ -29,23 +40,28 @@ public class GUIDisplay:Singleton<GUIDisplay> {
 	}
 
 	void OnGUI() {
-		if(player.PlayerCombat.TargetEnemy != null)
+		base.OnGUI();
+		if(player.PlayerCombat.TargetEnemy != null){
 			DrawEnemyHealthDisplay();
+		}
 
 		DrawPlayerHealthDisplay();
 	}
 
 	void DrawEnemyHealthDisplay() {
-		GUI.BeginGroup(new Rect(400, 0, 300, 25));
-			GUI.DrawTexture(new Rect(0, 0, 300 / player.PlayerCombat.TargetEnemy.data.maxHealth * player.PlayerCombat.TargetEnemy.data.health, 25), healthBar);
-			GUI.DrawTexture(new Rect(0, 0, 300, 25), healthBorder);
+		GUI.BeginGroup(new Rect(1020, 0, 900, 100));
+			GUI.DrawTexture(new Rect(900, 0, -900, 100), healthBorder);
+			GUI.DrawTexture(new Rect(900, 0, -900 / player.PlayerCombat.TargetEnemy.data.maxHealth * player.PlayerCombat.TargetEnemy.data.health, 100), healthBar);
 		GUI.EndGroup();
 	}
 
 	void DrawPlayerHealthDisplay() {
-		GUI.BeginGroup(new Rect(0, 0, 300, 25));
-			GUI.DrawTexture(new Rect(0, 0, barLength, 25), healthBar);
-			GUI.DrawTexture(new Rect(0, 0, 300, 25), healthBorder);
+		GUI.BeginGroup(new Rect(0, 0, 900, 100));
+			GUI.DrawTexture(new Rect(0, 0, 900, 100), healthBorder);
+			GUI.DrawTexture(new Rect(0, 0, barLength, 100), currentBar);
+		if(player.PlayerCombat.Defending){
+			GUI.DrawTexture(new Rect(barLength - 100, 0, 100, 100), defendingIcon);
+		}
 		GUI.EndGroup();
 	}
 }

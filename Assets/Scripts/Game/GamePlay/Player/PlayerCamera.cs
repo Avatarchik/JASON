@@ -33,6 +33,15 @@ public class PlayerCamera:MonoBehaviour {
 			playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, 60 + cameraDistance, Time.deltaTime * cameraDamping);
 		}
 	}
-
+	public IEnumerator CameraShake(){
+		Vector3 origin = transform.position;
+		Handheld.Vibrate();
+		transform.Translate(new Vector3(Random.Range(-2,3),0,0));
+		yield return new WaitForSeconds(0.05f);
+		transform.position = origin;
+		transform.Translate(new Vector3(Random.Range(-2,3),0,0));
+		yield return new WaitForSeconds(0.05f);
+	    transform.position = origin;
+	}
 	public int CameraDistance { set { cameraDistance = value; } }
 }
