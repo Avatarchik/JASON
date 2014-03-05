@@ -23,8 +23,6 @@ public class Destructable:MonoBehaviour {
 		if(effect != null)
 			effect.Play();
 
-		Debug.Log (effect.isPlaying);
-
 		destroyed = true;
 	}
 

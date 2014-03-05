@@ -22,7 +22,7 @@ public class DestructableVase:Destructable {
 		GameObject destroyed = Instantiate(destroyedModel, transform.position, rotation) as GameObject;
 		destroyed.transform.parent = transform.parent;
 
-		GetComponent<Renderer>().enabled = false;
+		GetComponentInChildren<Renderer>().enabled = false;
 		GetComponent<BoxCollider>().enabled = false;
 
 		StartCoroutine("DestroyOnEffectFinish");
