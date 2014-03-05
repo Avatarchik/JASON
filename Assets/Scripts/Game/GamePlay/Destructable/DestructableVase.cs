@@ -23,6 +23,7 @@ public class DestructableVase:Destructable {
 		destroyed.transform.parent = transform.parent;
 
 		GetComponent<Renderer>().enabled = false;
+		GetComponent<BoxCollider>().enabled = false;
 
 		StartCoroutine("DestroyOnEffectFinish");
 	}

@@ -83,8 +83,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 417633126}
   m_Layer: 0
-  m_Name: RoomContent
-  m_TagString: Room
+  m_Name: Editor
+  m_TagString: Room Editor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
