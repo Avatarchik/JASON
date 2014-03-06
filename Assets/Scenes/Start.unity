@@ -112,12 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffae1922615683049b5ee96d359b36a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultRoomContent: []
-  hallRoomContent: []
-  cornerRoomContent: []
-  TroomRoomContent: []
-  plusRoomContent: []
-  bigRoomContent: []
   oneSideChunk: []
   twoSideChunk: []
   threeSideChunk: []
@@ -134,7 +128,7 @@ GameObject:
   - 114: {fileID: 254651035}
   m_Layer: 0
   m_Name: Management-Static
-  m_TagString: StaticManager
+  m_TagString: Static Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

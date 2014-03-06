@@ -17,13 +17,7 @@ TagManager:
   - 
   - Destructable
   - 
-  - Room Editor
-  - Room Editor Prop
-  - Room Editor Room
-  - 
-  - Corpse
-  - 
-  - StaticManager
+  - Static Manager
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
