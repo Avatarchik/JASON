@@ -8,15 +8,18 @@ public class RoomWindow:EditorWindow {
 	public const string propsPath = "Editor/Room Editor/Props/";
 	public const string enemiesPath = "Editor/Room Editor/Enemies/";
 
-	private List<string> rooms;
-	private List<string> props;
-	private List<string> enemies;
+	private List<string> roomNames;
+	private List<string> propNames;
+	private List<string> enemyNames;
 	
 	private string roomName;
 	private string roomType;
 
 	private bool itemSelected;
 	private bool editorSelected;
+
+	private GameObject room;
+	private List<GameObject> props;
 
 	[MenuItem("Window/Room Editor")]
 	static void Init() {
@@ -44,7 +47,7 @@ public class RoomWindow:EditorWindow {
 	}
 
 	void OnGUI() {
-		if(rooms == null || props == null || enemies == null)
+		if(roomNames == null || propNames == null || enemyNames == null)
 			Initialize();
 
 		if(itemSelected) {
@@ -58,51 +61,51 @@ public class RoomWindow:EditorWindow {
 
 	/** (Re)Load the rooms, props and enemies arrays */
 	private void Initialize() {
-		rooms = LoadAssets(roomsPath);
-		props = LoadAssets(propsPath);
-		enemies = LoadAssets(enemiesPath);
+		roomNames = LoadAssets(roomsPath);
+		propNames = LoadAssets(propsPath);
+		enemyNames = LoadAssets(enemiesPath);
 	}
 
 	private void HandleRooms() {
 		GUILayout.Label("Available Room Types", EditorStyles.boldLabel);
 		string selectedRoom;
 
-		if(rooms.Count > 1) {
-			selectedRoom = DrawSeperatedList(rooms);
+		if(roomNames.Count > 1) {
+			selectedRoom = DrawSeperatedList(roomNames);
 		} else {
-			selectedRoom = DrawList(rooms);
+			selectedRoom = DrawList(roomNames);
 		}
 		
-		if(selectedRoom != "");
-			//CreateRoom(selectedRoom);
+		if(selectedRoom != null && selectedRoom != "")
+			CreateRoom(selectedRoom);
 	}
 
 	private void HandleProps() {
 		GUILayout.Label("Available Props", EditorStyles.boldLabel);
 		string selectedProp;
 		
-		if(props.Count > 1) {
-			selectedProp = DrawSeperatedList(props);
+		if(propNames.Count > 1) {
+			selectedProp = DrawSeperatedList(propNames);
 		} else {
-			selectedProp = DrawList(props);
+			selectedProp = DrawList(propNames);
 		}
 		
-		if(selectedProp != "");
-			//CreateProp(selectedProp);
+		if(selectedProp != null && selectedProp != "")
+			CreateOther(propsPath, selectedProp);
 	}
 
 	private void HandleEnemies() {
 		GUILayout.Label("Available Enemies", EditorStyles.boldLabel);
 		string selectedEnemy;
 		
-		if(enemies.Count > 1) {
-			selectedEnemy = DrawSeperatedList(enemies);
+		if(enemyNames.Count > 1) {
+			selectedEnemy = DrawSeperatedList(enemyNames);
 		} else {
-			selectedEnemy = DrawList(enemies);
+			selectedEnemy = DrawList(enemyNames);
 		}
 		
-		if(selectedEnemy != null);
-			//CreateEnemy(selectedProp);
+		if(selectedEnemy != null && selectedEnemy != "")
+			CreateOther(enemiesPath, selectedEnemy);
 	}
 
 	/** Draw the GUI if an item is selected */
@@ -158,6 +161,31 @@ public class RoomWindow:EditorWindow {
 		EditorGUILayout.EndVertical();
 
 		return "";
+	}
+
+	private void CreateRoom(string name) {
+		DestroyImmediate(room);
+
+		room = Instantiate(Resources.Load(roomsPath + name), Vector3.zero, Quaternion.identity) as GameObject;
+		room.name = name + " Room";
+		room.tag = "Room Editor Room";
+	}
+
+	private void CreateOther(string path, string name) {
+		if(room == null) {
+			Debug.LogError("You need to create a room first");
+			return;
+		}
+
+		GameObject prop = Instantiate(Resources.Load(path + name), Vector3.zero, Quaternion.identity) as GameObject;
+		Object[] selectedobject = new Object[] {prop};
+
+		prop.name = "Prop " + name;
+		prop.transform.parent = room.transform;
+		
+		props.Add(prop);
+
+		Selection.objects = selectedobject;
 	}
 
 	/** Load all the Game Objects in the specified path */
