@@ -3,7 +3,8 @@ using System.Collections;
 using System;
 
 public class PlayerCombat:MonoBehaviour {
-	[SerializeField] private GameObject weaponCollisionArea;
+	//0 Sword //1 Mace //2 Polearm
+	[SerializeField] private GameObject[] weaponCollisionArea;
 
 	private Player player;
 
@@ -13,12 +14,23 @@ public class PlayerCombat:MonoBehaviour {
 	private bool canAttack;
 	private bool attacking;
 	private bool defending;
-	
+	private int currentWeapon;
 	void Start() {
 		player = GetComponent<Player>();
 	}
 
 	void Update() {
+		switch(Inventory.Instance.currentWeapon.dataWeapon.weaponType){
+			case WeaponData.WeaponType.Sword:
+			currentWeapon = 0;
+			break;
+			case WeaponData.WeaponType.Spear:
+			currentWeapon = 1;
+			break;
+			case WeaponData.WeaponType.Axe:
+			currentWeapon = 2;
+			break;
+		}
 		canAttack = false;
 
 		if(targetEnemy != null) {
@@ -88,7 +100,7 @@ public class PlayerCombat:MonoBehaviour {
 			if(canAttack) {
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 
-				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
+				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea[0].transform.position, 1);
 
 				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
 
@@ -114,8 +126,8 @@ public class PlayerCombat:MonoBehaviour {
 			if(canAttack) {
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 				
-				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
-				
+				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea[currentWeapon].transform.position, 1);
+				weaponCollisionArea[currentWeapon].renderer.enabled = true;
 				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
 				
 				foreach(Collider collider in hits)
@@ -123,7 +135,7 @@ public class PlayerCombat:MonoBehaviour {
 						collider.GetComponent<Destructable>().Damage(player.PlayerData.attackDamage);
 				
 				yield return new WaitForSeconds(0.01f);
-				
+				weaponCollisionArea[currentWeapon].renderer.enabled = false;
 				player.PlayerAnimation.SetInteger("Attack", 0);
 				
 				yield return new WaitForSeconds(player.PlayerData.attackDelay);

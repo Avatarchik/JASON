@@ -2,16 +2,40 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Inventory:MonoBehaviour {
+public class Inventory:Singleton<Inventory> {
 	[SerializeField] private List<ItemSpecial> specials;
 
-	[SerializeField] private ItemEquipable[] helmets;
-	[SerializeField] private ItemEquipable[] chests;
-	[SerializeField] private ItemEquipable[] legs;
-	[SerializeField] private ItemEquipable[] shields;
-	[SerializeField] private ItemWeapon[] weapons;
-	[SerializeField] private ItemPower power;
+	[SerializeField] public ItemEquipable[] helmets;
+	[SerializeField] public ItemEquipable[] chests;
+	[SerializeField] public ItemEquipable[] legs;
+	[SerializeField] public ItemEquipable[] shields;
+	[SerializeField] public ItemWeapon[] weapons;
+	[SerializeField] public ItemPower power;
+	[SerializeField] private ItemList list;
 
+	public GameObject inventoryObject;
+	//TODO: Proper way of accesing current item
+	public ItemWeapon currentWeapon;
+	void Start(){
+		//TESTING PURPOSE
+		DEBUGADDITEMS();
+	}
+	void FixedUpdate(){
+	}
+	void DEBUGADDITEMS(){
+		ItemEquipable item =   inventoryObject.AddComponent<ItemEquipable>();
+		item.data = ItemList.Instance.EquipableItems[0];
+		AddHelmet(item);
+		ItemEquipable item1 =   inventoryObject.AddComponent<ItemEquipable>();
+		item.data = ItemList.Instance.EquipableItems[1];
+		AddChest(item1);
+		ItemEquipable item2 =  inventoryObject.AddComponent<ItemEquipable>();
+		item.data = ItemList.Instance.EquipableItems[2];
+		AddLegs(item2);
+		ItemEquipable item3 =   inventoryObject.AddComponent<ItemEquipable>();
+		item.data = ItemList.Instance.EquipableItems[3];
+		AddShield(item3);
+	}
 	/** Pickup an equipable item */
 	public void PickupEquipable(ItemEquipable item) {
 		switch(item.data.equipableType) {

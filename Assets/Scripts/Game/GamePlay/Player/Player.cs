@@ -8,18 +8,19 @@ public class Player:MonoBehaviour {
 	[SerializeField] private GameObject playerModel;
 	[SerializeField] private Animator playerAnimation;
 
+	public Inventory playerInventory;
 	private PlayerCamera playerCamera;
 	private PlayerCombat playerCombat;
 
 	private Vector3 targetPosition;
 
 	private bool defending;
-	private bool hit;
+	[HideInInspector]public bool hit;
 
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
 		playerCombat = GetComponent<PlayerCombat>();
-
+		playerData = PlayerData.Instance;
 		targetPosition = transform.position;
 	}
 

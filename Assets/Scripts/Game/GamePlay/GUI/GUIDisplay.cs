@@ -22,7 +22,6 @@ public class GUIDisplay:GUIBehaviour {
 	}
 
 	void FixedUpdate() {
-		Debug.Log(barLength);
 		if(player.PlayerCombat.Defending){
 			currentBar = defendingBar;
 		}else if(player.hit){
@@ -40,12 +39,14 @@ public class GUIDisplay:GUIBehaviour {
 	}
 
 	void OnGUI() {
+		GUI.depth = 1;
 		base.OnGUI();
 		if(player.PlayerCombat.TargetEnemy != null){
 			DrawEnemyHealthDisplay();
 		}
 
 		DrawPlayerHealthDisplay();
+		GUI.depth = 0;
 	}
 
 	void DrawEnemyHealthDisplay() {
