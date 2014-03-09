@@ -546,6 +546,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d6dd31abc35f34f87ac4dc9acc6a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iconHelmet:
+  - {fileID: 2800000, guid: d6b733a4654f9444697d7ec9c12def9a, type: 3}
+  - {fileID: 2800000, guid: 428105f1cbeaf6b4ebaf42674e9ba5e1, type: 3}
+  - {fileID: 2800000, guid: d341dfd890175734492cbacb4e331cdc, type: 3}
+  - {fileID: 2800000, guid: 4d84e61b16368c540aa9b7c704d7df0a, type: 3}
+  iconChest:
+  - {fileID: 2800000, guid: 41e897d170e5c984b96877a72370537c, type: 3}
+  - {fileID: 2800000, guid: 9e4a33d3c9daa6a4e9fb2f15cad3b632, type: 3}
+  - {fileID: 2800000, guid: 0216c8349532eb84b9c241e95b51a9c0, type: 3}
+  - {fileID: 2800000, guid: 1f15238f916ab234fa074a15c9c7c028, type: 3}
+  iconLegs:
+  - {fileID: 2800000, guid: 41e897d170e5c984b96877a72370537c, type: 3}
+  - {fileID: 2800000, guid: 3fb02f7ddbb00044b92a60a317304f53, type: 3}
+  - {fileID: 2800000, guid: 701fa49e5147b414692243a9530e9a40, type: 3}
+  - {fileID: 2800000, guid: b991823f77818594ab8c55ee1172c58c, type: 3}
+  iconSword:
+  - {fileID: 2800000, guid: 199fd0d1631b67d48a49a992f6f7833a, type: 3}
+  - {fileID: 2800000, guid: 8d5976361d4dd4d46beeba0e972245a4, type: 3}
+  - {fileID: 2800000, guid: 5a27ae7b5c3b4e44985b2ca6c172ce9a, type: 3}
+  - {fileID: 2800000, guid: 7898f80f066263e458816189fd9a1fc4, type: 3}
+  iconShield:
+  - {fileID: 2800000, guid: b98d2da9bec75a346b7633e362446f07, type: 3}
+  - {fileID: 2800000, guid: c1941a723b0cbb7489a0b440fbe76270, type: 3}
+  - {fileID: 2800000, guid: 1ab38c522e4009840af5d74b763fe151, type: 3}
+  - {fileID: 2800000, guid: 29740ecfa8d508d4fabcf14d355611a3, type: 3}
+  iconQuality:
+  - {fileID: 2800000, guid: 45d0618a9d007b243aaebbdd96ea8537, type: 3}
+  - {fileID: 2800000, guid: f8fb12363a183b849b672b3b674c8f3c, type: 3}
+  - {fileID: 2800000, guid: 3d50b6f9fb7e95447a93a415328e4993, type: 3}
+  - {fileID: 2800000, guid: 2a0d6888a053f6c45b5a550a80bcf949, type: 3}
+  statsIcons:
+  - {fileID: 2800000, guid: 53e28908c1837e541830fe8709bfc7cf, type: 3}
+  - {fileID: 2800000, guid: 39bce23576306584b84369137c88e992, type: 3}
   background: {fileID: 2800000, guid: 60a571b8b2e861e49bf98f2e05826d36, type: 3}
   playerBackground: {fileID: 2800000, guid: 60a571b8b2e861e49bf98f2e05826d36, type: 3}
   depth: 0
@@ -596,10 +629,10 @@ MonoBehaviour:
       m_Top: 0
       m_Bottom: 0
     m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    m_FontSize: 0
+    m_FontSize: 60
     m_FontStyle: 0
     m_Alignment: 0
-    m_WordWrap: 0
+    m_WordWrap: 1
     m_RichText: 1
     m_TextClipping: 0
     m_ImagePosition: 0
@@ -608,6 +641,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  selectedTextures: []
 --- !u!1 &311853766
 GameObject:
   m_ObjectHideFlags: 0

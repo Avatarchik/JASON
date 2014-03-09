@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Inventory:Singleton<Inventory> {
+	public enum EquipableType {
+		Helmet = 0,
+		Chest = 1,
+		Legs = 2,
+		Shields = 3
+	}
 	[SerializeField] private List<ItemSpecial> specials;
 
 	[SerializeField] public ItemEquipable[] helmets;
@@ -27,13 +33,13 @@ public class Inventory:Singleton<Inventory> {
 		item.data = ItemList.Instance.EquipableItems[0];
 		AddHelmet(item);
 		ItemEquipable item1 =   inventoryObject.AddComponent<ItemEquipable>();
-		item.data = ItemList.Instance.EquipableItems[1];
+		item1.data = ItemList.Instance.EquipableItems[1];
 		AddChest(item1);
 		ItemEquipable item2 =  inventoryObject.AddComponent<ItemEquipable>();
-		item.data = ItemList.Instance.EquipableItems[2];
+		item2.data = ItemList.Instance.EquipableItems[2];
 		AddLegs(item2);
 		ItemEquipable item3 =   inventoryObject.AddComponent<ItemEquipable>();
-		item.data = ItemList.Instance.EquipableItems[3];
+		item3.data = ItemList.Instance.EquipableItems[3];
 		AddShield(item3);
 	}
 	/** Pickup an equipable item */
@@ -115,5 +121,31 @@ public class Inventory:Singleton<Inventory> {
 				break;
 			}
 		}
+	}
+	public ItemEquipable GetEquipable(EquipableType type, int index) {
+		switch(type) {
+		case EquipableType.Helmet:
+			return helmets[index];
+		case EquipableType.Chest:
+			return chests[index];
+		case EquipableType.Legs:
+			return legs[index];
+		case EquipableType.Shields:
+			return shields[index];
+		default:
+			return null;
+		}
+	}
+	
+	public ItemWeapon GetWeapon(int index) {
+		return weapons[index];
+	}
+	
+	public ItemSpecial GetSpecial(int index) {
+		return specials[index];
+	}
+	
+	public ItemPower GetPower() {
+		return power;
 	}
 }
