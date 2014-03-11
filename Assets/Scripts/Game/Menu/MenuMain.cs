@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
+using SGUI;
 
 public class MenuMain:GUIBehaviour {
+	//public SGUITextureButton fap;
+	public SGUISpriteButton fap2;
 
-
-	void OnGUI(){
+	protected override void OnGUI() {
 		base.OnGUI();
-		if(GUI.Button(new Rect(0,0,400,100),"Start")){
-			Application.LoadLevel("Game");
-		}
+
+		if(fap2.OnClick)
+			Debug.Log("On Click");
+
+		if(fap2.OnHover)
+			Debug.Log("On Hover");
+
+		if(fap2.OnNormal)
+			Debug.Log("On Normal");
 	}
 }

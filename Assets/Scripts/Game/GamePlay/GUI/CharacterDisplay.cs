@@ -44,7 +44,9 @@ public class CharacterDisplay : GUIBehaviour {
 			}
 		}
 	}
-	void OnGUI(){
+	protected override void OnGUI(){
+		base.OnGUI();
+
 		GUI.depth = -1;
 		base.OnGUI();
 		if(GUI.Button(new Rect(0,600,400,400),"Menu")){
