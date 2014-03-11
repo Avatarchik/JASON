@@ -8,13 +8,15 @@ public class Player:MonoBehaviour {
 	[SerializeField] private GameObject playerModel;
 	[SerializeField] private Animator playerAnimation;
 
-	public Inventory playerInventory;
+	//public Inventory playerInventory;
 	private PlayerCamera playerCamera;
 	private PlayerCombat playerCombat;
 
 	private Vector3 targetPosition;
 
 	private bool defending;
+
+	private ThrowableObject currentObject;
 	[HideInInspector]public bool hit;
 
 	void Start() {
@@ -25,8 +27,11 @@ public class Player:MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		if(currentObject != null){
+			currentObject.AttachToPlayer(playerModel.transform);
+			currentObject.collider.enabled = false;
+		}
 		rigidbody.velocity = Vector3.zero;
-
 		CheckForInput();
 
 		if(Vector3.Distance(transform.position, targetPosition) > 2) {
@@ -51,8 +56,27 @@ public class Player:MonoBehaviour {
 			playerAnimation.SetBool("IsRunning", false);
 		}
 	}
-
+	void CheckForObjects(){
+		Collider[] hits = Physics.OverlapSphere(transform.position, 3);
+		
+		for(int i = 0; i < hits.Length; i++) {
+			if(hits[i].tag == "ThrowableObject"){
+				if(currentObject == null){
+					currentObject = hits[i].GetComponent<ThrowableObject>();
+					Debug.Log("Grab Object");
+				}
+			}
+		}
+	}
 	void OnGUI() {
+		if(GUI.Button(new Rect(500, 300, 300, 150), new GUIContent("Pickup"))) {
+			if(currentObject!= null){
+				currentObject.hasThrown = true;
+				currentObject = null;
+			}else{
+			CheckForObjects();
+			}
+		}
 		if(GUI.Button(new Rect(0, 0, 100, 50), new GUIContent("Defend"))) {
 			playerCombat.Defend(!playerCombat.Defending);
 			
@@ -102,7 +126,7 @@ public class Player:MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider) {
-		switch(collider.tag) {
+		/*switch(collider.tag) {
 		case "Item Equipable":
 			playerData.inventory.PickupEquipable(collider.GetComponent<ItemEquipable>());
 			break;
@@ -115,7 +139,7 @@ public class Player:MonoBehaviour {
 		case "Item Special":
 			playerData.inventory.PickupSpecial(collider.GetComponent<ItemSpecial>());
 			break;
-		}
+		}*/
 	}
 
 	public void Damage(int amount) {
