@@ -2,14 +2,18 @@
 using System.Collections;
 
 public class ArrowTrap : MonoBehaviour {
-
+	public Arrow arrow;
+	public Transform shotposition;
+	public float delay;
 	// Use this for initialization
 	void Start () {
-	
+		StartCoroutine(Shoot(delay));
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	IEnumerator Shoot(float d){
+		while(true){
+			arrow.ShootArrow(shotposition);
+			yield return new WaitForSeconds(d);
+		}
 	}
 }

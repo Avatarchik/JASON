@@ -16,4 +16,8 @@ public class Door : MonoBehaviour {
 		renderer.enabled = false;
 		collider.enabled = false;
 	}
+	public void CloseDoor(){
+		renderer.enabled = true;
+		collider.enabled = true;
+	}
 }

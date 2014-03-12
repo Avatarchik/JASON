@@ -17,7 +17,9 @@ public class Player:MonoBehaviour {
 	private bool defending;
 
 	private ThrowableObject currentObject;
+	private PushableBlock block;
 	[HideInInspector]public bool hit;
+	int mask = ~(1 << 8);
 
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
@@ -66,6 +68,10 @@ public class Player:MonoBehaviour {
 					Debug.Log("Grab Object");
 				}
 			}
+			if(hits[i].tag == "PushableObject"){
+				block = hits[i].GetComponent<PushableBlock>();
+				hits[i].transform.parent = this.transform;
+			}
 		}
 	}
 	void OnGUI() {
@@ -73,6 +79,9 @@ public class Player:MonoBehaviour {
 			if(currentObject!= null){
 				currentObject.hasThrown = true;
 				currentObject = null;
+			}else if(block != null){
+				block.transform.parent = null;
+				block = null;
 			}else{
 			CheckForObjects();
 			}
@@ -92,7 +101,7 @@ public class Player:MonoBehaviour {
 		if(Input.touchCount == 0) {
 			if(Input.GetMouseButtonDown(0)) {
 				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				Physics.Raycast(ray, out hit, 100);
+				Physics.Raycast(ray, out hit, 100,mask);
 
 				HandleInput(hit);
 			}
@@ -100,7 +109,7 @@ public class Player:MonoBehaviour {
 			Touch touch = Input.GetTouch(0);
 
 			ray = Camera.main.ScreenPointToRay(touch.position);
-			Physics.Raycast(ray, out hit, 100);
+			Physics.Raycast(ray, out hit, 100,mask);
 
 			HandleInput(hit);
 		}
