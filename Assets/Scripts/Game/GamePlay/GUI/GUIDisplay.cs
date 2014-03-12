@@ -38,7 +38,9 @@ public class GUIDisplay:GUIBehaviour {
 		}
 	}
 
-	void OnGUI() {
+	protected override void OnGUI() {
+		base.OnGUI();
+
 		GUI.depth = 1;
 		base.OnGUI();
 		if(player.PlayerCombat.TargetEnemy != null){
