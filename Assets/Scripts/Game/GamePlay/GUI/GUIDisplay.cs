@@ -1,70 +1,88 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using SGUI;
 
 public class GUIDisplay:GUIBehaviour {
-	[SerializeField] private Texture healthBorder;
-	[SerializeField] private Texture healthBar;
-	[SerializeField] private Texture damageBar;
-	[SerializeField] private Texture defendingBar;
-	[SerializeField] private Texture defendingIcon;
-	private Texture currentBar;
+	private enum Bars {
+		Health = 0,
+		Damage = 1,
+		Shield = 2
+	}
+
+	[SerializeField] private SGUITexture[] innerBars;
+	[SerializeField] private SGUITexture outerBar;
+
+	[SerializeField] private SGUITextureButton[] buttons;
+
 	private Player player;
-	
-	private bool isOnDelay;
-	private bool showing;
+
+	private Bars activeBar;
 
 	private int timershit;
-	private int barLength;
+	private int clickCooldown;
 
 	void Start() {
 		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+		if(player == null)
+			throw new System.NullReferenceException("No Game Object found in the scene with the 'Player' tag");
+		
+		outerBar.Create();
+		
+		foreach(SGUITexture texture in innerBars)
+			texture.Create();
+		
+		foreach(SGUITextureButton button in buttons)
+			button.Create();
 	}
-
-	void FixedUpdate() {
-		if(player.PlayerCombat.Defending){
-			currentBar = defendingBar;
-		}else if(player.hit){
-			currentBar = damageBar;
-		}else{
-			currentBar = healthBar; 
+	
+	void Update() {
+		if(player.PlayerCombat.Defending) {
+			SwitchBar(Bars.Shield);
+		} else if(player.hit) {
+			SwitchBar(Bars.Damage);
+		} else {
+			SwitchBar(Bars.Health);
 		}
-		barLength = 900 / player.PlayerData.maxHealth * player.PlayerData.Health;
-
+		
+		Rect bounds = innerBars[(int)activeBar].Bounds;
+		
+		bounds.width = innerBars[0].Bounds.width / player.PlayerData.maxHealth * player.PlayerData.Health;
+		innerBars[(int)activeBar].Bounds = bounds;
+		
 		if(player.PlayerCombat.Attacking) {
 			timershit -= 10;
 		} else {
 			timershit = 300;
 		}
+		
+		clickCooldown--;
 	}
-
+	
 	protected override void OnGUI() {
 		base.OnGUI();
-
-		GUI.depth = 1;
-		base.OnGUI();
-		if(player.PlayerCombat.TargetEnemy != null){
-			DrawEnemyHealthDisplay();
+	
+		if(clickCooldown <= 0) {
+			if(buttons[0].Click) {
+				clickCooldown = 10;
+				player.PlayerCombat.Defend(!player.PlayerCombat.Defending);
+			}
+			
+			if(buttons[1].Click) {
+				clickCooldown = 10;
+				player.Pickup();
+			}
 		}
-
-		DrawPlayerHealthDisplay();
-		GUI.depth = 0;
 	}
 
-	void DrawEnemyHealthDisplay() {
-		GUI.BeginGroup(new Rect(1020, 0, 900, 100));
-			GUI.DrawTexture(new Rect(900, 0, -900, 100), healthBorder);
-			GUI.DrawTexture(new Rect(900, 0, -900 / player.PlayerCombat.TargetEnemy.data.maxHealth * player.PlayerCombat.TargetEnemy.data.health, 100), healthBar);
-		GUI.EndGroup();
-	}
+	private void SwitchBar(Bars newBar) {
+		if(activeBar == newBar)
+			return;
 
-	void DrawPlayerHealthDisplay() {
-		GUI.BeginGroup(new Rect(0, 0, 900, 100));
-			GUI.DrawTexture(new Rect(0, 0, 900, 100), healthBorder);
-			GUI.DrawTexture(new Rect(0, 0, barLength, 100), currentBar);
-		if(player.PlayerCombat.Defending){
-			GUI.DrawTexture(new Rect(barLength - 100, 0, 100, 100), defendingIcon);
-		}
-		GUI.EndGroup();
+		innerBars[(int)activeBar].Activated = false;
+		innerBars[(int)newBar].Activated = true;
+
+		activeBar = newBar;
 	}
 }

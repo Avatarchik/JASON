@@ -128,34 +128,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af26be982d7b264997c574b429d1982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fap2:
-    activated: 1
+  buttons:
+  - activated: 1
+    layer: 0
     bounds:
       serializedVersion: 2
       x: 0
       y: 0
-      width: 128
-      height: 128
-    spriteSheet: {fileID: 2800000, guid: 765a8aba197fd2d468b5330bf57134f5, type: 3}
-    spriteSheetSize: {x: 3, y: 1}
-    spriteNormal:
-      serializedVersion: 2
-      x: 1
-      y: 0
-      width: 0
-      height: 0
-    spriteHover:
-      serializedVersion: 2
-      x: 2
-      y: 0
-      width: 0
-      height: 0
-    spriteActive:
-      serializedVersion: 2
-      x: 3
-      y: 0
-      width: 0
-      height: 0
+      width: 690
+      height: 211
+    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    textureHover: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    textureActive: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
 --- !u!4 &2025934087
 Transform:
   m_ObjectHideFlags: 0
