@@ -30,6 +30,10 @@ namespace SGUI {
 			buttons.Add(this);
 		}
 
+		public void Destroy() {
+			buttons.Remove(this);
+		}
+
 		/** Update the button */
 		internal virtual void Update(Vector2 nativeScreenSize) { }
 

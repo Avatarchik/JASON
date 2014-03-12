@@ -8,13 +8,9 @@ public class MenuMain:GUIBehaviour {
 	protected override void OnGUI() {
 		base.OnGUI();
 
-		if(fap2.OnClick)
-			Debug.Log("On Click");
-
-		if(fap2.OnHover)
-			Debug.Log("On Hover");
-
-		if(fap2.OnNormal)
-			Debug.Log("On Normal");
+		if(fap2.OnClick) {
+			fap2.Destroy();
+			Application.LoadLevel("Game");
+		}
 	}
 }
