@@ -51,8 +51,11 @@ public class Player:MonoBehaviour {
 			lookRotation.x = 0;
 			lookRotation.z = 0;
 
-			if(transform.position != targetPosition)
+			if(transform.position != targetPosition){
+				if(block == null){
 				playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, lookRotation, 30);
+				}
+			}
 		} else {
 			playerCamera.CameraDistance = -5;
 			playerAnimation.SetBool("IsRunning", false);
