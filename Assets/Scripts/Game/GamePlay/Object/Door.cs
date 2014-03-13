@@ -7,6 +7,7 @@ public class Door : MonoBehaviour {
 		key
 	}
 	public DoorType type;
+	public GameObject door;
 	// Use this for initialization
 	void Start () {
 	
@@ -15,6 +16,7 @@ public class Door : MonoBehaviour {
 	public void OpenDoor(){
 		renderer.enabled = false;
 		collider.enabled = false;
+		Destroy(door);
 	}
 	public void CloseDoor(){
 		renderer.enabled = true;

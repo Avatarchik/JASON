@@ -19,7 +19,7 @@ Material:
         second:
           m_Texture: {fileID: 2800000, guid: ff0d7b10b278df141b3bbd4b69d54cc8, type: 3}
           m_Scale: {x: 4, y: 4}
-          m_Offset: {x: 0, y: 0}
+          m_Offset: {x: 1, y: 0}
       data:
         first:
           name: _BumpMap
@@ -62,6 +62,10 @@ Material:
         second: 0
       data:
         first:
+          name: _InvFade
+        second: .00999999978
+      data:
+        first:
           name: _Shininess
         second: .699999988
       data:
@@ -72,7 +76,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .867647052, g: .867647052, b: .867647052, a: 1}
+        second: {r: .838235259, g: .838235259, b: .838235259, a: 1}
       data:
         first:
           name: _SpecColor
@@ -85,3 +89,7 @@ Material:
         first:
           name: _ReflectColor
         second: {r: 1, g: 1, b: 1, a: .5}
+      data:
+        first:
+          name: _TintColor
+        second: {r: .5, g: .5, b: .5, a: .5}

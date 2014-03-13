@@ -18,6 +18,7 @@ public class Player:MonoBehaviour {
 
 	private ThrowableObject currentObject;
 	private PushableBlock block;
+	public GameObject pushablePosition;
 	[HideInInspector]public bool hit;
 	int mask = ~(1 << 8);
 
@@ -32,6 +33,9 @@ public class Player:MonoBehaviour {
 		if(currentObject != null){
 			currentObject.AttachToPlayer(playerModel.transform);
 			currentObject.collider.enabled = false;
+		}
+		if(pushablePosition != null && block != null){
+			block.transform.position = pushablePosition.transform.position;
 		}
 		rigidbody.velocity = Vector3.zero;
 		CheckForInput();
@@ -73,7 +77,8 @@ public class Player:MonoBehaviour {
 			}
 			if(hits[i].tag == "PushableObject"){
 				block = hits[i].GetComponent<PushableBlock>();
-				hits[i].transform.parent = this.transform;
+				//hits[i].transform.parent = this.transform;
+				pushablePosition.transform.position = block.transform.position;
 			}
 		}
 	}
@@ -83,8 +88,10 @@ public class Player:MonoBehaviour {
 				currentObject.hasThrown = true;
 				currentObject = null;
 			}else if(block != null){
+				//pushablePosition = null;
 				block.transform.parent = null;
 				block = null;
+
 			}else{
 			CheckForObjects();
 			}
