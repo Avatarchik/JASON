@@ -21,7 +21,7 @@ public class Arrow : MonoBehaviour {
 		isTraveling = true;
 		collider.enabled = true;
 		transform.parent = null;
-		renderer.enabled = true;
+		//renderer.enabled = true;
 	}
 
 	void OnCollisionEnter(Collision coll){
@@ -30,7 +30,7 @@ public class Arrow : MonoBehaviour {
 		transform.parent = coll.gameObject.transform;
 		if(coll.gameObject.name == "Player"){
 			coll.gameObject.GetComponent<Player>().Damage(1);
-			renderer.enabled = false;
+			//renderer.enabled = false;
 		}
 	}
 }

@@ -16,11 +16,8 @@ public class Player:MonoBehaviour {
 
 	private ThrowableObject currentObject;
 	private PushableBlock block;
-<<<<<<< HEAD
 	public GameObject pushablePosition;
-=======
-	
->>>>>>> f1487c90797b4ea56ec4d5f7b870be696aedd4d8
+
 	[HideInInspector]public bool hit;
 	int mask = ~(1 << 8);
 
@@ -81,19 +78,6 @@ public class Player:MonoBehaviour {
 			}
 		}
 	}
-<<<<<<< HEAD
-	void OnGUI() {
-		if(GUI.Button(new Rect(500, 300, 300, 150), new GUIContent("Pickup"))) {
-			if(currentObject!= null){
-				currentObject.hasThrown = true;
-				currentObject = null;
-			}else if(block != null){
-				//pushablePosition = null;
-				block.transform.parent = null;
-				block = null;
-
-			}else{
-=======
 	
 	public void Pickup() {
 		if(currentObject != null) {
@@ -103,7 +87,6 @@ public class Player:MonoBehaviour {
 			block.transform.parent = null;
 			block = null;
 		} else {
->>>>>>> f1487c90797b4ea56ec4d5f7b870be696aedd4d8
 			CheckForObjects();
 		}
 	}
