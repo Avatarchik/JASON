@@ -14,11 +14,13 @@ public class Player:MonoBehaviour {
 
 	private Vector3 targetPosition;
 
-	private bool defending;
-
 	private ThrowableObject currentObject;
 	private PushableBlock block;
+<<<<<<< HEAD
 	public GameObject pushablePosition;
+=======
+	
+>>>>>>> f1487c90797b4ea56ec4d5f7b870be696aedd4d8
 	[HideInInspector]public bool hit;
 	int mask = ~(1 << 8);
 
@@ -55,11 +57,8 @@ public class Player:MonoBehaviour {
 			lookRotation.x = 0;
 			lookRotation.z = 0;
 
-			if(transform.position != targetPosition){
-				if(block == null){
+			if(transform.position != targetPosition)
 				playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, lookRotation, 30);
-				}
-			}
 		} else {
 			playerCamera.CameraDistance = -5;
 			playerAnimation.SetBool("IsRunning", false);
@@ -82,6 +81,7 @@ public class Player:MonoBehaviour {
 			}
 		}
 	}
+<<<<<<< HEAD
 	void OnGUI() {
 		if(GUI.Button(new Rect(500, 300, 300, 150), new GUIContent("Pickup"))) {
 			if(currentObject!= null){
@@ -93,14 +93,18 @@ public class Player:MonoBehaviour {
 				block = null;
 
 			}else{
+=======
+	
+	public void Pickup() {
+		if(currentObject != null) {
+			currentObject.hasThrown = true;
+			currentObject = null;
+		} else if(block != null) {
+			block.transform.parent = null;
+			block = null;
+		} else {
+>>>>>>> f1487c90797b4ea56ec4d5f7b870be696aedd4d8
 			CheckForObjects();
-			}
-		}
-		if(GUI.Button(new Rect(0, 0, 100, 50), new GUIContent("Defend"))) {
-			playerCombat.Defend(!playerCombat.Defending);
-			
-			if(playerCombat.Defending)
-				targetPosition = transform.position;
 		}
 	}
 
@@ -110,22 +114,30 @@ public class Player:MonoBehaviour {
 
 		if(Input.touchCount == 0) {
 			if(Input.GetMouseButtonDown(0)) {
+				Debug.Log (Input.mousePosition);
+				
+				if(Input.mousePosition.x <= 176 && Input.mousePosition.y <= 50)
+					return;
+					
 				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				Physics.Raycast(ray, out hit, 100,mask);
+				Physics.Raycast(ray, out hit, 100, mask);
 
 				HandleInput(hit);
 			}
-		} else if(Input.touchCount > 0) {
+		} else {
 			Touch touch = Input.GetTouch(0);
+			
+			if(touch.position.x <= 176 && touch.position.y <= 50)
+				return;
 
 			ray = Camera.main.ScreenPointToRay(touch.position);
-			Physics.Raycast(ray, out hit, 100,mask);
+			Physics.Raycast(ray, out hit, 100, mask);
 
 			HandleInput(hit);
 		}
 	}
 
-	private void HandleInput(RaycastHit hit) {	
+	private void HandleInput(RaycastHit hit) {
 		if(hit.collider == null)
 			return;
 

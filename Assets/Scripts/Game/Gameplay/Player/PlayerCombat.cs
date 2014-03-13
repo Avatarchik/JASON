@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using SGUI;
 
 public class PlayerCombat:MonoBehaviour {
 	//0 Sword //1 Mace //2 Polearm
@@ -15,6 +16,7 @@ public class PlayerCombat:MonoBehaviour {
 	private bool attacking;
 	private bool defending;
 	private int currentWeapon;
+	
 	void Start() {
 		player = GetComponent<Player>();
 	}
@@ -62,6 +64,9 @@ public class PlayerCombat:MonoBehaviour {
 		defending = state;
 
 		player.PlayerAnimation.SetBool("IsBlocking", state);
+		
+		if(defending)
+			player.TargetPosition = transform.position;
 	}
 
 	public void Attack(GameObject target, string type) {

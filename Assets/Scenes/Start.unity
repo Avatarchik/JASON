@@ -74,6 +74,47 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &43327943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 43327944}
+  - 114: {fileID: 43327945}
+  m_Layer: 0
+  m_Name: SGUI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &43327944
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43327943}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 254651034}
+--- !u!114 &43327945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43327943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ac0a6881d7d77348b88628d810c9f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sguiTextures: []
+  sguiSprites: []
+  sguiButtons: []
 --- !u!1 &240889545
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,11 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffae1922615683049b5ee96d359b36a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oneSideChunk: []
-  twoSideChunk: []
-  threeSideChunk: []
-  fourSideChunk: []
-  currentMap: {fileID: 0}
 --- !u!1 &254651033
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +180,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1540139886}
+  - {fileID: 43327944}
   - {fileID: 2003387398}
   - {fileID: 1237094236}
   - {fileID: 240889546}

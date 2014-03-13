@@ -1512,37 +1512,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0b2ce39757e3747a6024168375fa51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data:
-    health: 20
-    speed: 5
-    attackDamage: 1
-    attackDelay: 0
-  shieldButton:
-    activated: 1
-    position: {x: 0, y: 0}
-    id: 0
-    label:
-      activated: 1
-      position: {x: 0, y: 0}
-      text: 
-      size: 0
-      font: {fileID: 0}
-    spriteSheet: {fileID: 0}
-    sheetSize: {x: 0, y: 0}
-    spriteNormal:
-      texCoords: {x: 0, y: 0}
-      size: {x: 0, y: 0}
-    spriteHover:
-      texCoords: {x: 0, y: 0}
-      size: {x: 0, y: 0}
-    spriteClick:
-      texCoords: {x: 0, y: 0}
-      size: {x: 0, y: 0}
-  playerCamera: {fileID: 0}
+  playerData: {fileID: 0}
   playerModel: {fileID: 100018}
-  isCharging: 0
   playerAnimation: {fileID: 9500000}
-  chargingMultiplier: 1
+  hit: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1554,9 +1527,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5abbc4ed9577e438077d43719854f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentEnemy: {fileID: 0}
-  isDefending: 0
-  weaponCollision: {fileID: 100042}
+  weaponCollisionArea: []
+  shieldButton:
+    activated: 1
+    bounds:
+      serializedVersion: 2
+      x: 925
+      y: 452
+      width: 88.5
+      height: 116.166702
+    textureNormal: {fileID: 2800000, guid: 6f5c6a517656d814ab32d9b7e16a6dfb, type: 3}
+    textureHover: {fileID: 2800000, guid: 6f5c6a517656d814ab32d9b7e16a6dfb, type: 3}
+    textureActive: {fileID: 2800000, guid: 17a972c8592403a4db34ec13d34c420e, type: 3}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2584,6 +2566,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   power: {fileID: 0}
+  list: {fileID: 0}
+  inventoryObject: {fileID: 0}
+  currentWeapon: {fileID: 0}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
