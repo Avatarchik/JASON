@@ -60,10 +60,10 @@ public class Trigger : MonoBehaviour {
 		yield return new WaitForSeconds(1.5f);
 		for (int i = 0; i < doors.Length; i++){
 			if(doorstate == 0){
-				doors[i].OpenDoor();
+				doors[i].Open();
 				isTriggered = true;
 			}else{
-			doors[i].CloseDoor();
+			doors[i].Close();
 			isTriggered = false;
 			}
 		}
