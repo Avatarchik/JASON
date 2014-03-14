@@ -1,15 +1,27 @@
 ﻿using UnityEngine;
-using System;
+using System.Collections.Generic;
 
-[Serializable]
-public class Item {
-	public enum ItemType {
-		Equipable,
-		Power,
-		Special
+public class Item:MonoBehaviour {
+	private enum EquipableType {
+		Helmet,
+		Chest,
+		Legs,
+		Weapon,
+		Shield
 	}
 
-	public ItemType itemType;
-	public string itemName;
-	public string itemDescription;
+	private static Item[] itemList = new Item[255];
+
+	private static int nextItemId = 0;
+	
+	[SerializeField] private EquipableType type;
+	[SerializeField] private GameObject model;
+
+	private int itemId;
+
+	void Start() {
+		itemId = nextItemId++;
+
+		itemList[itemId] = this;
+	}
 }

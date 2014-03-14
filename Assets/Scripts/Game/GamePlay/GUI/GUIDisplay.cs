@@ -48,7 +48,7 @@ public class GUIDisplay:GUIBehaviour {
 		
 		Rect bounds = innerBars[(int)activeBar].Bounds;
 		
-		bounds.width = innerBars[0].Bounds.width / player.PlayerData.maxHealth * player.PlayerData.Health;
+		bounds.width = innerBars[0].Bounds.width / player.PlayerData.InitialHealth * player.PlayerData.Health;
 		innerBars[(int)activeBar].Bounds = bounds;
 		
 		if(player.PlayerCombat.Attacking) {
@@ -76,6 +76,7 @@ public class GUIDisplay:GUIBehaviour {
 		}
 	}
 
+	/** Switch the active inner bar texture */
 	private void SwitchBar(Bars newBar) {
 		if(activeBar == newBar)
 			return;

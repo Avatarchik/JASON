@@ -22,36 +22,25 @@ public class PlayerCombat:MonoBehaviour {
 	}
 
 	void Update() {
-		switch(Inventory.Instance.currentWeapon.dataWeapon.weaponType){
-			case WeaponData.WeaponType.Sword:
-			currentWeapon = 0;
-			break;
-			case WeaponData.WeaponType.Spear:
-			currentWeapon = 1;
-			break;
-			case WeaponData.WeaponType.Axe:
-			currentWeapon = 2;
-			break;
-		}
 		canAttack = false;
 
 		if(targetEnemy != null) {
-			if(targetEnemy.Dead) {
+			if(targetEnemy.IsDead) {
 				DeselectTarget();
 			} else {
-				if(targetEnemy.Moved)
-					if(Vector3.Distance(transform.position, targetEnemy.transform.position) >= player.PlayerData.attackRange / 2)
+				if(targetEnemy.HasMoved)
+					if(Vector3.Distance(transform.position, targetEnemy.transform.position) >= player.PlayerData.AttackRange / 2)
 						player.TargetPosition = targetEnemy.transform.position;
 
-				if(Vector3.Distance(transform.position, targetEnemy.transform.position) <= player.PlayerData.attackRange) {
+				if(Vector3.Distance(transform.position, targetEnemy.transform.position) <= player.PlayerData.AttackRange) {
 					player.TargetPosition = transform.position;
 					canAttack = !defending;
 				}
 			}
 		} else if(targetDestructable != null) {
-			if(targetDestructable.Destroyed) {
+			if(targetDestructable.IsDestroyed) {
 				DeselectTarget();
-			} else if(Vector3.Distance(transform.position, targetDestructable.transform.position) <= player.PlayerData.attackRange) {
+			} else if(Vector3.Distance(transform.position, targetDestructable.transform.position) <= player.PlayerData.AttackRange) {
 				player.TargetPosition = transform.position;
 				canAttack = !defending;
 			}
@@ -111,13 +100,13 @@ public class PlayerCombat:MonoBehaviour {
 
 				foreach(Collider collider in hits)
 					if(collider.CompareTag("Enemy"))
-						collider.GetComponent<Enemy>().Damage(player.PlayerData.attackDamage);
+						collider.GetComponent<Enemy>().Damage(player.PlayerData.AttackDamage);
 
 				yield return new WaitForSeconds(0.01f);
 
 				player.PlayerAnimation.SetInteger("Attack", 0);
 
-				yield return new WaitForSeconds(player.PlayerData.attackDelay);
+				yield return new WaitForSeconds(player.PlayerData.AttackDelay);
 			} else {
 				yield return new WaitForSeconds(0.01f);
 			}
@@ -137,13 +126,13 @@ public class PlayerCombat:MonoBehaviour {
 				
 				foreach(Collider collider in hits)
 					if(collider.CompareTag("Destructable"))
-						collider.GetComponent<Destructable>().Damage(player.PlayerData.attackDamage);
+						collider.GetComponent<Destructable>().Damage(player.PlayerData.AttackDamage);
 				
 				yield return new WaitForSeconds(0.01f);
 				weaponCollisionArea[currentWeapon].renderer.enabled = false;
 				player.PlayerAnimation.SetInteger("Attack", 0);
 				
-				yield return new WaitForSeconds(player.PlayerData.attackDelay);
+				yield return new WaitForSeconds(player.PlayerData.AttackDelay);
 			} else {
 				yield return new WaitForSeconds(0.01f);
 			}

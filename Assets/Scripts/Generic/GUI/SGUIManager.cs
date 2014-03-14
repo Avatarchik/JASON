@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using SGUI;
 
 public class SGUIManager:Singleton<SGUIManager> {
-	[SerializeField] private List<SGUITexture> sguiTextures = new List<SGUITexture>();
-	[SerializeField] private List<SGUISprite> sguiSprites = new List<SGUISprite>();
-	[SerializeField] private List<SGUIButton> sguiButtons = new List<SGUIButton>();
+	private List<SGUITexture> sguiTextures = new List<SGUITexture>();
+	private List<SGUISprite> sguiSprites = new List<SGUISprite>();
+	private List<SGUIButton> sguiButtons = new List<SGUIButton>();
 	
 	void OnGUI() {
 		Vector2 nativeSize = GUIManager.Instance.NativeSize;
@@ -50,7 +50,7 @@ public class SGUIManager:Singleton<SGUIManager> {
 		foreach(SGUIButton other in sguiButtons)
 			if(button.Equals(other))
 				other.Destroy();
-		Debug.Log ("Registered button");
+
 		sguiButtons.Add(button);
 	}
 	

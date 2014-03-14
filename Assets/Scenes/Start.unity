@@ -112,47 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac0a6881d7d77348b88628d810c9f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sguiTextures: []
-  sguiSprites: []
-  sguiButtons: []
---- !u!1 &240889545
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 240889546}
-  - 114: {fileID: 240889547}
-  m_Layer: 0
-  m_Name: Level Generator
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &240889546
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 240889545}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 254651034}
---- !u!114 &240889547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 240889545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffae1922615683049b5ee96d359b36a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &254651033
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,12 +139,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1540139886}
+  - {fileID: 1112543076}
   - {fileID: 43327944}
-  - {fileID: 2003387398}
   - {fileID: 1237094236}
-  - {fileID: 240889546}
   - {fileID: 690936601}
-  - {fileID: 1418674022}
   m_Father: {fileID: 0}
 --- !u!114 &254651035
 MonoBehaviour:
@@ -274,14 +231,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351739fa867515d49b061a7847219327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1418674021}
-  maxHealth: 10
-  speed: 5
-  chargeMultiplier: 2
-  attackDamage: 1
-  attackDelay: .699999988
-  attackRange: 3
-  damageDelay: .5
+  initialRunSpeed: 5
+  initialHealth: 10
+  initialAttackDamage: 1
+  initialAttackDelay: .699999988
+  initialAttackRange: 3
+--- !u!1 &1112543075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1112543076}
+  - 114: {fileID: 1112543077}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1112543076
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1112543075}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 254651034}
+--- !u!114 &1112543077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1112543075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c744078681b134da2b1fe539a37067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1237094235
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,91 +314,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nativeSize: {x: 1920, y: 1080}
---- !u!1 &1418674019
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1418674022}
-  - 114: {fileID: 1418674021}
-  - 114: {fileID: 1418674020}
-  m_Layer: 0
-  m_Name: Player Inventory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1418674020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1418674019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff0e0dda9c480d446811c9fb3cea28c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dataWeapon:
-    itemType: 0
-    itemName: 
-    itemDescription: 
-    equipableType: 3
-    element: 0
-    rarity: 0
-    model: {fileID: 0}
-    stats:
-      speed: 0
-      defence: 0
-      damage: 0
-      storePrice: 0
-      durability: 0
-    weaponType: 1
---- !u!114 &1418674021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1418674019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55bdfba0ed6fa1c43a92aa9aef6391fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  specials:
-  - {fileID: 0}
-  - {fileID: 0}
-  helmets:
-  - {fileID: 0}
-  - {fileID: 0}
-  chests:
-  - {fileID: 0}
-  - {fileID: 0}
-  legs:
-  - {fileID: 0}
-  - {fileID: 0}
-  shields:
-  - {fileID: 0}
-  - {fileID: 0}
-  weapons: []
-  power: {fileID: 0}
-  list: {fileID: 2003387399}
-  inventoryObject: {fileID: 1418674019}
-  currentWeapon: {fileID: 1418674020}
---- !u!4 &1418674022
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1418674019}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 254651034}
 --- !u!1 &1540139885
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,117 +355,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicVolume: 5
   soundVolume: 1
---- !u!1 &2003387397
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2003387398}
-  - 114: {fileID: 2003387399}
-  m_Layer: 0
-  m_Name: ItemList
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2003387398
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2003387397}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 254651034}
---- !u!114 &2003387399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2003387397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 458ce8e0e97f2084f97134c3a36f6ccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipableItems:
-  - itemType: 0
-    itemName: Jasons Helmet
-    itemDescription: Fit for a hero.
-    equipableType: 0
-    element: 0
-    rarity: 0
-    model: {fileID: 0}
-    stats:
-      speed: 2
-      defence: 3
-      damage: 0
-      storePrice: 25
-      durability: 0
-  - itemType: 0
-    itemName: Jasons Chestplate
-    itemDescription: Fit for a hero.
-    equipableType: 1
-    element: 0
-    rarity: 0
-    model: {fileID: 0}
-    stats:
-      speed: 2
-      defence: 3
-      damage: 0
-      storePrice: 25
-      durability: 0
-  - itemType: 0
-    itemName: Jasons Leggings
-    itemDescription: Fit for a hero. this test text is extra long so i can see how
-      long i need to make shit.
-    equipableType: 2
-    element: 0
-    rarity: 0
-    model: {fileID: 0}
-    stats:
-      speed: 2
-      defence: 3
-      damage: 0
-      storePrice: 25
-      durability: 0
-  - itemType: 0
-    itemName: Jasons Shield
-    itemDescription: Fit for a Hero.
-    equipableType: 4
-    element: 0
-    rarity: 0
-    model: {fileID: 0}
-    stats:
-      speed: 2
-      defence: 10
-      damage: 0
-      storePrice: 25
-      durability: 0
-  weaponItems:
-  - itemType: 0
-    itemName: Jasons Sword
-    itemDescription: Fit for a Hero.
-    equipableType: 0
-    element: 0
-    rarity: 0
-    model: {fileID: 0}
-    stats:
-      speed: 0
-      defence: 0
-      damage: 5
-      storePrice: 0
-      durability: 0
-    weaponType: 0
-  powerItems:
-  - itemType: 1
-    itemName: Heroes Call
-    itemDescription: Heals the Heroe while active.
-    powerType: 1
-    duration: 5
-  specialItems: []

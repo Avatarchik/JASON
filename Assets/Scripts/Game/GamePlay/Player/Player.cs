@@ -7,8 +7,7 @@ public class Player:MonoBehaviour {
 
 	[SerializeField] private GameObject playerModel;
 	[SerializeField] private Animator playerAnimation;
-
-	//public Inventory playerInventory;
+	
 	private PlayerCamera playerCamera;
 	private PlayerCombat playerCombat;
 
@@ -29,6 +28,8 @@ public class Player:MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		rigidbody.velocity = Vector3.zero;
+
 		if(currentObject != null){
 			currentObject.AttachToPlayer(playerModel.transform);
 			currentObject.collider.enabled = false;
@@ -36,14 +37,14 @@ public class Player:MonoBehaviour {
 		if(pushablePosition != null && block != null){
 			block.transform.position = pushablePosition.transform.position;
 		}
-		rigidbody.velocity = Vector3.zero;
+
 		CheckForInput();
 
 		if(Vector3.Distance(transform.position, targetPosition) > 2) {
 			playerAnimation.SetBool("IsRunning", true);
 
 			playerCamera.CameraDistance = 10;
-			transform.position = Vector3.MoveTowards(transform.position, targetPosition, playerData.speed * Time.deltaTime); 
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, playerData.RunSpeed * Time.deltaTime); 
 
 			Vector3 lookPosition = targetPosition - playerModel.transform.position;
 			Quaternion lookRotation = Quaternion.identity;
@@ -97,8 +98,6 @@ public class Player:MonoBehaviour {
 
 		if(Input.touchCount == 0) {
 			if(Input.GetMouseButtonDown(0)) {
-				Debug.Log (Input.mousePosition);
-				
 				if(Input.mousePosition.x <= 176 && Input.mousePosition.y <= 50)
 					return;
 					
@@ -166,13 +165,16 @@ public class Player:MonoBehaviour {
 	}
 
 	private void Move(Vector3 position) {
+		Debug.Log (playerData.RunSpeed);
+
 		playerCombat.TargetEnemy = null;
 		playerCombat.TargetDestructable = null;
 		targetPosition = new Vector3(position.x, 1, position.z);
 	}
 
 	private IEnumerator DamageDelay(){
-		yield return new WaitForSeconds(playerData.damageDelay);
+		yield return new WaitForSeconds(0.1f);
+		// TODO: Custom damage delay
 
 		hit = false;
 

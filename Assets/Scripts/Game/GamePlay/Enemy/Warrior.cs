@@ -6,7 +6,7 @@ public class Warrior:Enemy {
 
 	private Animator enemyAnimation;
 
-	private bool isAttacking;
+	private bool isAttackingPlayer;
 
 	protected override void Start() {
 		base.Start();
@@ -15,7 +15,11 @@ public class Warrior:Enemy {
 	}
 	
 	protected override void FixedUpdate() {
-		if(dead) {
+		base.FixedUpdate();
+
+		Animate();
+
+		if(isDead) {
 			if(enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("DeadIdle")) {
 				enemyAnimation.enabled = false;
 
@@ -28,20 +32,13 @@ public class Warrior:Enemy {
 			return;
 		}
 
-		base.FixedUpdate();
-
-		Animate();
-
-		if(playerFound) {
+		if(isChasingPlayer)
 			moveToPlayer();
-		} else {
-			// TODO: Do own behavior if player isn't found
-		}
 	}
 
-	/** Kill the enemy */
-	public override void Die() {
-		dead = true;
+	/** Called when the enemy has been killed */
+	protected override void OnKilled() {
+		base.OnKilled();
 
 		StopCoroutine("Attack");
 
@@ -51,20 +48,21 @@ public class Warrior:Enemy {
 
 	/** Determine which animation to play */
 	private void Animate() {
-		if(distanceToPlayer > data.chaseRange) {
+		if(!isChasingPlayer) {
 			enemyAnimation.SetInteger("State", 1);
-		} else if (distanceToPlayer > 4) {
+		} else if(distanceToPlayer > 4) {
 			enemyAnimation.SetInteger("State", 2);
 		} else {
-			if(!isAttacking)
+			if(!isAttackingPlayer)
 				StartCoroutine("Attack");
 		}
 	}
 
-	/** Attack */
+	/** Attack the player */
 	private IEnumerator Attack() {
 		int random = Random.Range(3, 5);
-		isAttacking = true;
+
+		isAttackingPlayer = true;
 
 		enemyAnimation.SetInteger("State", random);
 
@@ -76,27 +74,27 @@ public class Warrior:Enemy {
 
 		for(int i = 0; i < hits.Length; i++) {
 			if(hits[i].name == "Player")
-				player.GetComponent<Player>().Damage(data.attackDamage);
+				player.GetComponent<Player>().Damage(data.AttackDamage);
 		}
 
-		yield return new WaitForSeconds(data.attackDelay + Random.Range(0.3f, 1.0f));
+		yield return new WaitForSeconds(data.AttackDelay + Random.Range(0.3f, 1.0f));
 
-		isAttacking = false;
+		isAttackingPlayer = false;
 	}
 
 	/** Move towards the player */
 	private void moveToPlayer() {
-		if(Vector3.Distance(transform.position, player.transform.position) <= data.attackRange)
+		if(Vector3.Distance(transform.position, player.transform.position) <= data.AttackDamage)
 			return;
 
-		moved = true;
+		hasMoved = true;
 
 		Vector3 playerPos = player.transform.position;
 		Vector3 lookPos = playerPos - transform.position;
 
 		Quaternion rotation = Quaternion.LookRotation(lookPos);
 
-		float step = data.speed * Time.deltaTime;
+		float step = data.Speed * Time.deltaTime;
 
 		rotation.x = 0;
 		rotation.z = 0;
