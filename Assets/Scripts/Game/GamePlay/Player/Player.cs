@@ -35,7 +35,9 @@ public class Player:MonoBehaviour {
 			currentObject.collider.enabled = false;
 		}
 		if(pushablePosition != null && block != null){
-			block.transform.position = pushablePosition.transform.position;
+			//block.transform.position = pushablePosition.transform.position;
+			block.rigidbody.AddForce((pushablePosition.transform.position - block.transform.position) * 1551 * Time.smoothDeltaTime);
+			Debug.Log("ASD");
 		}
 
 		CheckForInput();
@@ -124,16 +126,19 @@ public class Player:MonoBehaviour {
 			return;
 
 		switch(hit.transform.tag) {
-		case "Floor":
-			if(!playerCombat.Defending)
-				Move(hit.point);
-
-			break;
-		case "Enemy":
-		case "Destructable":
+			case "Floor":
+				if(!playerCombat.Defending)
+					Move(hit.point);
+				break;
+			case "Enemy":
+			case "Destructable":
 			if(!playerCombat.Defending)
 				playerCombat.Attack(hit.transform.gameObject, hit.transform.tag);
 
+			break;
+			default:
+			if(!playerCombat.Defending)
+				Move(hit.point);
 			break;
 		}
 	}

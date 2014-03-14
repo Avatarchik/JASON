@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class PlayerCamera:MonoBehaviour {
-	[SerializeField] private Transform target;
+	[SerializeField] public Transform target;
 
 	[SerializeField] private float distance;
 	[SerializeField] private float distanceX;
