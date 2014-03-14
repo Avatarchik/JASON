@@ -10,12 +10,14 @@ namespace SGUI {
 		[SerializeField] protected bool activated = true;
 
 		[SerializeField] protected Rect bounds;
-		
+
+		/** Set and/or get wheter or not the GUI element is activated */
 		public bool Activated {
 			set { activated = value; }
 			get { return activated; }
 		}
-		
+
+		/** Set and/or get the bounds of the GUI element */
 		public Rect Bounds {
 			set { bounds = value; }
 			get { return bounds; }
@@ -27,7 +29,7 @@ namespace SGUI {
 	public class SGUITexture:SGUI {
 		[SerializeField] private Texture2D texture;	
 		
-		public void Create() {		
+		public void Create() {
 			SGUIManager.Instance.RegisterTexture(this);
 		}
 
@@ -53,7 +55,7 @@ namespace SGUI {
 			
 			return result;
 		}
-		
+
 		public Texture2D Texture { get { return texture; } }
 	}
 

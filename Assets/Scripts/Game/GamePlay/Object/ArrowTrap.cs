@@ -1,19 +1,26 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class ArrowTrap : MonoBehaviour {
-	public Arrow arrow;
-	public Transform shotposition;
-	public float delay;
-	// Use this for initialization
+public class ArrowTrap:MonoBehaviour {
+	[SerializeField] private float delay;
+
+	private Arrow arrow;
+
 	void Start () {
-		StartCoroutine(Shoot(delay));
+		arrow = GetComponentInChildren<Arrow>();
+
+		if(arrow == null)
+			throw new System.NullReferenceException("No child found with the 'Arrow' script");
+
+		StartCoroutine(FireArrow(delay));
 	}
 
-	IEnumerator Shoot(float d){
-		while(true){
-			arrow.ShootArrow(shotposition);
-			yield return new WaitForSeconds(d);
+	/** Fire an arrow */
+	private IEnumerator FireArrow(float delay) {
+		while(true) {
+			arrow.Fire(this);
+
+			yield return new WaitForSeconds(delay);
 		}
 	}
 }

@@ -4,8 +4,7 @@ using System;
 using SGUI;
 
 public class PlayerCombat:MonoBehaviour {
-	//0 Sword //1 Mace //2 Polearm
-	[SerializeField] private GameObject[] weaponCollisionArea;
+	[SerializeField] private GameObject weaponCollisionArea;
 
 	private Player player;
 
@@ -15,8 +14,7 @@ public class PlayerCombat:MonoBehaviour {
 	private bool canAttack;
 	private bool attacking;
 	private bool defending;
-	private int currentWeapon;
-	
+
 	void Start() {
 		player = GetComponent<Player>();
 	}
@@ -29,10 +27,10 @@ public class PlayerCombat:MonoBehaviour {
 				DeselectTarget();
 			} else {
 				if(targetEnemy.HasMoved)
-					if(Vector3.Distance(transform.position, targetEnemy.transform.position) >= player.PlayerData.AttackRange / 2)
+					if(Vector3.Distance(transform.position, targetEnemy.transform.position) >= PlayerData.Instance.AttackRange / 2)
 						player.TargetPosition = targetEnemy.transform.position;
 
-				if(Vector3.Distance(transform.position, targetEnemy.transform.position) <= player.PlayerData.AttackRange) {
+				if(Vector3.Distance(transform.position, targetEnemy.transform.position) <= PlayerData.Instance.AttackRange) {
 					player.TargetPosition = transform.position;
 					canAttack = !defending;
 				}
@@ -40,7 +38,7 @@ public class PlayerCombat:MonoBehaviour {
 		} else if(targetDestructable != null) {
 			if(targetDestructable.IsDestroyed) {
 				DeselectTarget();
-			} else if(Vector3.Distance(transform.position, targetDestructable.transform.position) <= player.PlayerData.AttackRange) {
+			} else if(Vector3.Distance(transform.position, targetDestructable.transform.position) <= PlayerData.Instance.AttackRange) {
 				player.TargetPosition = transform.position;
 				canAttack = !defending;
 			}
@@ -94,19 +92,19 @@ public class PlayerCombat:MonoBehaviour {
 			if(canAttack) {
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 
-				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea[0].transform.position, 1);
+				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
 
 				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
 
 				foreach(Collider collider in hits)
 					if(collider.CompareTag("Enemy"))
-						collider.GetComponent<Enemy>().Damage(player.PlayerData.AttackDamage);
+						collider.GetComponent<Enemy>().Damage(PlayerData.Instance.AttackDamage);
 
 				yield return new WaitForSeconds(0.01f);
 
 				player.PlayerAnimation.SetInteger("Attack", 0);
 
-				yield return new WaitForSeconds(player.PlayerData.AttackDelay);
+				yield return new WaitForSeconds(PlayerData.Instance.AttackDelay);
 			} else {
 				yield return new WaitForSeconds(0.01f);
 			}
@@ -120,19 +118,19 @@ public class PlayerCombat:MonoBehaviour {
 			if(canAttack) {
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 				
-				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea[currentWeapon].transform.position, 1);
-				weaponCollisionArea[currentWeapon].renderer.enabled = true;
+				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
+				weaponCollisionArea.renderer.enabled = true;
 				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
 				
 				foreach(Collider collider in hits)
 					if(collider.CompareTag("Destructable"))
-						collider.GetComponent<Destructable>().Damage(player.PlayerData.AttackDamage);
+						collider.GetComponent<Destructable>().Damage(PlayerData.Instance.AttackDamage);
 				
 				yield return new WaitForSeconds(0.01f);
-				weaponCollisionArea[currentWeapon].renderer.enabled = false;
+				weaponCollisionArea.renderer.enabled = false;
 				player.PlayerAnimation.SetInteger("Attack", 0);
 				
-				yield return new WaitForSeconds(player.PlayerData.AttackDelay);
+				yield return new WaitForSeconds(PlayerData.Instance.AttackDelay);
 			} else {
 				yield return new WaitForSeconds(0.01f);
 			}

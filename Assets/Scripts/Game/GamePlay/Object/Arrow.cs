@@ -1,36 +1,80 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Arrow : MonoBehaviour {
-	bool isTraveling;
-	// Use this for initialization
-	void Start () {
-	
+public class Arrow:MonoBehaviour {
+	[SerializeField] Shader alphaShader;
+
+	private Shader normalShader;
+
+	private Renderer model;
+
+	private bool isTraveling;
+	private bool fadeOut;
+
+	void Start() {
+		model = transform.GetChild(0).renderer;
+		normalShader = renderer.material.shader;
 	}
-	
-	// Update is called once per frame
+
 	void FixedUpdate () {
-		if(isTraveling){
-		transform.Translate(Vector3.forward * 0.8f);
+		if(isTraveling)
+			transform.Translate(Vector3.forward * 0.8f);
+	}
+
+	void LateUpdate() {
+		if(fadeOut) {
+			Color newColor = model.material.color;
+
+			newColor.a -= 0.01f;
+
+			model.material.color = newColor;
 		}
 	}
-
-	public void ShootArrow(Transform arrowTrap){
-		transform.position = arrowTrap.transform.position;
-		transform.rotation = arrowTrap.transform.rotation;
-		isTraveling = true;
-		collider.enabled = true;
-		transform.parent = null;
-		//renderer.enabled = true;
-	}
-
-	void OnCollisionEnter(Collision coll){
+	
+	void OnCollisionEnter(Collision collision) {
 		isTraveling = false;
 		collider.enabled = false;
-		transform.parent = coll.gameObject.transform;
-		if(coll.gameObject.name == "Player"){
-			coll.gameObject.GetComponent<Player>().Damage(1);
-			//renderer.enabled = false;
+
+		transform.parent = collision.transform;
+
+		if(collision.gameObject.name == "Player")
+			collision.gameObject.GetComponent<Player>().Damage(1, 0);
+
+		StartFade();
+	}
+
+	/** Fire the arrow from the specified arrow trap */
+	public void Fire(ArrowTrap arrowTrap) {
+		transform.position = arrowTrap.transform.position;
+		transform.rotation = arrowTrap.transform.rotation;
+		
+		isTraveling = true;
+		collider.enabled = true;
+		
+		transform.parent = arrowTrap.transform;
+
+		ResetFade();
+	}
+
+	/** Start fading out the arrow */
+	private void StartFade() {
+		model.material.shader = alphaShader;
+
+		fadeOut = true;
+	}
+
+	/** Reset the fade of the arrow */
+	private void ResetFade() {
+		if(normalShader != null) {
+			model.material.shader = normalShader;
+			
+			Color newColor = model.material.color;
+			
+			newColor.a = 1.0f;
+			
+			model.material.color = newColor;
+
+			fadeOut = false;
 		}
 	}
 }

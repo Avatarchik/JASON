@@ -3,8 +3,6 @@ using System;
 using System.Collections;
 
 public class Player:MonoBehaviour {
-	[SerializeField] private PlayerData playerData;
-
 	[SerializeField] private GameObject playerModel;
 	[SerializeField] private Animator playerAnimation;
 	
@@ -18,20 +16,29 @@ public class Player:MonoBehaviour {
 	public GameObject pushablePosition;
 
 	[HideInInspector]public bool hit;
-	int mask = ~(1 << 8);
+	private int mask = ~(1 << 8);
+
+	private bool dataInstanceFound;
 
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
 		playerCombat = GetComponent<PlayerCombat>();
-		playerData = PlayerData.Instance;
 		targetPosition = transform.position;
 	}
 
 	void FixedUpdate() {
+		if(!dataInstanceFound) {
+			if(GameObject.FindGameObjectWithTag("Global Manager") == null) {
+				return;
+			} else {
+				dataInstanceFound = true;
+			}
+		}
+
 		rigidbody.velocity = Vector3.zero;
 
 		if(currentObject != null){
-			currentObject.AttachToPlayer(playerModel.transform);
+			currentObject.AttachTo(playerModel.transform);
 			currentObject.collider.enabled = false;
 		}
 		if(pushablePosition != null && block != null){
@@ -46,7 +53,7 @@ public class Player:MonoBehaviour {
 			playerAnimation.SetBool("IsRunning", true);
 
 			playerCamera.CameraDistance = 10;
-			transform.position = Vector3.MoveTowards(transform.position, targetPosition, playerData.RunSpeed * Time.deltaTime); 
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, PlayerData.Instance.RunSpeed * Time.deltaTime); 
 
 			Vector3 lookPosition = targetPosition - playerModel.transform.position;
 			Quaternion lookRotation = Quaternion.identity;
@@ -84,7 +91,7 @@ public class Player:MonoBehaviour {
 	
 	public void Pickup() {
 		if(currentObject != null) {
-			currentObject.hasThrown = true;
+			currentObject.Thrown = true;
 			currentObject = null;
 		} else if(block != null) {
 			block.transform.parent = null;
@@ -160,26 +167,23 @@ public class Player:MonoBehaviour {
 		}*/
 	}
 
-	public void Damage(int amount) {
+	public void Damage(int amount, float stunTime) {
 		playerAnimation.SetBool("GettingHit", true);
-		playerData.Health -= amount;
+		PlayerData.Instance.Health -= amount;
 
 		hit = true;
 
-		StartCoroutine("DamageDelay");
+		StartCoroutine(DamageDelay(stunTime));
 	}
 
 	private void Move(Vector3 position) {
-		Debug.Log (playerData.RunSpeed);
-
 		playerCombat.TargetEnemy = null;
 		playerCombat.TargetDestructable = null;
 		targetPosition = new Vector3(position.x, 1, position.z);
 	}
 
-	private IEnumerator DamageDelay(){
-		yield return new WaitForSeconds(0.1f);
-		// TODO: Custom damage delay
+	private IEnumerator DamageDelay(float stunTime){
+		yield return new WaitForSeconds(stunTime);
 
 		hit = false;
 
@@ -187,8 +191,6 @@ public class Player:MonoBehaviour {
 	}
 
 	public bool Hit { get { return hit; } }
-	
-	public PlayerData PlayerData { get { return playerData; } }
 
 	public PlayerCombat PlayerCombat { get { return playerCombat; } }
 

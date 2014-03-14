@@ -1,47 +1,55 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class ThrowableObject : MonoBehaviour {
-	public enum ObjectType{
+public class ThrowableObject:MonoBehaviour {
+	public enum ObjectType {
 		Normal,
 		Key
 	}
-	public ObjectType type;
-	public bool hasThrown;
-	public bool pickedUp;
 
-	public bool destroyable;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-	if(hasThrown){
+	[SerializeField] private ObjectType type;
+
+	[SerializeField] private bool destroyable;
+
+	private bool isThrown;
+	private bool isPickedUp;
+
+	void FixedUpdate() {
+		if(isThrown){
 			transform.Translate(Vector3.forward * 0.8f);
 			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 			collider.enabled = true;
 		}
 	}
 
-	public void AttachToPlayer(Transform player){
-		transform.position = new Vector3(player.position.x,player.position.y + 3, player.position.z);
-		transform.rotation = player.transform.rotation;
+	void OnCollisionEnter(Collision collision) {
+		switch(collision.gameObject.tag) {
+		case "Door":
+			HandleDoorCollision(collision.gameObject.GetComponent<Door>());
+			break;
+		}
 	}
 
-	void OnCollisionEnter(Collision coll){
-		Debug.Log("Collided " + coll.gameObject.name);
-		if(coll.gameObject.name != "Player"){
-			if(coll.gameObject.name == "Door"){
-				Door hitDoor = coll.gameObject.GetComponent<Door>();
-				if(type == ObjectType.Key && hitDoor.type == Door.DoorType.key){
-				hitDoor.OpenDoor();
-				Destroy (this.gameObject);
-				}
-			}
-			hasThrown = false;
-			rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+	/** Attach the object to an object */
+	public void AttachTo(Transform other) {
+		transform.position = new Vector3(other.position.x,other.position.y + 3, other.position.z);
+		transform.rotation = other.transform.rotation;
+	}
+
+	/** Handle a collision with a door */
+	private void HandleDoorCollision(Door door) {
+		if(type == ObjectType.Key && door.Type == Door.DoorType.Key) {
+			door.Open();
+
+			Destroy(gameObject);
 		}
+
+		isThrown = false;
+		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+	}
+
+	public bool Thrown {
+		set { isThrown = value; }
+		get { return isThrown; }
 	}
 }

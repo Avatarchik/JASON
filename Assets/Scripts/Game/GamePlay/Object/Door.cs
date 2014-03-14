@@ -1,25 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Door : MonoBehaviour {
-	public enum DoorType{
-		normal,
-		key
+public class Door:MonoBehaviour {
+	public enum DoorType {
+		Normal,
+		Key
 	}
-	public DoorType type;
-	public GameObject door;
-	// Use this for initialization
-	void Start () {
 	
-	}
+	[SerializeField] private DoorType type;
 
-	public void OpenDoor(){
+	public void Open() {
 		renderer.enabled = false;
 		collider.enabled = false;
-		Destroy(door);
+		
+		Destroy(transform.GetChild(0).gameObject);
 	}
-	public void CloseDoor(){
+	
+	public void Close() {
 		renderer.enabled = true;
 		collider.enabled = true;
+	}
+	
+	/** Get the type of the door */
+	public DoorType Type {
+		get { return type; }
 	}
 }

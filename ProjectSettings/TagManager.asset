@@ -10,16 +10,18 @@ TagManager:
   - 
   - Weapon Collision
   - 
-  - Item Weapon
-  - Item Power
-  - Item Special
-  - Item Equipable
+  - Item
+  - 
+  - Door
+  - 
   - 
   - Destructable
   - 
-  - Static Manager
+  - Global Manager
   - ThrowableObject
   - PushableObject
+  - 
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

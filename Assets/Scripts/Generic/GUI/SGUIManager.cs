@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using SGUI;
 
 public class SGUIManager:Singleton<SGUIManager> {
+	[SerializeField] private Vector2 nativeGuiSize = new Vector2(1920, 1080);
+
 	private List<SGUITexture> sguiTextures = new List<SGUITexture>();
 	private List<SGUISprite> sguiSprites = new List<SGUISprite>();
 	private List<SGUIButton> sguiButtons = new List<SGUIButton>();
 	
 	void OnGUI() {
-		Vector2 nativeSize = GUIManager.Instance.NativeSize;
-	
-		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(Screen.width / nativeSize.x, Screen.height / nativeSize.y, 1));
+		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(Screen.width / nativeGuiSize.x, Screen.height / nativeGuiSize.y, 1));
 	
 		foreach(SGUITexture texture in sguiTextures)
-			texture.Update(nativeSize);
+			texture.Update(nativeGuiSize);
 			
 		foreach(SGUISprite sprite in sguiSprites)
-			sprite.Update(nativeSize);
+			sprite.Update(nativeGuiSize);
 			
 		foreach(SGUIButton button in sguiButtons)
-			button.Update(nativeSize);		
+			button.Update(nativeGuiSize);		
 	}
 	
 	public bool IsAnyButtonClicked() {
