@@ -21,9 +21,9 @@ public class PlayerCamera:MonoBehaviour {
 		if(target != null) {
 			Vector3 wantedPosition = target.transform.position + new Vector3(distanceX + cameraBuffer, height, distance);
 			if(transform.position.x < (target.transform.position.x + distanceX + cameraBuffer)){
-				cameraBuffer = 2;
+				//cameraBuffer = 2;
 			}else if(transform.position.x > (target.transform.position.x + distanceX + cameraBuffer)){
-				cameraBuffer = -2;
+				//cameraBuffer = -2;
 			}
 			if((playerCamera.fieldOfView == 60 + cameraDistance)){
 				cameraBuffer = 0;

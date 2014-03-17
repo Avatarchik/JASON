@@ -4,7 +4,8 @@ using System.Collections;
 public class ThrowableObject:MonoBehaviour {
 	public enum ObjectType {
 		Normal,
-		Key
+		Key,
+		BossKey
 	}
 
 	[SerializeField] private ObjectType type;
@@ -43,7 +44,11 @@ public class ThrowableObject:MonoBehaviour {
 
 			Destroy(gameObject);
 		}
-
+		if(type == ObjectType.BossKey && door.Type == Door.DoorType.BossDoor) {
+			door.Open();
+			
+			Destroy(gameObject);
+		}
 		isThrown = false;
 		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 	}

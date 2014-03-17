@@ -35,6 +35,9 @@ public class Trigger : MonoBehaviour {
 					StartCoroutine(CameraEvent(0));
 				}
 			}
+			if(coll.gameObject.tag == "Arrow"){
+				StartCoroutine(CameraEvent(0));
+			}
 		}
 	}
 	void OnCollisionExit(Collision coll){

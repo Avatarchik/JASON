@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Door:MonoBehaviour {
 	public enum DoorType {
-		Normal,
-		Key
+		Other,
+		Key,
+		BossDoor
 	}
 	
 	[SerializeField] private DoorType type;
