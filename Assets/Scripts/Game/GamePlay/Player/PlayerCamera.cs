@@ -2,37 +2,31 @@
 using System.Collections;
 
 public class PlayerCamera:MonoBehaviour {
-	[SerializeField] public Transform target;
+	[SerializeField] private Transform target;
 
-	[SerializeField] private float distance;
-	[SerializeField] private float distanceX;
-	[SerializeField] private float height;
-	[SerializeField] private float damping;
+	[SerializeField] private Vector3 targetPosition;
+	
 	[SerializeField] private float cameraDamping;
 	[SerializeField] private float cameraBuffer;
+	[SerializeField] private float fovDamping;
 
-	[SerializeField] private Camera playerCamera;
-
-	[SerializeField] private int cameraDistance;
+	[SerializeField] private int fovDistance;
 
 	private bool targetFound;
 
 	void Update() {
 		if(target != null) {
-			Vector3 wantedPosition = target.transform.position + new Vector3(distanceX + cameraBuffer, height, distance);
-			if(transform.position.x < (target.transform.position.x + distanceX + cameraBuffer)){
-				//cameraBuffer = 2;
-			}else if(transform.position.x > (target.transform.position.x + distanceX + cameraBuffer)){
-				//cameraBuffer = -2;
-			}
-			if((playerCamera.fieldOfView == 60 + cameraDistance)){
+			Vector3 wantedPosition = target.transform.position + new Vector3(targetPosition.x + cameraBuffer, targetPosition.y, targetPosition.z);
+
+			if((Camera.main.fieldOfView == 60 + fovDistance))
 				cameraBuffer = 0;
-			}
-				//Debug.Log("position: " + transform.position.x + "    wanted: " + (target.transform.position.x + distanceX));
-			transform.position = Vector3.Lerp (transform.position, wantedPosition, Time.deltaTime * damping);
-			playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, 60 + cameraDistance, Time.deltaTime * cameraDamping);
+
+			transform.position = Vector3.Lerp (transform.position, wantedPosition, Time.deltaTime * fovDamping);
+			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60 + fovDistance, Time.deltaTime * cameraDamping);
 		}
 	}
+
+	/** Shake the camera */
 	public IEnumerator CameraShake(){
 		Vector3 origin = transform.position;
 		Handheld.Vibrate();
@@ -43,5 +37,15 @@ public class PlayerCamera:MonoBehaviour {
 		yield return new WaitForSeconds(0.05f);
 	    transform.position = origin;
 	}
-	public int CameraDistance { set { cameraDistance = value; } }
+
+	public Transform Target {
+		set { target = value; }
+		get { return target; }
+	}
+
+	public Vector3 TargetPosition {
+		get { return targetPosition; }
+	}
+
+	public int CameraDistance { set { fovDistance = value; } }
 }

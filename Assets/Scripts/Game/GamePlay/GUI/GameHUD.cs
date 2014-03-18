@@ -44,7 +44,7 @@ public class GameHUD:GUIBehaviour {
 
 		if(player.PlayerCombat.Defending) {
 			SwitchBar(Bars.Shield);
-		} else if(player.hit) {
+		} else if(player.Hit) {
 			SwitchBar(Bars.Damage);
 		} else {
 			SwitchBar(Bars.Health);
@@ -75,7 +75,7 @@ public class GameHUD:GUIBehaviour {
 			
 			if(buttons[1].Click) {
 				clickCooldown = 10;
-				player.Pickup();
+				player.ThrowObject();
 			}
 		}
 	}

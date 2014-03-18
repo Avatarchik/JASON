@@ -58,8 +58,8 @@ public class Trigger : MonoBehaviour {
 	}
 	
 	IEnumerator CameraEvent(int doorstate){
-		character = cam.target;
-		cam.target = cameraEventTarget;
+		character = cam.Target;
+		cam.Target = cameraEventTarget;
 		yield return new WaitForSeconds(1.5f);
 		for (int i = 0; i < doors.Length; i++){
 			if(doorstate == 0){
@@ -74,7 +74,7 @@ public class Trigger : MonoBehaviour {
 		if(!onceActivated){
 			yield return new WaitForSeconds(1.5f);
 			onceActivated = true;
-			cam.target = character;
+			cam.Target = character;
 		}else{
 			return false;
 		}

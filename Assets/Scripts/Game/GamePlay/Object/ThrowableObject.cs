@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ThrowableObject:MonoBehaviour {
+public class ThrowableObject:InteractableObject {
 	public enum ObjectType {
 		Normal,
 		Key,
@@ -15,26 +15,25 @@ public class ThrowableObject:MonoBehaviour {
 	private bool isThrown;
 	private bool isPickedUp;
 
-	void FixedUpdate() {
-		if(isThrown){
+	protected override void FixedUpdate() {
+		if(isThrown) {
 			transform.Translate(Vector3.forward * 0.8f);
 			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 			collider.enabled = true;
 		}
+
+		Debug.DrawRay (transform.position, Vector3.forward, Color.green, 100);
 	}
 
 	void OnCollisionEnter(Collision collision) {
+		rigidbody.constraints = RigidbodyConstraints.None;
+		isThrown = false;
+
 		switch(collision.gameObject.tag) {
 		case "Door":
 			HandleDoorCollision(collision.gameObject.GetComponent<Door>());
 			break;
 		}
-	}
-
-	/** Attach the object to an object */
-	public void AttachTo(Transform other) {
-		transform.position = new Vector3(other.position.x,other.position.y + 3, other.position.z);
-		transform.rotation = other.transform.rotation;
 	}
 
 	/** Handle a collision with a door */
@@ -43,12 +42,12 @@ public class ThrowableObject:MonoBehaviour {
 			door.Open();
 
 			Destroy(gameObject);
-		}
-		if(type == ObjectType.BossKey && door.Type == Door.DoorType.BossDoor) {
+		} else if(type == ObjectType.BossKey && door.Type == Door.DoorType.BossDoor) {
 			door.Open();
 			
 			Destroy(gameObject);
 		}
+
 		isThrown = false;
 		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 	}
