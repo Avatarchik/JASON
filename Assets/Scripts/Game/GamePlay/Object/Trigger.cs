@@ -24,7 +24,6 @@ public class Trigger : MonoBehaviour {
 	}
 
 	void OnCollisionEnter (Collision coll) {
-		Debug.Log(coll.gameObject.name);
 		if(!isTriggered){
 		if(coll.gameObject.tag == "Player"){
 			if(type == TriggerType.PlayerSwitch){

@@ -21,8 +21,6 @@ public class ThrowableObject:InteractableObject {
 			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 			collider.enabled = true;
 		}
-
-		Debug.DrawRay (transform.position, Vector3.forward, Color.green, 100);
 	}
 
 	void OnCollisionEnter(Collision collision) {

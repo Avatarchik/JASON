@@ -67,9 +67,6 @@ public class Player:MonoBehaviour {
 				
 				if(transform.position != targetPosition)
 					playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, lookRotation, 30);
-			} else {
-				transform.LookAt(attachedPushable.transform.position);
-				transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 			}
 		} else {
 			playerCamera.CameraDistance = -5;
@@ -78,22 +75,25 @@ public class Player:MonoBehaviour {
 	}
 
 	/** Pickup an object */
-	public void Pickup() {
-		Collider[] hits = Physics.OverlapSphere(transform.position, 4);
-		
+	public IEnumerator Pickup(GameObject obj) {
 		if(attachedPushable != null || attachedThrowable != null) {
 			Drop();
 		} else {
-			for(int i = 0; i < hits.Length; i++) {
-				switch(hits[i].tag) {
-				case "ThrowableObject":
-					attachedThrowable = hits[i].GetComponent<ThrowableObject>();
-					attachedThrowable.collider.enabled = false;
-					break;
-				case "PushableObject":
-					attachedPushable = hits[i].GetComponent<PushableObject>();
-					break;
-				}
+			Move(obj.transform.position);
+
+			while(Vector3.Distance(transform.position, obj.transform.position) > 2.5f)
+				yield return new WaitForSeconds(0.5f);
+
+			switch(obj.tag) {
+			case "ThrowableObject":
+				attachedThrowable = obj.GetComponent<ThrowableObject>();
+				attachedThrowable.collider.enabled = false;
+				break;
+			case "PushableObject":
+				attachedPushable = obj.GetComponent<PushableObject>();
+				transform.LookAt(attachedPushable.transform.position);
+				transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+				break;
 			}
 		}
 	}
@@ -197,7 +197,7 @@ public class Player:MonoBehaviour {
 			break;
 		case "ThrowableObject":
 		case "PushableObject":
-			Pickup();
+			StartCoroutine(Pickup(hit.collider.gameObject));
 			break;
 		default:
 			Move(hit.point);
