@@ -1,13 +1,20 @@
 fileFormatVersion: 2
-guid: f90468de00b48244f8485851e80c08e9
+guid: a38b1b4821d4704478b83858e2f95f8f
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
+    100002: side_2edgy5me_overloop
+    100004: side_rand_overloop
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Box043
+    400002: side_2edgy5me_overloop
+    400004: side_rand_overloop
+    2300000: side_2edgy5me_overloop
+    2300002: side_rand_overloop
+    3300000: side_2edgy5me_overloop
+    3300002: side_rand_overloop
+    4300000: side_2edgy5me_overloop
+    4300002: side_rand_overloop
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -41,7 +48,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
   tangentSpace:
-    normalSmoothAngle: 180
+    normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
