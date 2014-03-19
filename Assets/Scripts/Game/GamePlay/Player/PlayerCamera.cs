@@ -29,7 +29,7 @@ public class PlayerCamera:MonoBehaviour {
 	/** Shake the camera */
 	public IEnumerator CameraShake(){
 		Vector3 origin = transform.position;
-		Handheld.Vibrate();
+		//Handheld.Vibrate();
 		transform.Translate(new Vector3(Random.Range(-2,3),0,0));
 		yield return new WaitForSeconds(0.05f);
 		transform.position = origin;

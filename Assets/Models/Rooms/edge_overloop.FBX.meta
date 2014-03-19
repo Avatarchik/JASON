@@ -1,20 +1,22 @@
 fileFormatVersion: 2
-guid: a38b1b4821d4704478b83858e2f95f8f
+guid: bc7f7595f583c5b40b5657723c2ffa5d
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
-    100002: side_2edgy5me_overloop
-    100004: side_rand_overloop
+    100002: Group009
+    100004: outer_corner013
+    100006: outer_corner_rand012
     400000: //RootNode
-    400002: side_2edgy5me_overloop
-    400004: side_rand_overloop
-    2300000: side_2edgy5me_overloop
-    2300002: side_rand_overloop
-    3300000: side_2edgy5me_overloop
-    3300002: side_rand_overloop
-    4300000: side_2edgy5me_overloop
-    4300002: side_rand_overloop
+    400002: Group009
+    400004: outer_corner013
+    400006: outer_corner_rand012
+    2300000: outer_corner013
+    2300002: outer_corner_rand012
+    3300000: outer_corner013
+    3300002: outer_corner_rand012
+    4300000: outer_corner013
+    4300002: outer_corner_rand012
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -34,7 +36,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: .0799999982
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

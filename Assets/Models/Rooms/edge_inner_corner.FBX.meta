@@ -1,20 +1,34 @@
 fileFormatVersion: 2
-guid: 340aeefb47890e44e847dd943844f5a7
+guid: 17cf01ce1256f2747a610686f85d5ca6
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
-    100002: outer_corner002
-    100004: outer_corner_rand002
+    100002: Group006
+    100004: Group008
+    100006: outer_corner011
+    100008: outer_corner012
+    100010: outer_corner_rand010
+    100012: outer_corner_rand011
     400000: //RootNode
-    400002: outer_corner002
-    400004: outer_corner_rand002
-    2300000: outer_corner002
-    2300002: outer_corner_rand002
-    3300000: outer_corner002
-    3300002: outer_corner_rand002
-    4300000: outer_corner_rand002
-    4300002: outer_corner002
+    400002: Group006
+    400004: Group008
+    400006: outer_corner011
+    400008: outer_corner012
+    400010: outer_corner_rand010
+    400012: outer_corner_rand011
+    2300000: outer_corner011
+    2300002: outer_corner012
+    2300004: outer_corner_rand010
+    2300006: outer_corner_rand011
+    3300000: outer_corner011
+    3300002: outer_corner012
+    3300004: outer_corner_rand010
+    3300006: outer_corner_rand011
+    4300000: outer_corner011
+    4300002: outer_corner_rand010
+    4300004: outer_corner012
+    4300006: outer_corner_rand011
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -34,7 +48,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: .0799999982
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
