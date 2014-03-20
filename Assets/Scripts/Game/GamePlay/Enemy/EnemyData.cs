@@ -4,7 +4,7 @@ using System;
 [Serializable]
 public class EnemyData {
 	[SerializeField] private int initialHealth;
-	[SerializeField] private int initialSpeed;
+	[SerializeField] private int initialRunSpeed;
 	[SerializeField] private int initialAttackDamage;
 	
 	[SerializeField] private float initialAttackDelay;
@@ -13,13 +13,22 @@ public class EnemyData {
 	[SerializeField] private float initialStunTime;
 	
 	private int health;
-	private int speed;
+	private int runSpeed;
 	private int attackDamage;
 	
 	private float attackDelay;
 	private float attackRange;
 	private float chaseRange;
 	private float stunTime;
+	
+	public void Init() {
+		health = initialHealth;
+		runSpeed = initialRunSpeed;
+		attackDamage = initialAttackDamage;
+		
+		attackDelay = initialAttackDelay;
+		attackRange = initialAttackRange;
+	}
 	
 	// Set and/or get the current health of the enemy */
 	public int Health {
@@ -28,9 +37,9 @@ public class EnemyData {
 	}
 	
 	// Set and/or get the current speed of the enemy */
-	public int Speed {
-		set { speed = value; }
-		get { return speed; }
+	public int RunSpeed {
+		set { runSpeed = value; }
+		get { return runSpeed; }
 	}
 	
 	// Set and/or get the current attack damage of the enemy */
@@ -69,8 +78,8 @@ public class EnemyData {
 	}
 	
 	// Get the initial speed of the enemy */
-	public int InitialSpeed {
-		get { return initialSpeed; }
+	public int InitialRunSpeed {
+		get { return initialRunSpeed; }
 	}
 	
 	// Get the initial attack damage of the enemy */

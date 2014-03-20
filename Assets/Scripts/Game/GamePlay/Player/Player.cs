@@ -16,6 +16,8 @@ public class Player:MonoBehaviour {
 	
 	private PushableObject attachedPushable;
 	private ThrowableObject attachedThrowable;
+
+	private float previousX;
 	
 	private int mask = ~(1 << 8);
 	
@@ -31,6 +33,8 @@ public class Player:MonoBehaviour {
 		
 		throwablePosition = transform.FindChild("Model").FindChild("Throwable Position");
 		pushablePosition = transform.FindChild("Pushable Position");
+
+		previousX = transform.position.x;
 	}
 	
 	void Update() {
@@ -66,12 +70,17 @@ public class Player:MonoBehaviour {
 				lookRotation.z = 0;
 				
 				if(transform.position != targetPosition)
-					playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, lookRotation, 30);
+					transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, lookRotation, 30);
 			}
 		} else {
 			playerCamera.CameraDistance = -5;
 			playerAnimation.SetBool("IsRunning", false);
 		}
+
+		if(transform.position.x < previousX)
+			playerCamera.CameraDistance = 20;
+
+		previousX = transform.position.x;
 	}
 
 	/** Pickup an object */
@@ -124,6 +133,9 @@ public class Player:MonoBehaviour {
 		PlayerData.Instance.Health -= amount;
 		
 		isHit = true;
+
+		if(PlayerData.Instance.Health <= 0)
+			Application.LoadLevel("Game");
 		
 		StartCoroutine(DamageDelay(stunTime));
 	}
@@ -193,6 +205,7 @@ public class Player:MonoBehaviour {
 			break;
 		case "Enemy":
 		case "Destructable":
+		case "Boss":
 			playerCombat.Attack(hit.transform.gameObject, hit.transform.tag);
 			break;
 		case "ThrowableObject":

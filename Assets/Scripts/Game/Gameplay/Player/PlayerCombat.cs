@@ -61,6 +61,7 @@ public class PlayerCombat:MonoBehaviour {
 
 		switch(type) {
 		case "Enemy":
+		case "Boss":
 			targetEnemy = target.GetComponent<Enemy>();
 			StartCoroutine("AttackEnemyDelay");
 			break;
@@ -87,9 +88,11 @@ public class PlayerCombat:MonoBehaviour {
 
 	private IEnumerator AttackEnemyDelay() {
 		attacking = true;
-
+		Debug.Log ("Start attack");
 		while(attacking) {
+			Debug.Log ("Attacking");
 			if(canAttack) {
+				Debug.Log ("Can attack");
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 
 				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
@@ -97,7 +100,7 @@ public class PlayerCombat:MonoBehaviour {
 				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
 
 				foreach(Collider collider in hits)
-					if(collider.CompareTag("Enemy"))
+					if(collider.CompareTag("Enemy") || collider.CompareTag("Boss"))
 						collider.GetComponent<Enemy>().Damage(PlayerData.Instance.AttackDamage);
 
 				yield return new WaitForSeconds(0.01f);

@@ -28,7 +28,8 @@ namespace SGUI {
 	[Serializable]
 	public class SGUITexture:SGUI {
 		[SerializeField] private Texture2D texture;	
-		
+
+		/** Create the texture */
 		public void Create() {
 			SGUIManager.Instance.RegisterTexture(this);
 		}
@@ -43,9 +44,10 @@ namespace SGUI {
 			if(!activated || texture == null)
 				return;
 
-			Graphics.DrawTexture(bounds, texture);
+			GUI.DrawTexture(bounds, texture);
 		}
-		
+
+		/** Compare the texture to another */
 		private bool Equals(SGUITexture other) {
 			bool result = false;
 			
@@ -56,6 +58,7 @@ namespace SGUI {
 			return result;
 		}
 
+		/** Get the texture */
 		public Texture2D Texture { get { return texture; } }
 	}
 
@@ -66,12 +69,13 @@ namespace SGUI {
 		[SerializeField] private Vector2 spriteSheetSize;
 		
 		[SerializeField] private Vector2 coordinates;
-		
+
+		/** Create the sprite */
 		public void Create() {		
 			SGUIManager.Instance.RegisterSprite(this);
 		}
 		
-		/** Destroy the texture */
+		/** Destroy the sprite */
 		public void Destroy() {
 			SGUIManager.Instance.RemoveSprite(this);
 		}
@@ -80,10 +84,11 @@ namespace SGUI {
 		internal void Update(Vector2 nativeScreenSize) {
 			if(!activated)
 				return;
-			
-			Graphics.DrawTexture(bounds, spriteSheet, new Rect(coordinates.x / spriteSheetSize.x, coordinates.y / spriteSheetSize.y, 0, 0), 0, 0, 0, 0);
+
+			GUI.DrawTextureWithTexCoords(bounds, spriteSheet, new Rect(coordinates.x / spriteSheetSize.x, coordinates.y / spriteSheetSize.y, 0, 0));
 		}
-		
+
+		/** Compare the sprite to another */
 		private bool Equals(SGUISprite other) {
 			bool result = false;
 			
@@ -105,7 +110,8 @@ namespace SGUI {
 		}
 
 		protected ButtonState state;
-		
+
+		/** Create the button */
 		public void Create() {		
 			state = ButtonState.NORMAL;
 			
@@ -169,8 +175,8 @@ namespace SGUI {
 			} else {
 				state = ButtonState.NORMAL;
 			}
-				
-			Graphics.DrawTexture(bounds, currentTexture);
+
+			GUI.DrawTexture(bounds, currentTexture);
 			
 			SwitchTexture();
 		}
@@ -189,7 +195,8 @@ namespace SGUI {
 				break;
 			}
 		}
-		
+
+		/** Compare the button to another */
 		private bool Equals(SGUITextureButton other) {
 			bool result = false;
 			
@@ -234,8 +241,8 @@ namespace SGUI {
 			} else {
 				state = ButtonState.NORMAL;
 			}	
-			
-			Graphics.DrawTexture(bounds, spriteSheet, new Rect(currentSprite.x / spriteSheetSize.x, currentSprite.y / spriteSheetSize.y, 0, 0), 0, 0, 0, 0);
+
+			GUI.DrawTextureWithTexCoords(bounds, spriteSheet, new Rect(currentSprite.x / spriteSheetSize.x, currentSprite.y / spriteSheetSize.y, 0, 0));
 			
 			SwitchTexture();
 		}
@@ -254,7 +261,8 @@ namespace SGUI {
 				break;
 			}
 		}
-		
+
+		/** Switch the texture of the button */
 		private bool Equals(SGUISpriteButton other) {
 			bool result = false;
 			

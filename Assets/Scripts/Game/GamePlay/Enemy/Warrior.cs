@@ -94,7 +94,7 @@ public class Warrior:Enemy {
 
 		Quaternion rotation = Quaternion.LookRotation(lookPos);
 
-		float step = data.Speed * Time.deltaTime;
+		float step = data.RunSpeed * Time.deltaTime;
 
 		rotation.x = 0;
 		rotation.z = 0;

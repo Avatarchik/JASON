@@ -19,6 +19,8 @@ public class GameHUD:GUIBehaviour {
 
 	private Bars activeBar;
 
+	private Rect originalBarWidth;
+
 	private int timershit;
 	private int clickCooldown;
 
@@ -29,6 +31,8 @@ public class GameHUD:GUIBehaviour {
 
 		if(player == null)
 			throw new System.NullReferenceException("No Game Object found in the scene with the 'Player' tag");
+
+		originalBarWidth = innerBars[0].Bounds;
 
 		StartCoroutine(WaitForGlobalManager());
 	}
@@ -50,9 +54,9 @@ public class GameHUD:GUIBehaviour {
 			SwitchBar(Bars.Health);
 		}
 		
-		Rect bounds = innerBars[(int)activeBar].Bounds;
-		
-		bounds.width = innerBars[0].Bounds.width / PlayerData.Instance.InitialHealth * PlayerData.Instance.Health;
+		Rect bounds = originalBarWidth;
+		bounds.width = bounds.width / PlayerData.Instance.InitialHealth * PlayerData.Instance.Health;
+
 		innerBars[(int)activeBar].Bounds = bounds;
 		
 		if(player.PlayerCombat.Attacking) {

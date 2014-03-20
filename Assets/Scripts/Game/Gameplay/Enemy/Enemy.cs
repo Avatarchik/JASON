@@ -19,6 +19,8 @@ public class Enemy:MonoBehaviour {
 
 		if(player == null)
 			throw new System.NullReferenceException("No Game Object found in the scene with the 'Player' tag");
+			
+		data.Init();
 	}
 
 	protected virtual void FixedUpdate() {
@@ -29,7 +31,7 @@ public class Enemy:MonoBehaviour {
 	}
 
 	/** Damage the enemy */
-	public void Damage(int amount) {
+	public virtual void Damage(int amount) {
 		data.Health -= amount;
 		
 		if(data.Health <= 0)
