@@ -44,6 +44,7 @@ public class PlayerCamera:MonoBehaviour {
 	}
 
 	public Vector3 TargetPosition {
+		set { targetPosition = value; }
 		get { return targetPosition; }
 	}
 

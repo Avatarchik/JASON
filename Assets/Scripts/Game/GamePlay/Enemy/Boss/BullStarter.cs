@@ -14,8 +14,12 @@ public class BullStarter:MonoBehaviour {
 			
 			collider.gameObject.transform.position = spawn.position;
 			collider.gameObject.transform.rotation = spawn.rotation;
-			
-			collider.GetComponent<Player>().TargetPosition = spawn.position;
+
+			Player player = collider.GetComponent<Player>();
+
+			player.TargetPosition = spawn.position;
+			player.PlayerCamera.TargetPosition = new Vector3(-10, 15, player.PlayerCamera.TargetPosition.z);
+			player.InBossRoom = true;
 		}
 	}
 }

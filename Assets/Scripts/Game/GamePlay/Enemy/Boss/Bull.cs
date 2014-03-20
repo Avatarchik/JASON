@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class Bull:Enemy {
+public class Bull:Boss {
 	public enum State {
 		Idle,
 		Charging,
@@ -19,10 +19,20 @@ public class Bull:Enemy {
 	private int rigidbodyForce;
 	
 	private bool stoppingCharge;
+
+	private Transform startTransform;
+	private EnemyData startData;
+
+	protected override void Start() {
+		base.Start();
+
+		startTransform = transform;
+		startData = data;
+	}
 	
-	void Update() {
-		float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-		
+	protected override void Update() {
+		base.Update ();
+
 		if(data.Health <= 0) {
 			lastState = state;
 			state = State.Dead;
@@ -40,7 +50,8 @@ public class Bull:Enemy {
 	}
 	
 	protected override void FixedUpdate() {
-		rigidbody.velocity = Vector3.zero;
+		base.FixedUpdate();
+
 		Debug.Log(state + " " + lastState);
 		switch(state) {
 		case State.Charging:
@@ -69,6 +80,14 @@ public class Bull:Enemy {
 			}
 			break;	
 		}
+	}
+
+	public override void Reset() {
+		transform.position = startTransform.position;
+		transform.rotation = startTransform.rotation;
+		transform.localScale = startTransform.localScale;
+
+		data = startData;
 	}
 	
 	public void StartAttack() {

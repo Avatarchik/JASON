@@ -23,11 +23,13 @@ public class Enemy:MonoBehaviour {
 		data.Init();
 	}
 
-	protected virtual void FixedUpdate() {
-		rigidbody.velocity = Vector3.zero;
-	
+	protected virtual void Update() {
 		distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 		isChasingPlayer = distanceToPlayer <= data.ChaseRange;
+	}
+
+	protected virtual void FixedUpdate() {
+		rigidbody.velocity = Vector3.zero;
 	}
 
 	/** Damage the enemy */

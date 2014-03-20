@@ -16,6 +16,10 @@ public class PlayerData:Singleton<PlayerData> {
 	private float attackRange;
 
 	void Start() {
+		Reset();
+	}
+
+	public void Reset() {
 		health = initialHealth;
 		runSpeed = initialRunSpeed;
 		attackDamage = initialAttackDamage;

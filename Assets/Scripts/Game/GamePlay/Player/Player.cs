@@ -5,6 +5,8 @@ using System.Collections;
 public class Player:MonoBehaviour {
 	[SerializeField] private GameObject playerModel;
 
+	private Boss currentBoss;
+
 	private Animator playerAnimation;
 	private PlayerCamera playerCamera;
 	private PlayerCombat playerCombat;
@@ -23,6 +25,7 @@ public class Player:MonoBehaviour {
 	
 	private bool dataInstanceFound;
 	private bool isHit;
+	private bool isInBossRoom;
 	
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
@@ -55,8 +58,10 @@ public class Player:MonoBehaviour {
 		
 		if(Vector3.Distance(transform.position, targetPosition) > 0.5f) {
 			playerAnimation.SetBool("IsRunning", true);
-			
-			playerCamera.CameraDistance = 10;
+
+			if(!isInBossRoom)
+				playerCamera.CameraDistance = 10;
+
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, PlayerData.Instance.RunSpeed * Time.deltaTime); 
 			
 			if(attachedPushable == null) {
@@ -73,7 +78,9 @@ public class Player:MonoBehaviour {
 					transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, lookRotation, 30);
 			}
 		} else {
-			playerCamera.CameraDistance = -5;
+			if(!isInBossRoom)
+				playerCamera.CameraDistance = -5;
+
 			playerAnimation.SetBool("IsRunning", false);
 		}
 
@@ -134,8 +141,16 @@ public class Player:MonoBehaviour {
 		
 		isHit = true;
 
-		if(PlayerData.Instance.Health <= 0)
-			Application.LoadLevel("Game");
+		if(PlayerData.Instance.Health <= 0) {
+			PlayerData.Instance.Reset();
+
+			if(!isInBossRoom) {
+				Application.LoadLevel("Game");
+			} else {
+
+				transform.position = GameObject.Find("Player Spawn").transform.position;
+			}
+		}
 		
 		StartCoroutine(DamageDelay(stunTime));
 	}
@@ -246,7 +261,7 @@ public class Player:MonoBehaviour {
 
 	/** Get the camera component of the player */
 	public PlayerCamera PlayerCamera {
-		get { return PlayerCamera; }
+		get { return playerCamera; }
 	}
 
 	/** Get the combat component of the player */
@@ -284,6 +299,11 @@ public class Player:MonoBehaviour {
 	
 	/** Get wheter or not the player is hit */
 	public bool Hit { 
+		get { return isHit; }
+	}
+
+	public bool InBossRoom {
+		set { isInBossRoom = value; }
 		get { return isHit; }
 	}
 }
