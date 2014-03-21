@@ -88,6 +88,8 @@ public class Bull:Boss {
 		transform.localScale = startTransform.localScale;
 
 		data = startData;
+
+		Debug.Log ("ge reset");
 	}
 	
 	public void StartAttack() {

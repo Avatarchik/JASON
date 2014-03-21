@@ -147,7 +147,7 @@ public class Player:MonoBehaviour {
 			if(!isInBossRoom) {
 				Application.LoadLevel("Game");
 			} else {
-
+				currentBoss.Reset();
 				transform.position = GameObject.Find("Player Spawn").transform.position;
 			}
 		}
@@ -254,6 +254,12 @@ public class Player:MonoBehaviour {
 		get { return playerModel; }
 	}
 
+	/** Set and/or get the current boss */
+	public Boss CurrentBoss {
+		set { currentBoss = value; }
+		get { return currentBoss; }
+	}
+
 	/** Get the animator component of the player */
 	public Animator PlayerAnimation {
 		get { return playerAnimation; }
@@ -302,6 +308,7 @@ public class Player:MonoBehaviour {
 		get { return isHit; }
 	}
 
+	/** Set and/or get wheter or not the player is in a boss room */
 	public bool InBossRoom {
 		set { isInBossRoom = value; }
 		get { return isHit; }

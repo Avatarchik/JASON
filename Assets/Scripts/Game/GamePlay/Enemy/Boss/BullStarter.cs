@@ -2,24 +2,26 @@
 using System.Collections;
 
 public class BullStarter:MonoBehaviour {
-	[SerializeField] private GameObject boss;
+	[SerializeField] private GameObject bull;
 
 	void OnTriggerEnter(Collider collider) {
 		if(collider.gameObject.CompareTag("Player")) {
-			boss.GetComponent<Bull>().StartAttack();
-			
-			this.collider.isTrigger = false;
-			
-			Transform spawn = transform.Find("Player Spawn");
-			
-			collider.gameObject.transform.position = spawn.position;
-			collider.gameObject.transform.rotation = spawn.rotation;
+			Transform playerSpawn = transform.FindChild("Player Spawn");
 
 			Player player = collider.GetComponent<Player>();
+			Bull boss = bull.GetComponent<Bull>();
 
-			player.TargetPosition = spawn.position;
+			this.collider.isTrigger = false;
+
+			player.transform.position = playerSpawn.position;
+			player.transform.rotation = playerSpawn.rotation;
+
 			player.PlayerCamera.TargetPosition = new Vector3(-10, 15, player.PlayerCamera.TargetPosition.z);
+			player.TargetPosition = playerSpawn.position;
+			player.CurrentBoss = boss;
 			player.InBossRoom = true;
+			
+			boss.StartAttack();
 		}
 	}
 }

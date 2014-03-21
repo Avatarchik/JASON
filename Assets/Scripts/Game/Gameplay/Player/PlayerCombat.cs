@@ -88,11 +88,9 @@ public class PlayerCombat:MonoBehaviour {
 
 	private IEnumerator AttackEnemyDelay() {
 		attacking = true;
-		Debug.Log ("Start attack");
+
 		while(attacking) {
-			Debug.Log ("Attacking");
 			if(canAttack) {
-				Debug.Log ("Can attack");
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 
 				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
