@@ -4,7 +4,9 @@ using System.Collections;
 public class Trigger : MonoBehaviour {
 	enum TriggerType{
 		PlayerSwitch,
-		BlockSwitch
+		BlockSwitch,
+		ArrowSwitch,
+		ArrowSwitchShort
 	}
 
 	[SerializeField] private bool toggle;
@@ -17,6 +19,8 @@ public class Trigger : MonoBehaviour {
 	private Transform character;
 
 	public Transform cameraEventTarget;
+
+	public bool arrowEnabled;
 	// Update is called once per frame
 
 	void Start(){
@@ -35,7 +39,12 @@ public class Trigger : MonoBehaviour {
 				}
 			}
 			if(coll.gameObject.tag == "Arrow"){
+				Debug.Log("ArrowHit");
+				if(type == TriggerType.ArrowSwitch){
 				StartCoroutine(CameraEvent(0));
+				}else if(type == TriggerType.ArrowSwitchShort){
+					StartCoroutine("Enabling");
+				}
 			}
 		}
 	}
@@ -55,7 +64,11 @@ public class Trigger : MonoBehaviour {
 
 		}
 	}
-	
+	IEnumerator Enabling(){
+		arrowEnabled = true;
+		yield return new WaitForSeconds(1);
+		arrowEnabled = false;
+	}
 	IEnumerator CameraEvent(int doorstate){
 		character = cam.Target;
 		cam.Target = cameraEventTarget;
