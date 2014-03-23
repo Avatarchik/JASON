@@ -74,7 +74,7 @@ public class Warrior:Enemy {
 
 		for(int i = 0; i < hits.Length; i++) {
 			if(hits[i].name == "Player")
-				player.GetComponent<Player>().Damage(data.AttackDamage, data.StunTime);
+				player.GetComponent<Player>().Damage(data.AttackDamage, data.StunTime, false);
 		}
 
 		yield return new WaitForSeconds(data.AttackDelay + Random.Range(0.3f, 1.0f));

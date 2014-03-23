@@ -2,7 +2,9 @@
 using System.Collections;
 using System;
 
-public class Enemy:MonoBehaviour {	
+public class Enemy:MonoBehaviour {
+	[SerializeField] protected GameObject scrollingCombatText;
+
 	[SerializeField] protected EnemyData data;
 
 	protected GameObject player;
@@ -36,8 +38,25 @@ public class Enemy:MonoBehaviour {
 	public virtual void Damage(int amount) {
 		data.Health -= amount;
 		
-		if(data.Health <= 0)
+		if(data.Health <= 0) {
+			DisplayCombatText(amount.ToString(), Color.red, 1);
 			OnKilled();
+		} else {
+			DisplayCombatText(amount.ToString(), Color.yellow, 1);
+		}
+	}
+	
+	protected void DisplayCombatText(string text, Color color, float size) {
+		Vector3 position = transform.position;
+		position.y += 3.5f;
+		
+		TextMesh popup = (Instantiate(Resources.Load("Prefabs/Misc/Scrolling Combat Text"), position, Quaternion.identity) as GameObject).GetComponent<TextMesh>();
+		
+		popup.transform.localScale = new Vector3(size, size, size);		
+		popup.transform.parent = this.transform;
+		
+		popup.text = text;
+		popup.color = color;
 	}
 
 	/** Called when the enemy has been killed */

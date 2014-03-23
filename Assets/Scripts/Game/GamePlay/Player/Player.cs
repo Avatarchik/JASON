@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 
 public class Player:MonoBehaviour {
-	[SerializeField] private GameObject playerModel;
+	[SerializeField] protected GameObject scrollingCombatText;
 
 	private Boss currentBoss;
 
@@ -34,7 +34,7 @@ public class Player:MonoBehaviour {
 
 		targetPosition = transform.position;
 		
-		throwablePosition = transform.FindChild("Model").FindChild("Throwable Position");
+		throwablePosition = transform.FindChild("Throwable Position");
 		pushablePosition = transform.FindChild("Pushable Position");
 
 		previousX = transform.position.x;
@@ -65,7 +65,7 @@ public class Player:MonoBehaviour {
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, PlayerData.Instance.RunSpeed * Time.deltaTime); 
 			
 			if(attachedPushable == null) {
-				Vector3 lookPosition = targetPosition - playerModel.transform.position;
+				Vector3 lookPosition = targetPosition - transform.position;
 				Quaternion lookRotation = Quaternion.identity;
 				
 				if(lookPosition != Vector3.zero)
@@ -75,7 +75,7 @@ public class Player:MonoBehaviour {
 				lookRotation.z = 0;
 				
 				if(transform.position != targetPosition)
-					transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, lookRotation, 30);
+					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 30);
 			}
 		} else {
 			if(!isInBossRoom)
@@ -135,9 +135,11 @@ public class Player:MonoBehaviour {
 	}
 
 	/** Damage the player */
-	public void Damage(int amount, float stunTime) {
+	public void Damage(int amount, float stunTime, bool crit) {
 		playerAnimation.SetBool("GettingHit", true);
 		PlayerData.Instance.Health -= amount;
+		
+		DisplayCombatText(amount.ToString(), Color.yellow, crit);
 		
 		isHit = true;
 
@@ -145,14 +147,37 @@ public class Player:MonoBehaviour {
 			PlayerData.Instance.Reset();
 
 			if(!isInBossRoom) {
-				Application.LoadLevel("Game");
+				Application.LoadLevel(Application.loadedLevel);
 			} else {
 				currentBoss.Reset();
 				transform.position = GameObject.Find("Player Spawn").transform.position;
+				targetPosition = transform.position;
 			}
 		}
 		
 		StartCoroutine(DamageDelay(stunTime));
+	}
+	
+	protected void DisplayCombatText(string text, Color color, bool crit) {
+		Vector3 position = transform.position;
+		position.y += 3.5f;
+		
+		TextMesh popup = (Instantiate(Resources.Load("Prefabs/Misc/Scrolling Combat Text"), position, Quaternion.identity) as GameObject).GetComponent<TextMesh>();
+		
+		if(crit) {
+			Vector3 ls = popup.transform.localScale;
+			
+			ls.x *= 2;
+			ls.y *= 2;
+			ls.z *= 2;
+			
+			popup.transform.localScale = ls;
+		}
+		
+		popup.transform.parent = this.transform;
+		
+		popup.text = text;
+		popup.color = color;
 	}
 
 	/** Handle the picked up object */
@@ -219,9 +244,8 @@ public class Player:MonoBehaviour {
 			Move(hit.point);
 			break;
 		case "Enemy":
-		case "Destructable":
 		case "Boss":
-			playerCombat.Attack(hit.transform.gameObject, hit.transform.tag);
+			playerCombat.StartAttack(hit.transform.gameObject);
 			break;
 		case "ThrowableObject":
 		case "PushableObject":
@@ -235,8 +259,7 @@ public class Player:MonoBehaviour {
 
 	/** Move the player */
 	private void Move(Vector3 position) {
-		playerCombat.TargetEnemy = null;
-		playerCombat.TargetDestructable = null;
+		playerCombat.Target = null;
 		targetPosition = new Vector3(position.x, 1, position.z);
 	}
 
@@ -247,11 +270,6 @@ public class Player:MonoBehaviour {
 		isHit = false;
 		
 		playerAnimation.SetBool("GettingHit", false);
-	}
-
-	/** Get the model of the player */
-	public GameObject PlayerModel {
-		get { return playerModel; }
 	}
 
 	/** Set and/or get the current boss */

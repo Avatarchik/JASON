@@ -4,43 +4,41 @@ using System;
 using SGUI;
 
 public class PlayerCombat:MonoBehaviour {
-	[SerializeField] private GameObject weaponCollisionArea;
-
 	private Player player;
+	private PlayerWeaponCollisionManager weaponCollisionManager;
 
-	private Enemy targetEnemy;
-	private Destructable targetDestructable;
+	private GameObject weaponCollisionArea;
+	private GameObject target;
 
 	private bool canAttack;
 	private bool attacking;
 	private bool defending;
 
 	void Start() {
+		weaponCollisionArea = transform.FindChild("Weapon Collision Area").gameObject;
+
 		player = GetComponent<Player>();
+		weaponCollisionManager = weaponCollisionArea.GetComponent<PlayerWeaponCollisionManager>();
 	}
 
 	void Update() {
 		canAttack = false;
 
-		if(targetEnemy != null) {
-			if(targetEnemy.IsDead) {
+		if(target != null) {
+			Enemy enemy = target.GetComponent<Enemy>();
+
+			if(enemy.IsDead) {
 				DeselectTarget();
 			} else {
-				if(targetEnemy.HasMoved)
-					if(Vector3.Distance(transform.position, targetEnemy.transform.position) >= PlayerData.Instance.AttackRange / 2)
-						player.TargetPosition = targetEnemy.transform.position;
-
-				if(Vector3.Distance(transform.position, targetEnemy.transform.position) <= PlayerData.Instance.AttackRange) {
-					player.TargetPosition = transform.position;
-					canAttack = !defending;
+				if(weaponCollisionManager.Colliders.Length > 0) {
+					foreach(Collider collider in weaponCollisionManager.Colliders) {
+						if(collider.gameObject.Equals(target)) {
+							player.TargetPosition = transform.position;
+							canAttack = !defending;
+							break;
+						}
+					}
 				}
-			}
-		} else if(targetDestructable != null) {
-			if(targetDestructable.IsDestroyed) {
-				DeselectTarget();
-			} else if(Vector3.Distance(transform.position, targetDestructable.transform.position) <= PlayerData.Instance.AttackRange) {
-				player.TargetPosition = transform.position;
-				canAttack = !defending;
 			}
 		}
 	}
@@ -56,50 +54,35 @@ public class PlayerCombat:MonoBehaviour {
 			player.TargetPosition = transform.position;
 	}
 
-	public void Attack(GameObject target, string type) {
+	public void StartAttack(GameObject target) {
 		DeselectTarget();
 
-		switch(type) {
-		case "Enemy":
-		case "Boss":
-			targetEnemy = target.GetComponent<Enemy>();
-			StartCoroutine("AttackEnemyDelay");
-			break;
-		case "Destructable":
-			targetDestructable = target.GetComponent<Destructable>();
-			StartCoroutine("AttackDestructableDelay");
-			break;
-		}
-
+		this.target = target;
 		player.TargetPosition = target.transform.position;
+
+		StartCoroutine(Attack());
 	}
 
 	private void DeselectTarget() {
 		player.PlayerAnimation.SetInteger("Attack", 0);
 
-		targetEnemy = null;
-		targetDestructable = null;
+		target = null;
 
 		attacking = false;
 
-		StopCoroutine("AttackEnemyDelay");
-		StopCoroutine("AttackDestructableDelay");
+		StopCoroutine("Attack");
 	}
 
-	private IEnumerator AttackEnemyDelay() {
+	private IEnumerator Attack() {
 		attacking = true;
 
 		while(attacking) {
 			if(canAttack) {
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 
-				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
-
 				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
 
-				foreach(Collider collider in hits)
-					if(collider.CompareTag("Enemy") || collider.CompareTag("Boss"))
-						collider.GetComponent<Enemy>().Damage(PlayerData.Instance.AttackDamage);
+				target.GetComponent<Enemy>().Damage(PlayerData.Instance.AttackDamage);
 
 				yield return new WaitForSeconds(0.01f);
 
@@ -112,40 +95,9 @@ public class PlayerCombat:MonoBehaviour {
 		}
 	}
 
-	private IEnumerator AttackDestructableDelay() {
-		attacking = true;
-
-		while(attacking) {
-			if(canAttack) {
-				int randomAnimation = UnityEngine.Random.Range(1, 4);
-				
-				Collider[] hits = Physics.OverlapSphere(weaponCollisionArea.transform.position, 1);
-				weaponCollisionArea.renderer.enabled = true;
-				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
-				
-				foreach(Collider collider in hits)
-					if(collider.CompareTag("Destructable"))
-						collider.GetComponent<Destructable>().Damage(PlayerData.Instance.AttackDamage);
-				
-				yield return new WaitForSeconds(0.01f);
-				weaponCollisionArea.renderer.enabled = false;
-				player.PlayerAnimation.SetInteger("Attack", 0);
-				
-				yield return new WaitForSeconds(PlayerData.Instance.AttackDelay);
-			} else {
-				yield return new WaitForSeconds(0.01f);
-			}
-		}
-	}
-
-	public Enemy TargetEnemy {
-		set { targetEnemy = value; }
-		get { return targetEnemy; }
-	}
-
-	public Destructable TargetDestructable {
-		set { targetDestructable = value; }
-		get { return targetDestructable; }
+	public GameObject Target {
+		set { target = value; }
+		get { return target; }
 	}
 
 	public bool Attacking {	get { return attacking; } }

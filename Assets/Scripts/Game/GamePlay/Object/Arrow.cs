@@ -38,7 +38,7 @@ public class Arrow:MonoBehaviour {
 		transform.parent = collision.transform;
 
 		if(collision.gameObject.name == "Player")
-			collision.gameObject.GetComponent<Player>().Damage(1, 0);
+			collision.gameObject.GetComponent<Player>().Damage(1, 0, false);
 
 		StartFade();
 	}

@@ -21,7 +21,7 @@ public class PlayerCamera:MonoBehaviour {
 			if((Camera.main.fieldOfView == 60 + fovDistance))
 				cameraBuffer = 0;
 
-			transform.position = Vector3.Lerp (transform.position, wantedPosition, Time.deltaTime * fovDamping);
+			transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * fovDamping);
 			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60 + fovDistance, Time.deltaTime * cameraDamping);
 		}
 	}

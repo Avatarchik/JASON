@@ -20,13 +20,13 @@ public class Bull:Boss {
 	
 	private bool stoppingCharge;
 
-	private Transform startTransform;
+	private StoreTransform startTransform;
 	private EnemyData startData;
 
 	protected override void Start() {
 		base.Start();
 
-		startTransform = transform;
+		startTransform = transform.SaveWorld();
 		startData = data;
 	}
 	
@@ -36,6 +36,7 @@ public class Bull:Boss {
 		if(data.Health <= 0) {
 			lastState = state;
 			state = State.Dead;
+			Debug.Log("DEAD");
 			return;
 		}
 	
@@ -52,7 +53,6 @@ public class Bull:Boss {
 	protected override void FixedUpdate() {
 		base.FixedUpdate();
 
-		Debug.Log(state + " " + lastState);
 		switch(state) {
 		case State.Charging:
 			Charge();
@@ -74,22 +74,17 @@ public class Bull:Boss {
 			if(state == State.Charging) {
 				lastState = state;
 				state = State.Attacking;
-				player.GetComponent<Player>().Damage(data.AttackDamage * 4, data.StunTime * 2);
+				player.GetComponent<Player>().Damage(data.AttackDamage * 4, data.StunTime * 2, true);
 			} else if(lastState != State.Charging) {
-				player.GetComponent<Player>().Damage(data.AttackDamage * 2, data.StunTime);
+				player.GetComponent<Player>().Damage(data.AttackDamage * 2, data.StunTime, false);
 			}
 			break;	
 		}
 	}
 
 	public override void Reset() {
-		transform.position = startTransform.position;
-		transform.rotation = startTransform.rotation;
-		transform.localScale = startTransform.localScale;
-
+		transform.LoadWorld(startTransform);
 		data = startData;
-
-		Debug.Log ("ge reset");
 	}
 	
 	public void StartAttack() {
@@ -99,11 +94,16 @@ public class Bull:Boss {
 		StartCoroutine(Attack());
 	}
 	
-	public override void Damage(int amount) {	
-		if(state == State.Stunned)
+	public override void Damage(int amount) {
+		if(state == State.Dead)
+			return;
+	
+		if(state == State.Stunned) {
 			data.Health -= amount;
-			
-		Debug.Log (data.Health);
+			DisplayCombatText(amount.ToString(), Color.red, 0.7f);
+		} else {
+			DisplayCombatText("Blocked", Color.gray, 0.7f);
+		}
 	}
 
 	private IEnumerator Attack() {
@@ -111,7 +111,7 @@ public class Bull:Boss {
 			if(state == State.Idle && lastState != State.Attacking) {
 				state = State.Charging;
 				playerPosition = player.transform.position - transform.position;
-				LookAt(playerPosition);
+				transform.LookAt(player.transform.position);
 			} else if(state == State.Idle && lastState == State.Attacking) {
 				lastState = state;
 				yield return new WaitForSeconds(2);
@@ -135,6 +135,8 @@ public class Bull:Boss {
 	}
 	
 	private IEnumerator Stunned() {
+		DisplayCombatText("Stunned", Color.yellow, 0.7f);
+	
 		yield return new WaitForSeconds(3);
 		
 		lastState = State.Stunned;
@@ -145,18 +147,7 @@ public class Bull:Boss {
 		while(state == State.Attacking) {
 			yield return new WaitForSeconds(data.AttackDelay);
 			
-			player.GetComponent<Player>().Damage(data.AttackDamage, data.StunTime);
+			player.GetComponent<Player>().Damage(data.AttackDamage, data.StunTime, false);
 		}
-	}
-	
-	private void LookAt(Vector3 position) {
-		Vector3 localTarget = transform.InverseTransformPoint(position);
-		
-		float angle = (float)Math.Atan2(localTarget.x, localTarget.z) * Mathf.Rad2Deg;
-		
-		Vector3 eurlerAngleVelocity = new Vector3(0, angle, 0);
-		Quaternion deltaRotation = Quaternion.Euler(eurlerAngleVelocity * Time.deltaTime);
-		
-		rigidbody.MoveRotation(rigidbody.rotation * deltaRotation);
 	}
 }
