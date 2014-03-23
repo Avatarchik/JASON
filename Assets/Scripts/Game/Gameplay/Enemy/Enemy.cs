@@ -31,7 +31,9 @@ public class Enemy:MonoBehaviour {
 	}
 
 	protected virtual void FixedUpdate() {
+		if(rigidbody != null){
 		rigidbody.velocity = Vector3.zero;
+		}
 	}
 
 	/** Damage the enemy */

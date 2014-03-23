@@ -27,9 +27,11 @@ public class FireTrap : MonoBehaviour {
 	IEnumerator ActivateGrill(){
 		while(true){
 		yield return new WaitForSeconds(time * Random.Range(0,3));
+		collider.enabled = true;
 		enabled = true;
 		yield return new WaitForSeconds(3);
 		enabled = false;
+		collider.enabled = false;
 		}
 	}
 }

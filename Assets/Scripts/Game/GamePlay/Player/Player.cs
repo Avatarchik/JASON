@@ -85,7 +85,7 @@ public class Player:MonoBehaviour {
 		}
 
 		if(transform.position.x < previousX)
-			playerCamera.CameraDistance = 20;
+			playerCamera.CameraDistance = 10;
 
 		previousX = transform.position.x;
 	}
@@ -232,6 +232,9 @@ public class Player:MonoBehaviour {
 	}
 
 	/** Handle the input */
+	void OnCollisionEnter(Collision coll){
+		Debug.Log(coll.gameObject.name);
+	}
 	private void HandleInput(RaycastHit hit) {
 		if(hit.collider == null)
 			return;

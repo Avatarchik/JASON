@@ -6,7 +6,8 @@ public class Trigger : MonoBehaviour {
 		PlayerSwitch,
 		BlockSwitch,
 		ArrowSwitch,
-		ArrowSwitchShort
+		ArrowSwitchShort,
+		FireItemSwitch
 	}
 
 	[SerializeField] private bool toggle;
@@ -35,6 +36,11 @@ public class Trigger : MonoBehaviour {
 			}
 			}else if(coll.gameObject.tag == "PushableObject"){
 				if(type == TriggerType.BlockSwitch){
+					StartCoroutine(CameraEvent(0));
+				}
+			}
+			if(coll.gameObject.tag == "FireDungeonItem"){
+				if(type == TriggerType.FireItemSwitch){
 					StartCoroutine(CameraEvent(0));
 				}
 			}

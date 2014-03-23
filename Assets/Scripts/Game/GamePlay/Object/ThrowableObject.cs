@@ -5,7 +5,8 @@ public class ThrowableObject:InteractableObject {
 	public enum ObjectType {
 		Normal,
 		Key,
-		BossKey
+		BossKey,
+		FireItem
 	}
 
 	[SerializeField] private ObjectType type;
@@ -14,8 +15,15 @@ public class ThrowableObject:InteractableObject {
 
 	private bool isThrown;
 	private bool isPickedUp;
-
+	private Vector3 respawnPosition;
+	void Start(){
+		respawnPosition = transform.position;
+	}
 	protected override void FixedUpdate() {
+		if(transform.position.y <= -20){
+			transform.position = respawnPosition;
+			rigidbody.velocity = Vector3.zero;
+		}
 		if(isThrown) {
 			transform.Translate(Vector3.forward * 0.8f);
 			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;

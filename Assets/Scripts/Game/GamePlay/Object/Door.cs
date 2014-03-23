@@ -9,16 +9,20 @@ public class Door:MonoBehaviour {
 	}
 	
 	[SerializeField] private DoorType type;
-
+	[SerializeField] private GameObject lockArt;
 	public void Open() {
-		renderer.enabled = false;
+		animation.enabled = true;
+		if(type == DoorType.Key){
+			lockArt.renderer.enabled = false;
+		}
+		animation.Play();
 		collider.enabled = false;
-		
-		Destroy(transform.GetChild(0).gameObject);
+
+		//Destroy(transform.GetChild(0).gameObject);
 	}
 	
 	public void Close() {
-		renderer.enabled = true;
+
 		collider.enabled = true;
 	}
 	

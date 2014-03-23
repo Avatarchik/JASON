@@ -5,7 +5,7 @@ public class Warrior:Enemy {
 	[SerializeField] private GameObject overlapPosition;
 
 	private Animator enemyAnimation;
-
+	private bool disableComponents = false;
 	private bool isAttackingPlayer;
 
 	protected override void Start() {
@@ -21,12 +21,15 @@ public class Warrior:Enemy {
 
 		if(isDead) {
 			if(enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("DeadIdle")) {
+				if(!disableComponents){
 				enemyAnimation.enabled = false;
 
-				gameObject.tag = "Corpse";
-
+				gameObject.tag = "Enemy Corpse";
+				
 				Destroy(GetComponent<Rigidbody>());
 				Destroy(GetComponent<CapsuleCollider>());
+				disableComponents = true;
+				}
 			}
 
 			return;
