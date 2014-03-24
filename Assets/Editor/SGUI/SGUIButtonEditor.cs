@@ -5,9 +5,9 @@ using System.Collections;
 using System.Reflection;
 using SGUI;
 
-[CustomPropertyDrawer(typeof(SGUITextureButton))]
-public class SGUITextureButtonEditor:SPropertyDrawer {
-	public const float BASE_HEIGHT = 168f;
+[CustomPropertyDrawer(typeof(SGUIButton))]
+public class SGUIButtonEditor:SPropertyDrawer {
+	public const float BASE_HEIGHT = 301f;
 	public const int LABEL_WIDTH = 80;
 	
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {		
@@ -32,5 +32,16 @@ public class SGUITextureButtonEditor:SPropertyDrawer {
 		DrawProperty("textureNormal", new GUIContent("Normal"));
 		DrawProperty("textureHover", new GUIContent("Hover"));
 		DrawProperty("textureActive", new GUIContent("Active"));
+		
+		// Text
+		DrawLabel("Text");
+		DrawProperty("text");
+		DrawProperty("textFont", new GUIContent("Font"));
+		DrawProperty("textSize", new GUIContent("Size"));
+		DrawProperty("textAnchor", new GUIContent("Anchor"));
+		
+		// Misc
+		DrawLabel("Misc.");
+		DrawProperty("isToggle", new GUIContent("Is Toggle"));
 	}
 }

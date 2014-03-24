@@ -6,7 +6,6 @@ public class SGUIManager:Singleton<SGUIManager> {
 	[SerializeField] private Vector2 nativeGuiSize = new Vector2(1920, 1080);
 
 	private List<SGUITexture> sguiTextures = new List<SGUITexture>();
-	private List<SGUISprite> sguiSprites = new List<SGUISprite>();
 	private List<SGUIButton> sguiButtons = new List<SGUIButton>();
 	
 	void OnGUI() {
@@ -14,9 +13,6 @@ public class SGUIManager:Singleton<SGUIManager> {
 	
 		foreach(SGUITexture texture in sguiTextures)
 			texture.Update(nativeGuiSize);
-			
-		foreach(SGUISprite sprite in sguiSprites)
-			sprite.Update(nativeGuiSize);
 			
 		foreach(SGUIButton button in sguiButtons)
 			button.Update(nativeGuiSize);		
@@ -38,14 +34,6 @@ public class SGUIManager:Singleton<SGUIManager> {
 		sguiTextures.Add(texture);
 	}
 	
-	internal void RegisterSprite(SGUISprite sprite) {
-		foreach(SGUISprite other in sguiSprites)
-			if(sprite.Equals(other))
-				other.Destroy();
-		
-		sguiSprites.Add(sprite);
-	}
-	
 	internal void RegisterButton(SGUIButton button) {
 		foreach(SGUIButton other in sguiButtons)
 			if(button.Equals(other))
@@ -56,10 +44,6 @@ public class SGUIManager:Singleton<SGUIManager> {
 	
 	internal void RemoveTexture(SGUITexture texture) {
 		sguiTextures.Remove(texture);
-	}
-	
-	internal void RemoveSprite(SGUISprite sprite) {
-		sguiSprites.Remove(sprite);
 	}
 	
 	internal void RemoveButton(SGUIButton button) {

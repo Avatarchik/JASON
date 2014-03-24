@@ -62,54 +62,33 @@ namespace SGUI {
 		public Texture2D Texture { get { return texture; } }
 	}
 
-	/** Sprite class */
-	[Serializable]
-	public class SGUISprite:SGUI {
-		[SerializeField] private Texture2D spriteSheet;
-		[SerializeField] private Vector2 spriteSheetSize;
-		
-		[SerializeField] private Vector2 coordinates;
-
-		/** Create the sprite */
-		public void Create() {		
-			SGUIManager.Instance.RegisterSprite(this);
-		}
-		
-		/** Destroy the sprite */
-		public void Destroy() {
-			SGUIManager.Instance.RemoveSprite(this);
-		}
-		
-		/** Update the sprite */
-		internal void Update(Vector2 nativeScreenSize) {
-			if(!activated)
-				return;
-
-			GUI.DrawTextureWithTexCoords(bounds, spriteSheet, new Rect(coordinates.x / spriteSheetSize.x, coordinates.y / spriteSheetSize.y, 0, 0));
-		}
-
-		/** Compare the sprite to another */
-		private bool Equals(SGUISprite other) {
-			bool result = false;
-			
-			if(activated.Equals(other.activated && bounds.Equals(other.bounds)))
-				if(spriteSheet.Equals(other.spriteSheet) && spriteSheetSize.Equals(other.spriteSheetSize) && coordinates.Equals(other.coordinates))
-					result = true;
-			
-			return result;
-		}
-	}
-
 	/** Button base class */
 	[Serializable]
 	public class SGUIButton:SGUI {
-		protected enum ButtonState {
+		private enum ButtonState {
 			NORMAL,
 			HOVER,
-			ACTIVE
+			ACTIVE,
+			TOGGLED
 		}
-
-		protected ButtonState state;
+		
+		[SerializeField] private Texture2D textureNormal;
+		[SerializeField] private Texture2D textureHover;
+		[SerializeField] private Texture2D textureActive;
+		
+		[SerializeField] private string text;
+		[SerializeField] private Font textFont;
+		[SerializeField] private int textSize;
+		[SerializeField] private TextAnchor textAnchor;
+		
+		[SerializeField] private bool isToggle;
+		
+		private ButtonState state;
+		
+		private Texture2D currentTexture;
+		
+		private bool wasMouseDown;
+		private bool firstToggle;
 
 		/** Create the button */
 		public void Create() {		
@@ -124,65 +103,58 @@ namespace SGUI {
 		}
 
 		/** Update the button */
-		internal virtual void Update(Vector2 nativeScreenSize) { }
-
-		/** Update the texture of the button */
-		internal virtual void SwitchTexture() { }
-		
-		/** Return wheter or not the mouse is hovering */
-		internal bool IsMouseOver(SGUIButton button) {
-			Vector3 mouse = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
-			
-			if(mouse.x >= button.bounds.x && mouse.x <= button.bounds.x + button.bounds.width &&
-			   mouse.y >= button.bounds.y && mouse.y <= button.bounds.y + button.bounds.width)
-				return true;
-			
-			return false;
-		}
-
-		/** Return wheter or not the button is currently in it's default state */
-		public bool Normal { get { return state == ButtonState.NORMAL; } }
-		
-		/** Return wheter or not the button is currently being hovered */
-		public bool Hover { get { return state == ButtonState.HOVER; } }
-		
-		/** Return wheter or not the button is currently being clicked */
-		public bool Click { get { return state == ButtonState.ACTIVE; } }
-	}
-
-	/** Texture button class */
-	[Serializable]
-	public class SGUITextureButton:SGUIButton {
-		[SerializeField] private Texture2D textureNormal;
-		[SerializeField] private Texture2D textureHover;
-		[SerializeField] private Texture2D textureActive;
-		
-		private Texture2D currentTexture;
-
-		/** Update the button */
-		internal override void Update(Vector2 nativeScreenSize) {
+		internal void Update(Vector2 nativeScreenSize) {
 			if(!activated)
 				return;
-				
+			
 			if(currentTexture == null)
 				currentTexture = textureNormal;
+			
+			if(IsMouseOver()) {
+				if(state != ButtonState.TOGGLED)
+					state = ButtonState.HOVER;
 				
-			if(IsMouseOver(this)) {
-				state = ButtonState.HOVER;
-				
-				if(Input.GetMouseButton(0)) 
-					state = ButtonState.ACTIVE;
+				if(!isToggle) {
+					if(Input.GetMouseButton(0))
+						state = ButtonState.ACTIVE;
+				} else {
+					if(!wasMouseDown && Input.GetMouseButtonDown(0)) {
+						if(state == ButtonState.HOVER) {
+							state = ButtonState.TOGGLED;
+						} else {
+							state = ButtonState.ACTIVE;
+						}
+						
+						firstToggle = true;
+						wasMouseDown = true;
+					} else {
+						wasMouseDown = false;
+					}
+				}
 			} else {
-				state = ButtonState.NORMAL;
+				if(state != ButtonState.TOGGLED)
+					state = ButtonState.NORMAL;
 			}
-
-			GUI.DrawTexture(bounds, currentTexture);
+			
+			if(!String.IsNullOrEmpty(text)) {
+				GUIStyle style = new GUIStyle();
+				
+				style.normal.background = currentTexture;
+				
+				style.font = textFont;
+				style.fontSize = textSize;
+				style.alignment = textAnchor;
+				
+				GUI.Label(bounds, new GUIContent(text), style);
+			} else {
+				GUI.DrawTexture(bounds, currentTexture);
+			}
 			
 			SwitchTexture();
 		}
 
-		/** Switch the texture of the button */
-		internal override void SwitchTexture() {
+		/** Update the texture of the button */
+		private void SwitchTexture() {
 			switch(state) {
 			case ButtonState.NORMAL:
 				currentTexture = textureNormal;
@@ -191,13 +163,25 @@ namespace SGUI {
 				currentTexture = textureHover;
 				break;
 			case ButtonState.ACTIVE:
+			case ButtonState.TOGGLED:
 				currentTexture = textureActive;
 				break;
 			}
 		}
-
+		
+		/** Return wheter or not the mouse is hovering */
+		private bool IsMouseOver() {
+			Vector3 mouse = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
+			
+			if(mouse.x >= bounds.x && mouse.x <= bounds.x + bounds.width &&
+			   mouse.y >= bounds.y && mouse.y <= bounds.y + bounds.width)
+				return true;
+			
+			return false;
+		}
+		
 		/** Compare the button to another */
-		private bool Equals(SGUITextureButton other) {
+		private bool Equals(SGUIButton other) {
 			bool result = false;
 			
 			if(activated.Equals(other.activated && bounds.Equals(other.bounds)))
@@ -206,71 +190,32 @@ namespace SGUI {
 			
 			return result;
 		}
-	}
 
-	/** Sprite button class */
-	[Serializable]
-	public class SGUISpriteButton:SGUIButton {
-		[SerializeField] private Texture2D spriteSheet;
-		[SerializeField] private Vector2 spriteSheetSize;
-
-		[SerializeField] private Vector2 spriteNormal;
-		[SerializeField] private Vector2 spriteHover;
-		[SerializeField] private Vector2 spriteActive;
-
-		private Vector2 currentSprite;
-
-		private bool initialized;
-
-		/** Update the button */
-		internal override void Update(Vector2 nativeScreenSize) {
-			if(!activated)
-				return;
-			
-			if(!initialized) {
-				currentSprite = spriteNormal;
-				
-				initialized = true;
-			}
-			
-			if(IsMouseOver(this)) {
-				state = ButtonState.HOVER;
-				
-				if(Input.GetMouseButton(0)) 
-					state = ButtonState.ACTIVE;
-			} else {
-				state = ButtonState.NORMAL;
-			}	
-
-			GUI.DrawTextureWithTexCoords(bounds, spriteSheet, new Rect(currentSprite.x / spriteSheetSize.x, currentSprite.y / spriteSheetSize.y, 0, 0));
-			
-			SwitchTexture();
+		/** Return wheter or not the button is currently in it's default state */
+		public bool Normal {
+			get { return state == ButtonState.NORMAL; }
 		}
-
-		/** Switch the texture of the button */
-		internal override void SwitchTexture() {
-			switch(state) {
-			case ButtonState.NORMAL:
-				currentSprite = spriteNormal;
-				break;
-			case ButtonState.HOVER:
-				currentSprite = spriteHover;
-				break;
-			case ButtonState.ACTIVE:
-				currentSprite = spriteActive;
-				break;
-			}
+		
+		/** Return wheter or not the button is currently being hovered */
+		public bool Hover {
+			get { return state == ButtonState.HOVER; }
 		}
-
-		/** Switch the texture of the button */
-		private bool Equals(SGUISpriteButton other) {
-			bool result = false;
-			
-			if(activated.Equals(other.activated && bounds.Equals(other.bounds)))
-				if(spriteSheet.Equals(other.spriteSheet) && spriteSheetSize.Equals(other.spriteSheetSize) && spriteNormal.Equals(other.spriteNormal) && spriteHover.Equals(other.spriteHover) && spriteActive.Equals(other.spriteActive))
-					result = true;
-			
-			return result;
+		
+		/** Return wheter or not the button is currently being clicked */
+		public bool Click {
+			get { return state == ButtonState.ACTIVE; }
+		}
+		
+		/** Return wheter or not the button is toggled */
+		public bool Toggle {
+			get {
+				if(firstToggle) {
+					firstToggle = false;
+					return true;
+				}
+				
+				return false;
+			}
 		}
 	}
 }

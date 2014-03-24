@@ -13,7 +13,7 @@ public class GameHUD:GUIBehaviour {
 	[SerializeField] private SGUITexture[] innerBars;
 	[SerializeField] private SGUITexture outerBar;
 
-	[SerializeField] private SGUITextureButton[] buttons;
+	[SerializeField] private SGUIButton[] buttons;
 
 	private Player player;
 
@@ -71,12 +71,10 @@ public class GameHUD:GUIBehaviour {
 	protected override void OnGUI() {
 		base.OnGUI();
 	
+		if(buttons[0].Toggle)
+			player.PlayerCombat.Defend(!player.PlayerCombat.Defending);
+		
 		if(clickCooldown <= 0) {
-			if(buttons[0].Click) {
-				clickCooldown = 10;
-				player.PlayerCombat.Defend(!player.PlayerCombat.Defending);
-			}
-			
 			if(buttons[1].Click) {
 				clickCooldown = 10;
 				player.ThrowObject();
@@ -105,7 +103,7 @@ public class GameHUD:GUIBehaviour {
 		foreach(SGUITexture texture in innerBars)
 			texture.Create();
 		
-		foreach(SGUITextureButton button in buttons)
+		foreach(SGUIButton button in buttons)
 			button.Create();
 	}
 }

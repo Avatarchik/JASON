@@ -4,7 +4,7 @@ using SGUI;
 
 public class MenuMain:GUIBehaviour {
 	public GameObject cameraRotation;
-	public SGUITextureButton[] buttons;
+	public SGUIButton[] buttons;
 	public Material[] materials;
     private bool fire;
 
@@ -71,7 +71,7 @@ public class MenuMain:GUIBehaviour {
 		while(GameObject.FindGameObjectWithTag("Global Manager") == null)
 			yield return new WaitForSeconds(0.3f);
 
-		foreach(SGUITextureButton button in buttons)
+		foreach(SGUIButton button in buttons)
 			button.Create();
 	}
 }
