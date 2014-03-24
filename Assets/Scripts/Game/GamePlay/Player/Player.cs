@@ -106,6 +106,7 @@ public class Player:MonoBehaviour {
 				attachedThrowable.collider.enabled = false;
 				break;
 			case "PushableObject":
+				playerCombat.WeaponCollisionArea.collider.enabled = false;
 				attachedPushable = obj.GetComponent<PushableObject>();
 				transform.LookAt(attachedPushable.transform.position);
 				transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
@@ -124,6 +125,8 @@ public class Player:MonoBehaviour {
 		
 		attachedThrowable = null;
 		attachedPushable = null;
+
+		playerCombat.WeaponCollisionArea.collider.enabled = true;
 	}
 
 	/** Throw the picked up object */
@@ -231,17 +234,13 @@ public class Player:MonoBehaviour {
 		}
 	}
 
-	/** Handle the input */
-	void OnCollisionEnter(Collision coll){
-		Debug.Log(coll.gameObject.name);
-	}
 	private void HandleInput(RaycastHit hit) {
 		if(hit.collider == null)
 			return;
 		
 		if(playerCombat.Defending)
 			return;
-		
+
 		switch(hit.transform.tag) {
 		case "Floor":
 			Move(hit.point);

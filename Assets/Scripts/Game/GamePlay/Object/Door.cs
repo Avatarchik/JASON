@@ -9,20 +9,31 @@ public class Door:MonoBehaviour {
 	}
 	
 	[SerializeField] private DoorType type;
-	[SerializeField] private GameObject lockArt;
+
+	private GameObject lockGo;
+
+	void Start() {
+		Transform lockTransform = transform.FindChild ("Lock");
+
+		if(lockTransform != null)
+			lockGo = lockTransform.gameObject;
+	}
+
 	public void Open() {
-		animation.enabled = true;
-		if(type == DoorType.Key){
-			lockArt.renderer.enabled = false;
-		}
-		animation.Play();
+		if(lockGo != null)
+			lockGo.renderer.enabled = false;
+
 		collider.enabled = false;
 
-		//Destroy(transform.GetChild(0).gameObject);
+		if(animation != null) {
+			animation.enabled = true;
+			animation.Play();
+		} else {
+			Destroy(gameObject);
+		}
 	}
 	
 	public void Close() {
-
 		collider.enabled = true;
 	}
 	

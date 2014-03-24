@@ -6,7 +6,7 @@ public class FireTrap : MonoBehaviour {
 	public Color setColor;
 	private float colorValue;
 	public float time;
-	public bool enabled;
+	public bool isEnabled;
 	// Use this for initialization
 	void Start () {
 		StartCoroutine("ActivateGrill");
@@ -14,7 +14,7 @@ public class FireTrap : MonoBehaviour {
 	void FixedUpdate(){
 		setColor = new Color(colorValue,colorValue,colorValue);
 		mats.renderer.material.color = setColor;
-		if(enabled){
+		if(isEnabled){
 			if(colorValue <= 1){
 			colorValue += 0.01f;
 			}
@@ -28,9 +28,9 @@ public class FireTrap : MonoBehaviour {
 		while(true){
 		yield return new WaitForSeconds(time * Random.Range(0,3));
 		collider.enabled = true;
-		enabled = true;
+		isEnabled = true;
 		yield return new WaitForSeconds(3);
-		enabled = false;
+		isEnabled = false;
 		collider.enabled = false;
 		}
 	}

@@ -21,7 +21,13 @@ public class BullStarter:MonoBehaviour {
 			player.CurrentBoss = boss;
 			player.InBossRoom = true;
 			
-			boss.StartAttack();
+			StartCoroutine(StartDelay(boss));
 		}
+	}
+
+	private IEnumerator StartDelay(Bull boss) {
+		yield return new WaitForSeconds(2.0f);
+
+		boss.StartAttack();
 	}
 }

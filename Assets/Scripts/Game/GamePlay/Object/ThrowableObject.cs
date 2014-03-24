@@ -58,6 +58,16 @@ public class ThrowableObject:InteractableObject {
 		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 	}
 
+	public ObjectType Type {
+		set { type = value; }
+		get { return type; }
+	}
+
+	public bool Destroyable {
+		set { destroyable = value; }
+		get { return destroyable; }
+	}
+
 	public bool Thrown {
 		set { isThrown = value; }
 		get { return isThrown; }

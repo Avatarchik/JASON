@@ -103,4 +103,8 @@ public class PlayerCombat:MonoBehaviour {
 	public bool Attacking {	get { return attacking; } }
 
 	public bool Defending { get { return defending; } }
+
+	public GameObject WeaponCollisionArea {
+		get { return weaponCollisionArea; }
+	}
 }
