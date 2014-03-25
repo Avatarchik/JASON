@@ -15,9 +15,10 @@ public class ThrowableObject:InteractableObject {
 
 	private bool isThrown;
 	private bool isPickedUp;
+
 	private Vector3 respawnPosition;
 
-	void Start(){
+	void Start() {
 		respawnPosition = transform.position;
 	}
 
@@ -36,6 +37,7 @@ public class ThrowableObject:InteractableObject {
 
 	void OnCollisionEnter(Collision collision) {
 		isThrown = false;
+		rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
 		switch(collision.gameObject.tag) {
 		case "Door":

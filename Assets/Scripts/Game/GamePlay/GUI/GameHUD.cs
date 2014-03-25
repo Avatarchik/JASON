@@ -21,8 +21,7 @@ public class GameHUD:GUIBehaviour {
 
 	private Rect originalBarWidth;
 
-	private int timershit;
-	private int clickCooldown;
+	private int hitTimer;
 
 	private bool playerInstanceFound;
 
@@ -46,41 +45,39 @@ public class GameHUD:GUIBehaviour {
 			}
 		}
 
-		if(player.PlayerCombat.Defending) {
-			SwitchBar(Bars.Shield);
-		} else if(player.Hit) {
+		UpdateHealthBar();
+
+		if(buttons[0].Toggle)
+            player.PlayerCombat.Defend(!player.PlayerCombat.Defending);
+
+		if(player.AttachedThrowable == null) {
+			buttons[1].Activated = false;
+		} else {
+			buttons[1].Activated = true;
+
+			if(buttons[1].Click)
+				player.ThrowObject();
+		}
+	}
+
+	private void UpdateHealthBar() {
+		if(player.Hit) {
 			SwitchBar(Bars.Damage);
+		} else if(player.PlayerCombat.Defending) {
+			SwitchBar(Bars.Shield);
 		} else {
 			SwitchBar(Bars.Health);
 		}
-		
+
 		Rect bounds = originalBarWidth;
 		bounds.width = bounds.width / PlayerData.Instance.InitialHealth * PlayerData.Instance.Health;
 
 		innerBars[(int)activeBar].Bounds = bounds;
-		
-		if(player.PlayerCombat.Attacking) {
-			timershit -= 10;
-		} else {
-			timershit = 300;
-		}
-		
-		clickCooldown--;
-	}
-	
-	protected override void OnGUI() {
-		base.OnGUI();
 
-        if(buttons[0].Toggle) {
-            player.PlayerCombat.Defend(!player.PlayerCombat.Defending);
-            Debug.Log("Sweek");
-        }
-		
-		if(clickCooldown <= 0) {
-			if(buttons[1].Click) {
-				clickCooldown = 10;
-				player.ThrowObject();
-			}
+		if(player.PlayerCombat.Attacking) {
+			hitTimer -= 10;
+		} else {
+			hitTimer = 300;
 		}
 	}
 

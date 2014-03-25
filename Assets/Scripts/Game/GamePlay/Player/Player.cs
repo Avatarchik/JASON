@@ -95,20 +95,35 @@ public class Player:MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if(pickupWhenReady) {
+		HandleCollision(collision);
+	}
+
+	void OnCollisionStay(Collision collision) {
+		HandleCollision(collision);
+	}
+
+	private void HandleCollision(Collision collision) {
+		if(pickupWhenReady != null) {
 			if(collision.gameObject.CompareTag(pickupWhenReady.tag)) {
 				switch(collision.gameObject.tag) {
-					case "ThrowableObject":
-						attachedThrowable = pickupWhenReady.GetComponent<ThrowableObject>();
-						attachedThrowable.collider.enabled = false;
-						break;
-					case "PushableObject":
-						playerCombat.WeaponCollisionArea.collider.enabled = false;
-						attachedPushable = pickupWhenReady.GetComponent<PushableObject>();
-						transform.LookAt(attachedPushable.transform.position);
-						transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
-						break;
+				case "ThrowableObject":
+					attachedThrowable = pickupWhenReady.GetComponent<ThrowableObject>();
+
+					attachedThrowable.collider.enabled = false;
+
+					targetPosition = transform.position;
+					break;
+				case "PushableObject":
+					attachedPushable = pickupWhenReady.GetComponent<PushableObject>();
+										
+					transform.LookAt(attachedPushable.transform.position);
+					transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+
+					targetPosition = transform.position;
+					break;
 				}
+
+				pickupWhenReady = null;
 			}
 		}
 
@@ -132,24 +147,26 @@ public class Player:MonoBehaviour {
 	/** Drop the picked up object */
 	public void Drop() {
 		if(attachedPushable != null) {
-			attachedPushable.rigidbody.mass = 1000;
-			attachedPushable.rigidbody.drag = 1000;
-			attachedPushable.rigidbody.angularDrag = 1000;
+			attachedPushable.rigidbody.isKinematic = true;
+			targetPosition = transform.position;
+		}
+
+		if(attachedThrowable != null) {
+			attachedThrowable.collider.enabled = true;
+			attachedThrowable.transform.position = new Vector3(attachedThrowable.transform.position.x, 0.58f, attachedThrowable.transform.position.z);
 		}
 		
 		attachedThrowable = null;
 		attachedPushable = null;
-		pickupWhenReady = null;
-
-		playerCombat.WeaponCollisionArea.collider.enabled = true;
 	}
 
 	/** Throw the picked up object */
 	public void ThrowObject() {
-		if(attachedThrowable != null) {
-			attachedThrowable.Thrown = true;
-			Drop();
-		}
+		if(attachedThrowable == null)
+			return;
+
+		attachedThrowable.Thrown = true;
+		Drop();
 	}
 
 	/** Damage the player */
@@ -203,24 +220,17 @@ public class Player:MonoBehaviour {
 		if(attachedThrowable != null) {
 			attachedThrowable.transform.position = throwablePosition.position;
 			attachedThrowable.transform.rotation = throwablePosition.rotation;
-		} else if(attachedPushable != null) {
-			if(attachedPushable.transform.position == pushablePosition.position) {
-				attachedPushable.rigidbody.mass = 1000;
-				attachedPushable.rigidbody.drag = 1000;
-				attachedPushable.rigidbody.angularDrag = 1000;
-			} else {
-				attachedPushable.rigidbody.mass = 1;
-				attachedPushable.rigidbody.drag = 1;
-				attachedPushable.rigidbody.angularDrag = 0.5f;
-			}
-			
+		} 
+		
+		if(attachedPushable != null) {
+			attachedPushable.rigidbody.isKinematic = attachedPushable.transform.position.Equals(pushablePosition.position) ? true : false;
 			attachedPushable.rigidbody.velocity = -(attachedPushable.transform.position - pushablePosition.position).normalized * 5;
 
 			if(Vector3.Distance(transform.position, attachedPushable.transform.position) > 5)
 				Drop();
 		}
 	}
-
+	
 	/** Check for input */
 	private void CheckForInput() {
 		RaycastHit hit;
@@ -257,18 +267,18 @@ public class Player:MonoBehaviour {
 			return;
 
 		switch(hit.transform.tag) {
-		case "Floor":
-			Move(hit.point);
-			break;
 		case "Enemy":
 		case "Boss":
+			playerCombat.WeaponCollisionArea.collider.enabled = true;
 			playerCombat.StartAttack(hit.transform.gameObject);
 			break;
 		case "ThrowableObject":
 		case "PushableObject":
+			playerCombat.WeaponCollisionArea.collider.enabled = false;
 			Pickup(hit.collider.gameObject);
 			break;
 		default:
+			playerCombat.WeaponCollisionArea.collider.enabled = false;
 			Move(hit.point);
 			break;
 		}

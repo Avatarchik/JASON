@@ -89,7 +89,6 @@ namespace SGUI {
 		
 		private bool wasMouseDown;
 		private bool firstToggle;
-        private bool manualEdit;
 
 		/** Create the button */
 		public void Create() {		
@@ -108,38 +107,34 @@ namespace SGUI {
 			if(!activated)
 				return;
 			
-			if(currentTexture == null)
-				currentTexture = textureNormal;
+		if(currentTexture == null)
+			currentTexture = textureNormal;
 
-			//if(isToggle && Application.platform == RuntimePlatform.Android) {
-				
-			//} else {
-				if(IsMouseOver()) {
-					if(state != ButtonState.TOGGLED)
-						state = ButtonState.HOVER;
+			if(IsMouseOver()) {
+				if(state != ButtonState.TOGGLED)
+					state = ButtonState.HOVER;
 
-					if(!isToggle) {
-						if(Input.GetMouseButton(0))
-							state = ButtonState.ACTIVE;
-					} else {
-						if(!wasMouseDown && Input.GetMouseButtonDown(0)) {
-							if(state == ButtonState.HOVER) {
-								state = ButtonState.TOGGLED;
-								firstToggle = true;
-							} else {
-								state = ButtonState.ACTIVE;
-							}
-
-							wasMouseDown = true;
-						} else {
-							wasMouseDown = false;
-						}
-					}
+				if(!isToggle) {
+					if(Input.GetMouseButton(0))
+						state = ButtonState.ACTIVE;
 				} else {
-					if(state != ButtonState.TOGGLED)
-						state = ButtonState.NORMAL;
+					if(!wasMouseDown && Input.GetMouseButtonDown(0)) {
+						if(state == ButtonState.HOVER) {
+							state = ButtonState.TOGGLED;
+							firstToggle = true;
+						} else {
+							state = ButtonState.ACTIVE;
+						}
+
+						wasMouseDown = true;
+					} else {
+						wasMouseDown = false;
+					}
 				}
-			//}
+			} else {
+				if(state != ButtonState.TOGGLED)
+					state = ButtonState.NORMAL;
+			}
 			
 			if(!String.IsNullOrEmpty(text)) {
 				GUIStyle style = new GUIStyle();
@@ -224,17 +219,13 @@ namespace SGUI {
 		}
 
         /** Manually set the state */
-        public void SetState(ButtonState state) {
-            manualEdit = true;
-            this.state = state;
+        public ButtonState State {
+            set {
+                state = value;
 
-            if(state == ButtonState.TOGGLED)
-                firstToggle = true;
-        }
-
-        /** Automaticly detect the state */
-        public void ResetState() {
-            manualEdit = false;
+                if (state == ButtonState.TOGGLED)
+                    firstToggle = true;
+            }
         }
 	}
 }
