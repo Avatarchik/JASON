@@ -16,23 +16,25 @@ public class ThrowableObject:InteractableObject {
 	private bool isThrown;
 	private bool isPickedUp;
 	private Vector3 respawnPosition;
+
 	void Start(){
 		respawnPosition = transform.position;
 	}
+
 	protected override void FixedUpdate() {
 		if(transform.position.y <= -20){
 			transform.position = respawnPosition;
 			rigidbody.velocity = Vector3.zero;
 		}
+
 		if(isThrown) {
-			transform.Translate(Vector3.forward * 0.8f);
-			rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+			rigidbody.AddForce(Vector3.forward);
+			rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 			collider.enabled = true;
 		}
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		rigidbody.constraints = RigidbodyConstraints.None;
 		isThrown = false;
 
 		switch(collision.gameObject.tag) {
@@ -43,7 +45,7 @@ public class ThrowableObject:InteractableObject {
 	}
 
 	/** Handle a collision with a door */
-	private void HandleDoorCollision(Door door) {
+	public void HandleDoorCollision(Door door) {
 		if(type == ObjectType.Key && door.Type == Door.DoorType.Key) {
 			door.Open();
 

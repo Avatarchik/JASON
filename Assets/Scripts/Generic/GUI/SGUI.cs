@@ -89,6 +89,7 @@ namespace SGUI {
 		
 		private bool wasMouseDown;
 		private bool firstToggle;
+        private bool manualEdit;
 
 		/** Create the button */
 		public void Create() {		
@@ -110,47 +111,35 @@ namespace SGUI {
 			if(currentTexture == null)
 				currentTexture = textureNormal;
 
-            if(Application.platform == RuntimePlatform.Android) {
-                if(Input.touchCount <= 0)
-                    return;
+			//if(isToggle && Application.platform == RuntimePlatform.Android) {
+				
+			//} else {
+				if(IsMouseOver()) {
+					if(state != ButtonState.TOGGLED)
+						state = ButtonState.HOVER;
 
-				if(IsTouched()) {
-					if(!wasMouseDown) {
-						if(!isToggle) {
+					if(!isToggle) {
+						if(Input.GetMouseButton(0))
 							state = ButtonState.ACTIVE;
-						} else {
-							state = (state == ButtonState.NORMAL) ? ButtonState.TOGGLED : ButtonState.ACTIVE;
-						}
+					} else {
+						if(!wasMouseDown && Input.GetMouseButtonDown(0)) {
+							if(state == ButtonState.HOVER) {
+								state = ButtonState.TOGGLED;
+								firstToggle = true;
+							} else {
+								state = ButtonState.ACTIVE;
+							}
 
-						wasMouseDown = true;
+							wasMouseDown = true;
+						} else {
+							wasMouseDown = false;
+						}
 					}
 				} else {
 					if(state != ButtonState.TOGGLED)
 						state = ButtonState.NORMAL;
-
-					wasMouseDown = false;
 				}
-            } else {
-                if(IsMouseOver()) {
-                    if(state != ButtonState.TOGGLED)
-                        state = ButtonState.HOVER;
-                    if(!isToggle) {
-                        if(Input.GetMouseButton(0))
-                            state = ButtonState.ACTIVE;
-                    } else {
-                        if(!wasMouseDown && Input.GetMouseButtonDown(0)) {
-							state = (state == ButtonState.HOVER) ? ButtonState.TOGGLED : ButtonState.ACTIVE;
-							firstToggle = true;
-                            wasMouseDown = true;
-                        } else {
-                            wasMouseDown = false;
-                        }
-                    }
-                } else {
-                    if(state != ButtonState.TOGGLED)
-                        state = ButtonState.NORMAL;
-                }
-            }
+			//}
 			
 			if(!String.IsNullOrEmpty(text)) {
 				GUIStyle style = new GUIStyle();
@@ -187,7 +176,7 @@ namespace SGUI {
 		
 		/** Return wheter or not the mouse is hovering */
 		private bool IsMouseOver() {
-			Vector2 mouse = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
+			Vector3 mouse = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
 			
 			if(mouse.x >= bounds.x && mouse.x <= bounds.x + bounds.width &&
 			   mouse.y >= bounds.y && mouse.y <= bounds.y + bounds.width)
@@ -195,16 +184,6 @@ namespace SGUI {
 			
 			return false;
 		}
-
-        private bool IsTouched() {
-            Vector2 touch = Input.GetTouch(0).position;
-
-			if(touch.x >= bounds.x && touch.x <= bounds.x + bounds.width &&
-				touch.y >= bounds.y && touch.y <= bounds.y + bounds.width)
-				return true;
-
-			return false;
-        }
 		
 		/** Compare the button to another */
 		private bool Equals(SGUIButton other) {
@@ -245,13 +224,17 @@ namespace SGUI {
 		}
 
         /** Manually set the state */
-        public ButtonState State {
-            set {
-                state = value;
+        public void SetState(ButtonState state) {
+            manualEdit = true;
+            this.state = state;
 
-                if(state == ButtonState.TOGGLED)
-                    firstToggle = true;
-            }
+            if(state == ButtonState.TOGGLED)
+                firstToggle = true;
+        }
+
+        /** Automaticly detect the state */
+        public void ResetState() {
+            manualEdit = false;
         }
 	}
 }

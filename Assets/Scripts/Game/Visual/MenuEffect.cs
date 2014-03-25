@@ -41,14 +41,12 @@ public class MenuEffect : MonoBehaviour {
 	/**Wait to swap the Textures of Menu */
 	IEnumerator SwitchTextures(){
 		while(true){
-			Debug.Log(fire);
 			yield return new WaitForSeconds(10);
 			if(fire){
 				fire = false;
 			}else{
 				fire = true;
 			}
-			Debug.Log(fire);
 		}
 	}
 }

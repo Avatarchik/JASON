@@ -2,6 +2,11 @@
 using System.Collections;
 
 public class Door:MonoBehaviour {
+	public enum DoorState {
+		Open,
+		Closed
+	}
+
 	public enum DoorType {
 		Other,
 		Key,

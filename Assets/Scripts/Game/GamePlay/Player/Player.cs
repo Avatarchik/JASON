@@ -21,6 +21,7 @@ public class Player:MonoBehaviour {
 	private ThrowableObject attachedThrowable;
 
     private GameObject selectionParticle;
+	private GameObject pickupWhenReady;
 
 	private float previousX;
 	
@@ -93,28 +94,38 @@ public class Player:MonoBehaviour {
 		previousX = transform.position.x;
 	}
 
+	void OnCollisionEnter(Collision collision) {
+		if(pickupWhenReady) {
+			if(collision.gameObject.CompareTag(pickupWhenReady.tag)) {
+				switch(collision.gameObject.tag) {
+					case "ThrowableObject":
+						attachedThrowable = pickupWhenReady.GetComponent<ThrowableObject>();
+						attachedThrowable.collider.enabled = false;
+						break;
+					case "PushableObject":
+						playerCombat.WeaponCollisionArea.collider.enabled = false;
+						attachedPushable = pickupWhenReady.GetComponent<PushableObject>();
+						transform.LookAt(attachedPushable.transform.position);
+						transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
+						break;
+				}
+			}
+		}
+
+		if(attachedThrowable != null) {
+			if(collision.gameObject.CompareTag("Door"))
+				attachedThrowable.HandleDoorCollision(collision.gameObject.GetComponent<Door>());
+		}
+	}
+
 	/** Pickup an object */
-	public IEnumerator Pickup(GameObject obj) {
+	public void Pickup(GameObject obj) {
 		if(attachedPushable != null || attachedThrowable != null) {
 			Drop();
 		} else {
 			Move(obj.transform.position);
 
-			while(Vector3.Distance(transform.position, obj.transform.position) > 2.5f)
-				yield return new WaitForSeconds(0.5f);
-
-			switch(obj.tag) {
-			case "ThrowableObject":
-				attachedThrowable = obj.GetComponent<ThrowableObject>();
-				attachedThrowable.collider.enabled = false;
-				break;
-			case "PushableObject":
-				playerCombat.WeaponCollisionArea.collider.enabled = false;
-				attachedPushable = obj.GetComponent<PushableObject>();
-				transform.LookAt(attachedPushable.transform.position);
-				transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
-				break;
-			}
+			pickupWhenReady = obj;
 		}
 	}
 
@@ -128,6 +139,7 @@ public class Player:MonoBehaviour {
 		
 		attachedThrowable = null;
 		attachedPushable = null;
+		pickupWhenReady = null;
 
 		playerCombat.WeaponCollisionArea.collider.enabled = true;
 	}
@@ -254,7 +266,7 @@ public class Player:MonoBehaviour {
 			break;
 		case "ThrowableObject":
 		case "PushableObject":
-			StartCoroutine(Pickup(hit.collider.gameObject));
+			Pickup(hit.collider.gameObject);
 			break;
 		default:
 			Move(hit.point);

@@ -19,7 +19,7 @@ public class MultipleHandler : MonoBehaviour {
 	void FixedUpdate () {
 		checknum = 0;
 		for (int i = 0; i < triggers.Length; i++){
-			if(triggers[i].arrowEnabled){
+			if(triggers[i].ArrowEnabled){
 				checknum++;
 			}
 		}

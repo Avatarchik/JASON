@@ -60,6 +60,8 @@ public class PlayerCombat:MonoBehaviour {
 		this.target = target;
 		player.TargetPosition = target.transform.position;
 
+		weaponCollisionArea.collider.enabled = true;
+
 		StartCoroutine(Attack());
 	}
 
@@ -69,6 +71,8 @@ public class PlayerCombat:MonoBehaviour {
 		target = null;
 
 		attacking = false;
+
+		weaponCollisionArea.collider.enabled = false;
 
 		StopCoroutine("Attack");
 	}

@@ -1,102 +1,146 @@
 using UnityEngine;
 using System.Collections;
 
-public class Trigger : MonoBehaviour {
-	enum TriggerType{
-		PlayerSwitch,
-		BlockSwitch,
-		ArrowSwitch,
-		ArrowSwitchShort,
-		FireItemSwitch
+public class Trigger:MonoBehaviour {
+	enum TriggerType {
+		Player,
+		Block,
+		Arrow,
+		TimedArrow,
+		FireItem
 	}
 
-	[SerializeField] private bool toggle;
+	[SerializeField] private bool isToggle;
+
 	[SerializeField] private TriggerType type;
-	[SerializeField] private Door[] doors;
+	
+	[SerializeField] private Door[] connectedDoors;
 
-	private bool isTriggered = false;
-	private bool onceActivated;
-	private PlayerCamera cam;
-	private Transform character;
+	private PlayerCamera playerCamera;
 
-	public Transform cameraEventTarget;
+	private Transform oldTarget;
+	private Transform eventTarget;
 
-	public bool arrowEnabled;
-	// Update is called once per frame
+	private bool isTriggered;
+	private bool arrowEnabled;
+	
+	void Start() {
+		playerCamera = Camera.main.gameObject.GetComponent<PlayerCamera>();
 
-	void Start(){
-		cam = Camera.main.gameObject.GetComponent<PlayerCamera>();
+		eventTarget = transform.FindChild("Camera Focus");
 	}
 
-	void OnCollisionEnter (Collision coll) {
-		if(!isTriggered){
-		if(coll.gameObject.tag == "Player"){
-			if(type == TriggerType.PlayerSwitch){
-					StartCoroutine(CameraEvent(0));
-			}
-			}else if(coll.gameObject.tag == "PushableObject"){
-				if(type == TriggerType.BlockSwitch){
-					StartCoroutine(CameraEvent(0));
-				}
-			}
-			if(coll.gameObject.tag == "FireDungeonItem"){
-				if(type == TriggerType.FireItemSwitch){
-					StartCoroutine(CameraEvent(0));
-				}
-			}
-			if(coll.gameObject.tag == "Arrow"){
-				Debug.Log("ArrowHit");
-				if(type == TriggerType.ArrowSwitch){
-				StartCoroutine(CameraEvent(0));
-				}else if(type == TriggerType.ArrowSwitchShort){
-					StartCoroutine("Enabling");
-				}
+	void OnCollisionEnter (Collision collision) {
+		if(!isTriggered) {
+			switch(collision.gameObject.tag) {
+			case "Player":
+				OnPlayerCollision();
+				break;
+			case "PushableObject":
+				OnBlockCollision();
+				break;
+			case "Arrow":
+				OnArrowCollision();
+				break;
+			case "FireDungeonItem":
+				OnFireDungeonItemCollision();
+				break;				
 			}
 		}
 	}
-	void OnCollisionExit(Collision coll){
-		if(toggle){
 
-			if(coll.gameObject.tag == "Player"){
-				if(type == TriggerType.PlayerSwitch){
-					StartCoroutine(CameraEvent(1));
-				}
+	void OnCollisionExit(Collision collision) {
+		if(isToggle)
+			return;
 
-			}else if(coll.gameObject.tag == "PushableObject"){
-				if(type == TriggerType.BlockSwitch){
-					StartCoroutine(CameraEvent(1));
-				}
-			}
-
+		switch(type) {
+		case TriggerType.Player:
+			OnPlayerCollisionExit();
+			break;
+		case TriggerType.Block:
+			OnBlockCollisionExit();
+			break;
 		}
 	}
-	IEnumerator Enabling(){
-		arrowEnabled = true;
-		yield return new WaitForSeconds(1);
-		arrowEnabled = false;
-	}
-	IEnumerator CameraEvent(int doorstate){
-		character = cam.Target;
-		cam.Target = cameraEventTarget;
-		yield return new WaitForSeconds(1.5f);
-		for (int i = 0; i < doors.Length; i++){
-			if(doorstate == 0){
-				doors[i].Open();
-				isTriggered = true;
-			}else{
-			doors[i].Close();
-			isTriggered = false;
-			}
-		}
 
-		if(!onceActivated){
-			yield return new WaitForSeconds(1.5f);
-			onceActivated = true;
-			cam.Target = character;
-		}else{
-			return false;
+	private void OnPlayerCollision() {
+		if(type != TriggerType.Player)
+			return;
+
+		StartCoroutine(CameraEvent(Door.DoorState.Open));
+	}
+
+	private void OnPlayerCollisionExit() {
+		if(type != TriggerType.Player)
+			return;
+
+		StartCoroutine(CameraEvent(Door.DoorState.Closed));
+	}
+
+	private void OnBlockCollision() {
+		if(type != TriggerType.Block)
+			return;
+
+		Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+		player.AttachedPushable.transform.position = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
+		player.Drop();
+
+		StartCoroutine(CameraEvent(Door.DoorState.Open));
+	}
+
+	private void OnBlockCollisionExit() {
+		if(type != TriggerType.Block)
+			return;
+
+		StartCoroutine(CameraEvent(Door.DoorState.Closed));
+	}
+
+	private void OnFireDungeonItemCollision() {
+		if(type != TriggerType.FireItem)
+			return;
+
+		StartCoroutine(CameraEvent(Door.DoorState.Open));
+	}
+
+	private void OnArrowCollision() {
+		if(type == TriggerType.Arrow) {
+			StartCoroutine(CameraEvent(Door.DoorState.Open));
+		} else if(type == TriggerType.TimedArrow) {
+			StartCoroutine(TimedArrow());
 		}
-		
 	}
 	
+	private IEnumerator TimedArrow() {
+		arrowEnabled = true;
+		
+		yield return new WaitForSeconds(1);
+
+		arrowEnabled = false;
+	}
+
+	private IEnumerator CameraEvent(Door.DoorState state){
+		oldTarget = playerCamera.Target;
+		playerCamera.Target = eventTarget;
+
+		yield return new WaitForSeconds(1.5f);
+
+		foreach(Door door in connectedDoors) {
+			if(state == Door.DoorState.Open) {
+				door.Open();
+				isTriggered = true;
+			} else if(state == Door.DoorState.Closed) {
+				door.Close();
+				isTriggered = false;
+			}
+		}
+
+		yield return new WaitForSeconds(1.5f);
+
+		playerCamera.Target = oldTarget;		
+	}
+
+	public bool ArrowEnabled {
+		get { return arrowEnabled; }
+	}
 }
