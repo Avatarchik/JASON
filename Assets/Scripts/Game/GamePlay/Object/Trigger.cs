@@ -141,7 +141,7 @@ public class Trigger:MonoBehaviour {
 
 		playerCamera.Target = oldTarget;
 
-		cameraEventActive = true;
+		cameraEventActive = false;
 	}
 
 	public bool ArrowEnabled {
