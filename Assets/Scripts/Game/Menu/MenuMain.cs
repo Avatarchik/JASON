@@ -3,69 +3,83 @@ using System.Collections;
 using SGUI;
 
 public class MenuMain:GUIBehaviour {
-	public GameObject cameraRotation;
 	public SGUIButton[] buttons;
-	public Material[] materials;
-    private bool fire;
+	public SGUITexture[] textures;
 
-	public Material[] normalMaterials;
-	public Material[] fireMaterials;
-	private float blendfloat;
+	private bool optionsOpened;
+	private bool creditsOpened;
+	private bool mainMenuOpened = true;
+
 	void Start() {
 		StartCoroutine(WaitForGlobalManager());
-		StartCoroutine(SwitchTextures());
 	}
-	void FixedUpdate(){
-		DoMenuEffects();
-	}
+
 	protected override void OnGUI() {
 		base.OnGUI();
-
-		if(buttons[0].Click) {
-			buttons[0].Destroy();
-
-			Application.LoadLevel("Game");
+		RenderGUI();
+		if(buttons[0].Toggle) {
+			if(optionsOpened){
+				optionsOpened = false;
+			}else{
+				optionsOpened = true;
+				mainMenuOpened = false;
+				creditsOpened = false;
+			}
+		}
+		if(optionsOpened){
+			OptionsHandling();
 		}
 	}
 
-	/**Animates the Menu Scenery */
-	void DoMenuEffects(){
-		cameraRotation.transform.Rotate(Vector3.up / 2);
-		if(fire){
-			for(int i = 0; i < materials.Length; i++){
-				if(materials[i].GetFloat("_Blend") <= 1)
-					materials[i].SetFloat("_Blend",materials[i].GetFloat("_Blend") +0.01f);
-				normalMaterials[i].color = new Color(1,1,1,-materials[i].GetFloat("_Blend") + 1);
-			}
-			for(int i = 0; i < fireMaterials.Length; i++){
-				fireMaterials[i].color = new Color(1,1,1,materials[1].GetFloat("_Blend"));
-			}
-		}else{
-			for(int i = 0; i < materials.Length; i++){
-				if(materials[i].GetFloat("_Blend") >= 0)
-					materials[i].SetFloat("_Blend",materials[i].GetFloat("_Blend") -0.01f);
-				normalMaterials[i].color = new Color(1,1,1,-materials[i].GetFloat("_Blend") + 1);
-			}
-			for(int i = 0; i < fireMaterials.Length; i++){
-				fireMaterials[i].color = new Color(1,1,1,materials[1].GetFloat("_Blend"));
-			}
-		}
+	void RenderGUI(){
+		/** Option Items*/
+		textures[0].Activated = optionsOpened;
+		buttons[1].Activated = optionsOpened;
+		buttons[2].Activated = optionsOpened;
+		buttons[3].Activated = optionsOpened;
+		buttons[4].Activated = optionsOpened;
+		buttons[5].Activated = optionsOpened;
+		buttons[6].Activated = optionsOpened;
+		buttons[7].Activated = optionsOpened;
+		buttons[8].Activated = optionsOpened;
 	}
 
-	/**Wait to swap the Textures of Menu */
-	IEnumerator SwitchTextures(){
-		while(true){
-		Debug.Log(fire);
-		yield return new WaitForSeconds(10);
-		if(fire){
-			fire = false;
-		}else{
-			fire = true;
+	void OptionsHandling(){
+		if(buttons[4].Toggle){
+			//Dynamic Lights
+			if(GameData.Instance.lightEnabled){
+				GameData.Instance.lightEnabled = false;
+			}else{
+				GameData.Instance.lightEnabled = true;
+			}
+		}	
+		if(buttons[5].Toggle){
+			//Particles
+			if(GameData.Instance.particlesEnabled){
+				GameData.Instance.particlesEnabled = false;
+			}else{
+				GameData.Instance.particlesEnabled = true;
+			}
 		}
-		Debug.Log(fire);
+
+		if(buttons[6].Toggle){
+			//Left Handed
+			if(GameData.Instance.leftHanded){
+				GameData.Instance.leftHanded = false;
+			}else{
+				GameData.Instance.leftHanded = true;
+			}
+		}
+
+		if(buttons[7].Click){
+			GameData.Instance.SaveData();
+		}
+		if(buttons[8].Click){
+			GameData.Instance.fireDungeonCleared = false;
+			GameData.Instance.normalDungeonCleared = false;
+			GameData.Instance.SaveData();
 		}
 	}
-
 	/** Wait until the Global Manager has been loaded */
 	private IEnumerator WaitForGlobalManager() {
 		while(GameObject.FindGameObjectWithTag("Global Manager") == null)
@@ -73,5 +87,8 @@ public class MenuMain:GUIBehaviour {
 
 		foreach(SGUIButton button in buttons)
 			button.Create();
+
+		foreach(SGUITexture texture in textures)
+			texture.Create();
 	}
 }

@@ -163,6 +163,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 690936601}
   - 114: {fileID: 690936602}
+  - 114: {fileID: 690936603}
   m_Layer: 0
   m_Name: Player Data
   m_TagString: Untagged
@@ -197,6 +198,23 @@ MonoBehaviour:
   initialAttackDamage: 1
   initialAttackDelay: .699999988
   initialAttackRange: 3
+--- !u!114 &690936603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 690936600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e70a61dbe987904592077e1c50661b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalDungeonCleared: 0
+  fireDungeonCleared: 0
+  lightEnabled: 0
+  particlesEnabled: 0
+  leftHanded: 0
+  contrast: 0
 --- !u!1 &1540139885
 GameObject:
   m_ObjectHideFlags: 0
