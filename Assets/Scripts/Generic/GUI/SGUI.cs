@@ -113,6 +113,23 @@ namespace SGUI {
             if(Application.platform == RuntimePlatform.Android) {
                 if(Input.touchCount <= 0)
                     return;
+
+				if(IsTouched()) {
+					if(!wasMouseDown) {
+						if(!isToggle) {
+							state = ButtonState.ACTIVE;
+						} else {
+							state = (state == ButtonState.NORMAL) ? ButtonState.TOGGLED : ButtonState.ACTIVE;
+						}
+
+						wasMouseDown = true;
+					}
+				} else {
+					if(state != ButtonState.TOGGLED)
+						state = ButtonState.NORMAL;
+
+					wasMouseDown = false;
+				}
             } else {
                 if(IsMouseOver()) {
                     if(state != ButtonState.TOGGLED)
@@ -122,13 +139,8 @@ namespace SGUI {
                             state = ButtonState.ACTIVE;
                     } else {
                         if(!wasMouseDown && Input.GetMouseButtonDown(0)) {
-                            if(state == ButtonState.HOVER) {
-                                state = ButtonState.TOGGLED;
-                            } else {
-                                state = ButtonState.ACTIVE;
-                            }
-
-                            firstToggle = true;
+							state = (state == ButtonState.HOVER) ? ButtonState.TOGGLED : ButtonState.ACTIVE;
+							firstToggle = true;
                             wasMouseDown = true;
                         } else {
                             wasMouseDown = false;
@@ -175,7 +187,7 @@ namespace SGUI {
 		
 		/** Return wheter or not the mouse is hovering */
 		private bool IsMouseOver() {
-			Vector3 mouse = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
+			Vector2 mouse = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
 			
 			if(mouse.x >= bounds.x && mouse.x <= bounds.x + bounds.width &&
 			   mouse.y >= bounds.y && mouse.y <= bounds.y + bounds.width)
@@ -183,6 +195,16 @@ namespace SGUI {
 			
 			return false;
 		}
+
+        private bool IsTouched() {
+            Vector2 touch = Input.GetTouch(0).position;
+
+			if(touch.x >= bounds.x && touch.x <= bounds.x + bounds.width &&
+				touch.y >= bounds.y && touch.y <= bounds.y + bounds.width)
+				return true;
+
+			return false;
+        }
 		
 		/** Compare the button to another */
 		private bool Equals(SGUIButton other) {
