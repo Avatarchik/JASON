@@ -65,7 +65,7 @@ namespace SGUI {
 	/** Button base class */
 	[Serializable]
 	public class SGUIButton:SGUI {
-		private enum ButtonState {
+		public enum ButtonState {
 			NORMAL,
 			HOVER,
 			ACTIVE,
@@ -89,6 +89,7 @@ namespace SGUI {
 		
 		private bool wasMouseDown;
 		private bool firstToggle;
+        private bool manualEdit;
 
 		/** Create the button */
 		public void Create() {		
@@ -109,32 +110,36 @@ namespace SGUI {
 			
 			if(currentTexture == null)
 				currentTexture = textureNormal;
-			
-			if(IsMouseOver()) {
-				if(state != ButtonState.TOGGLED)
-					state = ButtonState.HOVER;
-				
-				if(!isToggle) {
-					if(Input.GetMouseButton(0))
-						state = ButtonState.ACTIVE;
-				} else {
-					if(!wasMouseDown && Input.GetMouseButtonDown(0)) {
-						if(state == ButtonState.HOVER) {
-							state = ButtonState.TOGGLED;
-						} else {
-							state = ButtonState.ACTIVE;
-						}
-						
-						firstToggle = true;
-						wasMouseDown = true;
-					} else {
-						wasMouseDown = false;
-					}
-				}
-			} else {
-				if(state != ButtonState.TOGGLED)
-					state = ButtonState.NORMAL;
-			}
+
+            if(Application.platform == RuntimePlatform.Android) {
+                if(Input.touchCount <= 0)
+                    return;
+            } else {
+                if(IsMouseOver()) {
+                    if(state != ButtonState.TOGGLED)
+                        state = ButtonState.HOVER;
+                    if(!isToggle) {
+                        if(Input.GetMouseButton(0))
+                            state = ButtonState.ACTIVE;
+                    } else {
+                        if(!wasMouseDown && Input.GetMouseButtonDown(0)) {
+                            if(state == ButtonState.HOVER) {
+                                state = ButtonState.TOGGLED;
+                            } else {
+                                state = ButtonState.ACTIVE;
+                            }
+
+                            firstToggle = true;
+                            wasMouseDown = true;
+                        } else {
+                            wasMouseDown = false;
+                        }
+                    }
+                } else {
+                    if(state != ButtonState.TOGGLED)
+                        state = ButtonState.NORMAL;
+                }
+            }
 			
 			if(!String.IsNullOrEmpty(text)) {
 				GUIStyle style = new GUIStyle();
@@ -217,5 +222,19 @@ namespace SGUI {
 				return false;
 			}
 		}
+
+        /** Manually set the state */
+        public void SetState(ButtonState state) {
+            manualEdit = true;
+            this.state = state;
+
+            if(state == ButtonState.TOGGLED)
+                firstToggle = true;
+        }
+
+        /** Automaticly detect the state */
+        public void ResetState() {
+            manualEdit = false;
+        }
 	}
 }

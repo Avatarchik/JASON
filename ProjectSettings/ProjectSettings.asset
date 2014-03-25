@@ -40,7 +40,7 @@ PlayerSettings:
   captureSingleScreen: 0
   Override IPod Music: 0
   Prepare IOS For Recording: 0
-  enableHWStatistics: 1
+  enableHWStatistics: 0
   usePlayerLog: 1
   stripPhysics: 0
   forceSingleInstance: 0
@@ -74,8 +74,6 @@ PlayerSettings:
     16:9: 1
     Others: 1
   iPhoneBundleIdentifier: the.KevinBreurken.Mythe
-  metroEnableIndependentInputSource: 0
-  metroEnableLowLatencyPresentationAPI: 0
   productGUID: fe0426d4a0cc81049846b8641c605cab
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
@@ -112,8 +110,20 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 0}
+    - m_Icon: {fileID: 2800000, guid: 7922b84d4ad9bfa449e829c51dbcd060, type: 3}
       m_Size: 128
+  - m_BuildTarget: Android
+    m_Icons:
+    - m_Icon: {fileID: 2800000, guid: 7922b84d4ad9bfa449e829c51dbcd060, type: 3}
+      m_Size: 144
+    - m_Icon: {fileID: 2800000, guid: c903d4e7c0862444695dcb2e7de2a90d, type: 3}
+      m_Size: 96
+    - m_Icon: {fileID: 2800000, guid: 7034fa9fceb4ac84cb0193b96292ef5e, type: 3}
+      m_Size: 72
+    - m_Icon: {fileID: 2800000, guid: 76450e10be574f1449068d24396ce3fe, type: 3}
+      m_Size: 48
+    - m_Icon: {fileID: 2800000, guid: a4f1ac9300861c645add00ed508fa4ca, type: 3}
+      m_Size: 36
   m_BuildTargetBatching: []
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
@@ -175,7 +185,6 @@ PlayerSettings:
   metroSplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
   metroSplashScreenUseBackgroundColor: 0
   metroCapabilities: {}
-  metroUnprocessedPlugins: []
   metroCompilationOverrides: 1
   blackberryDeviceAddress: 
   blackberryDevicePassword: 

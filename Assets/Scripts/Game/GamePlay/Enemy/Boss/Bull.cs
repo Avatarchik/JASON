@@ -36,7 +36,9 @@ public class Bull:Boss {
 		if(data.Health <= 0) {
 			lastState = state;
 			state = State.Dead;
-			Debug.Log("DEAD");
+
+            Application.LoadLevel("Fire Dungeon");
+			
 			return;
 		}
 	

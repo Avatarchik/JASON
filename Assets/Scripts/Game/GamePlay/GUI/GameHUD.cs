@@ -70,9 +70,11 @@ public class GameHUD:GUIBehaviour {
 	
 	protected override void OnGUI() {
 		base.OnGUI();
-	
-		if(buttons[0].Toggle)
-			player.PlayerCombat.Defend(!player.PlayerCombat.Defending);
+
+        if(buttons[0].Toggle) {
+            player.PlayerCombat.Defend(!player.PlayerCombat.Defending);
+            Debug.Log("Sweek");
+        }
 		
 		if(clickCooldown <= 0) {
 			if(buttons[1].Click) {
@@ -105,5 +107,7 @@ public class GameHUD:GUIBehaviour {
 		
 		foreach(SGUIButton button in buttons)
 			button.Create();
+
+        buttons[0].SetState(SGUIButton.ButtonState.TOGGLED);
 	}
 }
