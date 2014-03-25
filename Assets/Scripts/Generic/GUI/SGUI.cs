@@ -89,7 +89,6 @@ namespace SGUI {
 		
 		private bool wasMouseDown;
 		private bool firstToggle;
-        private bool manualEdit;
 
 		/** Create the button */
 		public void Create() {		
@@ -224,17 +223,13 @@ namespace SGUI {
 		}
 
         /** Manually set the state */
-        public void SetState(ButtonState state) {
-            manualEdit = true;
-            this.state = state;
+        public ButtonState State {
+            set {
+                state = value;
 
-            if(state == ButtonState.TOGGLED)
-                firstToggle = true;
-        }
-
-        /** Automaticly detect the state */
-        public void ResetState() {
-            manualEdit = false;
+                if(state == ButtonState.TOGGLED)
+                    firstToggle = true;
+            }
         }
 	}
 }

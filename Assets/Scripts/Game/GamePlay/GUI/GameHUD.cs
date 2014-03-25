@@ -107,7 +107,5 @@ public class GameHUD:GUIBehaviour {
 		
 		foreach(SGUIButton button in buttons)
 			button.Create();
-
-        buttons[0].SetState(SGUIButton.ButtonState.TOGGLED);
 	}
 }
