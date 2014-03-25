@@ -3,7 +3,8 @@ using System;
 using System.Collections;
 
 public class Player:MonoBehaviour {
-	[SerializeField] protected GameObject scrollingCombatText;
+	[SerializeField] private GameObject scrollingCombatText;
+    [SerializeField] private GameObject selectionParticles;
 
 	private Boss currentBoss;
 
@@ -18,6 +19,8 @@ public class Player:MonoBehaviour {
 	
 	private PushableObject attachedPushable;
 	private ThrowableObject attachedThrowable;
+
+    private GameObject selectionParticle;
 
 	private float previousX;
 	
@@ -161,7 +164,7 @@ public class Player:MonoBehaviour {
 		StartCoroutine(DamageDelay(stunTime));
 	}
 	
-	protected void DisplayCombatText(string text, Color color, bool crit) {
+	private void DisplayCombatText(string text, Color color, bool crit) {
 		Vector3 position = transform.position;
 		position.y += 3.5f;
 		
@@ -263,6 +266,11 @@ public class Player:MonoBehaviour {
 	private void Move(Vector3 position) {
 		playerCombat.Target = null;
 		targetPosition = new Vector3(position.x, 1, position.z);
+
+        if(selectionParticle != null)
+            Destroy(selectionParticle);
+
+        selectionParticle = Instantiate(selectionParticles, targetPosition, Quaternion.identity) as GameObject;
 	}
 
 	/** The damage delay of the player */
