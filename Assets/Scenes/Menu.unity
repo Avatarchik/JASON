@@ -9015,7 +9015,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2025934085}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8af26be982d7b264997c574b429d1982, type: 3}
   m_Name: 
@@ -9152,6 +9152,51 @@ MonoBehaviour:
     textureHover: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
     textureActive: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
     text: Reset Data
+    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    textSize: 90
+    textAnchor: 4
+    isToggle: 0
+  - activated: 1
+    bounds:
+      serializedVersion: 2
+      x: 600
+      y: 800
+      width: 700
+      height: 250
+    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    textureHover: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    textureActive: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    text: Play
+    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    textSize: 90
+    textAnchor: 4
+    isToggle: 0
+  - activated: 1
+    bounds:
+      serializedVersion: 2
+      x: 0
+      y: 900
+      width: 600
+      height: 200
+    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    textureHover: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    textureActive: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    text: Credits
+    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    textSize: 90
+    textAnchor: 4
+    isToggle: 0
+  - activated: 1
+    bounds:
+      serializedVersion: 2
+      x: 1300
+      y: 900
+      width: 600
+      height: 200
+    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    textureHover: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    textureActive: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+    text: Quit
     textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
     textSize: 90
     textAnchor: 4

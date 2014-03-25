@@ -22,6 +22,7 @@ public class MenuMain:GUIBehaviour {
 		if(buttons[0].Toggle) {
 			if(optionsOpened){
 				optionsOpened = false;
+				mainMenuOpened = true;
 			}else{
 				optionsOpened = true;
 				mainMenuOpened = false;
@@ -44,6 +45,9 @@ public class MenuMain:GUIBehaviour {
 		buttons[6].Activated = optionsOpened;
 		buttons[7].Activated = optionsOpened;
 		buttons[8].Activated = optionsOpened;
+		buttons[9].Activated = mainMenuOpened;
+		buttons[10].Activated = mainMenuOpened;
+		buttons[11].Activated = mainMenuOpened;
 		if(optionsOpened){
 			GameData.Instance.musicVolume = GUI.HorizontalSlider(new Rect(1200,300,600,150),GameData.Instance.musicVolume,0,1,sliderStyle,thumbStyle);
 			GameData.Instance.audioVolume = GUI.HorizontalSlider(new Rect(1200,600,600,150),GameData.Instance.audioVolume,0,1,sliderStyle,thumbStyle);
