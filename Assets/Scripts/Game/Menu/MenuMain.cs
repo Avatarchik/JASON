@@ -10,6 +10,8 @@ public class MenuMain:GUIBehaviour {
 	private bool creditsOpened;
 	private bool mainMenuOpened = true;
 
+	[SerializeField]private GUIStyle sliderStyle;
+	[SerializeField]private GUIStyle thumbStyle;
 	void Start() {
 		StartCoroutine(WaitForGlobalManager());
 	}
@@ -42,6 +44,12 @@ public class MenuMain:GUIBehaviour {
 		buttons[6].Activated = optionsOpened;
 		buttons[7].Activated = optionsOpened;
 		buttons[8].Activated = optionsOpened;
+		if(optionsOpened){
+			GameData.Instance.musicVolume = GUI.HorizontalSlider(new Rect(1200,300,600,150),GameData.Instance.musicVolume,0,1,sliderStyle,thumbStyle);
+			GameData.Instance.audioVolume = GUI.HorizontalSlider(new Rect(1200,600,600,150),GameData.Instance.audioVolume,0,1,sliderStyle,thumbStyle);
+			GameData.Instance.contrast = GUI.HorizontalSlider(new Rect(1200,900,600,150),GameData.Instance.contrast,0,1,sliderStyle,thumbStyle);
+		}
+
 	}
 
 	void OptionsHandling(){
