@@ -18,12 +18,15 @@ public class SGUIManager:Singleton<SGUIManager> {
 			button.Update(nativeGuiSize);		
 	}
 	
-	public bool IsAnyButtonClicked() {
-		foreach(SGUIButton button in sguiButtons)
-			if(button.Click)
-				return true;
-	
-		return false;
+	public bool AnyButtonClicked {
+		get {
+			foreach(SGUIButton button in sguiButtons)
+				if(button.Hover || button.Click)
+					if(!button.IsManual)
+						return true;
+
+			return false;
+		}
 	}
 	
 	internal void RegisterTexture(SGUITexture texture) {

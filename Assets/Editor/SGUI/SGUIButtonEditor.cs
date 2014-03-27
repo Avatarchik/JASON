@@ -7,7 +7,7 @@ using SGUI;
 
 [CustomPropertyDrawer(typeof(SGUIButton))]
 public class SGUIButtonEditor:SPropertyDrawer {
-	public const float BASE_HEIGHT = 301f;
+	public const float BASE_HEIGHT = 263f;
 	public const int LABEL_WIDTH = 80;
 	
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {		
@@ -39,9 +39,5 @@ public class SGUIButtonEditor:SPropertyDrawer {
 		DrawProperty("textFont", new GUIContent("Font"));
 		DrawProperty("textSize", new GUIContent("Size"));
 		DrawProperty("textAnchor", new GUIContent("Anchor"));
-		
-		// Misc
-		DrawLabel("Misc.");
-		DrawProperty("isToggle", new GUIContent("Is Toggle"));
 	}
 }

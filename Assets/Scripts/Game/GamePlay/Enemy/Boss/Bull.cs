@@ -37,7 +37,8 @@ public class Bull:Boss {
 			lastState = state;
 			state = State.Dead;
 
-            Application.LoadLevel("Fire Dungeon");
+			//PlayerData.Instance.Reset();
+			Application.Quit();
 			
 			return;
 		}

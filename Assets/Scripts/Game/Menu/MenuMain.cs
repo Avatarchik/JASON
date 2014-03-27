@@ -19,7 +19,7 @@ public class MenuMain:GUIBehaviour {
 	protected override void OnGUI() {
 		base.OnGUI();
 		RenderGUI();
-		if(buttons[0].Toggle) {
+		if(buttons[0].Click) {
 			if(optionsOpened){
 				optionsOpened = false;
 				mainMenuOpened = true;
@@ -57,15 +57,15 @@ public class MenuMain:GUIBehaviour {
 	}
 
 	void OptionsHandling(){
-		if(buttons[4].Toggle){
+		if(buttons[4].Click){
 			//Dynamic Lights
 			if(GameData.Instance.lightEnabled){
 				GameData.Instance.lightEnabled = false;
 			}else{
 				GameData.Instance.lightEnabled = true;
 			}
-		}	
-		if(buttons[5].Toggle){
+		}
+		if(buttons[5].Click) {
 			//Particles
 			if(GameData.Instance.particlesEnabled){
 				GameData.Instance.particlesEnabled = false;
@@ -74,7 +74,7 @@ public class MenuMain:GUIBehaviour {
 			}
 		}
 
-		if(buttons[6].Toggle){
+		if(buttons[6].Click) {
 			//Left Handed
 			if(GameData.Instance.leftHanded){
 				GameData.Instance.leftHanded = false;

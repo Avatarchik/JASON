@@ -11,6 +11,7 @@ public class Trigger:MonoBehaviour {
 	}
 
 	[SerializeField] private bool isToggle;
+	[SerializeField] private bool canOnlyTriggerOnce;
 
 	[SerializeField] private TriggerType type;
 	
@@ -35,6 +36,10 @@ public class Trigger:MonoBehaviour {
 		if(cameraEventActive)
 			return;
 
+		if(canOnlyTriggerOnce)
+			if(isTriggered)
+				return;
+
 		switch(collision.gameObject.tag) {
 		case "Player":
 			OnPlayerCollision();
@@ -55,6 +60,10 @@ public class Trigger:MonoBehaviour {
 		if(isToggle || cameraEventActive)
 			return;
 
+		if(canOnlyTriggerOnce)
+			if(isTriggered)
+				return;
+
 		switch(collision.gameObject.tag) {
 		case "Player":
 			OnPlayerCollisionExit();
@@ -68,6 +77,9 @@ public class Trigger:MonoBehaviour {
 	private void OnPlayerCollision() {
 		if(type != TriggerType.Player)
 			return;
+
+		if(canOnlyTriggerOnce)
+			isTriggered = true;
 
 		StartCoroutine(CameraEvent(Door.DoorState.Open));
 	}
@@ -84,6 +96,11 @@ public class Trigger:MonoBehaviour {
 			return;
 
 		Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+		if(canOnlyTriggerOnce) {
+			player.AttachedPushable.Locked = true;
+			isTriggered = true;
+		}
 
 		player.AttachedPushable.transform.position = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
 		player.Drop();
@@ -102,13 +119,22 @@ public class Trigger:MonoBehaviour {
 		if(type != TriggerType.FireItem)
 			return;
 
+		if(canOnlyTriggerOnce)
+			isTriggered = true;
+
 		StartCoroutine(CameraEvent(Door.DoorState.Open));
 	}
 
 	private void OnArrowCollision() {
 		if(type == TriggerType.Arrow) {
+			if(canOnlyTriggerOnce)
+				isTriggered = true;
+
 			StartCoroutine(CameraEvent(Door.DoorState.Open));
 		} else if(type == TriggerType.TimedArrow) {
+			if(canOnlyTriggerOnce)
+				isTriggered = true;
+
 			StartCoroutine(TimedArrow());
 		}
 	}

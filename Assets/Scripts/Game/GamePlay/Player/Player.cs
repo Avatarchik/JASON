@@ -52,14 +52,22 @@ public class Player:MonoBehaviour {
 				dataInstanceFound = true;
 			}
 		}
+
+		HandlePickedUpObject();
+
+		switch(Application.platform) {
+		case RuntimePlatform.Android:
+			HandleTouchInput();
+			break;
+		default:
+			HandleMouseInput();
+			break;
+		}
 	}
 	
 	void FixedUpdate() {
 		rigidbody.velocity = Vector3.zero;
-		
-		HandlePickedUpObject();
-		CheckForInput();
-		
+
 		if(Vector3.Distance(transform.position, targetPosition) > 0.5f) {
 			playerAnimation.SetBool("IsRunning", true);
 
@@ -115,6 +123,11 @@ public class Player:MonoBehaviour {
 					break;
 				case "PushableObject":
 					attachedPushable = pickupWhenReady.GetComponent<PushableObject>();
+
+					if(attachedPushable.Locked) {
+						Drop();
+						break;
+					}
 										
 					transform.LookAt(attachedPushable.transform.position);
 					transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
@@ -135,13 +148,12 @@ public class Player:MonoBehaviour {
 
 	/** Pickup an object */
 	public void Pickup(GameObject obj) {
-		if(attachedPushable != null || attachedThrowable != null) {
-			Drop();
-		} else {
-			Move(obj.transform.position);
+		if(attachedPushable != null || attachedThrowable != null)
+			return;
 
-			pickupWhenReady = obj;
-		}
+		Move(obj.transform.position);
+
+		pickupWhenReady = obj;
 	}
 
 	/** Drop the picked up object */
@@ -230,37 +242,33 @@ public class Player:MonoBehaviour {
 				Drop();
 		}
 	}
-	
-	/** Check for input */
-	private void CheckForInput() {
-		RaycastHit hit;
-		Ray ray;
-		
-		if(Input.touchCount == 0) {
-			if(Input.GetMouseButtonDown(0)) {
-				if(Input.mousePosition.x <= 176 && Input.mousePosition.y <= 50)
-					return;
-				
-				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+	private void HandleTouchInput() {
+		foreach(Touch touch in Input.touches) {
+			if(touch.phase == TouchPhase.Began) {
+				Ray ray = Camera.main.ScreenPointToRay(touch.position);
+				RaycastHit hit;
+
 				Physics.Raycast(ray, out hit, 100, mask);
-				
+
 				HandleInput(hit);
 			}
-		} else {
-			Touch touch = Input.GetTouch(0);
-			
-			if(touch.position.x <= 176 && touch.position.y <= 50)
-				return;
-			
-			ray = Camera.main.ScreenPointToRay(touch.position);
+		}
+	}
+
+	private void HandleMouseInput() {
+		if(Input.GetMouseButtonDown(0)) {
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+
 			Physics.Raycast(ray, out hit, 100, mask);
-			
+
 			HandleInput(hit);
 		}
 	}
 
 	private void HandleInput(RaycastHit hit) {
-		if(hit.collider == null)
+		if(hit.collider == null || SGUIManager.Instance.AnyButtonClicked)
 			return;
 		
 		if(playerCombat.Defending)
@@ -275,7 +283,12 @@ public class Player:MonoBehaviour {
 		case "ThrowableObject":
 		case "PushableObject":
 			playerCombat.WeaponCollisionArea.collider.enabled = false;
-			Pickup(hit.collider.gameObject);
+
+			if(attachedPushable != null) {
+				Drop();
+			} else {
+				Pickup(hit.collider.gameObject);
+			}
 			break;
 		default:
 			playerCombat.WeaponCollisionArea.collider.enabled = false;
