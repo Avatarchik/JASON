@@ -21,7 +21,7 @@ public class EnemyData {
 	private float chaseRange;
 	private float stunTime;
 	
-	public void Init() {
+	public void Reset() {
 		health = initialHealth;
 		runSpeed = initialRunSpeed;
 		attackDamage = initialAttackDamage;

@@ -22,7 +22,7 @@ public class Enemy:MonoBehaviour {
 		if(player == null)
 			throw new System.NullReferenceException("No Game Object found in the scene with the 'Player' tag");
 			
-		data.Init();
+		data.Reset();
 	}
 
 	protected virtual void Update() {

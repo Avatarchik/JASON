@@ -111,4 +111,8 @@ public class PlayerCombat:MonoBehaviour {
 	public GameObject WeaponCollisionArea {
 		get { return weaponCollisionArea; }
 	}
+
+	public bool InCombat {
+		get { return target != null; }
+	}
 }

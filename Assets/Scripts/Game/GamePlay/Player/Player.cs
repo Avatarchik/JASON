@@ -53,6 +53,9 @@ public class Player:MonoBehaviour {
 			}
 		}
 
+		if(Input.GetKeyDown(KeyCode.T))
+			Application.LoadLevel("Fire Dungeon");
+
 		HandlePickedUpObject();
 
 		switch(Application.platform) {
@@ -94,6 +97,8 @@ public class Player:MonoBehaviour {
 				playerCamera.CameraDistance = -5;
 
 			playerAnimation.SetBool("IsRunning", false);
+
+			Destroy(selectionParticle);
 		}
 
 		if(transform.position.x < previousX)
@@ -277,8 +282,10 @@ public class Player:MonoBehaviour {
 		switch(hit.transform.tag) {
 		case "Enemy":
 		case "Boss":
-			playerCombat.WeaponCollisionArea.collider.enabled = true;
-			playerCombat.StartAttack(hit.transform.gameObject);
+			if(!playerCombat.InCombat) {
+				playerCombat.WeaponCollisionArea.collider.enabled = true;
+				playerCombat.StartAttack(hit.transform.gameObject);
+			}
 			break;
 		case "ThrowableObject":
 		case "PushableObject":

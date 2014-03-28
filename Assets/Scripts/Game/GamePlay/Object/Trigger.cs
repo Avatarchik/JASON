@@ -23,7 +23,7 @@ public class Trigger:MonoBehaviour {
 	private Transform eventTarget;
 
 	private bool isTriggered;
-	private bool arrowEnabled;
+	private bool isActive;
 	private bool cameraEventActive;
 	
 	void Start() {
@@ -103,6 +103,7 @@ public class Trigger:MonoBehaviour {
 		}
 
 		player.AttachedPushable.transform.position = new Vector3(transform.position.x, transform.position.y + 2.5f, transform.position.z);
+		player.TargetPosition = player.transform.position;
 		player.Drop();
 
 		StartCoroutine(CameraEvent(Door.DoorState.Open));
@@ -140,11 +141,11 @@ public class Trigger:MonoBehaviour {
 	}
 	
 	private IEnumerator TimedArrow() {
-		arrowEnabled = true;
+		isActive = true;
 		
 		yield return new WaitForSeconds(1);
 
-		arrowEnabled = false;
+		isActive = false;
 	}
 
 	private IEnumerator CameraEvent(Door.DoorState state) {
@@ -170,7 +171,7 @@ public class Trigger:MonoBehaviour {
 		cameraEventActive = false;
 	}
 
-	public bool ArrowEnabled {
-		get { return arrowEnabled; }
+	public bool IsActive {
+		get { return isActive; }
 	}
 }

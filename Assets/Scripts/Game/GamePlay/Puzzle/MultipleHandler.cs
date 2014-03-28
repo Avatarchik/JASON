@@ -1,50 +1,53 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MultipleHandler : MonoBehaviour {
-	public Trigger[] triggers;
-	public Door[] doors;
-	public int checknum;
-	private bool puzzleDone = false;
+public class MultipleHandler:MonoBehaviour {
+	[SerializeField] private Trigger[] triggers;
 
-	private PlayerCamera cam;
-	private Transform character;
-	public Transform cameraEventTarget;
-	// Use this for initialization
-	void Start(){
-		cam = Camera.main.gameObject.GetComponent<PlayerCamera>();
-	}
+	private PlayerCamera playerCamera;
+
+	private Transform oldTarget;
+	private Transform eventTarget;
 	
-	// Update is called once per frame
-	void FixedUpdate () {
-		checknum = 0;
-		for (int i = 0; i < triggers.Length; i++){
-			if(triggers[i].ArrowEnabled){
-				checknum++;
-			}
-		}
-		if(checknum == triggers.Length){
-			if(!puzzleDone){
-				puzzleDone = true;
-				StartCoroutine(CameraEvent(0));
-			}
+	private int numEnabled;
+
+	private bool puzzleDone;
+	
+	void Start() {
+		playerCamera = Camera.main.gameObject.GetComponent<PlayerCamera>();
+		eventTarget = transform.FindChild("Camera Focus");
+	}
+
+	void Update() {
+		if(puzzleDone)
+			return;
+
+		numEnabled = 0;
+
+		foreach(Trigger trigger in triggers)
+			if(trigger.IsActive)
+				numEnabled++;
+
+		if(numEnabled >= triggers.Length) {
+			puzzleDone = true;
+			StartCoroutine(CameraEvent(Door.DoorState.Open));
 		}
 	}
 
-	IEnumerator CameraEvent(int doorstate){
-		character = cam.Target;
-		cam.Target = cameraEventTarget;
+	private IEnumerator CameraEvent(Door.DoorState state) {
+		oldTarget = playerCamera.Target;
+		playerCamera.Target = eventTarget;
+
 		yield return new WaitForSeconds(1.5f);
-		for (int i = 0; i < doors.Length; i++){
-			if(doorstate == 0){
-				doors[i].Open();
-			}else{
-				doors[i].Close();
-			}
+
+		if(state == Door.DoorState.Open) {
+			GetComponent<Door>().Open();
+		} else if(state == Door.DoorState.Closed) {
+			GetComponent<Door>().Close();
 		}
 
-			yield return new WaitForSeconds(1.5f);
-			cam.Target = character;
-		
+		yield return new WaitForSeconds(1.5f);
+
+		playerCamera.Target = oldTarget;
 	}
 }

@@ -21,13 +21,11 @@ public class Bull:Boss {
 	private bool stoppingCharge;
 
 	private StoreTransform startTransform;
-	private EnemyData startData;
 
 	protected override void Start() {
 		base.Start();
 
 		startTransform = transform.SaveWorld();
-		startData = data;
 	}
 	
 	protected override void Update() {
@@ -37,8 +35,10 @@ public class Bull:Boss {
 			lastState = state;
 			state = State.Dead;
 
-			//PlayerData.Instance.Reset();
-			Application.Quit();
+			Destroy(GameObject.Find("Global Managers"));
+			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
+			PlayerData.Instance.Reset();
+			Application.LoadLevel("Fire Dungeon");
 			
 			return;
 		}
@@ -87,7 +87,7 @@ public class Bull:Boss {
 
 	public override void Reset() {
 		transform.LoadWorld(startTransform);
-		data = startData;
+		data.Reset();
 	}
 	
 	public void StartAttack() {

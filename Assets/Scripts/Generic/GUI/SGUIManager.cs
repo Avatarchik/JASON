@@ -17,6 +17,14 @@ public class SGUIManager:Singleton<SGUIManager> {
 		foreach(SGUIButton button in sguiButtons)
 			button.Update(nativeGuiSize);		
 	}
+
+	public void RemoveAll() {
+		foreach(SGUITexture texture in sguiTextures)
+			texture.Destroy();
+
+		foreach(SGUIButton button in sguiButtons)
+			button.Destroy();
+	}
 	
 	public bool AnyButtonClicked {
 		get {
@@ -30,19 +38,27 @@ public class SGUIManager:Singleton<SGUIManager> {
 	}
 	
 	internal void RegisterTexture(SGUITexture texture) {
-		foreach(SGUITexture other in sguiTextures)
-			if(texture.Equals(other))
-				other.Destroy();
-		
-		sguiTextures.Add(texture);
+		try {
+			foreach(SGUITexture other in sguiTextures)
+				if(texture.Equals(other))
+					other.Destroy();
+
+			sguiTextures.Add(texture);
+		} catch(System.InvalidOperationException e) {
+			Debug.Log(e.Message + " " + e.StackTrace);
+		}
 	}
 	
 	internal void RegisterButton(SGUIButton button) {
-		foreach(SGUIButton other in sguiButtons)
-			if(button.Equals(other))
-				other.Destroy();
+		try {
+			foreach(SGUIButton other in sguiButtons)
+				if(button.Equals(other))
+					other.Destroy();
 
-		sguiButtons.Add(button);
+			sguiButtons.Add(button);
+		} catch(System.InvalidOperationException e) {
+			Debug.Log(e.Message + " " + e.StackTrace);
+		}
 	}
 	
 	internal void RemoveTexture(SGUITexture texture) {
