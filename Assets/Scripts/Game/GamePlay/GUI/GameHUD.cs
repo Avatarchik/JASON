@@ -13,8 +13,6 @@ public class GameHUD:GUIBehaviour {
 	[SerializeField] private SGUITexture[] innerBars;
 	[SerializeField] private SGUITexture outerBar;
 
-	[SerializeField] private SGUIButton[] buttons;
-
 	private Player player;
 
 	private Bars activeBar;
@@ -46,18 +44,6 @@ public class GameHUD:GUIBehaviour {
 		}
 
 		UpdateHealthBar();
-
-		/*if(buttons[0].OnClick)
-			player.PlayerCombat.Defend(!player.PlayerCombat.Defending);
-
-		if(player.AttachedThrowable == null) {
-			buttons[1].Activated = false;
-		} else {
-			buttons[1].Activated = true;
-
-			if(buttons[1].OnClick)
-				player.ThrowObject();
-		}*/
 	}
 
 	private void UpdateHealthBar() {
@@ -101,8 +87,5 @@ public class GameHUD:GUIBehaviour {
 		
 		foreach(SGUITexture texture in innerBars)
 			texture.Create();
-		
-		/*foreach(SGUIButton button in buttons)
-			button.Create();*/
 	}
 }
