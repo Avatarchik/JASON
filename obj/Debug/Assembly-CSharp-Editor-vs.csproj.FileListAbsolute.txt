@@ -1,0 +1,1 @@
+D:\Code\Unity C#\Jason\obj\Debug\Assembly-CSharp-Editor-vs.csprojResolveAssemblyReference.cache

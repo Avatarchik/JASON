@@ -7,6 +7,7 @@ public class SGUIManager:Singleton<SGUIManager> {
 
 	private List<SGUITexture> sguiTextures = new List<SGUITexture>();
 	private List<SGUIButton> sguiButtons = new List<SGUIButton>();
+	private List<SGUILabel> sguiLabels = new List<SGUILabel>();
 	
 	void OnGUI() {
 		GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, new Vector3(Screen.width / nativeGuiSize.x, Screen.height / nativeGuiSize.y, 1));
@@ -15,7 +16,10 @@ public class SGUIManager:Singleton<SGUIManager> {
 			texture.Update(nativeGuiSize);
 			
 		foreach(SGUIButton button in sguiButtons)
-			button.Update(nativeGuiSize);		
+			button.Update(nativeGuiSize);
+
+		foreach(SGUILabel label in sguiLabels)
+			label.Update(nativeGuiSize);
 	}
 
 	public void RemoveAll() {
@@ -24,6 +28,9 @@ public class SGUIManager:Singleton<SGUIManager> {
 
 		foreach(SGUIButton button in sguiButtons)
 			button.Destroy();
+
+		foreach(SGUILabel label in sguiLabels)
+			label.Destroy();
 	}
 	
 	public bool AnyButtonClicked {
@@ -38,27 +45,27 @@ public class SGUIManager:Singleton<SGUIManager> {
 	}
 	
 	internal void RegisterTexture(SGUITexture texture) {
-		try {
-			foreach(SGUITexture other in sguiTextures)
-				if(texture.Equals(other))
-					other.Destroy();
+		foreach(SGUITexture other in sguiTextures)
+			if(texture.Equals(other))
+				other.Destroy();
 
-			sguiTextures.Add(texture);
-		} catch(System.InvalidOperationException e) {
-			Debug.Log(e.Message + " " + e.StackTrace);
-		}
+		sguiTextures.Add(texture);
 	}
 	
 	internal void RegisterButton(SGUIButton button) {
-		try {
-			foreach(SGUIButton other in sguiButtons)
-				if(button.Equals(other))
-					other.Destroy();
+		foreach(SGUIButton other in sguiButtons)
+			if(button.Equals(other))
+				other.Destroy();
 
-			sguiButtons.Add(button);
-		} catch(System.InvalidOperationException e) {
-			Debug.Log(e.Message + " " + e.StackTrace);
-		}
+		sguiButtons.Add(button);
+	}
+
+	internal void RegisterLabel(SGUILabel label) {
+		foreach(SGUILabel other in sguiLabels)
+			if(label.Equals(other))
+				other.Destroy();
+
+		sguiLabels.Add(label);
 	}
 	
 	internal void RemoveTexture(SGUITexture texture) {
@@ -67,5 +74,9 @@ public class SGUIManager:Singleton<SGUIManager> {
 	
 	internal void RemoveButton(SGUIButton button) {
 		sguiButtons.Remove(button);
+	}
+
+	internal void RemoveLabel(SGUILabel label) {
+		sguiLabels.Remove(label);
 	}
 }

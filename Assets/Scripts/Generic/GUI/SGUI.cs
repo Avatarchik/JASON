@@ -24,6 +24,86 @@ namespace SGUI {
 		}
 	}
 
+	/** Label class */
+	[Serializable]
+	public class SGUILabel:SGUI {
+		[SerializeField] protected String text;
+
+		[SerializeField] private Color textColor;
+
+		[SerializeField] private Font font;
+
+		[SerializeField] private int fontSize;
+
+		private GUIStyle style;
+		
+		/** Create the label */
+		public virtual void Create() {
+			style = new GUIStyle();
+
+			SGUIManager.Instance.RegisterLabel(this);
+		}
+
+		/** Destroy the label */
+		public void Destroy() {
+			SGUIManager.Instance.RemoveLabel(this);
+		}
+
+		/** Update the label */
+		internal void Update(Vector2 nativeScreenSize) {
+			if(!activated || String.IsNullOrEmpty(text))
+				return;
+
+			style.normal.textColor = textColor;
+			style.font = font;
+			style.fontSize = fontSize;
+			style.wordWrap = true;
+
+			GUI.Label(bounds, new GUIContent(text), style);
+		}
+
+		/** Compare the label to another */
+		public bool Equals(SGUILabel other) {
+			if(activated.Equals(other.activated && bounds.Equals(other.bounds)))
+				if(text.Equals(other.text) && textColor.Equals(other.textColor) && font.Equals(other.font) && fontSize.Equals(other.fontSize))
+					return true;
+
+			return false;
+		}
+
+		public string Text {
+			set { text = value; }
+			get { return text; }
+		}
+	}
+
+	[Serializable]
+	public class SGUISlowWriteLabel:SGUILabel {
+		[SerializeField] private float wordDelay;
+
+		[SerializeField] private float minDelay;
+		[SerializeField] private float maxDelay;
+
+		private string originalText;
+
+		public override void Create() {
+			base.Create();
+
+			originalText = text;
+			text = "";
+		}
+
+		public IEnumerator Write() {
+			yield return new WaitForSeconds(wordDelay);
+
+			foreach(char letter in originalText.ToCharArray()) {
+				text += letter;
+
+				yield return new WaitForSeconds(UnityEngine.Random.Range(minDelay, maxDelay));
+			}
+		}
+	}
+
 	/** Texture class */
 	[Serializable]
 	public class SGUITexture:SGUI {

@@ -8140,49 +8140,51 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -.943083763}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1997623012}
+  - {fileID: 1449150687}
   - {fileID: 1214608401}
   - {fileID: 172798002}
   - {fileID: 1867595092}
   - {fileID: 85509528}
   - {fileID: 1604310887}
   - {fileID: 61500877}
+  - {fileID: 1230957893}
   - {fileID: 1782806584}
+  - {fileID: 2052299132}
   - {fileID: 1886784830}
   - {fileID: 615135454}
   - {fileID: 434279874}
   - {fileID: 1334161116}
-  - {fileID: 1449150687}
-  - {fileID: 1997623012}
-  - {fileID: 2052299132}
-  - {fileID: 1230957893}
   - {fileID: 252750629}
   - {fileID: 342468732}
+  - {fileID: 1373363169}
+  - {fileID: 2084245875}
   - {fileID: 458595986}
   - {fileID: 843625525}
   - {fileID: 1796742615}
-  - {fileID: 216643777}
-  - {fileID: 1936713768}
-  - {fileID: 1526648421}
-  - {fileID: 811913136}
-  - {fileID: 856181287}
-  - {fileID: 875290647}
-  - {fileID: 990692947}
-  - {fileID: 1373363169}
-  - {fileID: 2084245875}
-  - {fileID: 1168057358}
   - {fileID: 1726737797}
-  - {fileID: 134947153}
-  - {fileID: 304524462}
-  - {fileID: 354131022}
-  - {fileID: 572075226}
-  - {fileID: 2045856031}
-  - {fileID: 1295235914}
-  - {fileID: 1243216593}
+  - {fileID: 216643777}
+  - {fileID: 990692947}
+  - {fileID: 856181287}
+  - {fileID: 1936713768}
+  - {fileID: 1168057358}
+  - {fileID: 1526648421}
+  - {fileID: 875290647}
+  - {fileID: 811913136}
   - {fileID: 1838772234}
+  - {fileID: 2045856031}
+  - {fileID: 1651678401}
+  - {fileID: 1243216593}
   - {fileID: 1527682157}
   - {fileID: 1586146945}
-  - {fileID: 1651678401}
+  - {fileID: 134947153}
+  - {fileID: 1295235914}
+  - {fileID: 572075226}
+  - {fileID: 304524462}
+  - {fileID: 354131022}
+  - {fileID: 1770008233}
   - {fileID: 1042344426}
+  - {fileID: 1053193374}
   - {fileID: 310761794}
   - {fileID: 1210441913}
   - {fileID: 498752127}
@@ -8191,6 +8193,7 @@ Transform:
   - {fileID: 967634127}
   - {fileID: 503674901}
   - {fileID: 339002770}
+  - {fileID: 1834393517}
   - {fileID: 1172921416}
   - {fileID: 1462815635}
   - {fileID: 2050512062}
@@ -8202,13 +8205,10 @@ Transform:
   - {fileID: 1878936569}
   - {fileID: 446470635}
   - {fileID: 2117840570}
-  - {fileID: 1053193374}
   - {fileID: 1234933370}
-  - {fileID: 1770008233}
-  - {fileID: 1834393517}
+  - {fileID: 1391307384}
   - {fileID: 2067341570}
   - {fileID: 835681866}
-  - {fileID: 1391307384}
   - {fileID: 1474829542}
   - {fileID: 2098744846}
   - {fileID: 2095292090}
@@ -8226,8 +8226,8 @@ Transform:
   - {fileID: 815425717}
   - {fileID: 1679211193}
   - {fileID: 1232279967}
-  - {fileID: 977370722}
   - {fileID: 1212739409}
+  - {fileID: 977370722}
   m_Father: {fileID: 1219390794}
 --- !u!114 &158509608
 MonoBehaviour:
@@ -15475,35 +15475,6 @@ MonoBehaviour:
       width: 681.75
       height: 109.499985
     texture: {fileID: 2800000, guid: 2ebb39f262467dd42ba1afc26dafc727, type: 3}
-  buttons:
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 1775
-      y: 892
-      width: 132.75
-      height: 174.25
-    textureNormal: {fileID: 2800000, guid: 6f5c6a517656d814ab32d9b7e16a6dfb, type: 3}
-    textureHover: {fileID: 2800000, guid: 6f5c6a517656d814ab32d9b7e16a6dfb, type: 3}
-    textureActive: {fileID: 2800000, guid: 17a972c8592403a4db34ec13d34c420e, type: 3}
-    text: 
-    textFont: {fileID: 0}
-    textSize: 0
-    textAnchor: 0
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 10
-      y: 930
-      width: 170
-      height: 137
-    textureNormal: {fileID: 2800000, guid: 84503b6df6f562f4f852fe8b9d584c78, type: 3}
-    textureHover: {fileID: 2800000, guid: 84503b6df6f562f4f852fe8b9d584c78, type: 3}
-    textureActive: {fileID: 2800000, guid: 7add3b6d6e46f174ebd2fd7a334cb707, type: 3}
-    text: 
-    textFont: {fileID: 0}
-    textSize: 0
-    textAnchor: 0
 --- !u!1 &302860883
 GameObject:
   m_ObjectHideFlags: 0
@@ -70477,6 +70448,81 @@ Prefab:
   m_RootGameObject: {fileID: 1645697816}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &1413513225
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1413513227}
+  - 114: {fileID: 1413513226}
+  - 114: {fileID: 1413513228}
+  m_Layer: 0
+  m_Name: Tutorial
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1413513226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413513225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7344219dab23148a2428a7d89efa17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorial: 0
+--- !u!4 &1413513227
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413513225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1413513228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1413513225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4b9b8dbc39f9a4f968f9885c3c778e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip:
+    activated: 1
+    bounds:
+      serializedVersion: 2
+      x: 460
+      y: 823
+      width: 1000
+      height: 256
+    texture: {fileID: 2800000, guid: 1d89caf2afd1b9c479ae443b3ee56763, type: 3}
+  labels:
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Touch anywhere on the screen to move there.
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    wordDelay: .5
+    minDelay: .00800000038
+    maxDelay: .0199999996
 --- !u!1 &1413808776
 GameObject:
   m_ObjectHideFlags: 0
