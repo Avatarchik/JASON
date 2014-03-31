@@ -79,12 +79,12 @@ namespace SGUI {
 
 	[Serializable]
 	public class SGUISlowWriteLabel:SGUILabel {
-		[SerializeField] private float wordDelay;
-
 		[SerializeField] private float minDelay;
 		[SerializeField] private float maxDelay;
 
 		private string originalText;
+
+		private bool finished;
 
 		public override void Create() {
 			base.Create();
@@ -94,13 +94,20 @@ namespace SGUI {
 		}
 
 		public IEnumerator Write() {
-			yield return new WaitForSeconds(wordDelay);
-
 			foreach(char letter in originalText.ToCharArray()) {
+				if(!activated)
+					yield break;
+
 				text += letter;
 
 				yield return new WaitForSeconds(UnityEngine.Random.Range(minDelay, maxDelay));
 			}
+
+			finished = true;
+		}
+
+		public bool FinishedWriting {
+			get { return finished; }
 		}
 	}
 

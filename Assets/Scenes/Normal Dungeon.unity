@@ -45356,44 +45356,6 @@ Transform:
   - {fileID: 1219390794}
   - {fileID: 2015118456}
   m_Father: {fileID: 0}
---- !u!1 &919781217
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 919781218}
-  - 114: {fileID: 919781219}
-  m_Layer: 0
-  m_Name: Global Manager Loader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &919781218
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 919781217}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.5315399, y: 1.52574348, z: .832803249}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1846745310}
---- !u!114 &919781219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 919781217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffd6f5ad4d6574f4482c0f5fe9d0f3e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &921261543
 Prefab:
   m_ObjectHideFlags: 0
@@ -70500,7 +70462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltip:
-    activated: 1
+    activated: 0
     bounds:
       serializedVersion: 2
       x: 460
@@ -70520,7 +70482,45 @@ MonoBehaviour:
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
     fontSize: 40
-    wordDelay: .5
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: You can push blocks by touching them once, and then moving around normally.
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Blocks can only move on the marked path.
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Touch the block again to release it.
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
     minDelay: .00800000038
     maxDelay: .0199999996
 --- !u!1 &1413808776
@@ -93924,33 +93924,6 @@ Prefab:
   m_RootGameObject: {fileID: 2038495543}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1 &1846745309
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1846745310}
-  m_Layer: 0
-  m_Name: Local Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1846745310
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1846745309}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 919781218}
-  m_Father: {fileID: 0}
 --- !u!1001 &1848010742
 Prefab:
   m_ObjectHideFlags: 0

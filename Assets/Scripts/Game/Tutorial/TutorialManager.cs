@@ -9,6 +9,6 @@ public class TutorialManager:MonoBehaviour {
 	[SerializeField] private Tutorial tutorial;
 
 	void Start() {
-		BasicTutorial.Instance.StartStage(0);
+		BasicTutorial.Instance.StartTutorial();
 	}
 }

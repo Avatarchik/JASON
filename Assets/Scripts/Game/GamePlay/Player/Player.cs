@@ -289,6 +289,11 @@ public class Player:MonoBehaviour {
 			break;
 		case "ThrowableObject":
 		case "PushableObject":
+			BasicTutorial tutorial = BasicTutorial.Instance;
+
+			if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.BlockPickup)
+				tutorial.StartStage();
+
 			playerCombat.WeaponCollisionArea.collider.enabled = false;
 
 			if(attachedPushable != null) {
@@ -306,6 +311,11 @@ public class Player:MonoBehaviour {
 
 	/** Move the player */
 	private void Move(Vector3 position) {
+		BasicTutorial tutorial = BasicTutorial.Instance;
+
+		if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.Movement)
+			tutorial.NextStage();
+
 		playerCombat.Target = null;
 		targetPosition = new Vector3(position.x, 1, position.z);
 

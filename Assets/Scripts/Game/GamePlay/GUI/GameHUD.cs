@@ -31,22 +31,13 @@ public class GameHUD:GUIBehaviour {
 
 		originalBarWidth = innerBars[0].Bounds;
 
-		StartCoroutine(WaitForGlobalManager());
+		outerBar.Create();
+
+		foreach(SGUITexture texture in innerBars)
+			texture.Create();
 	}
 	
 	void Update() {
-		if(!playerInstanceFound) {
-			if(GameObject.Find("Global Managers") == null) {
-				return;
-			} else {
-				playerInstanceFound = true;
-			}
-		}
-
-		UpdateHealthBar();
-	}
-
-	private void UpdateHealthBar() {
 		if(player.Hit) {
 			SwitchBar(Bars.Damage);
 		} else if(player.PlayerCombat.Defending) {
@@ -76,16 +67,5 @@ public class GameHUD:GUIBehaviour {
 		innerBars[(int)newBar].Activated = true;
 
 		activeBar = newBar;
-	}
-
-	/** Wait until the Global Manager has been loaded */
-	private IEnumerator WaitForGlobalManager() {
-		while(GameObject.FindGameObjectWithTag("Global Manager") == null)
-			yield return new WaitForSeconds(0.3f);
-
-		outerBar.Create();
-		
-		foreach(SGUITexture texture in innerBars)
-			texture.Create();
 	}
 }

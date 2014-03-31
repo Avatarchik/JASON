@@ -12,8 +12,13 @@ public class MenuMain:GUIBehaviour {
 
 	[SerializeField]private GUIStyle sliderStyle;
 	[SerializeField]private GUIStyle thumbStyle;
+
 	void Start() {
-		StartCoroutine(WaitForGlobalManager());
+		foreach(SGUIButton button in buttons)
+			button.Create();
+
+		foreach(SGUITexture texture in textures)
+			texture.Create();
 	}
 
 	protected override void OnGUI() {
@@ -91,16 +96,5 @@ public class MenuMain:GUIBehaviour {
 			GameData.Instance.normalDungeonCleared = false;
 			GameData.Instance.SaveData();
 		}
-	}
-	/** Wait until the Global Manager has been loaded */
-	private IEnumerator WaitForGlobalManager() {
-		while(GameObject.FindGameObjectWithTag("Global Manager") == null)
-			yield return new WaitForSeconds(0.3f);
-
-		foreach(SGUIButton button in buttons)
-			button.Create();
-
-		foreach(SGUITexture texture in textures)
-			texture.Create();
 	}
 }
