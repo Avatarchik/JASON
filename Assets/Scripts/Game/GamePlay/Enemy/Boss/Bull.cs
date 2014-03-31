@@ -10,7 +10,7 @@ public class Bull:Boss {
 		Stunned,
 		Dead
 	}
-	
+	public Animator animator;
 	private Vector3 playerPosition;
 	
 	private State state;
@@ -55,7 +55,6 @@ public class Bull:Boss {
 	
 	protected override void FixedUpdate() {
 		base.FixedUpdate();
-
 		switch(state) {
 		case State.Charging:
 			Charge();
@@ -125,9 +124,17 @@ public class Bull:Boss {
 	}
 	
 	private void Charge() {
+		StartCoroutine("IsCharging");
+	}
+	private IEnumerator IsCharging(){
+		animator.SetBool("StartCharge",true);
+		yield return new WaitForSeconds(1.5f);
+		animator.SetBool("IsCharging",true);
+		Debug.Log("DIT");
+		animator.SetBool("StartCharge",false);
 		if(!stoppingCharge && Vector3.Distance(transform.position, playerPosition) < 3)
 			stoppingCharge = true;
-	
+		
 		if(!stoppingCharge) {
 			rigidbodyForce = 100;
 		} else {
@@ -136,12 +143,17 @@ public class Bull:Boss {
 		
 		rigidbody.AddForce(playerPosition.normalized * (100 * data.RunSpeed));
 	}
-	
 	private IEnumerator Stunned() {
+		StopCoroutine("IsCharging");
+		animator.SetBool("IsCharging",false);
+		animator.SetBool("StartCharge",false);
+		animator.SetBool("WallHit",true);
+		animator.SetBool("IsStunned",true);
 		DisplayCombatText("Stunned", Color.yellow, 0.7f);
 	
 		yield return new WaitForSeconds(3);
-		
+		animator.SetBool("IsStunned",false);
+		animator.SetBool("WallHit",false);
 		lastState = State.Stunned;
 		state = State.Idle;
 	}

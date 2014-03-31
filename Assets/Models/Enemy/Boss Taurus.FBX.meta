@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 11efede7b348c194ea371fef7a77178d
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: Bone002
     100002: Bone003
@@ -100,7 +100,17 @@ ModelImporter:
     400092: Tail
     400094: Tailtip
     4300000: Box001
-    7400000: Take 001
+    7400000: Bull_Idle
+    7400002: Bull_Walk
+    7400004: Bull_Taunt
+    7400006: Bull_Attack_01
+    7400008: Bull_Attack_02
+    7400010: Bull_Charge
+    7400012: Bull_Charge_Wallhit
+    7400014: Bull_Charge_Stop
+    7400016: Bull_Hit
+    7400018: Bull_Stun
+    7400020: Bull_Dead
     9500000: //RootNode
     13700000: Box001
   materials:
@@ -117,7 +127,1349 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Bull_Idle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 34
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Walk
+      takeName: Take 001
+      firstFrame: 45
+      lastFrame: 84
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Taunt
+      takeName: Take 001
+      firstFrame: 90
+      lastFrame: 137
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Attack_01
+      takeName: Take 001
+      firstFrame: 145
+      lastFrame: 189
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Attack_02
+      takeName: Take 001
+      firstFrame: 191
+      lastFrame: 232
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Charge
+      takeName: Take 001
+      firstFrame: 240
+      lastFrame: 255
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Charge_Wallhit
+      takeName: Take 001
+      firstFrame: 256
+      lastFrame: 283
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Charge_Stop
+      takeName: Take 001
+      firstFrame: 290
+      lastFrame: 312
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Hit
+      takeName: Take 001
+      firstFrame: 320
+      lastFrame: 334
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Stun
+      takeName: Take 001
+      firstFrame: 339
+      lastFrame: 399
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Bull_Dead
+      takeName: Take 001
+      firstFrame: 405
+      lastFrame: 451
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: IK LBfoot
+        weight: 1
+      - path: IK LBfoot/IK Lankle
+        weight: 1
+      - path: IK LFfoot
+        weight: 1
+      - path: IK LFfoot/IK Lelbow
+        weight: 1
+      - path: IK RBfoot
+        weight: 1
+      - path: IK RBfoot/IK Rankle
+        weight: 1
+      - path: IK RFfoot
+        weight: 1
+      - path: IK RFfoot/IK Relbow
+        weight: 1
+      - path: IK Tail
+        weight: 1
+      - path: Root
+        weight: 1
+      - path: Root/Cavity
+        weight: 1
+      - path: Root/Cavity/Bone013
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Bone017/Bone018/Bone019/Head
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Lshoulder/Bone024/Bone023/Bone026/Bone030/Lfoot
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010
+        weight: 1
+      - path: Root/Cavity/Bone013/Bone014/Bone015/Chest1/Chest2/Rshoulder/Bone007/Bone008/Bone009/Bone010/Rfoot
+        weight: 1
+      - path: Root/Lhip
+        weight: 1
+      - path: Root/Lhip/Bone028
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025
+        weight: 1
+      - path: Root/Lhip/Bone028/Bone027/Bone025/Lhoof
+        weight: 1
+      - path: Root/Rhip
+        weight: 1
+      - path: Root/Rhip/Bone002
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004
+        weight: 1
+      - path: Root/Rhip/Bone002/Bone003/Bone004/Rhoof
+        weight: 1
+      - path: Root/Tail
+        weight: 1
+      - path: Root/Tail/Bone033
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034
+        weight: 1
+      - path: Root/Tail/Bone033/Bone034/Tailtip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -154,4 +1506,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
+  additionalBone: 0
   userData: 
