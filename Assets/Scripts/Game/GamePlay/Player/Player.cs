@@ -5,7 +5,8 @@ using System.Collections;
 public class Player:MonoBehaviour {
 	[SerializeField] private GameObject scrollingCombatText;
     [SerializeField] private GameObject selectionParticles;
-
+	[SerializeField] private Renderer[] shield;
+	[SerializeField] private Renderer sword;
 	private Boss currentBoss;
 
 	private Animator playerAnimation;
@@ -13,7 +14,7 @@ public class Player:MonoBehaviour {
 	private PlayerCombat playerCombat;
 
 	private Transform pushablePosition;
-	private Transform throwablePosition;
+	[SerializeField] private Transform throwablePosition;
 	
 	private Vector3 targetPosition;
 	
@@ -30,21 +31,26 @@ public class Player:MonoBehaviour {
 	private bool dataInstanceFound;
 	private bool isHit;
 	private bool isInBossRoom;
-	
+
+	private Vector3 prevpos;
+	private Vector3 newpos;
+	private Vector3 movement;
+	private Vector3 fwd;
+	private Vector3 bck;
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
 		playerCombat = GetComponent<PlayerCombat>();
 		playerAnimation = GetComponentInChildren<Animator>();
 
 		targetPosition = transform.position;
-		
-		throwablePosition = transform.FindChild("Throwable Position");
+
 		pushablePosition = transform.FindChild("Pushable Position");
 
 		previousX = transform.position.x;
 	}
 	
 	void Update() {
+		AnimationHandling();
 		if(!dataInstanceFound) {
 			if(GameObject.FindGameObjectWithTag("Global Manager") == null) {
 				return;
@@ -70,7 +76,6 @@ public class Player:MonoBehaviour {
 	
 	void FixedUpdate() {
 		rigidbody.velocity = Vector3.zero;
-
 		if(Vector3.Distance(transform.position, targetPosition) > 0.5f) {
 			playerAnimation.SetBool("IsRunning", true);
 
@@ -106,7 +111,31 @@ public class Player:MonoBehaviour {
 
 		previousX = transform.position.x;
 	}
+	void AnimationHandling(){
+		if(attachedPushable != null || attachedThrowable != null){
+			shield[0].enabled = false;
+			shield[1].enabled = false;
+			sword.enabled = false;
+		}else{
+			shield[0].enabled = true;
+			shield[1].enabled = true;
+			sword.enabled = true;
+		}
+		if(attachedPushable != null){
+			playerAnimation.SetBool("IsMovingBlock",true);
 
+			Vector3 dir = (transform.forward - Vector3.forward).normalized;
+			
+			float direction = Vector3.Dot(dir, transform.forward);
+		}else{
+			playerAnimation.SetBool("IsMovingBlock",false);
+		}
+		if(attachedThrowable != null){
+			playerAnimation.SetBool("IsHolding", true);
+		}else{
+			playerAnimation.SetBool("IsHolding", false);
+		}
+	}
 	void OnCollisionEnter(Collision collision) {
 		HandleCollision(collision);
 	}

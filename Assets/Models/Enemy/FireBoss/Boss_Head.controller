@@ -11,7 +11,7 @@ AnimatorController:
   - m_Name: Attack
     m_Type: 3
     m_DefaultFloat: 0
-    m_DefaultInt: 1
+    m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: spawnItem
@@ -47,28 +47,6 @@ Transition:
     m_ConditionEvent: Attack
     m_EventTreshold: 0
     m_ExitTime: .961734712
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
---- !u!1101 &110106796
-Transition:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 0}
-  m_DstState: {fileID: 110268108}
-  m_TransitionDuration: .100000001
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: spawnItem
-    m_EventTreshold: 0
-    m_ExitTime: .899999976
-  - m_ConditionMode: 5
-    m_ConditionEvent: spawnItem
-    m_EventTreshold: 0
-    m_ExitTime: .899999976
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -214,7 +192,6 @@ StateMachine:
       first: {fileID: 0}
       second:
       - {fileID: 110141514}
-      - {fileID: 110106796}
     data:
       first: {fileID: 110268108}
       second:
