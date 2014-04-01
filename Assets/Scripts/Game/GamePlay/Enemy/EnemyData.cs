@@ -28,6 +28,8 @@ public class EnemyData {
 		
 		attackDelay = initialAttackDelay;
 		attackRange = initialAttackRange;
+		chaseRange = initialChaseRange;
+		stunTime = initialStunTime;
 	}
 	
 	// Set and/or get the current health of the enemy */

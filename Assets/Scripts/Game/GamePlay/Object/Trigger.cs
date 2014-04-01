@@ -32,6 +32,13 @@ public class Trigger:MonoBehaviour {
 		eventTarget = transform.FindChild("Camera Focus");
 	}
 
+	void OnGUI() {
+		if(cameraEventActive) {
+			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height / 8), playerCamera.CameraEventTexture);
+			GUI.DrawTexture(new Rect(0, Screen.height - (Screen.height / 8), Screen.width, Screen.height / 8), playerCamera.CameraEventTexture);
+		}
+	}
+
 	void OnCollisionEnter(Collision collision) {
 		if(cameraEventActive)
 			return;
@@ -149,6 +156,18 @@ public class Trigger:MonoBehaviour {
 	}
 
 	private IEnumerator CameraEvent(Door.DoorState state) {
+		GameHUD hud = GameObject.Find("HUD").GetComponent<GameHUD>();
+		SGUI.SGUITexture activeBar = null;
+
+		hud.Outerbar.Activated = false;
+
+		foreach(SGUI.SGUITexture bar in hud.Innerbars) {
+			if(bar.Activated) {
+				activeBar = bar;
+				bar.Activated = false;
+			}
+		}
+
 		cameraEventActive = true;
 
 		oldTarget = playerCamera.Target;
@@ -169,6 +188,11 @@ public class Trigger:MonoBehaviour {
 		playerCamera.Target = oldTarget;
 
 		cameraEventActive = false;
+
+		if(activeBar != null)
+			activeBar.Activated = true;
+
+		hud.Outerbar.Activated = true;
 	}
 
 	public bool IsActive {

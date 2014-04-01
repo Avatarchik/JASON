@@ -1130,7 +1130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100080}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -67.5186386, y: 1.04999995, z: -.204862997}
+  m_LocalPosition: {x: -239.518646, y: 1.04999995, z: -.204842493}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400066}
@@ -1349,6 +1349,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollingCombatText: {fileID: 100000, guid: a3650ee7cdfff4643bdd45ef3aa26b54, type: 2}
   selectionParticles: {fileID: 100000, guid: f034af0d99b24084894575b2609b2355, type: 2}
+  shield:
+  - {fileID: 2300006}
+  - {fileID: 2300004}
+  sword: {fileID: 2300000}
+  throwablePosition: {fileID: 400082}
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

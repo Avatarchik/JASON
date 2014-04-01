@@ -68,4 +68,12 @@ public class GameHUD:GUIBehaviour {
 
 		activeBar = newBar;
 	}
+
+	public SGUITexture Outerbar {
+		get { return outerBar; }
+	}
+
+	public SGUITexture[] Innerbars {
+		get { return innerBars; }
+	}
 }

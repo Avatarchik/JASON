@@ -12,6 +12,8 @@ public class PlayerCamera:MonoBehaviour {
 
 	[SerializeField] private int fovDistance;
 
+	[SerializeField] private Texture2D cameraEventTexture;
+
 	private bool targetFound;
 
 	void Update() {
@@ -29,7 +31,10 @@ public class PlayerCamera:MonoBehaviour {
 	/** Shake the camera */
 	public IEnumerator CameraShake(){
 		Vector3 origin = transform.position;
-		//Handheld.Vibrate();
+		
+		if(Application.platform == RuntimePlatform.Android)
+			Handheld.Vibrate();
+
 		transform.Translate(new Vector3(Random.Range(-2,3),0,0));
 		yield return new WaitForSeconds(0.05f);
 		transform.position = origin;
@@ -49,4 +54,8 @@ public class PlayerCamera:MonoBehaviour {
 	}
 
 	public int CameraDistance { set { fovDistance = value; } }
+
+	public Texture2D CameraEventTexture {
+		get { return cameraEventTexture; }
+	}
 }
