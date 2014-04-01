@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-public interface Tutorial {
+public interface ITutorial {
 	void StartTutorial();
 
 	void StartStage();
@@ -8,6 +8,4 @@ public interface Tutorial {
 	void NextStage();
 
 	void StopTutorial();
-
-	IEnumerator NextStageOnFinish();
 }

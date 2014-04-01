@@ -22,7 +22,7 @@ public class SPropertyDrawer:PropertyDrawer {
 		position = EditorGUI.IndentedRect(position);
 		oldIndent = EditorGUI.indentLevel;
 
-		EditorGUI.indentLevel = 0;
+		EditorGUI.indentLevel = 1;
 
 		this.position = position;
 		this.oldPosition = position;
@@ -63,6 +63,19 @@ public class SPropertyDrawer:PropertyDrawer {
 			EditorGUI.PropertyField(position, property.FindPropertyRelative(names[i]), labels[i]);
 			position.x += position.width;
 		}
+	}
+
+	protected bool DrawFoldout(string label, int content, bool status, out bool target) {
+		position.x = oldPosition.x;
+		position.y += 19f;
+		position.width = oldPosition.width;
+
+		target = EditorGUI.Foldout(position, status, new GUIContent(label), true);
+
+		if(target)
+			height += (content * 19f);
+
+		return target;
 	}
 
 	protected void DrawLabel(string label) {

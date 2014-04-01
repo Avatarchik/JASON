@@ -38199,6 +38199,45 @@ Prefab:
   m_RootGameObject: {fileID: 374354810}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &794489191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 794489192}
+  - 65: {fileID: 794489193}
+  m_Layer: 0
+  m_Name: Block Trigger Trigger
+  m_TagString: Tutorial Block Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &794489192
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 794489191}
+  m_LocalRotation: {x: 0, y: .707105994, z: 0, w: .707107604}
+  m_LocalPosition: {x: -21.3505669, y: .5, z: 18.8947792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413513227}
+--- !u!65 &794489193
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 794489191}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 4.38718414}
+  m_Center: {x: -4.54028623e-06, y: 0, z: 1.11621857}
 --- !u!1 &794544707
 GameObject:
   m_ObjectHideFlags: 0
@@ -38344,6 +38383,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 794619055}
   m_Mesh: {fileID: 4300000, guid: 0e1d51574218ae34b986f9faf54841d8, type: 3}
+--- !u!1 &796901811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 796901813}
+  - 65: {fileID: 796901812}
+  m_Layer: 0
+  m_Name: Key Trigger
+  m_TagString: Tutorial Key
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &796901812
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 796901811}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 4.38718414}
+  m_Center: {x: -4.54028623e-06, y: 0, z: 1.11621857}
+--- !u!4 &796901813
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 796901811}
+  m_LocalRotation: {x: 0, y: -7.31690307e-07, z: 0, w: 1}
+  m_LocalPosition: {x: -30.3505669, y: .5, z: 18.8947792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413513227}
 --- !u!1 &797764539
 GameObject:
   m_ObjectHideFlags: 0
@@ -60496,6 +60574,45 @@ Transform:
   m_Children:
   - {fileID: 1115871531}
   m_Father: {fileID: 1181277263}
+--- !u!1 &1207718653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1207718654}
+  - 65: {fileID: 1207718655}
+  m_Layer: 0
+  m_Name: Block Pickup Trigger
+  m_TagString: Tutorial Block Pickup
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1207718654
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1207718653}
+  m_LocalRotation: {x: 0, y: -.707105994, z: 0, w: .707107604}
+  m_LocalPosition: {x: 19.6494331, y: .5, z: 22.8947792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413513227}
+--- !u!65 &1207718655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1207718653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 12.8116655}
+  m_Center: {x: -4.6184814e-06, y: 0, z: 2.09419632}
 --- !u!1001 &1208178194
 Prefab:
   m_ObjectHideFlags: 0
@@ -70412,6 +70529,45 @@ Prefab:
   m_RootGameObject: {fileID: 1645697816}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &1411625230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1411625231}
+  - 65: {fileID: 1411625232}
+  m_Layer: 0
+  m_Name: Block Drop Trigger
+  m_TagString: Tutorial Block Drop
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1411625231
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1411625230}
+  m_LocalRotation: {x: 0, y: 3.25020949e-07, z: 0, w: 1}
+  m_LocalPosition: {x: 5.64943409, y: .5, z: 38.8947792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413513227}
+--- !u!65 &1411625232
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1411625230}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 4.38718414}
+  m_Center: {x: -4.54028623e-06, y: 0, z: 1.11621857}
 --- !u!1 &1413513225
 GameObject:
   m_ObjectHideFlags: 0
@@ -70420,7 +70576,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1413513227}
-  - 114: {fileID: 1413513226}
   - 114: {fileID: 1413513228}
   m_Layer: 0
   m_Name: Tutorial
@@ -70429,18 +70584,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1413513226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1413513225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c7344219dab23148a2428a7d89efa17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorial: 0
 --- !u!4 &1413513227
 Transform:
   m_ObjectHideFlags: 0
@@ -70450,7 +70593,14 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2020681304}
+  - {fileID: 794489192}
+  - {fileID: 1878696208}
+  - {fileID: 796901813}
+  - {fileID: 1883850395}
+  - {fileID: 1207718654}
+  - {fileID: 1411625231}
   m_Father: {fileID: 0}
 --- !u!114 &1413513228
 MonoBehaviour:
@@ -70493,7 +70643,7 @@ MonoBehaviour:
       y: 840
       width: 960
       height: 256
-    text: You can push blocks by touching them once, and then moving around normally.
+    text: Avoid getting hit by arrows!
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
     fontSize: 40
@@ -70506,7 +70656,7 @@ MonoBehaviour:
       y: 840
       width: 960
       height: 256
-    text: Blocks can only move on the marked path.
+    text: Tap a block once to pick it up
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
     fontSize: 40
@@ -70519,7 +70669,74 @@ MonoBehaviour:
       y: 840
       width: 960
       height: 256
-    text: Touch the block again to release it.
+    text: Blocks can only move on the designated path
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Tap the block again to drop it
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Step on the pressure plate to activate, this pressure plate can only be
+      activated by Jason.
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Pull the block on the pressure plate, this pressure plate can only be activated
+      by blocks
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Tap the key once to pick it up
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Walk against the door while holding the key to pick it up
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
     fontSize: 40
@@ -95356,6 +95573,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1240843501}
   m_GameObject: {fileID: 1877484578}
   m_Mesh: {fileID: 4300000, guid: 7984ad174d027294e85413540eb6eb71, type: 3}
+--- !u!1 &1878696207
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1878696208}
+  - 65: {fileID: 1878696209}
+  m_Layer: 0
+  m_Name: Key Door Trigger
+  m_TagString: Tutorial Key Door
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1878696208
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1878696207}
+  m_LocalRotation: {x: 0, y: .707105815, z: 0, w: .707107842}
+  m_LocalPosition: {x: -41.3505669, y: .5, z: -3.10522079}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413513227}
+--- !u!65 &1878696209
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1878696207}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.17715597, y: 1, z: 8.56887436}
+  m_Center: {x: 2.58869219, y: 0, z: 3.20708179}
 --- !u!1 &1878889758
 GameObject:
   m_ObjectHideFlags: 0
@@ -95765,6 +96021,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1434625457}
   m_GameObject: {fileID: 1883514469}
   m_Mesh: {fileID: 4300000, guid: 385ab46a5db988d4daca56dad5204a39, type: 3}
+--- !u!1 &1883850394
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1883850395}
+  - 65: {fileID: 1883850396}
+  m_Layer: 0
+  m_Name: Player Trigger Trigger
+  m_TagString: Tutorial Player Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1883850395
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1883850394}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.3505659, y: .5, z: 38.8947792}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413513227}
+--- !u!65 &1883850396
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1883850394}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 4.38718414}
+  m_Center: {x: -4.54028623e-06, y: 0, z: 1.11621857}
 --- !u!1001 &1884535782
 Prefab:
   m_ObjectHideFlags: 0
@@ -102649,6 +102944,45 @@ Prefab:
   m_RootGameObject: {fileID: 1610018495}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &2020681302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2020681304}
+  - 65: {fileID: 2020681303}
+  m_Layer: 0
+  m_Name: Arrow Trigger
+  m_TagString: Tutorial Arrows
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &2020681303
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2020681302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 17}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &2020681304
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2020681302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -41, y: .5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413513227}
 --- !u!1 &2020728775
 GameObject:
   m_ObjectHideFlags: 0

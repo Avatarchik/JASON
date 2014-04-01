@@ -2,13 +2,18 @@
 using System.Collections;
 using SGUI;
 
-public class BasicTutorial:Singleton<BasicTutorial>, Tutorial {
+public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 	public enum TutorialStage {
-		None = 0,
-		Movement = 1,
+		None,
+		Movement,
+		Traps,
 		BlockPickup,
 		BlockPath,
-		BlockDrop
+		BlockDrop,
+		PlayerTrigger,
+		BlockTrigger,
+		Key,
+		KeyDoor
 	};
 
 	[SerializeField] private SGUITexture tooltip;
@@ -24,10 +29,12 @@ public class BasicTutorial:Singleton<BasicTutorial>, Tutorial {
 
 		foreach(SGUISlowWriteLabel label in labels)
 			label.Create();
+
+		StartTutorial();
 	}
 
 	public void StartTutorial() {
-		stage = 0;
+		stage = TutorialStage.Movement;
 
 		started = true;
 
@@ -36,30 +43,27 @@ public class BasicTutorial:Singleton<BasicTutorial>, Tutorial {
 
 	public void StartStage() {
 		tooltip.Activated = true;
-		labels[(int)stage].Activated = true;
+		labels[(int)stage - 1].Activated = true;
 
-		StartCoroutine(labels[(int)stage].Write());
+		StartCoroutine(labels[(int)stage - 1].Write());
 	}
 
 	public void NextStage() {
-		labels[(int)stage].Activated = false;
+		tooltip.Activated = false;
+		labels[(int)stage - 1].Activated = false;
 
 		stage++;
 	}
 
 	public void StopTutorial() {
 		tooltip.Activated = false;
-		labels[(int)stage].Activated = false;
+		labels[(int)stage - 1].Activated = false;
 
 		started = false;
 	}
 
-	public IEnumerator NextStageOnFinish() {
-		while(!labels[(int)stage].FinishedWriting)
-			yield return new WaitForSeconds(0.01f);
-
-		NextStage();
-		StartStage();
+	public SGUISlowWriteLabel[] Labels {
+		get { return labels; }
 	}
 
 	public TutorialStage Stage {

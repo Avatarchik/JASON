@@ -29,11 +29,11 @@ namespace SGUI {
 	public class SGUILabel:SGUI {
 		[SerializeField] protected String text;
 
-		[SerializeField] private Color textColor;
+		[SerializeField] protected Color textColor;
 
-		[SerializeField] private Font font;
+		[SerializeField] protected Font font;
 
-		[SerializeField] private int fontSize;
+		[SerializeField] protected int fontSize;
 
 		private GUIStyle style;
 		
@@ -94,6 +94,11 @@ namespace SGUI {
 		}
 
 		public IEnumerator Write() {
+			yield return new WaitForSeconds(0.05f);
+
+			if(originalText == null)
+				throw new NullReferenceException("The label you're trying to write is null. Text: " + text);
+
 			foreach(char letter in originalText.ToCharArray()) {
 				if(!activated)
 					yield break;
@@ -103,7 +108,19 @@ namespace SGUI {
 				yield return new WaitForSeconds(UnityEngine.Random.Range(minDelay, maxDelay));
 			}
 
+			yield return new WaitForSeconds(0.1f);
+			
 			finished = true;
+		}
+
+		/** Compare the label to another */
+		public bool Equals(SGUISlowWriteLabel other) {
+			if(activated.Equals(other.activated && bounds.Equals(other.bounds)))
+				if(text.Equals(other.text) && textColor.Equals(other.textColor) && font.Equals(other.font) && fontSize.Equals(other.fontSize))
+					if(minDelay.Equals(other.minDelay) && maxDelay.Equals(other.maxDelay))
+					return true;
+
+			return false;
 		}
 
 		public bool FinishedWriting {

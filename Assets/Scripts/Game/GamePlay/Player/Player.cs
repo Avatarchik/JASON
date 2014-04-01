@@ -144,6 +144,44 @@ public class Player:MonoBehaviour {
 		HandleCollision(collision);
 	}
 
+	void OnTriggerEnter(Collider collider) {
+		BasicTutorial tutorial = BasicTutorial.Instance;
+		
+		if(!tutorial.Started)
+			return;
+
+		switch(collider.tag) {
+		case "Tutorial Arrows":
+			if(tutorial.Stage == BasicTutorial.TutorialStage.Traps)
+				tutorial.StartStage();
+			break;
+		case "Tutorial Block Pickup":
+			if(tutorial.Stage == BasicTutorial.TutorialStage.BlockPickup)
+				tutorial.StartStage();
+			break;
+		case "Tutorial Block Drop":
+			if(tutorial.Stage == BasicTutorial.TutorialStage.BlockDrop && attachedPushable != null)
+				tutorial.StartStage();
+			break;
+		case "Tutorial Player Trigger":
+			if(tutorial.Stage == BasicTutorial.TutorialStage.PlayerTrigger)
+				tutorial.StartStage();
+			break;
+		case "Tutorial Block Trigger":
+			if(tutorial.Stage == BasicTutorial.TutorialStage.BlockTrigger && attachedPushable != null)
+				tutorial.StartStage();
+			break;
+		case "Tutorial Key":
+			if(tutorial.Stage == BasicTutorial.TutorialStage.Key)
+				tutorial.StartStage();
+			break;
+		case "Tutorial Key Door":
+			if(tutorial.Stage == BasicTutorial.TutorialStage.KeyDoor && attachedThrowable != null)
+				tutorial.StartStage();
+			break;
+		}
+	}
+
 	private void HandleCollision(Collision collision) {
 		if(pickupWhenReady != null) {
 			if(collision.gameObject.CompareTag(pickupWhenReady.tag)) {
@@ -167,6 +205,12 @@ public class Player:MonoBehaviour {
 					transform.rotation = new Quaternion(0, transform.rotation.y, 0, transform.rotation.w);
 
 					targetPosition = transform.position;
+
+					BasicTutorial tutorial = BasicTutorial.Instance;
+
+					if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.BlockPath)
+						tutorial.StartStage();
+
 					break;
 				}
 
@@ -342,9 +386,9 @@ public class Player:MonoBehaviour {
 	private void Move(Vector3 position) {
 		BasicTutorial tutorial = BasicTutorial.Instance;
 
-		if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.Movement)
+		if(tutorial.Started && tutorial.Labels[(int)tutorial.Stage - 1].FinishedWriting)
 			tutorial.NextStage();
-
+		
 		playerCombat.Target = null;
 		targetPosition = new Vector3(position.x, 1, position.z);
 
