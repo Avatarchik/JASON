@@ -31,12 +31,12 @@ public class Player:MonoBehaviour {
 	private bool isHit;
 	private bool isInBossRoom;
 
+	private Vector3 movement;
 	private Vector3 prevpos;
 	private Vector3 newpos;
-	private Vector3 movement;
 	private Vector3 fwd;
-	private Vector3 bck;
 
+	private Vector3 side;
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
 		playerCombat = GetComponent<PlayerCombat>();
@@ -107,7 +107,15 @@ public class Player:MonoBehaviour {
 
 		previousX = transform.position.x;
 	}
+	void LateUpdate ()
+	{
+		prevpos = transform.position;
+		fwd = transform.forward;
+		side = transform.right;
+	}
 	void AnimationHandling(){
+		newpos = transform.position;
+		movement = (newpos - prevpos);
 		if(attachedPushable != null || attachedThrowable != null){
 			shield[0].enabled = false;
 			shield[1].enabled = false;
@@ -119,10 +127,29 @@ public class Player:MonoBehaviour {
 		}
 		if(attachedPushable != null){
 			playerAnimation.SetBool("IsMovingBlock",true);
+			float forward = Vector3.Dot(fwd, movement);
+			float backwards = -forward;
+			float rightside = Vector3.Dot(side, movement);
+			float leftside = Mathf.Abs(rightside);
 
-			Vector3 dir = (transform.forward - Vector3.forward).normalized;
-			
-			float direction = Vector3.Dot(dir, transform.forward);
+			Debug.Log("Priority    F = " + forward + " B = " + backwards + " R = " + rightside + " L = " + leftside);
+			float[] floatlist = new float[] {forward,backwards,rightside,leftside};
+			float highest = Mathf.Max(floatlist);
+			Debug.Log(highest);
+
+			if(forward == highest){
+				playerAnimation.SetInteger("MoveDirection",1);
+			}else if(backwards == highest){
+				playerAnimation.SetInteger("MoveDirection",2);
+			}else if(rightside == highest){
+				playerAnimation.SetInteger("MoveDirection",4);
+			}else if(leftside == highest){
+				playerAnimation.SetInteger("MoveDirection",3);
+			}
+
+			if(forward == 0 && backwards == 0 && leftside == 0 && rightside == 0){
+				playerAnimation.SetInteger("MoveDirection",0);
+			}
 		}else{
 			playerAnimation.SetBool("IsMovingBlock",false);
 		}
@@ -310,7 +337,7 @@ public class Player:MonoBehaviour {
 		
 		if(attachedPushable != null) {
 			attachedPushable.rigidbody.isKinematic = attachedPushable.transform.position.Equals(pushablePosition.position) ? true : false;
-			attachedPushable.rigidbody.velocity = -(attachedPushable.transform.position - pushablePosition.position).normalized * 5;
+			attachedPushable.rigidbody.velocity = -(attachedPushable.transform.position - pushablePosition.position).normalized * 10;
 
 			if(Vector3.Distance(transform.position, attachedPushable.transform.position) > 5)
 				Drop();

@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e70a61dbe987904592077e1c50661b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalDungeonCleared: 0
+  normalDungeonCleared: 1
   fireDungeonCleared: 0
   lightEnabled: 0
   particlesEnabled: 0

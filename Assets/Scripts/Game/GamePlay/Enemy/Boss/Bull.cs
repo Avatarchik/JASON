@@ -27,7 +27,10 @@ public class Bull:Boss {
 
 		startTransform = transform.SaveWorld();
 	}
-	
+	IEnumerator SwitchLevel(){
+		yield return new WaitForSeconds(6);
+		Application.LoadLevel("DoorScene");
+	}
 	protected override void Update() {
 		base.Update ();
 
@@ -35,10 +38,11 @@ public class Bull:Boss {
 			lastState = state;
 			state = State.Dead;
 
-			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
-			PlayerData.Instance.Reset();
-			Application.LoadLevel("Fire Dungeon");
-			
+
+			//Destroy(GameObject.Find("Global Managers"));
+			//GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
+			//PlayerData.Instance.Reset();
+			StartCoroutine("SwitchLevel");
 			return;
 		}
 	
