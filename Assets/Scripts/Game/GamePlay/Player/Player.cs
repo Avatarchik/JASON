@@ -28,7 +28,6 @@ public class Player:MonoBehaviour {
 	
 	private int mask = ~(1 << 8);
 	
-	private bool dataInstanceFound;
 	private bool isHit;
 	private bool isInBossRoom;
 
@@ -37,6 +36,7 @@ public class Player:MonoBehaviour {
 	private Vector3 movement;
 	private Vector3 fwd;
 	private Vector3 bck;
+
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
 		playerCombat = GetComponent<PlayerCombat>();
@@ -51,16 +51,12 @@ public class Player:MonoBehaviour {
 	
 	void Update() {
 		AnimationHandling();
-		if(!dataInstanceFound) {
-			if(GameObject.FindGameObjectWithTag("Global Manager") == null) {
-				return;
-			} else {
-				dataInstanceFound = true;
-			}
-		}
 
-		if(Input.GetKeyDown(KeyCode.T))
+		if(Input.GetKeyDown(KeyCode.T)) {
+			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
+			PlayerData.Instance.Reset();
 			Application.LoadLevel("Fire Dungeon");
+		}
 
 		HandlePickedUpObject();
 
@@ -385,6 +381,9 @@ public class Player:MonoBehaviour {
 	/** Move the player */
 	private void Move(Vector3 position) {
 		BasicTutorial tutorial = BasicTutorial.Instance;
+
+		if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.KeyDoor && tutorial.Labels[(int)tutorial.Stage - 1].FinishedWriting)
+			tutorial.StopTutorial();
 
 		if(tutorial.Started && tutorial.Labels[(int)tutorial.Stage - 1].FinishedWriting)
 			tutorial.NextStage();

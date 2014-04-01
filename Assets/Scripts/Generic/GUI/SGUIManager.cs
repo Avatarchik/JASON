@@ -23,14 +23,14 @@ public class SGUIManager:Singleton<SGUIManager> {
 	}
 
 	public void RemoveAll() {
-		foreach(SGUITexture texture in sguiTextures)
-			texture.Destroy();
+		for(int i = sguiTextures.Count - 1; i > 0; i--)
+			sguiTextures[i].Destroy();
 
-		foreach(SGUIButton button in sguiButtons)
-			button.Destroy();
+		for(int i = sguiButtons.Count - 1; i > 0; i--)
+			sguiButtons[i].Destroy();
 
-		foreach(SGUILabel label in sguiLabels)
-			label.Destroy();
+		for(int i = sguiLabels.Count - 1; i > 0; i--)
+			sguiLabels[i].Destroy();
 	}
 	
 	public bool AnyButtonClicked {
@@ -45,25 +45,25 @@ public class SGUIManager:Singleton<SGUIManager> {
 	}
 	
 	internal void RegisterTexture(SGUITexture texture) {
-		foreach(SGUITexture other in sguiTextures)
-			if(texture.Equals(other))
-				other.Destroy();
+		for(int i = 0; i < sguiTextures.Count; i++)
+			if(texture.Equals(sguiTextures[i]))
+				sguiTextures[i].Destroy();
 
 		sguiTextures.Add(texture);
 	}
 	
 	internal void RegisterButton(SGUIButton button) {
-		foreach(SGUIButton other in sguiButtons)
-			if(button.Equals(other))
-				other.Destroy();
+		for(int i = 0; i < sguiButtons.Count; i++)
+			if(button.Equals(sguiButtons[i]))
+				sguiButtons[i].Destroy();
 
 		sguiButtons.Add(button);
 	}
 
 	internal void RegisterLabel(SGUILabel label) {
-		foreach(SGUILabel other in sguiLabels)
-			if(label.Equals(other))
-				other.Destroy();
+		for(int i = 0; i < sguiLabels.Count; i++)
+			if(label.Equals(sguiLabels[i]))
+				sguiLabels[i].Destroy();
 
 		sguiLabels.Add(label);
 	}

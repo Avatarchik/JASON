@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
 using SGUI;
 
 public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
@@ -16,11 +16,13 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 		KeyDoor
 	};
 
+	[SerializeField] private TutorialStage stage = TutorialStage.None;
+
 	[SerializeField] private SGUITexture tooltip;
 
 	[SerializeField] private SGUISlowWriteLabel[] labels;
 
-	private TutorialStage stage = TutorialStage.None;
+	[SerializeField] private bool canStart;
 
 	private bool started;
 
@@ -34,6 +36,9 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 	}
 
 	public void StartTutorial() {
+		if(!canStart)
+			return;
+
 		stage = TutorialStage.Movement;
 
 		started = true;
@@ -58,6 +63,8 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 	public void StopTutorial() {
 		tooltip.Activated = false;
 		labels[(int)stage - 1].Activated = false;
+
+		stage = TutorialStage.None;
 
 		started = false;
 	}

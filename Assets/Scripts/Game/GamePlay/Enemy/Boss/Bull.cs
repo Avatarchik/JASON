@@ -35,7 +35,6 @@ public class Bull:Boss {
 			lastState = state;
 			state = State.Dead;
 
-			Destroy(GameObject.Find("Global Managers"));
 			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
 			PlayerData.Instance.Reset();
 			Application.LoadLevel("Fire Dungeon");

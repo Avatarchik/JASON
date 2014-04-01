@@ -11,6 +11,8 @@ namespace SGUI {
 
 		[SerializeField] protected Rect bounds;
 
+		protected bool destroyed;
+
 		/** Set and/or get wheter or not the GUI element is activated */
 		public bool Activated {
 			set { activated = value; }
@@ -46,12 +48,14 @@ namespace SGUI {
 
 		/** Destroy the label */
 		public void Destroy() {
+			destroyed = true;
+
 			SGUIManager.Instance.RemoveLabel(this);
 		}
 
 		/** Update the label */
 		internal void Update(Vector2 nativeScreenSize) {
-			if(!activated || String.IsNullOrEmpty(text))
+			if(!activated || String.IsNullOrEmpty(text) || destroyed)
 				return;
 
 			style.normal.textColor = textColor;
@@ -140,12 +144,14 @@ namespace SGUI {
 
 		/** Destroy the texture */
 		public void Destroy() {
+			destroyed = true;
+
 			SGUIManager.Instance.RemoveTexture(this);
 		}
 
 		/** Update the texture */
 		internal void Update(Vector2 nativeScreenSize) {
-			if(!activated || texture == null)
+			if(!activated || texture == null || destroyed)
 				return;
 
 			GUI.DrawTexture(bounds, texture);
@@ -205,6 +211,8 @@ namespace SGUI {
 
 		/** Destroy the button */
 		public void Destroy() {
+			destroyed = true;
+
 			SGUIManager.Instance.RemoveButton(this);
 		}
 
@@ -225,7 +233,7 @@ namespace SGUI {
 
 		/** Update the button */
 		internal void Update(Vector2 nativeScreenSize) {
-			if(!activated)
+			if(!activated || destroyed)
 				return;
 
 			if(!manualEdit) {
