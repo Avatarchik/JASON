@@ -7,11 +7,12 @@ using SGUI;
 
 [CustomPropertyDrawer(typeof(SGUITexture))]
 public class SGUITextureEditor:SPropertyDrawer {
-	public const float BASE_HEIGHT = 57f;
+	public const float BASE_HEIGHT = 70f;
 	public const int LABEL_WIDTH = 80;
 
 	private bool foldoutGeneral;
 	private bool foldoutTextures;
+	private bool foldoutLabel;
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 		base.OnGUI(position, property, label);
@@ -34,6 +35,15 @@ public class SGUITextureEditor:SPropertyDrawer {
 		// Texture Settings
 		if(DrawFoldout("Texture", 1, foldoutTextures, out foldoutTextures)) {
 			DrawProperty("texture", new GUIContent("Texture"));
+		}
+
+		// Label Settings
+		if(DrawFoldout("Text", 5, foldoutLabel, out foldoutLabel)) {
+			DrawProperty("text");
+			DrawProperty("textFont", new GUIContent("Font"));
+			DrawProperty("textSize", new GUIContent("Size"));
+			DrawProperty("textAnchor", new GUIContent("Anchor"));
+			DrawProperty("textColor", new GUIContent("Text Color"));
 		}
 	}
 }

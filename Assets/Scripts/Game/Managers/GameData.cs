@@ -1,40 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameData:Singleton<GameData>{
+public class GameData:Singleton<GameData> {
 	public bool normalDungeonCleared;
-	public  bool fireDungeonCleared;
+	public bool fireDungeonCleared;
 
 	public bool lightEnabled;
 	public bool particlesEnabled;
-	public bool leftHanded;
+
+	private bool musicEnabled;
+	private bool sfxEnabled;
+
 	public float contrast;
 
-	public float musicVolume;
-	public float audioVolume;
-	void Start () {
-		GetData();
+	void Start() {
+		LoadData();
 	}
-	public void GetData(){
-		normalDungeonCleared = PlayerPrefsX.GetBool("NormalDungeon",false);
-		fireDungeonCleared = PlayerPrefsX.GetBool("FireDungeon",true);
-		lightEnabled = PlayerPrefsX.GetBool("Lights",false);
-		particlesEnabled = PlayerPrefsX.GetBool("Particles",false);
-		leftHanded = PlayerPrefsX.GetBool("LeftHanded",false);
-		contrast = PlayerPrefs.GetFloat("Contrast",0);
-		musicVolume = PlayerPrefs.GetFloat("Music",1);
-		audioVolume = PlayerPrefs.GetFloat("Audio",1);
-	}
-	// Update is called once per frame
-	public void SaveData(){
-		PlayerPrefsX.SetBool("NormalDungeon",normalDungeonCleared);
-		PlayerPrefsX.SetBool("FireDungeon",fireDungeonCleared);
-		PlayerPrefsX.SetBool("Lights",lightEnabled);
-		PlayerPrefsX.SetBool("Particles",particlesEnabled);
-		PlayerPrefsX.SetBool("LeftHanded",leftHanded);
-		PlayerPrefs.SetFloat("Music",musicVolume);
-		PlayerPrefs.SetFloat("Audio",audioVolume);
-		PlayerPrefs.SetFloat("Contrast",contrast);
+
+	public void SaveData() {
+		PlayerPrefsX.SetBool("Normal Dungeon", normalDungeonCleared);
+		PlayerPrefsX.SetBool("Fire Dungeon", fireDungeonCleared);
+
+		PlayerPrefsX.SetBool("Lights", lightEnabled);
+		PlayerPrefsX.SetBool("Particles", particlesEnabled);
+
+		PlayerPrefsX.SetBool("Music", musicEnabled);
+		PlayerPrefsX.SetBool("SFX", sfxEnabled);
+
+		PlayerPrefs.SetFloat("Contrast", contrast);
+
 		PlayerPrefs.Save();
+	}
+
+	public void LoadData() {
+		normalDungeonCleared = PlayerPrefsX.GetBool("Normal Dungeon", false);
+		fireDungeonCleared = PlayerPrefsX.GetBool("Fire Dungeon", false);
+
+		lightEnabled = PlayerPrefsX.GetBool("Lights", false);
+		particlesEnabled = PlayerPrefsX.GetBool("Particles", false);
+
+		musicEnabled = PlayerPrefsX.GetBool("Music", true);
+		sfxEnabled = PlayerPrefsX.GetBool("SFX", true);
+
+		contrast = PlayerPrefs.GetFloat("Contrast", 0);
 	}
 }

@@ -31,7 +31,7 @@ namespace SGUI {
 	public class SGUILabel:SGUI {
 		[SerializeField] protected String text;
 
-		[SerializeField] protected Color textColor;
+		[SerializeField] protected Color textColor = Color.white;
 
 		[SerializeField] protected Font font;
 
@@ -137,8 +137,18 @@ namespace SGUI {
 	public class SGUITexture:SGUI {
 		[SerializeField] private Texture2D texture;	
 
+		[SerializeField] private string text;
+		[SerializeField] private Font textFont;
+		[SerializeField] private Color textColor = Color.white;
+		[SerializeField] private int textSize;
+		[SerializeField] private TextAnchor textAnchor;
+
+		private GUIStyle style;
+
 		/** Create the texture */
 		public void Create() {
+			style = new GUIStyle();
+
 			SGUIManager.Instance.RegisterTexture(this);
 		}
 
@@ -154,7 +164,18 @@ namespace SGUI {
 			if(!activated || texture == null || destroyed)
 				return;
 
-			GUI.DrawTexture(bounds, texture);
+			if(!String.IsNullOrEmpty(text)) {
+				style.normal.background = texture;
+
+				style.font = textFont;
+				style.fontSize = textSize;
+				style.alignment = textAnchor;
+				style.normal.textColor = textColor;
+
+				GUI.Label(bounds, new GUIContent(text), style);
+			} else {
+				GUI.DrawTexture(bounds, texture);
+			}
 		}
 
 		/** Compare the texture to another */
@@ -185,6 +206,7 @@ namespace SGUI {
 		
 		[SerializeField] private string text;
 		[SerializeField] private Font textFont;
+		[SerializeField] private Color textColor = Color.white;
 		[SerializeField] private int textSize;
 		[SerializeField] private TextAnchor textAnchor;
 
@@ -257,6 +279,7 @@ namespace SGUI {
 				style.font = textFont;
 				style.fontSize = textSize;
 				style.alignment = textAnchor;
+				style.normal.textColor = textColor;
 				
 				GUI.Label(bounds, new GUIContent(text), style);
 			} else {
@@ -272,10 +295,12 @@ namespace SGUI {
 				return;
 
 			foreach(Touch touch in Input.touches) {
-				if(touch.position.x >= bounds.x && touch.position.x <= bounds.x + bounds.width && touch.position.y >= bounds.y && touch.position.y <= bounds.y + bounds.width) {
-					UpdateState(ButtonState.ACTIVE);
-				} else {
-					UpdateState(ButtonState.NORMAL);
+				if(touch.phase == TouchPhase.Began) {
+					if(touch.position.x >= bounds.x && touch.position.x <= bounds.x + bounds.width && touch.position.y >= bounds.y && touch.position.y <= bounds.y + bounds.width) {
+						UpdateState(ButtonState.ACTIVE);
+					} else {
+						UpdateState(ButtonState.NORMAL);
+					}
 				}
 			}
 		}
@@ -383,6 +408,11 @@ namespace SGUI {
 		/** Get wheter or not the state has been manually changed */
 		public bool IsManual {
 			get { return manualEdit; }
+		}
+
+		public Color TextColor {
+			set { textColor = value; }
+			get { return textColor; }
 		}
 	}
 }

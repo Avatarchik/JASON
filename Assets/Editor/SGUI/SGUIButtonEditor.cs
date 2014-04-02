@@ -40,11 +40,12 @@ public class SGUIButtonEditor:SPropertyDrawer {
 		}	
 		
 		// Label Settings
-		if(DrawFoldout("Text", 4, foldoutLabel, out foldoutLabel)) {
+		if(DrawFoldout("Text", 5, foldoutLabel, out foldoutLabel)) {
 			DrawProperty("text");
 			DrawProperty("textFont", new GUIContent("Font"));
 			DrawProperty("textSize", new GUIContent("Size"));
 			DrawProperty("textAnchor", new GUIContent("Anchor"));
+			DrawProperty("textColor", new GUIContent("Text Color"));
 		}
 	}
 }
