@@ -13,7 +13,8 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 		PlayerTrigger,
 		BlockTrigger,
 		Key,
-		KeyDoor
+		KeyDoor,
+		Boss
 	};
 
 	[SerializeField] private TutorialStage stage = TutorialStage.None;

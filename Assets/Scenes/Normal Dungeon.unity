@@ -3736,6 +3736,10 @@ Prefab:
       value: 
       objectReference: {fileID: 13400000, guid: a819d41ad6490e84aab406e81810f2b1,
         type: 2}
+    - target: {fileID: 100000, guid: 45e87a7216e73b44e9c7007dabda23f5, type: 2}
+      propertyPath: m_TagString
+      value: Boss Walls
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45e87a7216e73b44e9c7007dabda23f5, type: 2}
   m_RootGameObject: {fileID: 1997623008}
@@ -4101,6 +4105,10 @@ Prefab:
       value: 
       objectReference: {fileID: 13400000, guid: a819d41ad6490e84aab406e81810f2b1,
         type: 2}
+    - target: {fileID: 100000, guid: 45e87a7216e73b44e9c7007dabda23f5, type: 2}
+      propertyPath: m_TagString
+      value: Boss Walls
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45e87a7216e73b44e9c7007dabda23f5, type: 2}
   m_RootGameObject: {fileID: 1449150683}
@@ -5113,7 +5121,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 91650393}
   m_LocalRotation: {x: 0, y: 3.03096317e-06, z: 0, w: 1}
-  m_LocalPosition: {x: 28.6867485, y: -2.15615821, z: 1.14197385}
+  m_LocalPosition: {x: 28.9105721, y: -2.15615821, z: 1.14197385}
   m_LocalScale: {x: .940895975, y: .940895975, z: .940895975}
   m_Children:
   - {fileID: 1873531237}
@@ -32730,7 +32738,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 666673207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.8191433, y: .0500000007, z: .112086296}
+  m_LocalPosition: {x: 30.8361931, y: .0500000007, z: .112086296}
   m_LocalScale: {x: .493902683, y: 1, z: 1}
   m_Children:
   - {fileID: 1836795342}
@@ -54753,6 +54761,45 @@ Prefab:
   m_RootGameObject: {fileID: 694542379}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &1072766871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1072766872}
+  - 65: {fileID: 1072766873}
+  m_Layer: 0
+  m_Name: Boss Trigger
+  m_TagString: Tutorial Boss
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1072766872
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1072766871}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.3505659, y: .5, z: -1.10522079}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1413513227}
+--- !u!65 &1072766873
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1072766871}
+  m_Material: {fileID: 13400000, guid: a819d41ad6490e84aab406e81810f2b1, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 4.38718414}
+  m_Center: {x: -4.54028623e-06, y: 0, z: 1.11621857}
 --- !u!1 &1075798127
 GameObject:
   m_ObjectHideFlags: 0
@@ -56879,6 +56926,10 @@ Prefab:
       value: 
       objectReference: {fileID: 13400000, guid: a819d41ad6490e84aab406e81810f2b1,
         type: 2}
+    - target: {fileID: 100000, guid: 45e87a7216e73b44e9c7007dabda23f5, type: 2}
+      propertyPath: m_TagString
+      value: Boss Walls
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45e87a7216e73b44e9c7007dabda23f5, type: 2}
   m_RootGameObject: {fileID: 1230957889}
@@ -61894,7 +61945,7 @@ GameObject:
   - 65: {fileID: 1230957890}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Boss Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69604,6 +69655,10 @@ Prefab:
       value: 
       objectReference: {fileID: 13400000, guid: a819d41ad6490e84aab406e81810f2b1,
         type: 2}
+    - target: {fileID: 100000, guid: 45e87a7216e73b44e9c7007dabda23f5, type: 2}
+      propertyPath: m_TagString
+      value: Boss Walls
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45e87a7216e73b44e9c7007dabda23f5, type: 2}
   m_RootGameObject: {fileID: 2052299128}
@@ -70827,8 +70882,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1411625230}
-  m_LocalRotation: {x: 0, y: 3.25020949e-07, z: 0, w: 1}
-  m_LocalPosition: {x: 5.64943409, y: .5, z: 38.8947792}
+  m_LocalRotation: {x: 0, y: .707106292, z: 0, w: .707107365}
+  m_LocalPosition: {x: 15.6494331, y: .5, z: 36.8947792}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1413513227}
@@ -70877,6 +70932,7 @@ Transform:
   - {fileID: 1883850395}
   - {fileID: 1207718654}
   - {fileID: 1411625231}
+  - {fileID: 1072766872}
   m_Father: {fileID: 0}
 --- !u!114 &1413513228
 MonoBehaviour:
@@ -71013,7 +71069,20 @@ MonoBehaviour:
       y: 840
       width: 960
       height: 256
-    text: Walk against the door while holding the key to pick it up
+    text: Walk against the door while holding the key to open the door.
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    fontSize: 40
+    minDelay: .00800000038
+    maxDelay: .0199999996
+  - activated: 0
+    bounds:
+      serializedVersion: 2
+      x: 480
+      y: 840
+      width: 960
+      height: 256
+    text: Try to attack while it's stunned!
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
     fontSize: 40
@@ -72912,7 +72981,7 @@ GameObject:
   - 65: {fileID: 1449150684}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Boss Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102107,7 +102176,7 @@ GameObject:
   - 65: {fileID: 1997623009}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Boss Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105059,7 +105128,7 @@ GameObject:
   - 65: {fileID: 2052299129}
   m_Layer: 0
   m_Name: Barrel
-  m_TagString: Untagged
+  m_TagString: Boss Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

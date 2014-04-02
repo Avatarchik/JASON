@@ -202,6 +202,10 @@ public class Player:MonoBehaviour {
 			if(tutorial.Stage == BasicTutorial.TutorialStage.KeyDoor && attachedThrowable != null)
 				tutorial.StartStage();
 			break;
+		case "Tutorial Boss":
+			if(tutorial.Stage == BasicTutorial.TutorialStage.Boss)
+				tutorial.StartStage();
+			break;
 		}
 	}
 
@@ -409,7 +413,7 @@ public class Player:MonoBehaviour {
 	private void Move(Vector3 position) {
 		BasicTutorial tutorial = BasicTutorial.Instance;
 
-		if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.KeyDoor && tutorial.Labels[(int)tutorial.Stage - 1].FinishedWriting)
+		if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.Boss && tutorial.Labels[(int)tutorial.Stage - 1].FinishedWriting)
 			tutorial.StopTutorial();
 
 		if(tutorial.Started && tutorial.Labels[(int)tutorial.Stage - 1].FinishedWriting)
