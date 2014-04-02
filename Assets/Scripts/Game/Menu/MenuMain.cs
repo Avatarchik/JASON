@@ -33,9 +33,6 @@ public class MenuMain:GUIBehaviour {
 			Application.LoadLevel("Normal Dungeon");
 		}
 
-		if(buttons[1].OnClick)
-			;
-
 		if(buttons[2].OnClick)
 			menuOptions.Open();
 	}

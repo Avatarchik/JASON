@@ -62,6 +62,17 @@ public class ThrowableObject:InteractableObject {
 		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 	}
 
+	public void HandleBossCollision(MadOvenMain boss) {
+		Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+		player.PlayerCamera.TargetPosition = new Vector3(-10, 15, player.PlayerCamera.TargetPosition.z);
+		player.TargetPosition = player.transform.position;
+		player.CurrentBoss = boss;
+		player.InBossRoom = true;
+
+		boss.StartAttack();
+	}
+
 	public ObjectType Type {
 		set { type = value; }
 		get { return type; }

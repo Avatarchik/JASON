@@ -169,43 +169,45 @@ public class Player:MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider) {
 		BasicTutorial tutorial = BasicTutorial.Instance;
-		
-		if(!tutorial.Started)
-			return;
 
-		switch(collider.tag) {
-		case "Tutorial Arrows":
-			if(tutorial.Stage == BasicTutorial.TutorialStage.Traps)
-				tutorial.StartStage();
-			break;
-		case "Tutorial Block Pickup":
-			if(tutorial.Stage == BasicTutorial.TutorialStage.BlockPickup)
-				tutorial.StartStage();
-			break;
-		case "Tutorial Block Drop":
-			if(tutorial.Stage == BasicTutorial.TutorialStage.BlockDrop && attachedPushable != null)
-				tutorial.StartStage();
-			break;
-		case "Tutorial Player Trigger":
-			if(tutorial.Stage == BasicTutorial.TutorialStage.PlayerTrigger)
-				tutorial.StartStage();
-			break;
-		case "Tutorial Block Trigger":
-			if(tutorial.Stage == BasicTutorial.TutorialStage.BlockTrigger && attachedPushable != null)
-				tutorial.StartStage();
-			break;
-		case "Tutorial Key":
-			if(tutorial.Stage == BasicTutorial.TutorialStage.Key)
-				tutorial.StartStage();
-			break;
-		case "Tutorial Key Door":
-			if(tutorial.Stage == BasicTutorial.TutorialStage.KeyDoor && attachedThrowable != null)
-				tutorial.StartStage();
-			break;
-		case "Tutorial Boss":
-			if(tutorial.Stage == BasicTutorial.TutorialStage.Boss)
-				tutorial.StartStage();
-			break;
+		if(collider.CompareTag("Fire Rooster"))
+			Damage(1, 0, false);
+
+		if(tutorial.Started) {
+			switch(collider.tag) {
+			case "Tutorial Arrows":
+				if(tutorial.Stage == BasicTutorial.TutorialStage.Traps)
+					tutorial.StartStage();
+				break;
+			case "Tutorial Block Pickup":
+				if(tutorial.Stage == BasicTutorial.TutorialStage.BlockPickup)
+					tutorial.StartStage();
+				break;
+			case "Tutorial Block Drop":
+				if(tutorial.Stage == BasicTutorial.TutorialStage.BlockDrop && attachedPushable != null)
+					tutorial.StartStage();
+				break;
+			case "Tutorial Player Trigger":
+				if(tutorial.Stage == BasicTutorial.TutorialStage.PlayerTrigger)
+					tutorial.StartStage();
+				break;
+			case "Tutorial Block Trigger":
+				if(tutorial.Stage == BasicTutorial.TutorialStage.BlockTrigger && attachedPushable != null)
+					tutorial.StartStage();
+				break;
+			case "Tutorial Key":
+				if(tutorial.Stage == BasicTutorial.TutorialStage.Key)
+					tutorial.StartStage();
+				break;
+			case "Tutorial Key Door":
+				if(tutorial.Stage == BasicTutorial.TutorialStage.KeyDoor && attachedThrowable != null)
+					tutorial.StartStage();
+				break;
+			case "Tutorial Boss":
+				if(tutorial.Stage == BasicTutorial.TutorialStage.Boss)
+					tutorial.StartStage();
+				break;
+			}
 		}
 	}
 
@@ -246,8 +248,13 @@ public class Player:MonoBehaviour {
 		}
 
 		if(attachedThrowable != null) {
-			if(collision.gameObject.CompareTag("Door"))
-				attachedThrowable.HandleDoorCollision(collision.gameObject.GetComponent<Door>());
+			if(AttachedThrowable.CompareTag("Key"))
+				if(collision.gameObject.CompareTag("Door"))
+					attachedThrowable.HandleDoorCollision(collision.gameObject.GetComponent<Door>());
+
+			if(AttachedThrowable.CompareTag("FireItem"))
+				if(collision.gameObject.CompareTag("Main Body"))
+					attachedThrowable.HandleBossCollision(collision.gameObject.GetComponent<MadOvenMain>());
 		}
 	}
 
