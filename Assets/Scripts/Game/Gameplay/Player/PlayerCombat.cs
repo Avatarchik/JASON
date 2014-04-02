@@ -85,7 +85,7 @@ public class PlayerCombat:MonoBehaviour {
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
 
 				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
-
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.SwordSlash,true);
 				target.GetComponent<Enemy>().Damage(PlayerData.Instance.AttackDamage);
 
 				yield return new WaitForSeconds(0.01f);

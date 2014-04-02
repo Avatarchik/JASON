@@ -74,7 +74,7 @@ public class Player:MonoBehaviour {
 		rigidbody.velocity = Vector3.zero;
 		if(Vector3.Distance(transform.position, targetPosition) > 0.5f) {
 			playerAnimation.SetBool("IsRunning", true);
-
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps,true);
 			if(!isInBossRoom)
 				playerCamera.CameraDistance = 10;
 
@@ -94,6 +94,7 @@ public class Player:MonoBehaviour {
 					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 30);
 			}
 		} else {
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps,false);
 			if(!isInBossRoom)
 				playerCamera.CameraDistance = -5;
 
@@ -139,18 +140,24 @@ public class Player:MonoBehaviour {
 
 			if(forward == highest){
 				playerAnimation.SetInteger("MoveDirection",1);
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,true);
 			}else if(backwards == highest){
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,true);
 				playerAnimation.SetInteger("MoveDirection",2);
 			}else if(rightside == highest){
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,true);
 				playerAnimation.SetInteger("MoveDirection",4);
 			}else if(leftside == highest){
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,true);
 				playerAnimation.SetInteger("MoveDirection",3);
 			}
 
 			if(forward == 0 && backwards == 0 && leftside == 0 && rightside == 0){
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,false);
 				playerAnimation.SetInteger("MoveDirection",0);
 			}
 		}else{
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,false);
 			playerAnimation.SetBool("IsMovingBlock",false);
 		}
 		if(attachedThrowable != null){

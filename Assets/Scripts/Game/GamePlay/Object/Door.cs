@@ -31,6 +31,7 @@ public class Door:MonoBehaviour {
 		collider.enabled = false;
 
 		if(animation != null) {
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.DoorOpen,true);
 			animation.enabled = true;
 			animation.Play();
 		} else {
