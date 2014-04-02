@@ -87,7 +87,7 @@ public class Trigger:MonoBehaviour {
 
 		if(canOnlyTriggerOnce)
 			isTriggered = true;
-
+		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.DoorOpen,true);
 		StartCoroutine(CameraEvent(Door.DoorState.Open));
 	}
 

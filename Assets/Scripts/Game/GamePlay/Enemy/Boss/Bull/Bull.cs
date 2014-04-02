@@ -126,7 +126,7 @@ public class Bull:Boss {
 
 	private IEnumerator IsCharging() {
 		animator.SetBool("StartCharge",true);
-
+		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.Bull3,true);
 		yield return new WaitForSeconds(1.5f);
 
 		animator.SetBool("IsCharging",true);
@@ -142,8 +142,9 @@ public class Bull:Boss {
 		animator.SetBool("WallHit",true);
 		animator.SetBool("IsStunned",true);
 		DisplayCombatText("Stunned", Color.yellow, 0.7f);
-	
+
 		yield return new WaitForSeconds(3);
+	
 		animator.SetBool("IsStunned",false);
 		animator.SetBool("WallHit",false);
 
