@@ -21,7 +21,7 @@ public class CutsceneDoor : MonoBehaviour {
 		Application.LoadLevel("Fire Dungeon");
 	}
 	IEnumerator TimeToCredits(){
-		yield return new WaitForSeconds(12);
+		yield return new WaitForSeconds(15);
 		cutscene.enabled = false;
 		Application.LoadLevel("Credits");
 	}

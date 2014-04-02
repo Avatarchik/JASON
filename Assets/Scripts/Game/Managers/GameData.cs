@@ -17,7 +17,7 @@ public class GameData:Singleton<GameData>{
 	}
 	public void GetData(){
 		normalDungeonCleared = PlayerPrefsX.GetBool("NormalDungeon",false);
-		fireDungeonCleared = PlayerPrefsX.GetBool("FireDungeon",false);
+		fireDungeonCleared = PlayerPrefsX.GetBool("FireDungeon",true);
 		lightEnabled = PlayerPrefsX.GetBool("Lights",false);
 		particlesEnabled = PlayerPrefsX.GetBool("Particles",false);
 		leftHanded = PlayerPrefsX.GetBool("LeftHanded",false);
