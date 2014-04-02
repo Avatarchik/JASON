@@ -51,13 +51,6 @@ public class Player:MonoBehaviour {
 	
 	void Update() {
 		AnimationHandling();
-
-		if(Input.GetKeyDown(KeyCode.T)) {
-			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
-			PlayerData.Instance.Reset();
-			Application.LoadLevel("Fire Dungeon");
-		}
-
 		HandlePickedUpObject();
 
 		switch(Application.platform) {

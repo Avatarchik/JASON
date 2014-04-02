@@ -13,6 +13,9 @@ public class MadOvenMain:Boss {
 	}
 
 	protected override void Update() {
+		if(Input.GetKeyDown(KeyCode.T))
+			StartAttack();
+
 		if(isDead && hamer.IsDead && spatel.IsDead)
 			StartCoroutine("SwitchLevel");
 	}
@@ -36,8 +39,14 @@ public class MadOvenMain:Boss {
 		if(data.Health <= 0)
 			return;
 
-		data.Health -= amount;
-		DisplayCombatText(amount.ToString(), Color.red, 0.7f);
+		if(hamer.IsDead && spatel.IsDead) {
+			data.Health -= amount;
+			DisplayCombatText(amount.ToString(), Color.red, 0.7f);
+		} else {
+			DisplayCombatText("Blocked", Color.gray, 0.4f);
+		}
+
+		Debug.Log("Main: " + data.Health);
 	}
 
 	private IEnumerator Attack() {

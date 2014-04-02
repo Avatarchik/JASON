@@ -21,7 +21,9 @@ public class MadOvenSpatel:Boss {
 			return;
 
 		data.Health -= amount;
-		DisplayCombatText(amount.ToString(), Color.red, 0.7f);
+		DisplayCombatText(amount.ToString(), Color.red, 0.4f);
+
+		Debug.Log("Spatel: " + data.Health);
 	}
 
 	private IEnumerator Attack() {
