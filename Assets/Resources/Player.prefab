@@ -552,8 +552,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400072}
-  - 23: {fileID: 2300002}
-  - 33: {fileID: 3300002}
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
   m_Layer: 0
@@ -633,7 +631,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100082
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -705,6 +703,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1.00000012, z: 1.00000012}
   m_Children:
   - {fileID: 400068}
+  - {fileID: 400082}
   m_Father: {fileID: 400012}
 --- !u!4 &400010
 Transform:
@@ -1130,13 +1129,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100080}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -239.518646, y: 1.04999995, z: -.204842493}
+  m_LocalPosition: {x: -63.5535126, y: .739028335, z: .415554047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400066}
   - {fileID: 400074}
   - {fileID: 400072}
-  - {fileID: 400082}
   m_Father: {fileID: 0}
 --- !u!4 &400082
 Transform:
@@ -1144,11 +1142,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100082}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.52437449, z: 1.28630102}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -.700900316, y: -.102654055, z: -.703036249, w: .0627769381}
+  m_LocalPosition: {x: -.0421533808, y: .000294959929, z: -.133603975}
+  m_LocalScale: {x: .18768768, y: .187687591, z: .187687635}
   m_Children: []
-  m_Father: {fileID: 400080}
+  m_Father: {fileID: 400008}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -1162,27 +1160,6 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: abaa93f3bcd47f342aaec72ce48fd650, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_SortingLayerID: 0
---- !u!23 &2300002
-Renderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100072}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1240,13 +1217,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100070}
   m_Mesh: {fileID: 4300000, guid: ce94d7d21e7c5f64f927ce58e1bf3c3b, type: 3}
---- !u!33 &3300002
-MeshFilter:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100072}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &3300004
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -1282,7 +1252,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100072}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a819d41ad6490e84aab406e81810f2b1, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
@@ -1294,7 +1264,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100080}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a819d41ad6490e84aab406e81810f2b1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1348,7 +1318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollingCombatText: {fileID: 100000, guid: a3650ee7cdfff4643bdd45ef3aa26b54, type: 2}
-  selectionParticles: {fileID: 100000, guid: f034af0d99b24084894575b2609b2355, type: 2}
+  selectionParticles: {fileID: 100000, guid: f07ca3cb8f7eb8049b2db64e6d1610da, type: 2}
   shield:
   - {fileID: 2300006}
   - {fileID: 2300004}

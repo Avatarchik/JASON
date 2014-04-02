@@ -116,7 +116,7 @@ public class Player:MonoBehaviour {
 	void AnimationHandling(){
 		newpos = transform.position;
 		movement = (newpos - prevpos);
-		if(attachedPushable != null || attachedThrowable != null){
+		if(attachedPushable != null || attachedThrowable != null) {
 			shield[0].enabled = false;
 			shield[1].enabled = false;
 			sword.enabled = false;
@@ -310,7 +310,7 @@ public class Player:MonoBehaviour {
 		Vector3 position = transform.position;
 		position.y += 3.5f;
 		
-		TextMesh popup = (Instantiate(Resources.Load("Prefabs/Misc/Scrolling Combat Text"), position, Quaternion.identity) as GameObject).GetComponent<TextMesh>();
+		TextMesh popup = (Instantiate(scrollingCombatText, position, Quaternion.identity) as GameObject).GetComponent<TextMesh>();
 		
 		if(crit) {
 			Vector3 ls = popup.transform.localScale;
@@ -422,6 +422,7 @@ public class Player:MonoBehaviour {
             Destroy(selectionParticle);
 
         selectionParticle = Instantiate(selectionParticles, targetPosition, Quaternion.identity) as GameObject;
+		selectionParticle.transform.Rotate(new Vector3(270, 0, 0));
 	}
 
 	/** The damage delay of the player */

@@ -6,7 +6,8 @@ public class PlayerWeaponCollisionManager:MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider) {
 		if(collider.CompareTag("Boss") || collider.CompareTag("Enemy"))
-			colliders.Add(collider);
+			if(!colliders.Contains(collider))
+				colliders.Add(collider);
 	}
 
 	void OnTriggerExit(Collider collider) {

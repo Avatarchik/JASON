@@ -6,7 +6,6 @@ public class PlayerData:Singleton<PlayerData> {
 	[SerializeField] private int initialAttackDamage;
 
 	[SerializeField] private float initialAttackDelay;
-	[SerializeField] private float initialAttackRange;
 
 	private int health;
 	private int runSpeed;
@@ -25,7 +24,6 @@ public class PlayerData:Singleton<PlayerData> {
 		attackDamage = initialAttackDamage;
 		
 		attackDelay = initialAttackDelay;
-		attackRange = initialAttackRange;
 	}
 
 	/** Set and/or get the current run speed of the player */
@@ -76,10 +74,5 @@ public class PlayerData:Singleton<PlayerData> {
 	/** Get the initial attack delay of the player */
 	public float InitialAttackDelay {
 		get { return initialAttackDelay; }
-	}
-
-	/** Get the initial attack range of the player */
-	public float InitialAttackRange {
-		get { return initialAttackRange; }
 	}
 }

@@ -15,10 +15,6 @@ public class Bull:Boss {
 	
 	private State state;
 	private State lastState;
-	
-	private int rigidbodyForce;
-	
-	private bool stoppingCharge;
 
 	private StoreTransform startTransform;
 
@@ -27,10 +23,17 @@ public class Bull:Boss {
 
 		startTransform = transform.SaveWorld();
 	}
-	IEnumerator SwitchLevel(){
-		yield return new WaitForSeconds(6);
+
+	IEnumerator SwitchLevel() {
+		GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
+
+		yield return new WaitForSeconds(3);
+		
+		PlayerData.Instance.Reset();
+
 		Application.LoadLevel("DoorScene");
 	}
+
 	protected override void Update() {
 		base.Update ();
 
@@ -38,10 +41,6 @@ public class Bull:Boss {
 			lastState = state;
 			state = State.Dead;
 
-
-			//Destroy(GameObject.Find("Global Managers"));
-			//GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
-			//PlayerData.Instance.Reset();
 			StartCoroutine("SwitchLevel");
 			return;
 		}
@@ -58,9 +57,10 @@ public class Bull:Boss {
 	
 	protected override void FixedUpdate() {
 		base.FixedUpdate();
+
 		switch(state) {
 		case State.Charging:
-			Charge();
+			StartCoroutine("IsCharging");
 			break;
 		}
 	}
@@ -77,8 +77,6 @@ public class Bull:Boss {
 			break;
 		case "Player":
 			if(state == State.Charging) {
-				lastState = state;
-				state = State.Attacking;
 				player.GetComponent<Player>().Damage(data.AttackDamage * 4, data.StunTime * 2, true);
 			} else if(lastState != State.Charging) {
 				player.GetComponent<Player>().Damage(data.AttackDamage * 2, data.StunTime, false);
@@ -125,24 +123,15 @@ public class Bull:Boss {
 			yield return new WaitForSeconds(1);
 		}
 	}
-	
-	private void Charge() {
-		StartCoroutine("IsCharging");
-	}
-	private IEnumerator IsCharging(){
+
+	private IEnumerator IsCharging() {
 		animator.SetBool("StartCharge",true);
+
 		yield return new WaitForSeconds(1.5f);
+
 		animator.SetBool("IsCharging",true);
-		Debug.Log("DIT");
-		animator.SetBool("StartCharge",false);
-		if(!stoppingCharge && Vector3.Distance(transform.position, playerPosition) < 3)
-			stoppingCharge = true;
 		
-		if(!stoppingCharge) {
-			rigidbodyForce = 100;
-		} else {
-			rigidbodyForce -= 20;
-		}
+		animator.SetBool("StartCharge",false);
 		
 		rigidbody.AddForce(playerPosition.normalized * (100 * data.RunSpeed));
 	}
@@ -157,6 +146,7 @@ public class Bull:Boss {
 		yield return new WaitForSeconds(3);
 		animator.SetBool("IsStunned",false);
 		animator.SetBool("WallHit",false);
+
 		lastState = State.Stunned;
 		state = State.Idle;
 	}

@@ -7,7 +7,7 @@ using SGUI;
 
 [CustomPropertyDrawer(typeof(SGUIButton))]
 public class SGUIButtonEditor:SPropertyDrawer {
-	public const float BASE_HEIGHT = 263f;
+	public const float BASE_HEIGHT = 70f;
 	public const int LABEL_WIDTH = 80;
 
 	private bool foldoutGeneral;
@@ -33,15 +33,14 @@ public class SGUIButtonEditor:SPropertyDrawer {
 		}
 
 		// Texture Settings
-		if(DrawFoldout("Textures", 1, foldoutTextures, out foldoutTextures)) {
+		if(DrawFoldout("Textures", 3, foldoutTextures, out foldoutTextures)) {
 			DrawProperty("textureNormal", new GUIContent("Normal"));
 			DrawProperty("textureHover", new GUIContent("Hover"));
 			DrawProperty("textureActive", new GUIContent("Active"));
 		}	
 		
 		// Label Settings
-		if(DrawFoldout("Textures", 1, foldoutLabel, out foldoutLabel)) {
-			DrawLabel("Text");
+		if(DrawFoldout("Text", 4, foldoutLabel, out foldoutLabel)) {
 			DrawProperty("text");
 			DrawProperty("textFont", new GUIContent("Font"));
 			DrawProperty("textSize", new GUIContent("Size"));

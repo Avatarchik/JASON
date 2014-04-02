@@ -3,15 +3,20 @@ using System.Collections;
 using SGUI;
 
 public class MenuMain:GUIBehaviour {
-	public SGUIButton[] buttons;
-	public SGUITexture[] textures;
+	public enum MenuOpen {
+		Main,
+		Options,
+		Credits
+	}
 
-	private bool optionsOpened;
-	private bool creditsOpened;
-	private bool mainMenuOpened = true;
+	[SerializeField] private SGUITexture[] textures;
 
-	[SerializeField]private GUIStyle sliderStyle;
-	[SerializeField]private GUIStyle thumbStyle;
+	[SerializeField] private SGUIButton[] buttons;
+
+	[SerializeField] private GUIStyle sliderStyle;
+	[SerializeField] private GUIStyle thumbStyle;
+
+	private MenuOpen openMenu = MenuOpen.Main;
 
 	void Start() {
 		foreach(SGUIButton button in buttons)
@@ -23,75 +28,55 @@ public class MenuMain:GUIBehaviour {
 
 	protected override void OnGUI() {
 		base.OnGUI();
-		RenderGUI();
-		if(buttons[0].Click) {
-			if(optionsOpened){
-				optionsOpened = false;
-				mainMenuOpened = true;
-			}else{
-				optionsOpened = true;
-				mainMenuOpened = false;
-				creditsOpened = false;
-			}
-		}
-		if(optionsOpened){
-			OptionsHandling();
-		}
+
+		if(buttons[0].OnClick)
+			openMenu = (openMenu == MenuOpen.Main) ? MenuOpen.Options : MenuOpen.Main;
+
+		RenderMainGUI();
+		RenderOptionsGUI();
 	}
 
-	void RenderGUI(){
-		/** Option Items*/
-		textures[0].Activated = optionsOpened;
-		buttons[1].Activated = optionsOpened;
-		buttons[2].Activated = optionsOpened;
-		buttons[3].Activated = optionsOpened;
-		buttons[4].Activated = optionsOpened;
-		buttons[5].Activated = optionsOpened;
-		buttons[6].Activated = optionsOpened;
-		buttons[7].Activated = optionsOpened;
-		buttons[8].Activated = optionsOpened;
-		buttons[9].Activated = mainMenuOpened;
-		buttons[10].Activated = mainMenuOpened;
-		buttons[11].Activated = mainMenuOpened;
-		if(optionsOpened){
-			GameData.Instance.musicVolume = GUI.HorizontalSlider(new Rect(1200,300,600,150),GameData.Instance.musicVolume,0,1,sliderStyle,thumbStyle);
-			GameData.Instance.audioVolume = GUI.HorizontalSlider(new Rect(1200,600,600,150),GameData.Instance.audioVolume,0,1,sliderStyle,thumbStyle);
-			GameData.Instance.contrast = GUI.HorizontalSlider(new Rect(1200,900,600,150),GameData.Instance.contrast,0,1,sliderStyle,thumbStyle);
-		}
+	private void RenderMainGUI() {
+		bool isOpen = (openMenu == MenuOpen.Main);
 
+		for(int i = 9; i < 12; i++)
+			buttons[i].Activated = isOpen;
+	}
+
+	private void RenderOptionsGUI() {
+		bool isOpen = (openMenu == MenuOpen.Options);
+
+		textures[0].Activated = isOpen;
+
+		for(int i = 1; i < 9; i++)
+			buttons[i].Activated = isOpen;
+
+		if(isOpen) {
+			GameData.Instance.musicVolume = GUI.HorizontalSlider(new Rect(1200, 300, 600, 150), GameData.Instance.musicVolume, 0, 1, sliderStyle, thumbStyle);
+			GameData.Instance.audioVolume = GUI.HorizontalSlider(new Rect(1200, 600, 600, 150), GameData.Instance.audioVolume, 0, 1, sliderStyle, thumbStyle);
+			GameData.Instance.contrast = GUI.HorizontalSlider(new Rect(1200, 900, 600, 150), GameData.Instance.contrast, 0, 1, sliderStyle, thumbStyle);
+		}
 	}
 
 	void OptionsHandling(){
-		if(buttons[4].Click){
-			//Dynamic Lights
-			if(GameData.Instance.lightEnabled){
-				GameData.Instance.lightEnabled = false;
-			}else{
-				GameData.Instance.lightEnabled = true;
-			}
-		}
-		if(buttons[5].Click) {
-			//Particles
-			if(GameData.Instance.particlesEnabled){
-				GameData.Instance.particlesEnabled = false;
-			}else{
-				GameData.Instance.particlesEnabled = true;
-			}
-		}
+		// Dynamic Lights
+		if(buttons[4].OnClick)
+			GameData.Instance.lightEnabled = !GameData.Instance.lightEnabled;
+		
+		// Particles
+		if(buttons[5].OnClick)
+			GameData.Instance.particlesEnabled = !GameData.Instance.particlesEnabled;
 
-		if(buttons[6].Click) {
-			//Left Handed
-			if(GameData.Instance.leftHanded){
-				GameData.Instance.leftHanded = false;
-			}else{
-				GameData.Instance.leftHanded = true;
-			}
-		}
+		// Left Handed
+		if(buttons[6].OnClick)
+			GameData.Instance.leftHanded = !GameData.Instance.leftHanded;
 
-		if(buttons[7].Click){
+		// Save Data
+		if(buttons[7].OnClick)
 			GameData.Instance.SaveData();
-		}
-		if(buttons[8].Click){
+		
+		// Reset Save Data
+		if(buttons[8].OnClick) {
 			GameData.Instance.fireDungeonCleared = false;
 			GameData.Instance.normalDungeonCleared = false;
 			GameData.Instance.SaveData();

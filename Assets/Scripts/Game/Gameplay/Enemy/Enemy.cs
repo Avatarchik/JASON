@@ -51,7 +51,7 @@ public class Enemy:MonoBehaviour {
 		Vector3 position = transform.position;
 		position.y += 3.5f;
 		
-		TextMesh popup = (Instantiate(Resources.Load("Prefabs/Misc/Scrolling Combat Text"), position, Quaternion.identity) as GameObject).GetComponent<TextMesh>();
+		TextMesh popup = (Instantiate(scrollingCombatText, position, Quaternion.identity) as GameObject).GetComponent<TextMesh>();
 		
 		popup.transform.localScale = new Vector3(size, size, size);		
 		popup.transform.parent = this.transform;

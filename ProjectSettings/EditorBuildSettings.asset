@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Start.unity
   - enabled: 1
+    path: Assets/Scenes/DoorScene.unity
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
   - enabled: 1
     path: Assets/Scenes/Normal Dungeon.unity
   - enabled: 1
     path: Assets/Scenes/Fire Dungeon.unity
-  - enabled: 1
-    path: Assets/Scenes/DoorScene.unity

@@ -23,13 +23,13 @@ public class SGUIManager:Singleton<SGUIManager> {
 	}
 
 	public void RemoveAll() {
-		for(int i = sguiTextures.Count - 1; i > 0; i--)
+		for(int i = sguiTextures.Count - 1; i >= 0; i--)
 			sguiTextures[i].Destroy();
 
-		for(int i = sguiButtons.Count - 1; i > 0; i--)
+		for(int i = sguiButtons.Count - 1; i >= 0; i--)
 			sguiButtons[i].Destroy();
 
-		for(int i = sguiLabels.Count - 1; i > 0; i--)
+		for(int i = sguiLabels.Count - 1; i >= 0; i--)
 			sguiLabels[i].Destroy();
 	}
 	
