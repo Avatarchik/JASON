@@ -185,7 +185,7 @@ GameObject:
   - 54: {fileID: 3537325}
   m_Layer: 0
   m_Name: Key
-  m_TagString: ThrowableObject
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90919,7 +90919,7 @@ GameObject:
   - 54: {fileID: 1773509779}
   m_Layer: 0
   m_Name: Key
-  m_TagString: ThrowableObject
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

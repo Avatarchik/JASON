@@ -40,6 +40,7 @@ public class Player:MonoBehaviour {
 	
 	private bool isHit;
 	private bool isInBossRoom;
+	private bool sprinting;
 	
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
@@ -78,7 +79,9 @@ public class Player:MonoBehaviour {
 			if(!isInBossRoom)
 				playerCamera.CameraDistance = 10;
 
-			transform.position = Vector3.MoveTowards(transform.position, targetPosition, PlayerData.Instance.RunSpeed * Time.deltaTime); 
+			int speed = sprinting ? PlayerData.Instance.RunSpeed : PlayerData.Instance.WalkSpeed;
+
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); 
 			
 			if(attachedPushable == null) {
 				Vector3 lookPosition = targetPosition - transform.position;
@@ -380,17 +383,27 @@ public class Player:MonoBehaviour {
 
 					Physics.Raycast(ray, out hit, 100, mask);
 
-					HandleInput(hit, true);	
+					HandleInput(hit, true);
 				} else {
 					Ray ray = Camera.main.ScreenPointToRay(touch.position);
 					RaycastHit hit;
 
 					Physics.Raycast(ray, out hit, 100, mask);
 
-					HandleInput(hit, false);					
+					HandleInput(hit, false);
 				}
 
 				lastTouchTime = Time.time;
+			} else if(touch.phase == TouchPhase.Stationary) {
+				if((Time.time - lastTouchTime) > 0.05f) {
+					if(attachedThrowable != null) {
+						ThrowObject();
+					} else {
+						playerCombat.Defend(!playerCombat.Defending);
+					}
+
+					lastTouchTime = Time.time;
+				}
 			}
 		}
 	}
@@ -404,6 +417,27 @@ public class Player:MonoBehaviour {
 			Physics.Raycast(ray, out hit, 100, mask);
 
 			HandleInput(hit, false);
+
+			lastTouchTime = Time.time;
+		} else if(Input.GetMouseButtonDown(1)) {
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+
+			Physics.Raycast(ray, out hit, 100, mask);
+
+			HandleInput(hit, true);
+
+			lastTouchTime = Time.time;
+		} else if(Input.GetMouseButton(0)) {
+			if((Time.time - lastTouchTime) > 0.5f) {
+				if(attachedThrowable != null) {
+					ThrowObject();
+				} else {
+					playerCombat.Defend(!playerCombat.Defending);
+				}
+
+				lastTouchTime = Time.time;
+			}
 		}
 	}
 
@@ -415,34 +449,42 @@ public class Player:MonoBehaviour {
 		if(playerCombat.Defending)
 			return;
 
-		switch(hit.transform.tag) {
-		case "Enemy":
-		case "Boss":
-			if(!playerCombat.InCombat) {
-				playerCombat.WeaponCollisionArea.collider.enabled = true;
-				playerCombat.StartAttack(hit.transform.gameObject);
+		if(!doubleTap) {
+			sprinting = false;
+
+			switch(hit.transform.tag) {
+			case "Enemy":
+			case "Boss":
+				if(!playerCombat.InCombat) {
+					playerCombat.WeaponCollisionArea.collider.enabled = true;
+					playerCombat.StartAttack(hit.transform.gameObject);
+				}
+				break;
+			case "Key":
+			case "FireItem":
+			case "PushableObject":
+				BasicTutorial tutorial = BasicTutorial.Instance;
+
+				if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.BlockPickup)
+					tutorial.StartStage();
+
+				playerCombat.WeaponCollisionArea.collider.enabled = false;
+
+				if(attachedPushable != null) {
+					Drop();
+				} else {
+					Pickup(hit.collider.gameObject);
+				}
+				break;
+			default:
+				playerCombat.WeaponCollisionArea.collider.enabled = false;
+				Move(hit.point);
+				break;
 			}
-			break;
-		case "Key":
-		case "FireItem":
-		case "PushableObject":
-			BasicTutorial tutorial = BasicTutorial.Instance;
-
-			if(tutorial.Started && tutorial.Stage == BasicTutorial.TutorialStage.BlockPickup)
-				tutorial.StartStage();
-
+		} else {
 			playerCombat.WeaponCollisionArea.collider.enabled = false;
-
-			if(attachedPushable != null) {
-				Drop();
-			} else {
-				Pickup(hit.collider.gameObject);
-			}
-			break;
-		default:
-			playerCombat.WeaponCollisionArea.collider.enabled = false;
+			sprinting = true;
 			Move(hit.point);
-			break;
 		}
 	}
 

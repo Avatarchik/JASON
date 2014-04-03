@@ -618,7 +618,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351739fa867515d49b061a7847219327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialRunSpeed: 5
+  initialWalkSpeed: 5
+  initialRunSpeed: 7
   initialHealth: 10
   initialAttackDamage: 1
   initialAttackDelay: .699999988
@@ -1175,7 +1176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb75927410b0872408765aadbb5108fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: DoorScene
+  sceneToLoad: Normal Dungeon
 --- !u!4 &2039726021
 Transform:
   m_ObjectHideFlags: 0

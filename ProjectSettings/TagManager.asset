@@ -18,7 +18,7 @@ TagManager:
   - Destructable
   - 
   - Global Manager
-  - ThrowableObject
+  - 
   - PushableObject
   - 
   - Boss Walls

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 public class PlayerData:Singleton<PlayerData> {
+	[SerializeField] private int initialWalkSpeed;
 	[SerializeField] private int initialRunSpeed;
 	[SerializeField] private int initialHealth;
 	[SerializeField] private int initialAttackDamage;
@@ -8,6 +9,7 @@ public class PlayerData:Singleton<PlayerData> {
 	[SerializeField] private float initialAttackDelay;
 
 	private int health;
+	private int walkSpeed;
 	private int runSpeed;
 	private int attackDamage;
 
@@ -21,13 +23,20 @@ public class PlayerData:Singleton<PlayerData> {
 	/** Reset the player data to the defaults */
 	public void Reset() {
 		health = initialHealth;
+		walkSpeed = initialWalkSpeed;
 		runSpeed = initialRunSpeed;
 		attackDamage = initialAttackDamage;
 		
 		attackDelay = initialAttackDelay;
 	}
 
-	/** Set and/or get the current run speed of the player */
+	/** Set and/or get the current walk speed of the player */
+	public int WalkSpeed {
+		set { walkSpeed = value; }
+		get { return walkSpeed; }
+	}
+
+	/** Set and/or get the current walk speed of the player */
 	public int RunSpeed {
 		set { runSpeed = value; }
 		get { return runSpeed; }
@@ -60,6 +69,11 @@ public class PlayerData:Singleton<PlayerData> {
 	/** Get the initial health of the player */
 	public int InitialHealth {
 		get { return initialHealth; }
+	}
+
+	/** Get the initial walk speed of the player */
+	public int InitialWalkSpeed {
+		get { return initialWalkSpeed; }
 	}
 
 	/** Get the initial run speed of the player */
