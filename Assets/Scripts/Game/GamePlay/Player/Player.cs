@@ -81,6 +81,9 @@ public class Player:MonoBehaviour {
 
 			int speed = (sprinting && !playerCombat.Defending) ? PlayerData.Instance.RunSpeed : PlayerData.Instance.WalkSpeed;
 
+			if(playerCombat.Defending)
+				speed /= 2;
+
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); 
 			
 			if(attachedPushable == null) {

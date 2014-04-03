@@ -7,7 +7,7 @@ public class MadOvenMain:Boss {
 	public Animator animatie;
 	private bool attacking;
 	public bool damageable;
-
+	public int spawncounter;
 	public ParticleSystem[] fireAttack;
 	protected override void Start() {
 		hamer = GameObject.Find("Hamer").GetComponent<MadOvenHamer>();
@@ -62,10 +62,12 @@ public class MadOvenMain:Boss {
 			yield return new WaitForSeconds(data.AttackDelay / 2);
 			int random = Random.Range(0,10);
 			if(random >= 4){
+				if(spawncounter < 3){
 				animatie.SetInteger("Attack",1);
 				damageable = true;
 				attacking = true;
 				yield return new WaitForSeconds(0.5f);
+				spawncounter++;
 				fireAttack[0].light.enabled = true;
 				for(int i = 0; i < fireAttack.Length; i++){
 					fireAttack[i].renderer.enabled = true;
@@ -79,6 +81,16 @@ public class MadOvenMain:Boss {
 				}
 				attacking = false;
 				damageable = false;
+				}else{
+					spawncounter = 0;
+					animatie.SetBool("spawnItem",true);
+					yield return new WaitForSeconds(0.5f);
+					animatie.SetBool("spawnItem",false);
+					animatie.SetBool("toIdle",true);
+					/* Spawn Item*/
+					yield return new WaitForSeconds(4);
+					animatie.SetBool("toIdle",false);
+				}
 			}
 			yield return new WaitForSeconds(3);
 		}
