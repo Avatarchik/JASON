@@ -4,6 +4,8 @@ using System;
 using SGUI;
 
 public class PlayerCombat:MonoBehaviour {
+	[SerializeField] Collider shieldCollider;
+
 	private Player player;
 	private PlayerWeaponCollisionManager weaponCollisionManager;
 
@@ -48,6 +50,7 @@ public class PlayerCombat:MonoBehaviour {
 		DeselectTarget();
 
 		defending = state;
+		shieldCollider.enabled = state;
 
 		player.PlayerAnimation.SetBool("IsBlocking", state);
 		

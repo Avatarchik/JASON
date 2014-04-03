@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Start.unity
   - enabled: 1
-    path: Assets/Scenes/DoorScene.unity
+    path: Assets/Scenes/Boss Door.unity
   - enabled: 1
     path: Assets/Scenes/Menu.unity
   - enabled: 1

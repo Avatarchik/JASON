@@ -79,7 +79,7 @@ public class Player:MonoBehaviour {
 			if(!isInBossRoom)
 				playerCamera.CameraDistance = 10;
 
-			int speed = sprinting ? PlayerData.Instance.RunSpeed : PlayerData.Instance.WalkSpeed;
+			int speed = (sprinting && !playerCombat.Defending) ? PlayerData.Instance.RunSpeed : PlayerData.Instance.WalkSpeed;
 
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime); 
 			
@@ -444,9 +444,6 @@ public class Player:MonoBehaviour {
 	/** Handle input */
 	private void HandleInput(RaycastHit hit, bool doubleTap) {
 		if(hit.collider == null || SGUIManager.Instance.AnyButtonClicked)
-			return;
-		
-		if(playerCombat.Defending)
 			return;
 
 		if(!doubleTap) {

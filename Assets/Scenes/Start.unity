@@ -925,11 +925,11 @@ Transform:
   - {fileID: 507811812}
   - {fileID: 1570010887}
   - {fileID: 801654219}
+  - {fileID: 1344386353}
   - {fileID: 67922422}
   - {fileID: 358239358}
   - {fileID: 1212953639}
   - {fileID: 286637655}
-  - {fileID: 1344386353}
   m_Father: {fileID: 254651034}
 --- !u!114 &1540139887
 MonoBehaviour:
@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb75927410b0872408765aadbb5108fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Normal Dungeon
+  sceneToLoad: Menu
 --- !u!4 &2039726021
 Transform:
   m_ObjectHideFlags: 0
