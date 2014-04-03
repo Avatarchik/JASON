@@ -33,7 +33,8 @@ public class BasicTutorial:Singleton<BasicTutorial> {
 		foreach(SGUISlowWriteLabel label in labels)
 			label.Create();
 
-		StartTutorial();
+		if(!GameData.Instance.tutorialFinished)
+			StartTutorial();
 	}
 
 	/** Start the tutorial */
@@ -66,12 +67,15 @@ public class BasicTutorial:Singleton<BasicTutorial> {
 
 	/** Stop the tutorial */
 	public void StopTutorial() {
+		Debug.Log("Fap");
 		tooltip.Activated = false;
 		labels[(int)stage - 1].Activated = false;
 
 		stage = TutorialStage.None;
 
 		started = false;
+
+		GameData.Instance.tutorialFinished = true;
 	}
 
 	/** Get the labels */

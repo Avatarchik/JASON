@@ -31,6 +31,9 @@ public class MenuOptions:GUIBehaviour {
 		}
 
 		menuMain = GetComponent<MenuMain>();
+
+		buttons[2].TextColor = GameData.Instance.particlesEnabled ? Color.yellow : Color.white;
+		buttons[3].TextColor = GameData.Instance.lightEnabled ? Color.yellow : Color.white;
 	}
 
 	protected override void OnGUI() {

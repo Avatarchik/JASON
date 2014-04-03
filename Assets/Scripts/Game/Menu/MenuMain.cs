@@ -29,7 +29,10 @@ public class MenuMain:GUIBehaviour {
 		base.OnGUI();
 
 		if(buttons[0].OnClick) {
+			ExitApplication.Instance.GameStarted = true;
+
 			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
+			
 			Application.LoadLevel("Normal Dungeon");
 		}
 

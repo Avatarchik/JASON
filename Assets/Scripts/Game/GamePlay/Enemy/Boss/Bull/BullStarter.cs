@@ -3,8 +3,13 @@ using System.Collections;
 
 public class BullStarter:MonoBehaviour {
 	[SerializeField] private GameObject bull;
+	[SerializeField] private GameObject otherDoorEnd;
 
 	void OnTriggerEnter(Collider collider) {
+		otherDoorEnd.collider.enabled = true;
+	}
+
+	void OnTriggerExit(Collider collider) {
 		if(collider.gameObject.CompareTag("Player")) {
 			Player player = collider.GetComponent<Player>();
 			Bull boss = bull.GetComponent<Bull>();
@@ -22,8 +27,10 @@ public class BullStarter:MonoBehaviour {
 
 	private IEnumerator StartDelay(Bull boss) {
 		yield return new WaitForSeconds(2.0f);
-		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BossMusic,true);
-		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.NormalMusic,false);
+
+		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BossMusic, true);
+		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.NormalMusic, false);
+
 		boss.StartAttack();
 	}
 }

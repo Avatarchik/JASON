@@ -225,6 +225,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1540139886}
+  - {fileID: 1959936450}
   - {fileID: 43327944}
   - {fileID: 690936601}
   m_Father: {fileID: 0}
@@ -634,11 +635,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e70a61dbe987904592077e1c50661b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contrast: 0
   normalDungeonCleared: 1
   fireDungeonCleared: 0
   lightEnabled: 0
   particlesEnabled: 0
-  contrast: 0
+  musicEnabled: 0
+  sfxEnabled: 0
 --- !u!1 &801654217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1152,44 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1540139886}
+--- !u!1 &1959936449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1959936450}
+  - 114: {fileID: 1959936451}
+  m_Layer: 0
+  m_Name: Exit Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1959936450
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1959936449}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.9811268, y: 5.97700977, z: 15.2271442}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 254651034}
+--- !u!114 &1959936451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1959936449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30d0ce6d28f2d6444ad68cedf41fdddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2039726019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1176,7 +1217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb75927410b0872408765aadbb5108fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Fire Dungeon
+  sceneToLoad: Menu
 --- !u!4 &2039726021
 Transform:
   m_ObjectHideFlags: 0

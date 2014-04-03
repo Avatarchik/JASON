@@ -2,16 +2,18 @@
 using System.Collections;
 
 public class GameData:Singleton<GameData> {
+	public float contrast;
+
 	public bool normalDungeonCleared;
 	public bool fireDungeonCleared;
 
 	public bool lightEnabled;
 	public bool particlesEnabled;
 
-	private bool musicEnabled;
-	private bool sfxEnabled;
+	public bool musicEnabled;
+	public bool sfxEnabled;
 
-	public float contrast;
+	public bool tutorialFinished;
 
 	void Start() {
 		LoadData();
@@ -28,6 +30,8 @@ public class GameData:Singleton<GameData> {
 		PlayerPrefsX.SetBool("Music", musicEnabled);
 		PlayerPrefsX.SetBool("SFX", sfxEnabled);
 
+		PlayerPrefsX.SetBool("Tutorial Finished", tutorialFinished);
+
 		PlayerPrefs.SetFloat("Contrast", contrast);
 
 		PlayerPrefs.Save();
@@ -39,10 +43,12 @@ public class GameData:Singleton<GameData> {
 		fireDungeonCleared = PlayerPrefsX.GetBool("Fire Dungeon", false);
 
 		lightEnabled = PlayerPrefsX.GetBool("Lights", false);
-		particlesEnabled = PlayerPrefsX.GetBool("Particles", false);
+		particlesEnabled = PlayerPrefsX.GetBool("Particles", true);
 
 		musicEnabled = PlayerPrefsX.GetBool("Music", true);
 		sfxEnabled = PlayerPrefsX.GetBool("SFX", true);
+
+		tutorialFinished = PlayerPrefsX.GetBool("Tutorial Finished", false);
 
 		contrast = PlayerPrefs.GetFloat("Contrast", 0);
 	}

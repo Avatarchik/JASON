@@ -299,7 +299,7 @@ namespace SGUI {
 
 			foreach(Touch touch in Input.touches) {
 				if(touch.phase == TouchPhase.Began) {
-					if(touch.position.x >= bounds.x && touch.position.x <= bounds.x + bounds.width && touch.position.y >= bounds.y && touch.position.y <= bounds.y + bounds.width) {
+					if(touch.position.x >= bounds.x && touch.position.x <= bounds.x + bounds.width && touch.position.y >= bounds.y && touch.position.y <= bounds.y + bounds.height) {
 						UpdateState(ButtonState.ACTIVE);
 					} else {
 						UpdateState(ButtonState.NORMAL);
@@ -312,7 +312,7 @@ namespace SGUI {
 		private void HandleInput() {
 			Vector2 mouse = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
 
-			if(mouse.x >= bounds.x && mouse.x <= bounds.x + bounds.width && mouse.y >= bounds.y && mouse.y <= bounds.y + bounds.width) {
+			if(mouse.x >= bounds.x && mouse.x <= bounds.x + bounds.width && mouse.y >= bounds.y && mouse.y <= bounds.y + bounds.height) {
 				if(Input.GetMouseButton(0)) {
 					UpdateState(ButtonState.ACTIVE);
 				} else {
