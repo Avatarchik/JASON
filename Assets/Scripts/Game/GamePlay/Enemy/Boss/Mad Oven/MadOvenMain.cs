@@ -4,9 +4,9 @@ using System.Collections;
 public class MadOvenMain:Boss {
 	private MadOvenHamer hamer;
 	private MadOvenSpatel spatel;
-
+	public Animator animatie;
 	private bool attacking;
-
+	public bool damageable;
 	protected override void Start() {
 		hamer = GameObject.Find("Hamer").GetComponent<MadOvenHamer>();
 		spatel = GameObject.Find("Spatel").GetComponent<MadOvenSpatel>();
@@ -23,7 +23,10 @@ public class MadOvenMain:Boss {
 	public void StartAttack() {
 		hamer.StartAttack();
 		spatel.StartAttack();
-
+		animatie.SetBool("start",true);
+		hamer.animatie.SetBool("start",true);
+		spatel.animatie.SetBool("start",true);
+		Debug.Log("ASD");
 		StartCoroutine(Attack());
 	}
 
@@ -52,12 +55,18 @@ public class MadOvenMain:Boss {
 	private IEnumerator Attack() {
 		while(true) {
 			yield return new WaitForSeconds(data.AttackDelay / 2);
-
-			attacking = true;
-
-			yield return new WaitForSeconds(data.AttackDelay / 2);
-
-			attacking = false;
+			int random = Random.Range(0,10);
+			if(random >= 4){
+				animatie.SetInteger("Attack",1);
+				damageable = true;
+				attacking = true;
+				yield return new WaitForSeconds(1);
+				animatie.SetInteger("Attack",0);
+				yield return new WaitForSeconds(4);
+				attacking = false;
+				damageable = false;
+			}
+			yield return new WaitForSeconds(3);
 		}
 	}
 

@@ -173,7 +173,8 @@ public class Player:MonoBehaviour {
 		if(pickupWhenReady != null) {
 			if(collision.gameObject.CompareTag(pickupWhenReady.tag)) {
 				switch(collision.gameObject.tag) {
-				case "ThrowableObject":
+				case "Key":
+				case "FireItem":
 					attachedThrowable = pickupWhenReady.GetComponent<ThrowableObject>();
 
 					attachedThrowable.collider.enabled = false;
@@ -204,7 +205,18 @@ public class Player:MonoBehaviour {
 				pickupWhenReady = null;
 			}
 		}
-
+		if(collision.gameObject.tag == "Boss"){
+			if(attachedThrowable != null){
+				if(attachedThrowable.Type == ThrowableObject.ObjectType.FireItem){
+					MadOvenMain baas = collision.gameObject.GetComponent<MadOvenMain>();
+					baas.StartAttack();
+					Destroy(attachedThrowable);
+					attachedThrowable = null;
+					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BossMusic,true);
+					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.NormalMusic,false);
+				}
+			}
+		}
 		if(attachedThrowable != null) {
 			if(AttachedThrowable.CompareTag("Key"))
 				if(collision.gameObject.CompareTag("Door"))
@@ -411,7 +423,8 @@ public class Player:MonoBehaviour {
 				playerCombat.StartAttack(hit.transform.gameObject);
 			}
 			break;
-		case "ThrowableObject":
+		case "Key":
+		case "FireItem":
 		case "PushableObject":
 			BasicTutorial tutorial = BasicTutorial.Instance;
 

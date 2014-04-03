@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MadOvenSpatel:Boss {
 	private bool attacking;
-
+	public Animator animatie;
 	void OnCollisionEnter(Collision collision) {
 		if(!attacking)
 			return;
@@ -29,11 +29,11 @@ public class MadOvenSpatel:Boss {
 	private IEnumerator Attack() {
 		while(true) {
 			yield return new WaitForSeconds(data.AttackDelay / 2);
-
+			animatie.SetInteger("Attack",Random.Range(0,4));
 			attacking = true;
 
 			yield return new WaitForSeconds(data.AttackDelay / 2);
-
+			animatie.SetInteger("Attack",0);
 			attacking = false;
 		}
 	}

@@ -77,6 +77,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110228318
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: HammerAttack1
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: 0db7e498ca8643c48b8cafbe0a823737, type: 2}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: -1, y: 5, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110241829
 State:
   m_ObjectHideFlags: 3
@@ -119,6 +134,7 @@ StateMachine:
   - {fileID: 110200000}
   - {fileID: 110284463}
   - {fileID: 110241829}
+  - {fileID: 110228318}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MadOvenHamer:Boss {
 	private bool attacking;
-
+	public Animator animatie;
 	void OnCollisionEnter(Collision collision) {
 		if(!attacking)
 			return;
@@ -17,19 +17,13 @@ public class MadOvenHamer:Boss {
 	}
 
 	public override void Damage(int amount) {
-		if(data.Health <= 0)
-			return;
 
-		data.Health -= amount;
-		DisplayCombatText(amount.ToString(), Color.red, 0.4f);
-
-		Debug.Log("Hamer: " + data.Health);
 	}
 
 	private IEnumerator Attack() {
 		while(true) {
 			yield return new WaitForSeconds(data.AttackDelay / 2);
-
+			animatie.SetInteger("Attack",Random.Range(0,4));
 			attacking = true;
 
 			yield return new WaitForSeconds(data.AttackDelay / 2);
