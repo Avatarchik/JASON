@@ -69,6 +69,7 @@ public class MenuOptions:GUIBehaviour {
 		data.SaveData();
 	}
 
+	/** Open this GUI */
 	public void Open() {
 		menuMain.Close();
 
@@ -84,6 +85,7 @@ public class MenuOptions:GUIBehaviour {
 			label.Activated = true;
 	}
 
+	/** Close this GUI */
 	public void Close() {
 		opened = false;
 

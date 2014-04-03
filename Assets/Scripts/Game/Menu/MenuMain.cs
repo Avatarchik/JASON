@@ -37,6 +37,7 @@ public class MenuMain:GUIBehaviour {
 			menuOptions.Open();
 	}
 
+	/** Open this GUI */
 	public void Open() {
 		menuOptions.Close();
 
@@ -49,6 +50,7 @@ public class MenuMain:GUIBehaviour {
 			button.Activated = true;
 	}
 
+	/** Close this GUI */
 	public void Close() {
 		opened = false;
 

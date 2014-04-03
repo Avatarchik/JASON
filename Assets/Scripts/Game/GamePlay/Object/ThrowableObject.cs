@@ -62,6 +62,7 @@ public class ThrowableObject:InteractableObject {
 		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 	}
 
+	/** Handle collision with the Ffire boss */
 	public void HandleBossCollision(MadOvenMain boss) {
 		Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
@@ -73,16 +74,18 @@ public class ThrowableObject:InteractableObject {
 		boss.StartAttack();
 	}
 
+	/** Get the type of the object */
 	public ObjectType Type {
-		set { type = value; }
 		get { return type; }
 	}
 
+	/** Set whether the object should be destroyable */
 	public bool Destroyable {
 		set { destroyable = value; }
 		get { return destroyable; }
 	}
 
+	/** Set wheter the object is thrown */
 	public bool Thrown {
 		set { isThrown = value; }
 		get { return isThrown; }

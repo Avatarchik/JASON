@@ -1,28 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CutsceneDoor : MonoBehaviour {
+public class CutsceneDoor:MonoBehaviour {
+	[SerializeField] private Animator cutscene;
+
 	private bool fireAnimation;
-	public Animator cutscene;
-	// Use this for initialization
-	void Start () {
-		fireAnimation = GameData.Instance.fireDungeonCleared;
-		if(fireAnimation){
-			cutscene.SetInteger("SceneNumber",2);
+	
+	void Start() {
+		if(GameData.Instance.fireDungeonCleared) {
+			cutscene.SetInteger("SceneNumber", 2);
 			StartCoroutine("TimeToCredits");
-		}else{
+		} else {
 			cutscene.SetInteger("SceneNumber",1);
 			StartCoroutine("TimeToFire");
 		}
 	}
-	IEnumerator TimeToFire(){
+
+	/** Delay before the fire dungeon is loaded */
+	private IEnumerator TimeToFire() {
 		yield return new WaitForSeconds(6);
+
 		cutscene.enabled = false;
+
 		Application.LoadLevel("Fire Dungeon");
 	}
-	IEnumerator TimeToCredits(){
+
+	/** Delay before the credits scene is loaded */
+	private IEnumerator TimeToCredits() {
 		yield return new WaitForSeconds(15);
+
 		cutscene.enabled = false;
+
 		Application.LoadLevel("Credits");
 	}
 

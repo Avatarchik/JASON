@@ -24,6 +24,7 @@ public class Door:MonoBehaviour {
 			lockGo = lockTransform.gameObject;
 	}
 
+	/** Open the door */
 	public void Open() {
 		if(lockGo != null)
 			lockGo.renderer.enabled = false;
@@ -39,6 +40,7 @@ public class Door:MonoBehaviour {
 		}
 	}
 	
+	/** Close the door */
 	public void Close() {
 		collider.enabled = true;
 	}

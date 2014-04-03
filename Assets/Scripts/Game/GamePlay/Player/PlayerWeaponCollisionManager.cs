@@ -15,6 +15,7 @@ public class PlayerWeaponCollisionManager:MonoBehaviour {
 			colliders.Remove(collider);
 	}
 
+	/** Get the colliders */
 	public Collider[] Colliders {
 		get { return colliders.ToArray(); }
 	}

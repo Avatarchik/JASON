@@ -7,16 +7,25 @@ public class Player:MonoBehaviour {
     [SerializeField] private GameObject selectionParticles;
 	[SerializeField] private Renderer[] shield;
 	[SerializeField] private Renderer sword;
+
+	[SerializeField] private Transform throwablePosition;
+
 	private Boss currentBoss;
 
 	private Animator playerAnimation;
+
 	private PlayerCamera playerCamera;
 	private PlayerCombat playerCombat;
 
 	private Transform pushablePosition;
-	[SerializeField] private Transform throwablePosition;
 	
 	private Vector3 targetPosition;
+
+	private Vector3 movement;
+	private Vector3 prevpos;
+	private Vector3 newpos;
+	private Vector3 fwd;
+	private Vector3 side;
 	
 	private PushableObject attachedPushable;
 	private ThrowableObject attachedThrowable;
@@ -25,18 +34,13 @@ public class Player:MonoBehaviour {
 	private GameObject pickupWhenReady;
 
 	private float previousX;
+	private float lastTouchTime;
 	
 	private int mask = ~(1 << 8);
 	
 	private bool isHit;
 	private bool isInBossRoom;
-
-	private Vector3 movement;
-	private Vector3 prevpos;
-	private Vector3 newpos;
-	private Vector3 fwd;
-
-	private Vector3 side;
+	
 	void Start() {
 		playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<PlayerCamera>();
 		playerCombat = GetComponent<PlayerCombat>();
@@ -50,7 +54,7 @@ public class Player:MonoBehaviour {
 	}
 	
 	void Update() {
-		AnimationHandling();
+		HandleAnimations();
 		HandlePickedUpObject();
 
 		switch(Application.platform) {
@@ -65,9 +69,12 @@ public class Player:MonoBehaviour {
 	
 	void FixedUpdate() {
 		rigidbody.velocity = Vector3.zero;
+
 		if(Vector3.Distance(transform.position, targetPosition) > 0.5f) {
 			playerAnimation.SetBool("IsRunning", true);
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps,true);
+
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps, true);
+
 			if(!isInBossRoom)
 				playerCamera.CameraDistance = 10;
 
@@ -87,7 +94,8 @@ public class Player:MonoBehaviour {
 					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 30);
 			}
 		} else {
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps,false);
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps, false);
+
 			if(!isInBossRoom)
 				playerCamera.CameraDistance = -5;
 
@@ -101,64 +109,13 @@ public class Player:MonoBehaviour {
 
 		previousX = transform.position.x;
 	}
-	void LateUpdate ()
-	{
+
+	void LateUpdate() {
 		prevpos = transform.position;
 		fwd = transform.forward;
 		side = transform.right;
 	}
-	void AnimationHandling(){
-		newpos = transform.position;
-		movement = (newpos - prevpos);
-		if(attachedPushable != null || attachedThrowable != null) {
-			shield[0].enabled = false;
-			shield[1].enabled = false;
-			sword.enabled = false;
-		}else{
-			shield[0].enabled = true;
-			shield[1].enabled = true;
-			sword.enabled = true;
-		}
-		if(attachedPushable != null){
-			playerAnimation.SetBool("IsMovingBlock",true);
-			float forward = Vector3.Dot(fwd, movement);
-			float backwards = -forward;
-			float rightside = Vector3.Dot(side, movement);
-			float leftside = Mathf.Abs(rightside);
-
-			Debug.Log("Priority    F = " + forward + " B = " + backwards + " R = " + rightside + " L = " + leftside);
-			float[] floatlist = new float[] {forward,backwards,rightside,leftside};
-			float highest = Mathf.Max(floatlist);
-			Debug.Log(highest);
-
-			if(forward == highest){
-				playerAnimation.SetInteger("MoveDirection",1);
-				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,true);
-			}else if(backwards == highest){
-				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,true);
-				playerAnimation.SetInteger("MoveDirection",2);
-			}else if(rightside == highest){
-				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,true);
-				playerAnimation.SetInteger("MoveDirection",4);
-			}else if(leftside == highest){
-				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,true);
-				playerAnimation.SetInteger("MoveDirection",3);
-			}
-
-			if(forward == 0 && backwards == 0 && leftside == 0 && rightside == 0){
-				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,false);
-				playerAnimation.SetInteger("MoveDirection",0);
-			}
-		}else{
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove,false);
-			playerAnimation.SetBool("IsMovingBlock",false);
-		}
-		if(attachedThrowable != null){
-			playerAnimation.SetBool("IsHolding", true);
-		}else{
-			playerAnimation.SetBool("IsHolding", false);
-		}
-	}
+	
 	void OnCollisionEnter(Collision collision) {
 		HandleCollision(collision);
 	}
@@ -211,6 +168,7 @@ public class Player:MonoBehaviour {
 		}
 	}
 
+	/** Handle collisions */
 	private void HandleCollision(Collision collision) {
 		if(pickupWhenReady != null) {
 			if(collision.gameObject.CompareTag(pickupWhenReady.tag)) {
@@ -256,6 +214,50 @@ public class Player:MonoBehaviour {
 				if(collision.gameObject.CompareTag("Main Body"))
 					attachedThrowable.HandleBossCollision(collision.gameObject.GetComponent<MadOvenMain>());
 		}
+	}
+
+	private void HandleAnimations() {
+		newpos = transform.position;
+		movement = (newpos - prevpos);
+
+		shield[0].enabled = attachedPushable == null && attachedThrowable == null;
+		shield[1].enabled = attachedPushable == null && attachedThrowable == null;
+		sword.enabled = attachedPushable == null && attachedThrowable == null;
+
+		if(attachedPushable != null) {
+			playerAnimation.SetBool("IsMovingBlock", true);
+
+			float forward = Vector3.Dot(fwd, movement);
+			float back = -forward;
+			float right = Vector3.Dot(side, movement);
+			float left = Mathf.Abs(right);
+
+			float highest = Mathf.Max(new float[] { forward, back, right, left });
+
+			if(forward == highest) {
+				playerAnimation.SetInteger("MoveDirection", 1);
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
+			} else if(back == highest) {
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
+				playerAnimation.SetInteger("MoveDirection", 2);
+			} else if(right == highest) {
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
+				playerAnimation.SetInteger("MoveDirection", 4);
+			} else if(left == highest) {
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
+				playerAnimation.SetInteger("MoveDirection", 3);
+			}
+
+			if(forward == 0 && back == 0 && right == 0 && left == 0) {
+				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, false);
+				playerAnimation.SetInteger("MoveDirection", 0);
+			}
+		} else {
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, false);
+			playerAnimation.SetBool("IsMovingBlock", false);
+		}
+
+		playerAnimation.SetBool("IsHolding", attachedThrowable != null ? true : false);
 	}
 
 	/** Pickup an object */
@@ -317,6 +319,7 @@ public class Player:MonoBehaviour {
 		StartCoroutine(DamageDelay(stunTime));
 	}
 	
+	/** Display combat text */
 	private void DisplayCombatText(string text, Color color, bool crit) {
 		Vector3 position = transform.position;
 		position.y += 3.5f;
@@ -355,19 +358,32 @@ public class Player:MonoBehaviour {
 		}
 	}
 
+	/** Handle touch input */
 	private void HandleTouchInput() {
 		foreach(Touch touch in Input.touches) {
 			if(touch.phase == TouchPhase.Began) {
-				Ray ray = Camera.main.ScreenPointToRay(touch.position);
-				RaycastHit hit;
+				if((Time.time - lastTouchTime) < 0.5f) {
+					Ray ray = Camera.main.ScreenPointToRay(touch.position);
+					RaycastHit hit;
 
-				Physics.Raycast(ray, out hit, 100, mask);
+					Physics.Raycast(ray, out hit, 100, mask);
 
-				HandleInput(hit);
+					HandleInput(hit, true);	
+				} else {
+					Ray ray = Camera.main.ScreenPointToRay(touch.position);
+					RaycastHit hit;
+
+					Physics.Raycast(ray, out hit, 100, mask);
+
+					HandleInput(hit, false);					
+				}
+
+				lastTouchTime = Time.time;
 			}
 		}
 	}
 
+	/** Handle mouse input */
 	private void HandleMouseInput() {
 		if(Input.GetMouseButtonDown(0)) {
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -375,11 +391,12 @@ public class Player:MonoBehaviour {
 
 			Physics.Raycast(ray, out hit, 100, mask);
 
-			HandleInput(hit);
+			HandleInput(hit, false);
 		}
 	}
 
-	private void HandleInput(RaycastHit hit) {
+	/** Handle input */
+	private void HandleInput(RaycastHit hit, bool doubleTap) {
 		if(hit.collider == null || SGUIManager.Instance.AnyButtonClicked)
 			return;
 		
@@ -437,7 +454,7 @@ public class Player:MonoBehaviour {
 	}
 
 	/** The damage delay of the player */
-	private IEnumerator DamageDelay(float stunTime){
+	private IEnumerator DamageDelay(float stunTime) {
 		yield return new WaitForSeconds(stunTime);
 		
 		isHit = false;

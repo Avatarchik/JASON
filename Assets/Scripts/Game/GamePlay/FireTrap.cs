@@ -2,29 +2,34 @@
 using System.Collections;
 
 public class FireTrap : MonoBehaviour {
-	public GameObject mats;
-	public Color setColor;
+	[SerializeField] private GameObject mats;
+	[SerializeField] private Color setColor;
+	
+	[SerializeField] private float time;
+
+	[SerializeField] private bool isEnabled;
+
 	private float colorValue;
-	public float time;
-	public bool isEnabled;
-	// Use this for initialization
-	void Start () {
+	
+	void Start() {
 		StartCoroutine("ActivateGrill");
 	}
+
 	void FixedUpdate(){
-		setColor = new Color(colorValue,colorValue,colorValue);
+		setColor = new Color(colorValue, colorValue, colorValue);
 		mats.renderer.material.color = setColor;
-		if(isEnabled){
-			if(colorValue <= 1){
-			colorValue += 0.01f;
-			}
-		}else{
-			if(colorValue >= 0.2f){
+
+		if(isEnabled) {
+			if(colorValue <= 1)
+				colorValue += 0.01f;
+		} else {
+			if(colorValue >= 0.2f)
 				colorValue -= 0.01f;
-			}
 		}
 	}
-	IEnumerator ActivateGrill(){
+
+	/** Activate the grill */
+	private IEnumerator ActivateGrill(){
 		while(true){
 		yield return new WaitForSeconds(time * Random.Range(0,3));
 		collider.enabled = true;

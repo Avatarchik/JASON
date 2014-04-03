@@ -81,6 +81,7 @@ public class Trigger:MonoBehaviour {
 		}
 	}
 
+	/** Handle collision with the player */
 	private void OnPlayerCollision() {
 		if(type != TriggerType.Player)
 			return;
@@ -91,6 +92,7 @@ public class Trigger:MonoBehaviour {
 		StartCoroutine(CameraEvent(Door.DoorState.Open));
 	}
 
+	/** Handle when the player exits collision */
 	private void OnPlayerCollisionExit() {
 		if(type != TriggerType.Player)
 			return;
@@ -98,6 +100,7 @@ public class Trigger:MonoBehaviour {
 		StartCoroutine(CameraEvent(Door.DoorState.Closed));
 	}
 
+	/** Handle collision with a block */
 	private void OnBlockCollision() {
 		if(type != TriggerType.Block)
 			return;
@@ -116,6 +119,7 @@ public class Trigger:MonoBehaviour {
 		StartCoroutine(CameraEvent(Door.DoorState.Open));
 	}
 
+	/** Handle when a block exits collision */
 	private void OnBlockCollisionExit() {
 		if(type != TriggerType.Block)
 			return;
@@ -123,6 +127,7 @@ public class Trigger:MonoBehaviour {
 		StartCoroutine(CameraEvent(Door.DoorState.Closed));
 	}
 
+	/** Handle when a fire item enters collision */
 	private void OnFireDungeonItemCollision() {
 		if(type != TriggerType.FireItem)
 			return;
@@ -133,6 +138,7 @@ public class Trigger:MonoBehaviour {
 		StartCoroutine(CameraEvent(Door.DoorState.Open));
 	}
 
+	/** Handle when an arrow enters collision */
 	private void OnArrowCollision() {
 		if(type == TriggerType.Arrow) {
 			if(canOnlyTriggerOnce)
@@ -147,6 +153,7 @@ public class Trigger:MonoBehaviour {
 		}
 	}
 	
+	/** Timed arrow delay */
 	private IEnumerator TimedArrow() {
 		isActive = true;
 		
@@ -155,6 +162,7 @@ public class Trigger:MonoBehaviour {
 		isActive = false;
 	}
 
+	/** Camera event */
 	private IEnumerator CameraEvent(Door.DoorState state) {
 		GameHUD hud = GameObject.Find("HUD").GetComponent<GameHUD>();
 		SGUI.SGUITexture activeBar = null;
@@ -195,6 +203,7 @@ public class Trigger:MonoBehaviour {
 		hud.Outerbar.Activated = true;
 	}
 
+	/** Get whether the timed arrow delay is currently active */
 	public bool IsActive {
 		get { return isActive; }
 	}

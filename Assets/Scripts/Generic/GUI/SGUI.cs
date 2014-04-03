@@ -90,6 +90,7 @@ namespace SGUI {
 
 		private bool finished;
 
+		/** Create the label */
 		public override void Create() {
 			base.Create();
 
@@ -97,6 +98,7 @@ namespace SGUI {
 			text = "";
 		}
 
+		/** Write the text */
 		public IEnumerator Write() {
 			yield return new WaitForSeconds(0.05f);
 
@@ -127,6 +129,7 @@ namespace SGUI {
 			return false;
 		}
 
+		/** Whether or not the text has finished writing */
 		public bool FinishedWriting {
 			get { return finished; }
 		}
@@ -410,6 +413,7 @@ namespace SGUI {
 			get { return manualEdit; }
 		}
 
+		/** Get the text color of the label */
 		public Color TextColor {
 			set { textColor = value; }
 			get { return textColor; }

@@ -22,6 +22,7 @@ public class SGUIManager:Singleton<SGUIManager> {
 			label.Update(nativeGuiSize);
 	}
 
+	/** Remove all SGUI elements */
 	public void RemoveAll() {
 		for(int i = sguiTextures.Count - 1; i >= 0; i--)
 			sguiTextures[i].Destroy();
@@ -33,6 +34,7 @@ public class SGUIManager:Singleton<SGUIManager> {
 			sguiLabels[i].Destroy();
 	}
 	
+	/** Whether or not any button has been clicked */
 	public bool AnyButtonClicked {
 		get {
 			foreach(SGUIButton button in sguiButtons)
@@ -44,6 +46,7 @@ public class SGUIManager:Singleton<SGUIManager> {
 		}
 	}
 	
+	/** Register a texture */
 	internal void RegisterTexture(SGUITexture texture) {
 		for(int i = 0; i < sguiTextures.Count; i++)
 			if(texture.Equals(sguiTextures[i]))
@@ -52,6 +55,7 @@ public class SGUIManager:Singleton<SGUIManager> {
 		sguiTextures.Add(texture);
 	}
 	
+	/** Register a button */
 	internal void RegisterButton(SGUIButton button) {
 		for(int i = 0; i < sguiButtons.Count; i++)
 			if(button.Equals(sguiButtons[i]))
@@ -60,6 +64,7 @@ public class SGUIManager:Singleton<SGUIManager> {
 		sguiButtons.Add(button);
 	}
 
+	/** Register a label */
 	internal void RegisterLabel(SGUILabel label) {
 		for(int i = 0; i < sguiLabels.Count; i++)
 			if(label.Equals(sguiLabels[i]))
@@ -68,14 +73,17 @@ public class SGUIManager:Singleton<SGUIManager> {
 		sguiLabels.Add(label);
 	}
 	
+	/** Remove a texture */
 	internal void RemoveTexture(SGUITexture texture) {
 		sguiTextures.Remove(texture);
 	}
-	
+
+	/** Remove a button */
 	internal void RemoveButton(SGUIButton button) {
 		sguiButtons.Remove(button);
 	}
 
+	/** Remove a label */
 	internal void RemoveLabel(SGUILabel label) {
 		sguiLabels.Remove(label);
 	}

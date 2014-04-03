@@ -18,6 +18,7 @@ public class PlayerData:Singleton<PlayerData> {
 		Reset();
 	}
 
+	/** Reset the player data to the defaults */
 	public void Reset() {
 		health = initialHealth;
 		runSpeed = initialRunSpeed;

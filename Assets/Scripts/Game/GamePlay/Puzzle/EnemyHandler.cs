@@ -1,50 +1,72 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyHandler : MonoBehaviour {
-	public Enemy[] enemies;
-	public Door[] doors;
-	public int checknum;
+public class EnemyHandler:MonoBehaviour {
+	[SerializeField] private Transform cameraEventTarget;
+
+	[SerializeField] private Enemy[] enemies;
+	[SerializeField] private Door[] doors;
+
+	[SerializeField] private int checknum;
+
 	private bool puzzleDone = false;
 	
-	private PlayerCamera cam;
-	private Transform character;
-	public Transform cameraEventTarget;
-	// Use this for initialization
+	private PlayerCamera playerCamera;
+	private Transform oldTarget;
+	
 	void Start(){
-		cam = Camera.main.gameObject.GetComponent<PlayerCamera>();
+		playerCamera = Camera.main.gameObject.GetComponent<PlayerCamera>();
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
 		checknum = 0;
-		for (int i = 0; i < enemies.Length; i++){
-			if(enemies[i].IsDead){
+
+		for (int i = 0; i < enemies.Length; i++)
+			if(enemies[i].IsDead)
 				checknum++;
-			}
-		}
-		if(checknum == enemies.Length){
-			if(!puzzleDone){
+
+		if(checknum == enemies.Length) {
+			if(!puzzleDone) {
 				puzzleDone = true;
 				StartCoroutine(CameraEvent(0));
 			}
 		}
 	}
-	
-	IEnumerator CameraEvent(int doorstate){
-		character = cam.Target;
-		cam.Target = cameraEventTarget;
-		yield return new WaitForSeconds(1.5f);
-		for (int i = 0; i < doors.Length; i++){
-			if(doorstate == 0){
-				doors[i].Open();
-			}else{
-				doors[i].Close();
+
+	/** Camera event */
+	private IEnumerator CameraEvent(Door.DoorState state) {
+		GameHUD hud = GameObject.Find("HUD").GetComponent<GameHUD>();
+		SGUI.SGUITexture activeBar = null;
+
+		hud.Outerbar.Activated = false;
+
+		foreach(SGUI.SGUITexture bar in hud.Innerbars) {
+			if(bar.Activated) {
+				activeBar = bar;
+				bar.Activated = false;
 			}
 		}
-		
+
+		oldTarget = playerCamera.Target;
+		playerCamera.Target = cameraEventTarget;
+
 		yield return new WaitForSeconds(1.5f);
-		cam.Target = character;
-		
+
+		foreach(Door door in doors) {
+			if(state == Door.DoorState.Open) {
+				door.Open();
+			} else if(state == Door.DoorState.Closed) {
+				door.Close();
+			}
+		}
+
+		yield return new WaitForSeconds(1.5f);
+
+		playerCamera.Target = oldTarget;
+
+		if(activeBar != null)
+			activeBar.Activated = true;
+
+		hud.Outerbar.Activated = true;
 	}
 }

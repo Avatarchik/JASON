@@ -43,6 +43,7 @@ public class PlayerCombat:MonoBehaviour {
 		}
 	}
 	
+	/** Defend */
 	public void Defend(bool state) {
 		DeselectTarget();
 
@@ -54,6 +55,7 @@ public class PlayerCombat:MonoBehaviour {
 			player.TargetPosition = transform.position;
 	}
 
+	/** Start attacking */
 	public void StartAttack(GameObject target) {
 		DeselectTarget();
 
@@ -65,6 +67,7 @@ public class PlayerCombat:MonoBehaviour {
 		StartCoroutine(Attack());
 	}
 
+	/** Deselect the current target */
 	private void DeselectTarget() {
 		player.PlayerAnimation.SetInteger("Attack", 0);
 
@@ -77,6 +80,7 @@ public class PlayerCombat:MonoBehaviour {
 		StopCoroutine("Attack");
 	}
 
+	/** Attack */
 	private IEnumerator Attack() {
 		attacking = true;
 
@@ -99,19 +103,28 @@ public class PlayerCombat:MonoBehaviour {
 		}
 	}
 
+	/** Set and/or get the target of the player */
 	public GameObject Target {
 		set { target = value; }
 		get { return target; }
 	}
 
-	public bool Attacking {	get { return attacking; } }
+	/** Get whether the player is currently attacking */
+	public bool Attacking {	
+		get { return attacking; } 
+	}
 
-	public bool Defending { get { return defending; } }
+	/** Get wheter the player is currently defending */
+	public bool Defending {
+		get { return defending; }
+	}
 
+	/** Get the weapon collision area */
 	public GameObject WeaponCollisionArea {
 		get { return weaponCollisionArea; }
 	}
 
+	/** Get wheter or not the player is currently in combat */
 	public bool InCombat {
 		get { return target != null; }
 	}

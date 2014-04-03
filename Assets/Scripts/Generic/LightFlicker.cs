@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class LightFlicker:MonoBehaviour {
-	[SerializeField] private float duration = 1;
-
 	[SerializeField] private Color color0 = Color.red;
 	[SerializeField] private Color color1 = new Color(1, 0.0647f, 0);
+
+	[SerializeField] private float duration = 1;
 
 	private Light target;
 
@@ -17,9 +17,11 @@ public class LightFlicker:MonoBehaviour {
 
 	void Update () {
 		float t = Mathf.PingPong(Time.time, duration) / duration;
+
 		target.color = Color.Lerp(color0, color1, t);
 	}
 
+	/** Set the light */
 	private IEnumerator SetLight() {
 		while(true) {
 			float randomTime = Random.Range(0.01f, 0.1f);

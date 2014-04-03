@@ -2,7 +2,7 @@
 using System;
 using SGUI;
 
-public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
+public class BasicTutorial:Singleton<BasicTutorial> {
 	public enum TutorialStage {
 		None,
 		Movement,
@@ -36,6 +36,7 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 		StartTutorial();
 	}
 
+	/** Start the tutorial */
 	public void StartTutorial() {
 		if(!canStart)
 			return;
@@ -47,6 +48,7 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 		StartStage();
 	}
 
+	/** Start the stage */
 	public void StartStage() {
 		tooltip.Activated = true;
 		labels[(int)stage - 1].Activated = true;
@@ -54,6 +56,7 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 		StartCoroutine(labels[(int)stage - 1].Write());
 	}
 
+	/** Go to the next stage */
 	public void NextStage() {
 		tooltip.Activated = false;
 		labels[(int)stage - 1].Activated = false;
@@ -61,6 +64,7 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 		stage++;
 	}
 
+	/** Stop the tutorial */
 	public void StopTutorial() {
 		tooltip.Activated = false;
 		labels[(int)stage - 1].Activated = false;
@@ -70,14 +74,17 @@ public class BasicTutorial:Singleton<BasicTutorial>, ITutorial {
 		started = false;
 	}
 
+	/** Get the labels */
 	public SGUISlowWriteLabel[] Labels {
 		get { return labels; }
 	}
 
+	/** Get the stage */
 	public TutorialStage Stage {
 		get { return stage; }
 	}
 
+	/** Whether the tutorial has been started */
 	public bool Started {
 		get { return started; }
 	}

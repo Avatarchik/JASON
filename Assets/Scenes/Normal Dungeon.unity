@@ -15465,6 +15465,11 @@ MonoBehaviour:
       width: 681.75
       height: 109.499985
     texture: {fileID: 2800000, guid: c6213df33fc6e1d45a09d1b479fd62a2, type: 3}
+    text: 
+    textFont: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textSize: 0
+    textAnchor: 0
   - activated: 0
     bounds:
       serializedVersion: 2
@@ -15473,6 +15478,11 @@ MonoBehaviour:
       width: 681.75
       height: 109.499985
     texture: {fileID: 2800000, guid: 6aea6200dc7003c40a90957ba1296ec6, type: 3}
+    text: 
+    textFont: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textSize: 0
+    textAnchor: 0
   - activated: 0
     bounds:
       serializedVersion: 2
@@ -15481,6 +15491,11 @@ MonoBehaviour:
       width: 681.75
       height: 109.499985
     texture: {fileID: 2800000, guid: deaa64959e66f214ab7cb1e696b083e3, type: 3}
+    text: 
+    textFont: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textSize: 0
+    textAnchor: 0
   outerBar:
     activated: 1
     bounds:
@@ -15490,6 +15505,11 @@ MonoBehaviour:
       width: 681.75
       height: 109.499985
     texture: {fileID: 2800000, guid: 2ebb39f262467dd42ba1afc26dafc727, type: 3}
+    text: 
+    textFont: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textSize: 0
+    textAnchor: 0
 --- !u!1 &302860883
 GameObject:
   m_ObjectHideFlags: 0
@@ -24308,7 +24328,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400108, guid: 257f3586ad3463b498ee4e18a795d567, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 487278414}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalRotation: {x: -.49999851, y: -.500001788, z: .500001669, w: -.499998152}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
@@ -37054,7 +37074,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 3
   m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: .191987455, g: .243825331, b: .492647052, a: 1}
   m_Intensity: .5
   m_Range: 10
   m_SpotAngle: 30
@@ -57858,7 +57878,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400002, guid: cbcd0e787e8ffd94bb0b69206d9dec4d, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1138793741}
-  m_LocalRotation: {x: .500001132, y: -.499998838, z: .499998897, w: .500001252}
+  m_LocalRotation: {x: .707106829, y: 8.69538781e-07, z: -8.40070641e-07, w: .707106829}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
@@ -63460,8 +63480,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400106, guid: 257f3586ad3463b498ee4e18a795d567, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1271989651}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalRotation: {x: .500000536, y: .499999374, z: -.499999493, w: .500000596}
+  m_LocalPosition: {x: 19.9999981, y: 0, z: -4.76836931e-07}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 180956085}
@@ -71017,6 +71037,11 @@ MonoBehaviour:
       width: 1000
       height: 256
     texture: {fileID: 2800000, guid: 1d89caf2afd1b9c479ae443b3ee56763, type: 3}
+    text: 
+    textFont: {fileID: 0}
+    textColor: {r: 1, g: 1, b: 1, a: 1}
+    textSize: 0
+    textAnchor: 0
   labels:
   - activated: 0
     bounds:
@@ -71028,7 +71053,7 @@ MonoBehaviour:
     text: Touch anywhere on the screen to move there.
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   - activated: 0
@@ -71041,7 +71066,7 @@ MonoBehaviour:
     text: Avoid getting hit by arrows!
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   - activated: 0
@@ -71054,7 +71079,7 @@ MonoBehaviour:
     text: Tap a block once to pick it up
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   - activated: 0
@@ -71067,7 +71092,7 @@ MonoBehaviour:
     text: Blocks can only move on the designated path
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   - activated: 0
@@ -71080,7 +71105,7 @@ MonoBehaviour:
     text: Tap the block again to drop it
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   - activated: 0
@@ -71094,7 +71119,7 @@ MonoBehaviour:
       activated by Jason.
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   - activated: 0
@@ -71108,7 +71133,7 @@ MonoBehaviour:
       by blocks
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   - activated: 0
@@ -71134,7 +71159,7 @@ MonoBehaviour:
     text: Walk against the door while holding the key to open the door.
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   - activated: 0
@@ -71147,7 +71172,7 @@ MonoBehaviour:
     text: Try to attack while it's stunned!
     textColor: {r: 1, g: 1, b: 1, a: 1}
     font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 40
+    fontSize: 60
     minDelay: .00800000038
     maxDelay: .0199999996
   canStart: 1
@@ -75714,8 +75739,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400022, guid: a19954855153e954f9b0a6ac3143d914, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1494707785}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 20, y: 0, z: 0}
+  m_LocalRotation: {x: .500000596, y: .499999315, z: -.499999613, w: .500000596}
+  m_LocalPosition: {x: 20, y: 0, z: -4.76837158e-07}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 1799982276}
@@ -97280,7 +97305,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400080, guid: a19954855153e954f9b0a6ac3143d914, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1913589308}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalRotation: {x: .500000596, y: .499999315, z: -.499999613, w: .500000596}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
@@ -108855,8 +108880,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400094, guid: 257f3586ad3463b498ee4e18a795d567, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2122394834}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 20, y: -0, z: 20}
+  m_LocalRotation: {x: .500000596, y: .499999344, z: -.499999613, w: .500000596}
+  m_LocalPosition: {x: 20, y: 0, z: 20}
   m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 180956085}

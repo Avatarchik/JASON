@@ -17,15 +17,18 @@ public class PlayerCamera:MonoBehaviour {
 	private bool targetFound;
 
 	void Update() {
-		if(target != null) {
-			Vector3 wantedPosition = target.transform.position + new Vector3(targetPosition.x + cameraBuffer, targetPosition.y, targetPosition.z);
+		if(target == null)
+			return;
 
-			if((Camera.main.fieldOfView == 60 + fovDistance))
-				cameraBuffer = 0;
+		Vector3 wantedPosition = target.transform.position + new Vector3(targetPosition.x + cameraBuffer, targetPosition.y, targetPosition.z);
 
-			transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * fovDamping);
-			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60 + fovDistance, Time.deltaTime * cameraDamping);
-		}
+		if((Camera.main.fieldOfView == 60 + fovDistance))
+			cameraBuffer = 0;
+
+		transform.position = Vector3.Lerp(transform.position, wantedPosition, Time.deltaTime * fovDamping);
+
+		Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, 60 + fovDistance, Time.deltaTime * cameraDamping);
+
 	}
 
 	/** Shake the camera */
@@ -43,18 +46,24 @@ public class PlayerCamera:MonoBehaviour {
 	    transform.position = origin;
 	}
 
+	/** Set and/or get the target of the camera */
 	public Transform Target {
 		set { target = value; }
 		get { return target; }
 	}
 
+	/** Set and/or get the target position of the camera */
 	public Vector3 TargetPosition {
 		set { targetPosition = value; }
 		get { return targetPosition; }
 	}
 
-	public int CameraDistance { set { fovDistance = value; } }
+	/** Set the distance of the camera */
+	public int CameraDistance {
+		set { fovDistance = value; }
+	}
 
+	/** Get the camera event texture */
 	public Texture2D CameraEventTexture {
 		get { return cameraEventTexture; }
 	}

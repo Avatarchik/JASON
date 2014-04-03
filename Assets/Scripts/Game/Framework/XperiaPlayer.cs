@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class XperiaPlayer:MonoBehaviour {
-	public Vector2 movement;
+	[SerializeField] private Vector2 movement;
 
 	void FixedUpdate() {
 		movement = Vector2.zero;

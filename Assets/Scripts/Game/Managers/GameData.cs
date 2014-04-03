@@ -17,6 +17,7 @@ public class GameData:Singleton<GameData> {
 		LoadData();
 	}
 
+	/** Save the data */
 	public void SaveData() {
 		PlayerPrefsX.SetBool("Normal Dungeon", normalDungeonCleared);
 		PlayerPrefsX.SetBool("Fire Dungeon", fireDungeonCleared);
@@ -32,6 +33,7 @@ public class GameData:Singleton<GameData> {
 		PlayerPrefs.Save();
 	}
 
+	/** Load the data */
 	public void LoadData() {
 		normalDungeonCleared = PlayerPrefsX.GetBool("Normal Dungeon", false);
 		fireDungeonCleared = PlayerPrefsX.GetBool("Fire Dungeon", false);

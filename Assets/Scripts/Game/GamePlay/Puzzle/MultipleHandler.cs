@@ -7,7 +7,7 @@ public class MultipleHandler:MonoBehaviour {
 	private PlayerCamera playerCamera;
 
 	private Transform oldTarget;
-	private Transform eventTarget;
+	private Transform cameraEventTarget;
 	
 	private int numEnabled;
 
@@ -15,7 +15,7 @@ public class MultipleHandler:MonoBehaviour {
 	
 	void Start() {
 		playerCamera = Camera.main.gameObject.GetComponent<PlayerCamera>();
-		eventTarget = transform.FindChild("Camera Focus");
+		cameraEventTarget = transform.FindChild("Camera Focus");
 	}
 
 	void Update() {
@@ -34,9 +34,22 @@ public class MultipleHandler:MonoBehaviour {
 		}
 	}
 
+	/** Camera event */
 	private IEnumerator CameraEvent(Door.DoorState state) {
+		GameHUD hud = GameObject.Find("HUD").GetComponent<GameHUD>();
+		SGUI.SGUITexture activeBar = null;
+
+		hud.Outerbar.Activated = false;
+
+		foreach(SGUI.SGUITexture bar in hud.Innerbars) {
+			if(bar.Activated) {
+				activeBar = bar;
+				bar.Activated = false;
+			}
+		}
+
 		oldTarget = playerCamera.Target;
-		playerCamera.Target = eventTarget;
+		playerCamera.Target = cameraEventTarget;
 
 		yield return new WaitForSeconds(1.5f);
 
@@ -49,5 +62,10 @@ public class MultipleHandler:MonoBehaviour {
 		yield return new WaitForSeconds(1.5f);
 
 		playerCamera.Target = oldTarget;
+
+		if(activeBar != null)
+			activeBar.Activated = true;
+
+		hud.Outerbar.Activated = true;
 	}
 }

@@ -8,8 +8,6 @@ public class InteractableObject:MonoBehaviour {
 
 	protected virtual void FixedUpdate() {
 		if(isAttached && target != null) {
-			Debug.Log (target.name + " " + target.position);
-
 			transform.position = target.position;
 			transform.rotation = target.rotation;
 		}
@@ -24,7 +22,5 @@ public class InteractableObject:MonoBehaviour {
 	/** Detach the object */
 	public void Detach() {
 		isAttached = false;
-
-		Debug.Log ("ik ben detached! " + target.name);
 	}
 }
