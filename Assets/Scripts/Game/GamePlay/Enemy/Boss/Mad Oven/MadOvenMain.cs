@@ -69,12 +69,14 @@ public class MadOvenMain:Boss {
 				yield return new WaitForSeconds(0.5f);
 				spawncounter++;
 				fireAttack[0].light.enabled = true;
+				fireAttack[0].collider.enabled = true;
 				for(int i = 0; i < fireAttack.Length; i++){
 					fireAttack[i].renderer.enabled = true;
 				}
 				yield return new WaitForSeconds(1);
 				animatie.SetInteger("Attack",0);
 				yield return new WaitForSeconds(2.5f);
+				fireAttack[0].collider.enabled = false;
 				fireAttack[0].light.enabled = false;
 				for(int i = 0; i < fireAttack.Length; i++){
 					fireAttack[i].renderer.enabled = false;

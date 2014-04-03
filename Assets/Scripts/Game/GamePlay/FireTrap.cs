@@ -8,10 +8,12 @@ public class FireTrap : MonoBehaviour {
 	[SerializeField] private float time;
 
 	[SerializeField] private bool isEnabled;
+	public ParticleSystem particles;
 
 	private float colorValue;
 	
 	void Start() {
+		particles.enableEmission = false;
 		StartCoroutine("ActivateGrill");
 	}
 
@@ -31,12 +33,14 @@ public class FireTrap : MonoBehaviour {
 	/** Activate the grill */
 	private IEnumerator ActivateGrill(){
 		while(true){
-		yield return new WaitForSeconds(time * Random.Range(0,3));
-		collider.enabled = true;
-		isEnabled = true;
-		yield return new WaitForSeconds(3);
-		isEnabled = false;
-		collider.enabled = false;
+			yield return new WaitForSeconds(time * Random.Range(5,10));
+			particles.enableEmission = true;
+			collider.enabled = true;
+			isEnabled = true;
+			yield return new WaitForSeconds(2);
+			particles.enableEmission = false;
+			isEnabled = false;
+			collider.enabled = false;
 		}
 	}
 }
