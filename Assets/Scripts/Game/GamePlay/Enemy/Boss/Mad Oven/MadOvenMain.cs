@@ -77,6 +77,6 @@ public class MadOvenMain:Boss {
 
 		PlayerData.Instance.Reset();
 
-		Application.LoadLevel("DoorScene");
+		Application.LoadLevel("Boss Door");
 	}
 }

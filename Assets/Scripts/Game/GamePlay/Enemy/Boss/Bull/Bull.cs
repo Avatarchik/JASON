@@ -31,7 +31,7 @@ public class Bull:Boss {
 		
 		PlayerData.Instance.Reset();
 
-		Application.LoadLevel("DoorScene");
+		Application.LoadLevel("Boss Door");
 	}
 
 	protected override void Update() {
