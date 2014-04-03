@@ -7,6 +7,8 @@ public class MadOvenMain:Boss {
 	public Animator animatie;
 	private bool attacking;
 	public bool damageable;
+
+	public ParticleSystem[] fireAttack;
 	protected override void Start() {
 		hamer = GameObject.Find("Hamer").GetComponent<MadOvenHamer>();
 		spatel = GameObject.Find("Spatel").GetComponent<MadOvenSpatel>();
@@ -27,9 +29,12 @@ public class MadOvenMain:Boss {
 		hamer.animatie.SetBool("start",true);
 		spatel.animatie.SetBool("start",true);
 		Debug.Log("ASD");
+		StartCoroutine("AnimationDelay");
+	}
+	IEnumerator AnimationDelay(){
+		yield return new WaitForSeconds(5);
 		StartCoroutine(Attack());
 	}
-
 	void OnCollisionEnter(Collision collision) {
 		if(!attacking)
 			return;
@@ -60,9 +65,18 @@ public class MadOvenMain:Boss {
 				animatie.SetInteger("Attack",1);
 				damageable = true;
 				attacking = true;
+				yield return new WaitForSeconds(0.5f);
+				fireAttack[0].light.enabled = true;
+				for(int i = 0; i < fireAttack.Length; i++){
+					fireAttack[i].renderer.enabled = true;
+				}
 				yield return new WaitForSeconds(1);
 				animatie.SetInteger("Attack",0);
-				yield return new WaitForSeconds(4);
+				yield return new WaitForSeconds(2.5f);
+				fireAttack[0].light.enabled = false;
+				for(int i = 0; i < fireAttack.Length; i++){
+					fireAttack[i].renderer.enabled = false;
+				}
 				attacking = false;
 				damageable = false;
 			}
