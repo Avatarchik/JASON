@@ -26,6 +26,8 @@ public class Player:MonoBehaviour {
 	private Vector3 newpos;
 	private Vector3 fwd;
 	private Vector3 side;
+
+	private Vector2 lastTouchPosition;
 	
 	private PushableObject attachedPushable;
 	private ThrowableObject attachedThrowable;
@@ -401,25 +403,19 @@ public class Player:MonoBehaviour {
 
 					HandleInput(hit, true);
 				} else {
-					Ray ray = Camera.main.ScreenPointToRay(touch.position);
-					RaycastHit hit;
+					if(attachedPushable == null && attachedThrowable == null) {
+						Ray ray = Camera.main.ScreenPointToRay(touch.position);
+						RaycastHit hit;
 
-					Physics.Raycast(ray, out hit, 100, mask);
+						Physics.Raycast(ray, out hit, 100, mask);
 
-					HandleInput(hit, false);
+						HandleInput(hit, false);
+					} else {
+						ThrowObject();
+					}
 				}
 
 				lastTouchTime = Time.time;
-			} else if(touch.phase == TouchPhase.Stationary) {
-				if((Time.time - lastTouchTime) > 0.05f) {
-					if(attachedThrowable != null) {
-						ThrowObject();
-					} else {
-						playerCombat.Defend(!playerCombat.Defending);
-					}
-
-					lastTouchTime = Time.time;
-				}
 			}
 		}
 	}
