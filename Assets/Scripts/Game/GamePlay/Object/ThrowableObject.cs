@@ -46,6 +46,10 @@ public class ThrowableObject:InteractableObject {
 		}
 	}
 
+	public void Pickup() {
+		rigidbody.constraints = RigidbodyConstraints.None;
+	}
+
 	/** Handle a collision with a door */
 	public void HandleDoorCollision(Door door) {
 		if(type == ObjectType.Key && door.Type == Door.DoorType.Key) {

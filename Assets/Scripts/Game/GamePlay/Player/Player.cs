@@ -177,15 +177,15 @@ public class Player:MonoBehaviour {
 	/** Handle collisions */
 	private void HandleCollision(Collision collision) {
 
-		if(collision.gameObject.name == "FireAttack"){
+		if(collision.gameObject.name == "FireAttack")
 			Damage(0.1f, 1, false);
-		}
-		if(collision.gameObject.name == "Hamer"){
+		
+		if(collision.gameObject.name == "Hamer")
 			Damage(0.1f, 1, false);
-		}
-		if(collision.gameObject.name == "Spatel"){
+		
+		if(collision.gameObject.name == "Spatel")
 			Damage(0.1f, 1, false);
-		}
+
 		if(pickupWhenReady != null) {
 			if(collision.gameObject.CompareTag(pickupWhenReady.tag)) {
 				switch(collision.gameObject.tag) {
@@ -194,6 +194,7 @@ public class Player:MonoBehaviour {
 					attachedThrowable = pickupWhenReady.GetComponent<ThrowableObject>();
 
 					attachedThrowable.collider.enabled = false;
+					attachedThrowable.Pickup();
 
 					targetPosition = transform.position;
 					break;
@@ -221,6 +222,7 @@ public class Player:MonoBehaviour {
 				pickupWhenReady = null;
 			}
 		}
+
 		if(collision.gameObject.tag == "Boss"){
 			if(attachedThrowable != null){
 				if(attachedThrowable.Type == ThrowableObject.ObjectType.FireItem){
@@ -233,6 +235,7 @@ public class Player:MonoBehaviour {
 				}
 			}
 		}
+
 		if(attachedThrowable != null) {
 			if(AttachedThrowable.CompareTag("Key"))
 				if(collision.gameObject.CompareTag("Door"))
