@@ -48,7 +48,7 @@ public class MadOvenMain:Boss {
 		StartCoroutine("AnimationDelay");
 	}
 	IEnumerator AnimationDelay(){
-		yield return new WaitForSeconds(5);
+		yield return new WaitForSeconds(8);
 		StartCoroutine(Attack());
 	}
 	void OnCollisionEnter(Collision collision) {

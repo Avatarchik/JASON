@@ -176,6 +176,16 @@ public class Player:MonoBehaviour {
 
 	/** Handle collisions */
 	private void HandleCollision(Collision collision) {
+
+		if(collision.gameObject.name == "FireAttack"){
+			Damage(0.1f, 1, false);
+		}
+		if(collision.gameObject.name == "Hamer"){
+			Damage(0.1f, 1, false);
+		}
+		if(collision.gameObject.name == "Spatel"){
+			Damage(0.1f, 1, false);
+		}
 		if(pickupWhenReady != null) {
 			if(collision.gameObject.CompareTag(pickupWhenReady.tag)) {
 				switch(collision.gameObject.tag) {
@@ -314,7 +324,7 @@ public class Player:MonoBehaviour {
 	}
 
 	/** Damage the player */
-	public void Damage(int amount, float stunTime, bool crit) {
+	public void Damage(float amount, float stunTime, bool crit) {
 		playerAnimation.SetBool("GettingHit", true);
 		PlayerData.Instance.Health -= amount;
 		

@@ -8,7 +8,7 @@ public class PlayerData:Singleton<PlayerData> {
 
 	[SerializeField] private float initialAttackDelay;
 
-	private int health;
+	private float health;
 	private int walkSpeed;
 	private int runSpeed;
 	private int attackDamage;
@@ -43,7 +43,7 @@ public class PlayerData:Singleton<PlayerData> {
 	}
 
 	/** Set and/or get the current health of the player */
-	public int Health { 
+	public float Health { 
 		set { health = value; }
 		get { return health; }
 	}
@@ -67,7 +67,7 @@ public class PlayerData:Singleton<PlayerData> {
 	}
 	
 	/** Get the initial health of the player */
-	public int InitialHealth {
+	public float InitialHealth {
 		get { return initialHealth; }
 	}
 
