@@ -8,15 +8,26 @@ public class MenuEffect:MonoBehaviour {
 	[SerializeField] private Material[] normalMaterials;
 	[SerializeField] private Material[] fireMaterials;
 
+	private MenuMain menuMain;
+	private MenuOptions menuOptions;
+
 	private float blendfloat;
 
 	private bool fire;
 
 	void Start() {
 		StartCoroutine(SwitchTextures());
+
+		GameObject gui = GameObject.Find("GUI");
+
+		menuMain = gui.GetComponent<MenuMain>();
+		menuOptions = gui.GetComponent<MenuOptions>();
 	}
 	
 	void FixedUpdate() {
+		if(!menuMain.IsOpen && !menuOptions.IsOpen)
+			return;
+
 		cameraRotation.transform.Rotate(Vector3.up / 22);
 
 		if(fire) {
