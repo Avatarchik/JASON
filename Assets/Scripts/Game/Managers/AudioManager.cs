@@ -18,7 +18,8 @@ public class AudioManager:Singleton<AudioManager> {
 		SwordSlash = 22,
 		Bull1 = 30,
 		Bull2 = 31,
-		Bull3 = 32
+		Bull3 = 32,
+		ButtonClick = 50
 	}
 
 	/** Set the active audio source */

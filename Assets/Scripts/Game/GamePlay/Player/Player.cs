@@ -446,7 +446,7 @@ public class Player:MonoBehaviour {
 
 	/** Handle input */
 	private void HandleInput(RaycastHit hit, bool doubleTap) {
-		if(hit.collider == null || SGUIManager.Instance.AnyButtonClicked)
+		if(hit.collider == null || SGUIManager.Instance.AnyButtonClicked || playerCamera.CameraEventActive)
 			return;
 
 		if(!doubleTap) {

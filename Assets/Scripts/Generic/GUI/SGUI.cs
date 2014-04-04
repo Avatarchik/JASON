@@ -148,6 +148,9 @@ namespace SGUI {
 
 		private GUIStyle style;
 
+		private Color oldColor;
+		private Color color;
+
 		/** Create the texture */
 		public void Create() {
 			style = new GUIStyle();
@@ -167,6 +170,9 @@ namespace SGUI {
 			if(!activated || texture == null || destroyed)
 				return;
 
+			oldColor = GUI.color;
+			GUI.color = color;
+
 			if(!String.IsNullOrEmpty(text)) {
 				style.normal.background = texture;
 
@@ -179,6 +185,8 @@ namespace SGUI {
 			} else {
 				GUI.DrawTexture(bounds, texture);
 			}
+
+			GUI.color = oldColor;
 		}
 
 		/** Compare the texture to another */
@@ -191,7 +199,13 @@ namespace SGUI {
 		}
 
 		/** Get the texture */
-		public Texture2D Texture { get { return texture; } }
+		public Texture2D Texture {
+			get { return texture; }
+		}
+
+		public Color Color {
+			set { color = value; }
+		}
 	}
 
 	/** Button base class */
@@ -313,7 +327,7 @@ namespace SGUI {
 			Vector2 mouse = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
 
 			if(mouse.x >= bounds.x && mouse.x <= bounds.x + bounds.width && mouse.y >= bounds.y && mouse.y <= bounds.y + bounds.height) {
-				if(Input.GetMouseButton(0)) {
+				if(Input.GetMouseButtonDown(0)) {
 					UpdateState(ButtonState.ACTIVE);
 				} else {
 					UpdateState(ButtonState.HOVER);
