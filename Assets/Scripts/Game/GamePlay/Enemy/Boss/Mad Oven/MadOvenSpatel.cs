@@ -5,6 +5,7 @@ public class MadOvenSpatel:Boss {
 	private bool attacking;
 	public Animator animatie;
 	void OnCollisionEnter(Collision collision) {
+		Debug.Log("Collision");
 		if(!attacking)
 			return;
 
@@ -31,7 +32,12 @@ public class MadOvenSpatel:Boss {
 			yield return new WaitForSeconds(data.AttackDelay / 2);
 			animatie.SetInteger("Attack",Random.Range(0,4));
 			attacking = true;
-
+			int random = Random.Range(0,10);
+			if(random >= 4){
+				animatie.SetInteger("Attack",1);
+				yield return new WaitForSeconds(2);
+				animatie.SetInteger("Attack",0);
+			}
 			yield return new WaitForSeconds(data.AttackDelay / 2);
 			animatie.SetInteger("Attack",0);
 			attacking = false;
