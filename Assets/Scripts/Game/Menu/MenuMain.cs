@@ -3,29 +3,23 @@ using System.Collections;
 using SGUI;
 
 public class MenuMain:GUIBehaviour {
-	[SerializeField] private Transform creditsCamera;
-
 	[SerializeField] private SGUITexture[] textures;
 	[SerializeField] private SGUIButton[] buttons;
 
 	private MenuOptions menuOptions;
-	private MenuCredits menuCredits;
 
-	private bool opened = false;
+	private bool opened = true;
 
 	void Start() {
-		foreach(SGUITexture texture in textures) {
-			texture.Create();
-			texture.Activated = false;
-		}
+		if(textures.Length > 0)
+			foreach(SGUITexture texture in textures)
+				texture.Create();
 
-		foreach(SGUIButton button in buttons) {
-			button.Create();
-			button.Activated = false;
-		}
+		if(buttons.Length > 0)
+			foreach(SGUIButton button in buttons)
+				button.Create();
 
 		menuOptions = GetComponent<MenuOptions>();
-		menuCredits = GetComponent<MenuCredits>();
 	}
 
 	protected override void OnGUI() {
@@ -35,7 +29,6 @@ public class MenuMain:GUIBehaviour {
 		base.OnGUI();
 
 		if(buttons[0].OnClick) {
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
 			ExitApplication.Instance.GameStarted = true;
 
 			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
@@ -43,29 +36,21 @@ public class MenuMain:GUIBehaviour {
 			Application.LoadLevel("Normal Dungeon");
 		}
 
-		if(buttons[1].OnClick) {
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
-
-			Camera.main.transform.position = creditsCamera.position;
-			Camera.main.transform.rotation = creditsCamera.rotation;
-
-			menuCredits.Open();
-		}
-
-		if(buttons[2].OnClick) {
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
+		if(buttons[2].OnClick)
 			menuOptions.Open();
-		}
 	}
 
 	/** Open this GUI */
 	public void Open() {
 		menuOptions.Close();
-		menuCredits.Close();
 
 		opened = true;
 
-		StartCoroutine(ButtonDelay());
+		foreach(SGUITexture texture in textures)
+			texture.Activated = true;
+
+		foreach(SGUIButton button in buttons)
+			button.Activated = true;
 	}
 
 	/** Close this GUI */
@@ -77,15 +62,5 @@ public class MenuMain:GUIBehaviour {
 
 		foreach(SGUIButton button in buttons)
 			button.Activated = false;
-	}
-
-	private IEnumerator ButtonDelay() {
-		yield return new WaitForSeconds(0.001f);
-
-		foreach(SGUITexture texture in textures)
-			texture.Activated = true;
-
-		foreach(SGUIButton button in buttons)
-			button.Activated = true;
 	}
 }

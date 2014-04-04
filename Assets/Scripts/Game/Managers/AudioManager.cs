@@ -11,6 +11,8 @@ public class AudioManager:Singleton<AudioManager> {
 	public enum AudioFiles {
 		NormalMusic = 0,
 		BossMusic = 1,
+		MoanMusic = 2,
+		MenuMusic = 3,
 		DoorOpen = 11,
 		BlockMove = 12,
 		SwitchActivate = 13,
@@ -18,8 +20,7 @@ public class AudioManager:Singleton<AudioManager> {
 		SwordSlash = 22,
 		Bull1 = 30,
 		Bull2 = 31,
-		Bull3 = 32,
-		ButtonClick = 50
+		Bull3 = 32
 	}
 
 	/** Set the active audio source */
@@ -31,7 +32,22 @@ public class AudioManager:Singleton<AudioManager> {
 			sources[(int)filetype].Stop();
 		}
 	}
+	void OnLevelWasLoaded(int level){
+		SetAudio(AudioFiles.BossMusic,false);	
+		SetAudio(AudioFiles.MoanMusic,false);
+		SetAudio(AudioFiles.NormalMusic,false);
+		SetAudio(AudioFiles.MenuMusic,false);	
+		if(level == 3 || level == 4){
+			SetAudio(AudioFiles.NormalMusic,true);
 
+		}
+		if(level == 2){
+			SetAudio(AudioFiles.MenuMusic,true);	
+		}
+		if(level == 1){
+			SetAudio(AudioFiles.MoanMusic,true);	
+		}
+	}
 	/** Set and/or get the music volume */
 	public float MusicVolume {
 		set { musicVolume = value; }

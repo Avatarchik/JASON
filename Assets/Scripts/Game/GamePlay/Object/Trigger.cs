@@ -19,10 +19,12 @@ public class Trigger:MonoBehaviour {
 
 	private PlayerCamera playerCamera;
 
+	private Transform oldTarget;
 	private Transform eventTarget;
 
 	private bool isTriggered;
 	private bool isActive;
+	private bool cameraEventActive;
 	
 	void Start() {
 		playerCamera = Camera.main.gameObject.GetComponent<PlayerCamera>();
@@ -31,11 +33,14 @@ public class Trigger:MonoBehaviour {
 	}
 
 	void OnGUI() {
-		
+		if(cameraEventActive) {
+			GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height / 8), playerCamera.CameraEventTexture);
+			GUI.DrawTexture(new Rect(0, Screen.height - (Screen.height / 8), Screen.width, Screen.height / 8), playerCamera.CameraEventTexture);
+		}
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if(playerCamera.CameraEventActive)
+		if(cameraEventActive)
 			return;
 
 		if(canOnlyTriggerOnce)
@@ -58,6 +63,24 @@ public class Trigger:MonoBehaviour {
 		}
 	}
 
+	void OnCollisionExit(Collision collision) {
+		if(isToggle || cameraEventActive)
+			return;
+
+		if(canOnlyTriggerOnce)
+			if(isTriggered)
+				return;
+
+		switch(collision.gameObject.tag) {
+		case "Player":
+			OnPlayerCollisionExit();
+			break;
+		case "PushableObject":
+			OnBlockCollisionExit();
+			break;
+		}
+	}
+
 	/** Handle collision with the player */
 	private void OnPlayerCollision() {
 		if(type != TriggerType.Player)
@@ -65,8 +88,15 @@ public class Trigger:MonoBehaviour {
 
 		if(canOnlyTriggerOnce)
 			isTriggered = true;
-		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.DoorOpen,true);
-		StartCoroutine(playerCamera.CameraEvent(eventTarget, connectedDoors));
+		StartCoroutine(CameraEvent(Door.DoorState.Open));
+	}
+
+	/** Handle when the player exits collision */
+	private void OnPlayerCollisionExit() {
+		if(type != TriggerType.Player)
+			return;
+
+		StartCoroutine(CameraEvent(Door.DoorState.Closed));
 	}
 
 	/** Handle collision with a block */
@@ -85,7 +115,15 @@ public class Trigger:MonoBehaviour {
 		player.TargetPosition = player.transform.position;
 		player.Drop();
 
-		StartCoroutine(playerCamera.CameraEvent(eventTarget, connectedDoors));
+		StartCoroutine(CameraEvent(Door.DoorState.Open));
+	}
+
+	/** Handle when a block exits collision */
+	private void OnBlockCollisionExit() {
+		if(type != TriggerType.Block)
+			return;
+
+		StartCoroutine(CameraEvent(Door.DoorState.Closed));
 	}
 
 	/** Handle when a fire item enters collision */
@@ -96,7 +134,7 @@ public class Trigger:MonoBehaviour {
 		if(canOnlyTriggerOnce)
 			isTriggered = true;
 
-		StartCoroutine(playerCamera.CameraEvent(eventTarget, connectedDoors));
+		StartCoroutine(CameraEvent(Door.DoorState.Open));
 	}
 
 	/** Handle when an arrow enters collision */
@@ -105,7 +143,7 @@ public class Trigger:MonoBehaviour {
 			if(canOnlyTriggerOnce)
 				isTriggered = true;
 
-			StartCoroutine(playerCamera.CameraEvent(eventTarget, connectedDoors));
+			StartCoroutine(CameraEvent(Door.DoorState.Open));
 		} else if(type == TriggerType.TimedArrow) {
 			if(canOnlyTriggerOnce)
 				isTriggered = true;
@@ -121,6 +159,47 @@ public class Trigger:MonoBehaviour {
 		yield return new WaitForSeconds(1);
 
 		isActive = false;
+	}
+
+	/** Camera event */
+	private IEnumerator CameraEvent(Door.DoorState state) {
+		GameHUD hud = GameObject.Find("HUD").GetComponent<GameHUD>();
+		SGUI.SGUITexture activeBar = null;
+
+		hud.Outerbar.Activated = false;
+
+		foreach(SGUI.SGUITexture bar in hud.Innerbars) {
+			if(bar.Activated) {
+				activeBar = bar;
+				bar.Activated = false;
+			}
+		}
+
+		cameraEventActive = true;
+
+		oldTarget = playerCamera.Target;
+		playerCamera.Target = eventTarget;
+
+		yield return new WaitForSeconds(1.5f);
+		
+		foreach(Door door in connectedDoors) {
+			if(state == Door.DoorState.Open) {
+				door.Open();
+			} else if(state == Door.DoorState.Closed) {
+				door.Close();
+			}
+		}
+
+		yield return new WaitForSeconds(1.5f);
+
+		playerCamera.Target = oldTarget;
+
+		cameraEventActive = false;
+
+		if(activeBar != null)
+			activeBar.Activated = true;
+
+		hud.Outerbar.Activated = true;
 	}
 
 	/** Get whether the timed arrow delay is currently active */

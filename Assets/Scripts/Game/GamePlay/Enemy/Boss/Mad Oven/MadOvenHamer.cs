@@ -4,12 +4,13 @@ using System.Collections;
 public class MadOvenHamer:Boss {
 	private bool attacking;
 	public Animator animatie;
-	void OnCollisionEnter(Collision collision) {
+	void OnCollisionStay(Collision collision) {
+		
 		if(!attacking)
 			return;
-
+		
 		if(collider.gameObject.CompareTag("Player"))
-			collider.GetComponent<Player>().Damage(data.AttackDamage, 0, false);
+			collider.GetComponent<Player>().Damage(2, 1, false);
 	}
 
 	public void StartAttack() {

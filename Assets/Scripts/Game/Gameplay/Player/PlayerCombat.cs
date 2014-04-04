@@ -90,11 +90,11 @@ public class PlayerCombat:MonoBehaviour {
 		while(attacking) {
 			if(canAttack) {
 				int randomAnimation = UnityEngine.Random.Range(1, 4);
-
+				Debug.Log(canAttack);
 				player.PlayerAnimation.SetInteger("Attack", randomAnimation);
 				AudioManager.Instance.SetAudio(AudioManager.AudioFiles.SwordSlash,true);
 				target.GetComponent<Enemy>().Damage(PlayerData.Instance.AttackDamage);
-
+				
 				yield return new WaitForSeconds(0.01f);
 
 				player.PlayerAnimation.SetInteger("Attack", 0);

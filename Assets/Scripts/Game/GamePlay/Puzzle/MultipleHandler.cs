@@ -30,7 +30,42 @@ public class MultipleHandler:MonoBehaviour {
 
 		if(numEnabled >= triggers.Length) {
 			puzzleDone = true;
-			StartCoroutine(playerCamera.CameraEvent(cameraEventTarget, new Door[] {GetComponent<Door>()}));
+			StartCoroutine(CameraEvent(Door.DoorState.Open));
 		}
+	}
+
+	/** Camera event */
+	private IEnumerator CameraEvent(Door.DoorState state) {
+		GameHUD hud = GameObject.Find("HUD").GetComponent<GameHUD>();
+		SGUI.SGUITexture activeBar = null;
+
+		hud.Outerbar.Activated = false;
+
+		foreach(SGUI.SGUITexture bar in hud.Innerbars) {
+			if(bar.Activated) {
+				activeBar = bar;
+				bar.Activated = false;
+			}
+		}
+
+		oldTarget = playerCamera.Target;
+		playerCamera.Target = cameraEventTarget;
+
+		yield return new WaitForSeconds(1.5f);
+
+		if(state == Door.DoorState.Open) {
+			GetComponent<Door>().Open();
+		} else if(state == Door.DoorState.Closed) {
+			GetComponent<Door>().Close();
+		}
+
+		yield return new WaitForSeconds(1.5f);
+
+		playerCamera.Target = oldTarget;
+
+		if(activeBar != null)
+			activeBar.Activated = true;
+
+		hud.Outerbar.Activated = true;
 	}
 }

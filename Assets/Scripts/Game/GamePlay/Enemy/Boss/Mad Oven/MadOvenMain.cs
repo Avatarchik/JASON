@@ -9,6 +9,14 @@ public class MadOvenMain:Boss {
 	public bool damageable;
 	public int spawncounter;
 	public ParticleSystem[] fireAttack;
+
+	public Renderer[] randje;
+	public GameObject bruggetje;
+	public BoxCollider collidertje;
+
+	public GameObject objectspawnPosition;
+	private GameObject spawnedFireItem;
+
 	protected override void Start() {
 		hamer = GameObject.Find("Hamer").GetComponent<MadOvenHamer>();
 		spatel = GameObject.Find("Spatel").GetComponent<MadOvenSpatel>();
@@ -17,18 +25,26 @@ public class MadOvenMain:Boss {
 	protected override void Update() {
 		if(Input.GetKeyDown(KeyCode.T))
 			StartAttack();
-
+		if(data.Health == 0){
+			animatie.SetBool("Dead",true);
+		}
 		if(isDead && hamer.IsDead && spatel.IsDead)
 			StartCoroutine("SwitchLevel");
 	}
 
 	public void StartAttack() {
+		bruggetje.transform.position = new Vector3(5000,5000,0);
+		for(int i = 0; i < randje.Length; i++){
+			randje[i].renderer.enabled = true;
+		}
+		collidertje.enabled = true;
+		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.NormalMusic,false);
+		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BossMusic,true);
 		hamer.StartAttack();
 		spatel.StartAttack();
 		animatie.SetBool("start",true);
 		hamer.animatie.SetBool("start",true);
 		spatel.animatie.SetBool("start",true);
-		Debug.Log("ASD");
 		StartCoroutine("AnimationDelay");
 	}
 	IEnumerator AnimationDelay(){
@@ -87,6 +103,9 @@ public class MadOvenMain:Boss {
 					spawncounter = 0;
 					animatie.SetBool("spawnItem",true);
 					yield return new WaitForSeconds(0.5f);
+					if(spawnedFireItem == null){
+					spawnedFireItem = Instantiate(Resources.Load("Prefabs/BossItem/FireItem"), objectspawnPosition.transform.position, Quaternion.identity) as GameObject;
+					}
 					animatie.SetBool("spawnItem",false);
 					animatie.SetBool("toIdle",true);
 					/* Spawn Item*/
@@ -97,7 +116,6 @@ public class MadOvenMain:Boss {
 			yield return new WaitForSeconds(3);
 		}
 	}
-
 	private IEnumerator SwitchLevel() {
 		GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
 

@@ -29,7 +29,9 @@ public class Door:MonoBehaviour {
 		if(lockGo != null)
 			lockGo.renderer.enabled = false;
 
+		if(type != DoorType.BossDoor){
 		collider.enabled = false;
+		}
 
 		if(animation != null) {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.DoorOpen,true);

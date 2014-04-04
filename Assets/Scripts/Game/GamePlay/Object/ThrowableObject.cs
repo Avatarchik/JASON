@@ -69,8 +69,9 @@ public class ThrowableObject:InteractableObject {
 		player.PlayerCamera.TargetPosition = new Vector3(-10, 15, player.PlayerCamera.TargetPosition.z);
 		player.TargetPosition = player.transform.position;
 		player.CurrentBoss = boss;
+		boss.Damage(1);
 		player.InBossRoom = true;
-
+		Destroy(gameObject);
 		boss.StartAttack();
 	}
 

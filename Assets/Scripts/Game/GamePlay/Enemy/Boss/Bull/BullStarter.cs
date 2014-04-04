@@ -26,11 +26,11 @@ public class BullStarter:MonoBehaviour {
 	}
 
 	private IEnumerator StartDelay(Bull boss) {
-		yield return new WaitForSeconds(2.0f);
-
 		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BossMusic, true);
 		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.NormalMusic, false);
 
+		yield return new WaitForSeconds(2.0f);
+		
 		boss.StartAttack();
 	}
 }

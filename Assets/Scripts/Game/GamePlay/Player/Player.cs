@@ -216,7 +216,7 @@ public class Player:MonoBehaviour {
 				if(attachedThrowable.Type == ThrowableObject.ObjectType.FireItem){
 					MadOvenMain baas = collision.gameObject.GetComponent<MadOvenMain>();
 					baas.StartAttack();
-					Destroy(attachedThrowable);
+					Destroy(attachedThrowable.gameObject);
 					attachedThrowable = null;
 					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BossMusic,true);
 					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.NormalMusic,false);
@@ -446,7 +446,7 @@ public class Player:MonoBehaviour {
 
 	/** Handle input */
 	private void HandleInput(RaycastHit hit, bool doubleTap) {
-		if(hit.collider == null || SGUIManager.Instance.AnyButtonClicked || playerCamera.CameraEventActive)
+		if(hit.collider == null || SGUIManager.Instance.AnyButtonClicked)
 			return;
 
 		if(!doubleTap) {
@@ -456,8 +456,10 @@ public class Player:MonoBehaviour {
 			case "Enemy":
 			case "Boss":
 				if(!playerCombat.InCombat) {
+					if(hit.transform.name != "Main Body" && hit.transform.name != "Spatel" || hit.transform.name != "Hamer"){
 					playerCombat.WeaponCollisionArea.collider.enabled = true;
 					playerCombat.StartAttack(hit.transform.gameObject);
+					}
 				}
 				break;
 			case "Key":

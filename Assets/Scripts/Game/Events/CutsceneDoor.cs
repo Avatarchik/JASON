@@ -7,6 +7,7 @@ public class CutsceneDoor:MonoBehaviour {
 	private bool fireAnimation;
 	
 	void Start() {
+		AudioManager.Instance.SetAudio(AudioManager.AudioFiles.MoanMusic,true);
 		if(GameData.Instance.fireDungeonCleared) {
 			cutscene.SetInteger("SceneNumber", 2);
 			StartCoroutine("TimeToCredits");
@@ -28,7 +29,6 @@ public class CutsceneDoor:MonoBehaviour {
 	/** Delay before the credits scene is loaded */
 	private IEnumerator TimeToCredits() {
 		yield return new WaitForSeconds(15);
-
 		cutscene.enabled = false;
 
 		Application.LoadLevel("Credits");

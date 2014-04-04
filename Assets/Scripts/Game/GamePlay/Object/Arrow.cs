@@ -10,10 +10,12 @@ public class Arrow:MonoBehaviour {
 
 	private bool isTraveling;
 	private bool fadeOut;
-
+	public ParticleSystem[] particleEffect;
 	void Start() {
 		model = transform.GetChild(0).renderer;
 		normalShader = renderer.material.shader;
+		particleEffect[0].renderer.enabled = false;
+		particleEffect[1].renderer.enabled = false;
 	}
 
 	void FixedUpdate () {
@@ -47,7 +49,8 @@ public class Arrow:MonoBehaviour {
 	public void Fire(ArrowTrap arrowTrap) {
 		transform.position = arrowTrap.transform.position;
 		transform.rotation = arrowTrap.transform.rotation;
-		
+		particleEffect[0].renderer.enabled = true;
+		particleEffect[1].renderer.enabled = true;
 		isTraveling = true;
 		collider.enabled = true;
 		
@@ -59,7 +62,8 @@ public class Arrow:MonoBehaviour {
 	/** Start fading out the arrow */
 	private void StartFade() {
 		model.material.shader = alphaShader;
-
+		particleEffect[0].renderer.enabled = false;
+		particleEffect[1].renderer.enabled = false;
 		fadeOut = true;
 	}
 
