@@ -14,6 +14,8 @@ public class MadOvenMain:Boss {
 	public GameObject bruggetje;
 	public BoxCollider collidertje;
 
+	public int HealthPoints = 5;
+
 	public GameObject objectspawnPosition;
 	private GameObject spawnedFireItem;
 
@@ -23,11 +25,16 @@ public class MadOvenMain:Boss {
 	}
 
 	protected override void Update() {
+		if(HealthPoints == 0){
+			animatie.SetBool("Dead",true);
+			StopAllCoroutines();
+			GameData.Instance.fireDungeonCleared = true;
+			Application.LoadLevel("Boss Door");
+		}
+
+		Debug.Log(data.Health);
 		if(Input.GetKeyDown(KeyCode.T))
 			StartAttack();
-		if(data.Health == 0){
-			animatie.SetBool("Dead",true);
-		}
 		if(isDead && hamer.IsDead && spatel.IsDead)
 			StartCoroutine("SwitchLevel");
 	}

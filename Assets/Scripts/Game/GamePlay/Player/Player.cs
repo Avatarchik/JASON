@@ -230,7 +230,8 @@ public class Player:MonoBehaviour {
 				if(attachedThrowable.Type == ThrowableObject.ObjectType.FireItem){
 					MadOvenMain baas = collision.gameObject.GetComponent<MadOvenMain>();
 					baas.StartAttack();
-					Destroy(attachedThrowable);
+					Destroy(attachedThrowable.gameObject);
+					baas.HealthPoints -= 1;
 					attachedThrowable = null;
 					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BossMusic,true);
 					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.NormalMusic,false);
