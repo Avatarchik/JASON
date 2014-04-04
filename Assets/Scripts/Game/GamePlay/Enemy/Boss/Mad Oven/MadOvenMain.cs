@@ -29,6 +29,7 @@ public class MadOvenMain:Boss {
 			animatie.SetBool("Dead",true);
 			StopAllCoroutines();
 			GameData.Instance.fireDungeonCleared = true;
+			GameData.Instance.SaveData();
 			Application.LoadLevel("Boss Door");
 		}
 

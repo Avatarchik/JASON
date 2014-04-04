@@ -26,9 +26,14 @@ public class MadOvenHamer:Boss {
 			yield return new WaitForSeconds(data.AttackDelay / 2);
 			animatie.SetInteger("Attack",Random.Range(0,4));
 			attacking = true;
-
+			int random = Random.Range(0,10);
+			if(random >= 4){
+				animatie.SetInteger("Attack",Random.Range(0,4));
+				yield return new WaitForSeconds(2);
+				animatie.SetInteger("Attack",0);
+			}
 			yield return new WaitForSeconds(data.AttackDelay / 2);
-
+			animatie.SetInteger("Attack",0);
 			attacking = false;
 		}
 	}

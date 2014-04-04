@@ -34,7 +34,7 @@ public class MadOvenSpatel:Boss {
 			attacking = true;
 			int random = Random.Range(0,10);
 			if(random >= 4){
-				animatie.SetInteger("Attack",1);
+				animatie.SetInteger("Attack",Random.Range(0,4));
 				yield return new WaitForSeconds(2);
 				animatie.SetInteger("Attack",0);
 			}
