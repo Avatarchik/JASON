@@ -44,17 +44,22 @@ public class Trigger:MonoBehaviour {
 
 		switch(collision.gameObject.tag) {
 		case "Player":
-			OnPlayerCollision();
+			ThrowableObject throwable = collision.gameObject.GetComponent<Player>().AttachedThrowable;
+
+			if(throwable != null) {
+				if(throwable.CompareTag("FireItem")) {
+					OnFireDungeonItemCollision(throwable.gameObject);
+				} else {
+					OnPlayerCollision();
+				}
+			}
 			break;
 		case "PushableObject":
 			OnBlockCollision();
 			break;
 		case "Arrow":
 			OnArrowCollision();
-			break;
-		case "FireDungeonItem":
-			OnFireDungeonItemCollision();
-			break;				
+			break;			
 		}
 	}
 
@@ -89,12 +94,15 @@ public class Trigger:MonoBehaviour {
 	}
 
 	/** Handle when a fire item enters collision */
-	private void OnFireDungeonItemCollision() {
+	private void OnFireDungeonItemCollision(GameObject go) {
 		if(type != TriggerType.FireItem)
 			return;
 
 		if(canOnlyTriggerOnce)
 			isTriggered = true;
+
+		GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Drop();
+		Destroy(go.gameObject);
 
 		StartCoroutine(playerCamera.CameraEvent(eventTarget, connectedDoors));
 	}

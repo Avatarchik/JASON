@@ -404,16 +404,12 @@ public class Player:MonoBehaviour {
 
 					HandleInput(hit, true);
 				} else {
-					if(attachedPushable == null && attachedThrowable == null) {
-						Ray ray = Camera.main.ScreenPointToRay(touch.position);
-						RaycastHit hit;
+					Ray ray = Camera.main.ScreenPointToRay(touch.position);
+					RaycastHit hit;
 
-						Physics.Raycast(ray, out hit, 100, mask);
+					Physics.Raycast(ray, out hit, 100, mask);
 
-						HandleInput(hit, false);
-					} else {
-						ThrowObject();
-					}
+					HandleInput(hit, false);
 				}
 
 				lastTouchTime = Time.time;

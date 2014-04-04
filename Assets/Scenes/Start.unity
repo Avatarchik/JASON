@@ -705,7 +705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialWalkSpeed: 5
-  initialRunSpeed: 7
+  initialRunSpeed: 9
   initialHealth: 10
   initialAttackDamage: 1
   initialAttackDelay: .699999988

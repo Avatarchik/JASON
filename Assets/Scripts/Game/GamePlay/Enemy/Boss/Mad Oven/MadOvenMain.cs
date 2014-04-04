@@ -32,9 +32,6 @@ public class MadOvenMain:Boss {
 			Application.LoadLevel("Boss Door");
 		}
 
-		Debug.Log(data.Health);
-		if(Input.GetKeyDown(KeyCode.T))
-			StartAttack();
 		if(isDead && hamer.IsDead && spatel.IsDead)
 			StartCoroutine("SwitchLevel");
 	}
