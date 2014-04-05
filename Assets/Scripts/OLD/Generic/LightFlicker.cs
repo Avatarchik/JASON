@@ -2,34 +2,33 @@
 using System.Collections;
 
 public class LightFlicker:MonoBehaviour {
-	[SerializeField] private Color color0 = Color.red;
-	[SerializeField] private Color color1 = new Color(1, 0.0647f, 0);
+	[SerializeField] private float duration;
 
-	[SerializeField] private float duration = 1;
+	[SerializeField] private float minIntensity;
+	[SerializeField] private float maxIntensity;
 
-	private Light target;
+	[SerializeField] private Color[] colors;
 
 	void Start() {
-		target = GetComponent<Light>();
-
-		StartCoroutine("SetLight");
+		StartCoroutine("SwitchLightColor");
 	}
 
 	void Update () {
-		float t = Mathf.PingPong(Time.time, duration) / duration;
+		int color1 = Random.Range(0, colors.Length);
+		int color2 = Random.Range(0, colors.Length);
 
-		target.color = Color.Lerp(color0, color1, t);
+		light.color = Color.Lerp(colors[color1], colors[color2], Mathf.PingPong(Time.time, duration) / duration);
 	}
 
-	/** Set the light */
-	private IEnumerator SetLight() {
+	/** <summary>Switch between the available light colors every cycle</summary> */
+	private IEnumerator SwitchLightColor() {
 		while(true) {
-			float randomTime = Random.Range(0.01f, 0.1f);
-			float random = Random.Range(1.0f, 1.5f);
+			float intensity = Random.Range(minIntensity, maxIntensity);
+			float delay = Random.Range(0.01f, 0.1f);
 
-			yield return new WaitForSeconds(randomTime);
+			yield return new WaitForSeconds(delay);
 
-			target.intensity = random;
+			light.intensity = intensity;
 		}
 	}
 }

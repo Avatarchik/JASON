@@ -39,6 +39,11 @@ public abstract class Entity:MonoBehaviour {
 	public EntityData EntityData {
 		get { return entityData; }
 	}
+
+	/** <returns>The animator of this entity</returns> */
+	public Animator Animator {
+		get { return animator; }
+	}
 }
 
 [Serializable]

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
 public enum InteractableType {
-	Block,
+	PushableBlock,
 	Key,
-	FireItem
+	Brazier
 }
 
 public interface IInteractable {

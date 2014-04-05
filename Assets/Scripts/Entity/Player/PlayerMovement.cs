@@ -32,23 +32,37 @@ public class PlayerMovement:MonoBehaviour {
 			moveDirection = -(transform.position - targetPosition).normalized;
 
 			rigidbody.AddForce(-(transform.position - targetPosition).normalized * player.EntityData.WalkSpeed);
+		} else {
+			moveDirection = Vector3.zero;
 		}
 	}
 
 	void OnCollisionEnter(Collision col) {
-		if(pickupWhenColliding != null && col.collider.gameObject.Equals(pickupWhenColliding)) {
-			Pickup(col.transform);
-		}
+		HandleCollision(col);	
 	}
 
+	void OnCollisionStay(Collision col) {
+		HandleCollision(col);
+	}
+	
+	/** <summary>Move the player to the specified position</summary>
+	 * <param name="position">The position to move to</param> */
 	private void Move(Vector3 position) {
 		targetPosition = new Vector3(position.x, 0.667f, position.z);
 	}
 
-	private void Pickup(Transform target) {
-		Debug.Log("pickup!");
+	/** <summary>Handle <code>OnCollisionEnter</code> and <code>OnCollisionStay</code> calls</summary>
+	 * <param name="col">The collision</param>  */
+	private void HandleCollision(Collision col) {
+		if(pickupWhenColliding != null && col.collider.gameObject.Equals(pickupWhenColliding)) {
+			player.Pickup(col.transform);
+
+			pickupWhenColliding = null;
+		}
 	}
 
+	/** <summary>Handle short clicks/touches</summary>
+	 * <param name="hit">The raycast hit</param> */
 	private void HandleClick(RaycastHit hit) {
 		if(hit.collider == null)
 			return;
@@ -58,21 +72,42 @@ public class PlayerMovement:MonoBehaviour {
 			Debug.Log("Enemy clicked");
 			break;
 		case "Interactable Object":
-			pickupWhenColliding = hit.transform.gameObject;
-			Move(hit.transform.position);
+			if(player.Interactable == null) {
+				pickupWhenColliding = hit.transform.gameObject;
+				Move(hit.transform.position);
+			} else {
+				if(player.Interactable == hit.transform.GetComponent(typeof(IInteractable)) as IInteractable) {
+					player.Drop(false);
+				} else {
+					player.Drop(false);
+					pickupWhenColliding = hit.transform.gameObject;
+					Move(hit.transform.position);
+				}
+			}
 			break;
 		case "Movable Point":
-			Move(hit.transform.position);
+			Move(hit.point);
 			break;
 		}
 	}
 
+	/** <summary>Handle long clicks/touches</summary>
+	 * <param name="hit">The raycast hit</param> */
 	private void HandleLongClick(RaycastHit hit) {
 		if(hit.collider == null)
 			return;
+
+		if(player.Interactable != null) {
+			player.Drop(true);
+		}
+	}
+
+	public Vector3 MoveDirection {
+		get { return moveDirection; }
 	}
 
 #if UNITY_EDITOR || !UNITY_ANDROID
+	/** <summary>Check for input each update</summary> */
 	private void CheckForInput() {
 		if(Input.GetMouseButton(0) && Input.GetMouseButtonDown(0)) {
 			clicked = true;
@@ -88,6 +123,7 @@ public class PlayerMovement:MonoBehaviour {
 		}
 	}
 #elif UNITY_ANDROID
+	/** <summary>Check for input each update</summary> */
 	private void CheckForInput() {
 		Debug.Log("Android");
 

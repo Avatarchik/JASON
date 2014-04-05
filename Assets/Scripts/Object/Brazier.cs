@@ -1,20 +1,32 @@
 ﻿using UnityEngine;
+using System.Collections;
 
-public class Key:MonoBehaviour, IInteractable {
+public class Brazier:MonoBehaviour, IInteractable {
 	public enum KeyType {
 		Normal,
 		Boss
 	}
 
-	[SerializeField] private KeyType keyType;
+	[SerializeField]
+	private KeyType keyType;
 
 	private Transform targetPosition;
-	
+
+	private bool locked;
+	private bool thrown;
+
 	void FixedUpdate() {
+		if(locked)
+			return;
+
 		if(targetPosition != null) {
 			transform.position = targetPosition.position;
 			transform.rotation = targetPosition.rotation;
-		} 
+		}
+
+		if(thrown) {
+			// TODO Handle thrown logic
+		}
 	}
 
 	public void Pickup(Transform position) {
@@ -27,16 +39,22 @@ public class Key:MonoBehaviour, IInteractable {
 		targetPosition = null;
 
 		transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
-		transform.rotation = new Quaternion(0.5f, -0.5f, -0.5f, -0.5f);
 	}
 
 	public void Throw() {
+		thrown = true;
+		collider.enabled = true;
+
+		targetPosition = null;
+	}
+
+	public void Lock(bool locked) {
+		this.locked = locked;
+
 		Drop();
 	}
 
-	public void Lock(bool locked) { }
-	
 	public InteractableType GetInteractableType() {
-		return InteractableType.Key;
+		return InteractableType.Brazier;
 	}
 }
