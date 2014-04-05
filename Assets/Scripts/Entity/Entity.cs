@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
+using System;
 
 public abstract class Entity:MonoBehaviour {
+	[SerializeField] protected EntityData entityData;
+
 	[SerializeField] protected GameObject combatTextGO;
 	
 	[SerializeField] protected Animator animator;
-
-	[SerializeField] protected EntityData entityData;
-
+	
 	/** <summary>Damage the entity, <code>Kill()</code> is called when the entity's health reaches 0</summary>
 	 * <param name="amount">The amount of damage dealt to the entity</param> */
 	public virtual void Damage(float amount) {
@@ -33,8 +34,14 @@ public abstract class Entity:MonoBehaviour {
 		combatText.text = text;
 		combatText.color = color;
 	}
+
+	/** <returns>The stats of this entity</returns> */
+	public EntityData EntityData {
+		get { return entityData; }
+	}
 }
 
+[Serializable]
 public class EntityData {
 	[SerializeField]
 	private float health;
