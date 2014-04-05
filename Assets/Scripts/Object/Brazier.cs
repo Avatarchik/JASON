@@ -16,6 +16,8 @@ public class Brazier:MonoBehaviour, IInteractable {
 	private bool thrown;
 
 	void FixedUpdate() {
+		rigidbody.velocity = Vector3.zero;
+
 		if(locked)
 			return;
 
@@ -24,9 +26,22 @@ public class Brazier:MonoBehaviour, IInteractable {
 			transform.rotation = targetPosition.rotation;
 		}
 
-		if(thrown) {
-			// TODO Handle thrown logic
+		if(thrown)
+			rigidbody.AddForce(Vector3.forward * Time.deltaTime * 5000);
+	}
+
+	void OnCollisionEnter(Collision col) {
+		if(col.collider.CompareTag("Player"))
+			return;
+
+		if(col.collider.CompareTag("Brazier Switch")) {
+			// TODO Brazier switch
+		} else {
+			transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+			transform.rotation = new Quaternion(-0.7f, 0.0f, 0.0f, 0.7f);
 		}
+
+		thrown = false;
 	}
 
 	public void Pickup(Transform position) {
@@ -38,14 +53,13 @@ public class Brazier:MonoBehaviour, IInteractable {
 	public void Drop() {
 		targetPosition = null;
 
-		transform.position = new Vector3(transform.position.x, 0.05f, transform.position.z);
+		collider.enabled = true;
 	}
 
 	public void Throw() {
-		thrown = true;
-		collider.enabled = true;
+		Drop();
 
-		targetPosition = null;
+		thrown = true;
 	}
 
 	public void Lock(bool locked) {

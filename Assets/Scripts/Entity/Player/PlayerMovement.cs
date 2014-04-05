@@ -29,10 +29,28 @@ public class PlayerMovement:MonoBehaviour {
 		rigidbody.velocity = Vector3.zero;
 
 		if(Vector3.Distance(transform.position, targetPosition) > 0.1f) {
-			moveDirection = -(transform.position - targetPosition).normalized;
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps, true);
+			player.Animator.SetBool("IsRunning", true);
 
+			moveDirection = -(transform.position - targetPosition).normalized;
 			rigidbody.AddForce(-(transform.position - targetPosition).normalized * player.EntityData.WalkSpeed);
+
+			if(player.Interactable == null || player.Interactable.GetInteractableType() != InteractableType.PushableBlock) {
+				if((transform.position - targetPosition) != Vector3.zero) {
+					Quaternion targetRotation = Quaternion.identity;
+
+					targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
+
+					targetRotation.x = 0;
+					targetRotation.z = 0;
+
+					transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 30);
+				}
+			}
 		} else {
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps, false);
+			player.Animator.SetBool("IsRunning", false);
+
 			moveDirection = Vector3.zero;
 		}
 	}

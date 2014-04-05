@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PusableBlock:MonoBehaviour, IInteractable {
+public class PushableBlock:MonoBehaviour, IInteractable {
 	private Transform targetPosition;
 
 	private bool locked;
