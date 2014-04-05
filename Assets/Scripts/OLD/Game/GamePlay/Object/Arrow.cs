@@ -40,7 +40,7 @@ public class Arrow:MonoBehaviour {
 		transform.parent = collision.transform;
 
 		if(collision.gameObject.CompareTag("Player"))
-			collision.gameObject.GetComponent<Player>().Damage(1, 0, false);
+			collision.gameObject.GetComponent<Old_Player>().Damage(1, 0, false);
 
 		StartFade();
 	}

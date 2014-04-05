@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-public class Player:MonoBehaviour {
+public class Old_Player:MonoBehaviour {
 	[SerializeField] private GameObject scrollingCombatText;
     [SerializeField] private GameObject selectionParticles;
 	[SerializeField] private Renderer[] shield;

@@ -44,7 +44,7 @@ public class Trigger:MonoBehaviour {
 
 		switch(collision.gameObject.tag) {
 		case "Player":
-			ThrowableObject throwable = collision.gameObject.GetComponent<Player>().AttachedThrowable;
+			ThrowableObject throwable = collision.gameObject.GetComponent<Old_Player>().AttachedThrowable;
 
 			if(throwable != null) {
 				if(throwable.CompareTag("FireItem")) {
@@ -79,7 +79,7 @@ public class Trigger:MonoBehaviour {
 		if(type != TriggerType.Block)
 			return;
 
-		Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+		Old_Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Old_Player>();
 
 		if(canOnlyTriggerOnce) {
 			player.AttachedPushable.Locked = true;
@@ -101,7 +101,7 @@ public class Trigger:MonoBehaviour {
 		if(canOnlyTriggerOnce)
 			isTriggered = true;
 
-		GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().Drop();
+		GameObject.FindGameObjectWithTag("Player").GetComponent<Old_Player>().Drop();
 		Destroy(go.gameObject);
 
 		StartCoroutine(playerCamera.CameraEvent(eventTarget, connectedDoors));

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MadOvenHamer:Boss {
+public class MadOvenSpatel:Boss {
 	private bool attacking;
 	public Animator animatie;
 	void OnCollisionStay(Collision collision) {
@@ -10,7 +10,7 @@ public class MadOvenHamer:Boss {
 			return;
 		
 		if(collider.gameObject.CompareTag("Player"))
-			collider.GetComponent<Player>().Damage(2, 1, false);
+			collider.GetComponent<Old_Player>().Damage(2, 1, false);
 	}
 
 	public void StartAttack() {
@@ -18,7 +18,13 @@ public class MadOvenHamer:Boss {
 	}
 
 	public override void Damage(int amount) {
+		if(data.Health <= 0)
+			return;
 
+		data.Health -= amount;
+		DisplayCombatText(amount.ToString(), Color.red, 0.4f);
+
+		Debug.Log("Spatel: " + data.Health);
 	}
 
 	private IEnumerator Attack() {

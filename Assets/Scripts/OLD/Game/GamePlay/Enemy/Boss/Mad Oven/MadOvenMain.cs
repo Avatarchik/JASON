@@ -61,7 +61,7 @@ public class MadOvenMain:Boss {
 			return;
 
 		if(collider.gameObject.CompareTag("Player"))
-			collider.GetComponent<Player>().Damage(data.AttackDamage, 0, false);
+			collider.GetComponent<Old_Player>().Damage(data.AttackDamage, 0, false);
 	}
 
 	public override void Damage(int amount) {

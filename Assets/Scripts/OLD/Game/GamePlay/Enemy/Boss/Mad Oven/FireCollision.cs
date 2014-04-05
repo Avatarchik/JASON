@@ -8,6 +8,6 @@ public class FireCollision : MonoBehaviour {
 		Debug.Log(collider.gameObject.name);
 		}
 		if(collider.gameObject.CompareTag("Player"))
-			collider.GetComponent<Player>().Damage(0.3f, 1, false);
+			collider.GetComponent<Old_Player>().Damage(0.3f, 1, false);
 	}
 }

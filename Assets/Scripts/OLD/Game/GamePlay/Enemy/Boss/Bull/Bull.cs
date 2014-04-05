@@ -77,9 +77,9 @@ public class Bull:Boss {
 			break;
 		case "Player":
 			if(state == State.Charging) {
-				player.GetComponent<Player>().Damage(data.AttackDamage * 4, data.StunTime * 2, true);
+				player.GetComponent<Old_Player>().Damage(data.AttackDamage * 4, data.StunTime * 2, true);
 			} else if(lastState != State.Charging) {
-				player.GetComponent<Player>().Damage(data.AttackDamage * 2, data.StunTime, false);
+				player.GetComponent<Old_Player>().Damage(data.AttackDamage * 2, data.StunTime, false);
 			}
 			break;	
 		}
@@ -155,8 +155,8 @@ public class Bull:Boss {
 	private IEnumerator Attacking() {
 		while(state == State.Attacking) {
 			yield return new WaitForSeconds(data.AttackDelay);
-			
-			player.GetComponent<Player>().Damage(data.AttackDamage, data.StunTime, false);
+
+			player.GetComponent<Old_Player>().Damage(data.AttackDamage, data.StunTime, false);
 		}
 	}
 }

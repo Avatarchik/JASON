@@ -11,7 +11,7 @@ public class BullStarter:MonoBehaviour {
 
 	void OnTriggerExit(Collider collider) {
 		if(collider.gameObject.CompareTag("Player")) {
-			Player player = collider.GetComponent<Player>();
+			Old_Player player = collider.GetComponent<Old_Player>();
 			Bull boss = bull.GetComponent<Bull>();
 
 			this.collider.isTrigger = false;

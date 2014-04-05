@@ -6,7 +6,7 @@ using SGUI;
 public class PlayerCombat:MonoBehaviour {
 	[SerializeField] Collider shieldCollider;
 
-	private Player player;
+	private Old_Player player;
 	private PlayerWeaponCollisionManager weaponCollisionManager;
 
 	private GameObject weaponCollisionArea;
@@ -19,7 +19,7 @@ public class PlayerCombat:MonoBehaviour {
 	void Start() {
 		weaponCollisionArea = transform.FindChild("Weapon Collision Area").gameObject;
 
-		player = GetComponent<Player>();
+		player = GetComponent<Old_Player>();
 		weaponCollisionManager = weaponCollisionArea.GetComponent<PlayerWeaponCollisionManager>();
 	}
 

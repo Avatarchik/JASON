@@ -13,7 +13,7 @@ public class GameHUD:GUIBehaviour {
 	[SerializeField] private SGUITexture[] innerBars;
 	[SerializeField] private SGUITexture outerBar;
 
-	private Player player;
+	private Old_Player player;
 
 	private Bars activeBar;
 
@@ -24,7 +24,7 @@ public class GameHUD:GUIBehaviour {
 	private bool playerInstanceFound;
 
 	void Start() {
-		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+		player = GameObject.FindGameObjectWithTag("Player").GetComponent<Old_Player>();
 
 		if(player == null)
 			throw new System.NullReferenceException("No Game Object found in the scene with the 'Player' tag");

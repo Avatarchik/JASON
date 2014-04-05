@@ -68,7 +68,7 @@ public class ThrowableObject:InteractableObject {
 
 	/** Handle collision with the Ffire boss */
 	public void HandleBossCollision(MadOvenMain boss) {
-		Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+		Old_Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Old_Player>();
 		Destroy(gameObject);
 		player.PlayerCamera.TargetPosition = new Vector3(-10, 15, player.PlayerCamera.TargetPosition.z);
 		player.TargetPosition = player.transform.position;
