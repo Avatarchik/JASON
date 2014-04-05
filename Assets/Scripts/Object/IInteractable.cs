@@ -24,4 +24,7 @@ public interface IInteractable {
 	/** <summary>Get the type of the object, should never change</summary>
 	 * <returns>The type of the object</returns> */
 	InteractableType GetInteractableType();
+
+	/** <returns>Whether or not the object is currently locked</returns> */
+	bool IsLocked();
 }

@@ -103,7 +103,7 @@ public class PlayerMovement:MonoBehaviour {
 				}
 			}
 			break;
-		case "Movable Point":
+		default:
 			Move(hit.point);
 			break;
 		}

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MultipleHandler:MonoBehaviour {
-	[SerializeField] private Trigger[] triggers;
+	[SerializeField] private Old_Trigger[] triggers;
 
 	private PlayerCamera playerCamera;
 
@@ -24,7 +24,7 @@ public class MultipleHandler:MonoBehaviour {
 
 		numEnabled = 0;
 
-		foreach(Trigger trigger in triggers)
+		foreach(Old_Trigger trigger in triggers)
 			if(trigger.IsActive)
 				numEnabled++;
 

@@ -28,6 +28,9 @@ public class Player:Entity {
 	/** <summary>Pick up an interactable object</summary>
 	 * <param name="target">The transform of the object</param> */
 	public void Pickup(Transform target) {
+		if((target.GetComponent(typeof(IInteractable)) as IInteractable).IsLocked())
+			return;
+
 		interactable = target.GetComponent(typeof(IInteractable)) as IInteractable;
 
 		swordRenderer.enabled = false;
@@ -53,6 +56,11 @@ public class Player:Entity {
 	public void Drop(bool throwObject) {
 		if(interactable == null)
 			return;
+
+		swordRenderer.enabled = true;
+
+		foreach(Renderer shieldRenderer in shieldRenderers)
+			shieldRenderer.enabled = true;
 
 		switch(interactable.GetInteractableType()) {
 		case InteractableType.PushableBlock:

@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class Trigger:MonoBehaviour {
-	enum TriggerType {
+public class Old_Trigger:MonoBehaviour {
+	enum Old_TriggerType {
 		Player,
 		Block,
 		Arrow,
@@ -13,7 +13,8 @@ public class Trigger:MonoBehaviour {
 	[SerializeField] private bool isToggle;
 	[SerializeField] private bool canOnlyTriggerOnce;
 
-	[SerializeField] private TriggerType type;
+	[SerializeField]
+	private Old_TriggerType type;
 	
 	[SerializeField] private Door[] connectedDoors;
 
@@ -65,7 +66,7 @@ public class Trigger:MonoBehaviour {
 
 	/** Handle collision with the player */
 	private void OnPlayerCollision() {
-		if(type != TriggerType.Player)
+		if(type != Old_TriggerType.Player)
 			return;
 
 		if(canOnlyTriggerOnce)
@@ -76,7 +77,7 @@ public class Trigger:MonoBehaviour {
 
 	/** Handle collision with a block */
 	private void OnBlockCollision() {
-		if(type != TriggerType.Block)
+		if(type != Old_TriggerType.Block)
 			return;
 
 		Old_Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Old_Player>();
@@ -95,7 +96,7 @@ public class Trigger:MonoBehaviour {
 
 	/** Handle when a fire item enters collision */
 	private void OnFireDungeonItemCollision(GameObject go) {
-		if(type != TriggerType.FireItem)
+		if(type != Old_TriggerType.FireItem)
 			return;
 
 		if(canOnlyTriggerOnce)
@@ -109,12 +110,12 @@ public class Trigger:MonoBehaviour {
 
 	/** Handle when an arrow enters collision */
 	private void OnArrowCollision() {
-		if(type == TriggerType.Arrow) {
+		if(type == Old_TriggerType.Arrow) {
 			if(canOnlyTriggerOnce)
 				isTriggered = true;
 
 			StartCoroutine(playerCamera.CameraEvent(eventTarget, connectedDoors));
-		} else if(type == TriggerType.TimedArrow) {
+		} else if(type == Old_TriggerType.TimedArrow) {
 			if(canOnlyTriggerOnce)
 				isTriggered = true;
 

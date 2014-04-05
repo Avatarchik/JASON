@@ -7,8 +7,9 @@ public class Brazier:MonoBehaviour, IInteractable {
 		Boss
 	}
 
-	[SerializeField]
-	private KeyType keyType;
+	[SerializeField] private KeyType keyType;
+
+	[SerializeField] private float speed;
 
 	private Transform targetPosition;
 
@@ -16,6 +17,9 @@ public class Brazier:MonoBehaviour, IInteractable {
 	private bool thrown;
 
 	void FixedUpdate() {
+		if(rigidbody.isKinematic)
+			return;
+
 		rigidbody.velocity = Vector3.zero;
 
 		if(locked)
@@ -27,27 +31,29 @@ public class Brazier:MonoBehaviour, IInteractable {
 		}
 
 		if(thrown)
-			rigidbody.AddForce(Vector3.forward * Time.deltaTime * 5000);
+			rigidbody.AddForce(Vector3.forward * Time.deltaTime * speed);
 	}
 
 	void OnCollisionEnter(Collision col) {
 		if(col.collider.CompareTag("Player"))
 			return;
 
-		if(col.collider.CompareTag("Brazier Switch")) {
-			// TODO Brazier switch
-		} else {
-			transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-			transform.rotation = new Quaternion(-0.7f, 0.0f, 0.0f, 0.7f);
+		if(!col.collider.CompareTag("Trigger")) {
+			if(col.collider.GetComponent(typeof(ITrigger)) as ITrigger != null && (col.collider.GetComponent(typeof(ITrigger)) as ITrigger).GetTriggerActivator() != TriggerActivator.Brazier) {
+				transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+				transform.rotation = new Quaternion(-0.7f, 0.0f, 0.0f, 0.7f);
+			}
 		}
 
 		thrown = false;
+		rigidbody.isKinematic = true;
 	}
 
 	public void Pickup(Transform position) {
 		this.targetPosition = position;
 
 		collider.enabled = false;
+		rigidbody.isKinematic = false;
 	}
 
 	public void Drop() {
@@ -65,10 +71,17 @@ public class Brazier:MonoBehaviour, IInteractable {
 	public void Lock(bool locked) {
 		this.locked = locked;
 
+		if(rigidbody != null)
+			rigidbody.isKinematic = true;
+
 		Drop();
 	}
 
 	public InteractableType GetInteractableType() {
 		return InteractableType.Brazier;
+	}
+
+	public bool IsLocked() {
+		return locked;
 	}
 }

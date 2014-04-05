@@ -12,7 +12,7 @@ public class PushableBlock:MonoBehaviour, IInteractable {
 
 		if(targetPosition != null) {
 			transform.position = targetPosition.position;
-			transform.rotation = targetPosition.rotation;
+			transform.rotation = targetPosition.localRotation;
 		}
 	}
 
@@ -36,5 +36,9 @@ public class PushableBlock:MonoBehaviour, IInteractable {
 
 	public InteractableType GetInteractableType() {
 		return InteractableType.PushableBlock;
+	}
+
+	public bool IsLocked() {
+		return locked;
 	}
 }
