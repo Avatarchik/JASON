@@ -4,11 +4,13 @@ using System.Collections;
 public class PlayerTrigger:Trigger, ITrigger {
 	[SerializeField] private Transform pressArea;
 
+	[SerializeField] private DoorTrigger[] doors;
+
 	void OnTriggerEnter(Collider col) {
 		if(!col.CompareTag("Player") || (triggerType == TriggerType.Once && triggeredOnce))
 			return;
 
-		// TODO Open connected doors
+		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 3, CameraEventCallback));
 
 		pressArea.Translate(new Vector3(0, 0, -0.05f));
 
@@ -23,6 +25,11 @@ public class PlayerTrigger:Trigger, ITrigger {
 		pressArea.Translate(new Vector3(0, 0, 0.05f));
 
 		triggered = false;
+	}
+
+	private void CameraEventCallback(string message) {
+		foreach(DoorTrigger door in doors)
+			door.Open();
 	}
 
 	public TriggerActivator GetTriggerActivator() {

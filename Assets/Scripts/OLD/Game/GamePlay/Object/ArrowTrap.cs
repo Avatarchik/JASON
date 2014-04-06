@@ -4,10 +4,10 @@ using System.Collections;
 public class ArrowTrap:MonoBehaviour {
 	[SerializeField] private float delay;
 
-	private Arrow arrow;
+	private Old_Arrow arrow;
 
 	void Start () {
-		arrow = GetComponentInChildren<Arrow>();
+		arrow = GetComponentInChildren<Old_Arrow>();
 
 		if(arrow == null)
 			throw new System.NullReferenceException("No child found with the 'Arrow' script");

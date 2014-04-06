@@ -12,7 +12,6 @@ public class PushableBlock:MonoBehaviour, IInteractable {
 
 		if(targetPosition != null) {
 			transform.position = targetPosition.position;
-			transform.rotation = targetPosition.localRotation;
 		}
 	}
 

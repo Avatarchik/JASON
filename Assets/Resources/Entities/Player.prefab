@@ -1254,8 +1254,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 3.48000002, z: 1.5271982}
-  m_Center: {x: 1.93280637e-16, y: 1.10000014, z: .263600975}
+  m_Size: {x: 1, y: 3.505229, z: 1.5271982}
+  m_Center: {x: 0, y: 1.08738565, z: .263601005}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData:
-    health: 0
+    health: 25
     walkSpeed: 175
     runSpeed: 0
     attackDamage: 0

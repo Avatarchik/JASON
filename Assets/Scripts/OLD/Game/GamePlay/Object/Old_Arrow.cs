@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Arrow:MonoBehaviour {
+public class Old_Arrow:MonoBehaviour {
 	[SerializeField] Shader alphaShader;
 
 	private Shader normalShader;

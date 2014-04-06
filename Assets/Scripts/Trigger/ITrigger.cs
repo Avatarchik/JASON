@@ -4,12 +4,12 @@ using System.Collections;
 public enum TriggerActivator {
 	Player,
 	PushableBlock,
-	Key,
 	Brazier,
 	Arrow,
 	TimedArrow
 }
 
 public interface ITrigger {
+	/** <returns>The activator of this trigger</returns> */
 	TriggerActivator GetTriggerActivator();
 }

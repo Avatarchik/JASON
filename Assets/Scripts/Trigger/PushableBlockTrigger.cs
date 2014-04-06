@@ -5,6 +5,8 @@ public class PushableBlockTrigger:Trigger, ITrigger {
 	[SerializeField] private Transform pushableBlockPosition;
 	[SerializeField] private Transform pressArea;
 
+	[SerializeField] private DoorTrigger[] doors;
+
 	void OnTriggerEnter(Collider col) {
 		if(!col.CompareTag("Interactable Object") || (triggerType == TriggerType.Once && triggeredOnce) || (col.GetComponent(typeof(IInteractable)) as IInteractable).GetInteractableType() != InteractableType.PushableBlock)
 			return;
@@ -20,7 +22,8 @@ public class PushableBlockTrigger:Trigger, ITrigger {
 
 		pressArea.Translate(new Vector3(0, 0, -0.1f));
 
-		// TODO Open connected doors
+		foreach(DoorTrigger door in doors)
+			door.Open();
 
 		triggeredOnce = true;
 		triggered = true;

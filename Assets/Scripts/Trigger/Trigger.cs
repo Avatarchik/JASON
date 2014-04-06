@@ -9,12 +9,13 @@ public abstract class Trigger:MonoBehaviour {
 	}
 
 	[SerializeField] protected TriggerType triggerType;
+	[SerializeField] protected Transform cameraEventTarget;
 
 	protected bool triggeredOnce;
 	protected bool triggered;
 
 	/** <returns>The type of the trigger</returns> */
-	public TriggerType CanOnlyTriggerOnce {
+	public TriggerType Type {
 		get { return triggerType; }
 	}
 

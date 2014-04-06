@@ -82,7 +82,7 @@ public class PlayerMovement:MonoBehaviour {
 	/** <summary>Handle short clicks/touches</summary>
 	 * <param name="hit">The raycast hit</param> */
 	private void HandleClick(RaycastHit hit) {
-		if(hit.collider == null)
+		if(hit.collider == null || CameraManager.Instance.CameraEventActive)
 			return;
 
 		switch(hit.transform.tag) {

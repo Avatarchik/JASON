@@ -13,6 +13,8 @@ public abstract class Entity:MonoBehaviour {
 	public virtual void Damage(float amount) {
 		entityData.Health -= amount;
 
+		DisplayCombatText(amount.ToString(), Color.yellow, 0.4f, 3);
+
 		if(entityData.Health <= 0)
 			Kill();
 	}
@@ -24,12 +26,12 @@ public abstract class Entity:MonoBehaviour {
 	 * <param name="text">The text of the popup</param>
 	 * <param name="color">The color of the popup</param>
 	 * <param name="size">The size of the popup</param> */
-	protected void DisplayCombatText(string text, Color color, float size) {
-		Vector3 startPosition = new Vector3(transform.position.x, transform.position.y + 5, transform.position.z);
+	protected void DisplayCombatText(string text, Color color, float size, float yOffset) {
+		Vector3 startPosition = new Vector3(transform.position.x, transform.position.y + yOffset, transform.position.z);
 		TextMesh combatText = (Instantiate(combatTextGO, startPosition, Quaternion.identity) as GameObject).GetComponent<TextMesh>();
 
 		combatText.transform.parent = transform;
-		combatText.transform.localScale.Scale(new Vector3(size, size, size));
+		combatText.transform.localScale = new Vector3(size, size, size);
 
 		combatText.text = text;
 		combatText.color = color;
@@ -48,23 +50,14 @@ public abstract class Entity:MonoBehaviour {
 
 [Serializable]
 public class EntityData {
-	[SerializeField]
-	private float health;
+	[SerializeField] private float health;
 
-	[SerializeField]
-	private float walkSpeed;
+	[SerializeField] private float walkSpeed;
+	[SerializeField] private float runSpeed;
 
-	[SerializeField]
-	private float runSpeed;
-
-	[SerializeField]
-	private float attackDamage;
-
-	[SerializeField]
-	private float attackSpeed;
-
-	[SerializeField]
-	private float attackRange;
+	[SerializeField] private float attackDamage;
+	[SerializeField] private float attackSpeed;
+	[SerializeField] private float attackRange;
 
 	/** <summary>Set or get the health of the entity</summary> */
 	public float Health {

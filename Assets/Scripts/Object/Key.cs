@@ -43,4 +43,9 @@ public class Key:MonoBehaviour, IInteractable {
 	public bool IsLocked() {
 		return false;
 	}
+
+	/** <retrurns>The type of the key</returns> */
+	public KeyType Type {
+		get { return keyType; }
+	}
 }

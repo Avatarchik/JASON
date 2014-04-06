@@ -4,6 +4,8 @@ using System.Collections;
 public class BrazierTrigger:Trigger, ITrigger {
 	[SerializeField] private Transform brazierPosition;
 
+	[SerializeField] private DoorTrigger[] doors;
+
 	void OnTriggerEnter(Collider col) {
 		if(!col.CompareTag("Interactable Object") || (triggerType == TriggerType.Once && triggeredOnce) || (col.GetComponent(typeof(IInteractable)) as IInteractable).GetInteractableType() != InteractableType.Brazier)
 			return;
@@ -13,7 +15,8 @@ public class BrazierTrigger:Trigger, ITrigger {
 
 		col.GetComponent<Brazier>().Lock(true);
 
-		// TODO Open connected doors
+		foreach(DoorTrigger door in doors)
+			door.Open();
 
 		triggeredOnce = true;
 		triggered = true;

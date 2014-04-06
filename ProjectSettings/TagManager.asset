@@ -13,7 +13,7 @@ TagManager:
   - Item
   - 
   - Door
-  - Arrow
+  - 
   - 
   - Destructable
   - 
@@ -55,6 +55,7 @@ TagManager:
   - 
   - Interactable Object
   - Trigger
+  - Arrow
   - 
   - 
   - 
@@ -73,7 +74,6 @@ TagManager:
   - 
   - 
   - 
-  - Brazier Switch
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

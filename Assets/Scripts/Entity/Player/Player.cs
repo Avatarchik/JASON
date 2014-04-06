@@ -53,6 +53,8 @@ public class Player:Entity {
 		}
 	}
 
+	/** <summary>Drop the currently held interactable object</summary>
+	 * <param name="throwObject">Whether or not to throw the object</param> */
 	public void Drop(bool throwObject) {
 		if(interactable == null)
 			return;
@@ -113,6 +115,7 @@ public class Player:Entity {
 		}
 	}
 	
+	/** <returns>The currently held interactable, or <code>null</code></returns> */
 	public IInteractable Interactable {
 		set { interactable = value; }
 		get { return interactable; }
