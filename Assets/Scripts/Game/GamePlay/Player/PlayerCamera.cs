@@ -57,6 +57,9 @@ public class PlayerCamera:MonoBehaviour {
 
 	/** Camera event */
 	public IEnumerator CameraEvent(Transform eventTarget, Door[] doors) {
+		if(cameraEventActive)
+			yield break;
+
 		Transform oldTarget = target;
 
 		GameHUD hud = GameObject.Find("HUD").GetComponent<GameHUD>();

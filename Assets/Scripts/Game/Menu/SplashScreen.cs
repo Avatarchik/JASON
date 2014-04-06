@@ -5,30 +5,40 @@ using SGUI;
 public class SplashScreen:GUIBehaviour {
 	[SerializeField] private Transform normalCamera;
 
-	[SerializeField] private SGUITexture[] textures;
+	[SerializeField] private Texture logo;
 
-	private float alpha;
+	private float alpha = 0;
 
 	private bool fadingOut;
 
 	private bool isDone;
-	
-	void Start() {
-		foreach(SGUITexture texture in textures)
-			texture.Create();
 
-		alpha = 0;
+	void Update() {
+		if(isDone)
+			return;
+
+		if(Input.touchCount > 0 || Input.GetMouseButton(0)) {
+			isDone = true;
+
+			Camera.main.transform.position = normalCamera.position;
+			Camera.main.transform.rotation = normalCamera.rotation;
+
+			GetComponent<MenuMain>().Open();
+		}
 	}
 
 	protected override void OnGUI() {
 		if(isDone)
 			return;
 
-		textures[0].Color = new Color(1, 1, 1, alpha);
+		Color originalColor = GUI.color;
+
+		GUI.color = new Color(1, 1, 1, alpha);
+		GUI.DrawTexture(new Rect(180, 0, 435.25f, 448.5f), logo);
+		GUI.color = originalColor;
 
 		if(fadingOut && alpha <= 0) {
 			isDone = true;
-			textures[0].Activated = false;
 
 			Camera.main.transform.position = normalCamera.position;
 			Camera.main.transform.rotation = normalCamera.rotation;

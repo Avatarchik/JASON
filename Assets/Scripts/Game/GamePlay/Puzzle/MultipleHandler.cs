@@ -28,9 +28,9 @@ public class MultipleHandler:MonoBehaviour {
 			if(trigger.IsActive)
 				numEnabled++;
 
-		if(numEnabled >= triggers.Length) {
+		if(!puzzleDone && numEnabled >= triggers.Length) {
 			puzzleDone = true;
-			StartCoroutine(playerCamera.CameraEvent(cameraEventTarget, new Door[] {GetComponent<Door>()}));
+			StartCoroutine(playerCamera.CameraEvent(cameraEventTarget, GetComponents<Door>()));
 		}
 	}
 }

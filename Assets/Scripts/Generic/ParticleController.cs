@@ -3,7 +3,10 @@ using System.Collections;
 
 public class ParticleController:MonoBehaviour {
 	void Start() {
-		if(!GameData.Instance.particlesEnabled)
+		if(!GameData.Instance.particlesEnabled) {;
+			GetComponent<ParticleSystem>().renderer.enabled = true;
+		} else {
 			GetComponent<ParticleSystem>().renderer.enabled = false;
+		}
 	}
 }

@@ -5,30 +5,15 @@ using SGUI;
 public class MenuCredits:GUIBehaviour {
 	[SerializeField] private Transform normalCamera;
 
-	[SerializeField] private SGUITexture[] textures;
-	[SerializeField] private SGUIButton[] buttons;
-	[SerializeField] private SGUILabel[] labels;
+	[SerializeField] private Texture credits;
+
+	[SerializeField] private GUIStyle back;
 
 	private MenuMain menuMain;
 
 	private bool opened = false;
 
 	void Start() {
-		foreach(SGUITexture texture in textures) {
-			texture.Create();
-			texture.Activated = false;
-		}
-
-		foreach(SGUIButton button in buttons) {
-			button.Create();
-			button.Activated = false;
-		}
-
-		foreach(SGUILabel label in labels) {
-			label.Create();
-			label.Activated = false;
-		}
-
 		menuMain = GetComponent<MenuMain>();
 	}
 
@@ -38,7 +23,9 @@ public class MenuCredits:GUIBehaviour {
 
 		base.OnGUI();
 
-		if(buttons[0].OnClick) {
+		GUI.DrawTexture(new Rect(181.7f, -6.1f, 1536, 850.5f), credits);
+
+		if(GUI.Button(new Rect(697, 915, 517.5f, 158.25f), new GUIContent("Back"), back)) {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
 
 			Camera.main.transform.position = normalCamera.position;
@@ -53,34 +40,10 @@ public class MenuCredits:GUIBehaviour {
 		menuMain.Close();
 
 		opened = true;
-
-		StartCoroutine("ButtonDelay");
 	}
 
 	/** Close this GUI */
 	public void Close() {
 		opened = false;
-
-		foreach(SGUITexture texture in textures)
-			texture.Activated = false;
-
-		foreach(SGUIButton button in buttons)
-			button.Activated = false;
-
-		foreach(SGUILabel label in labels)
-			label.Activated = false;
-	}
-
-	private IEnumerator ButtonDelay() {
-		yield return new WaitForSeconds(0.001f);
-
-		foreach(SGUITexture texture in textures)
-			texture.Activated = true;
-
-		foreach(SGUIButton button in buttons)
-			button.Activated = true;
-
-		foreach(SGUILabel label in labels)
-			label.Activated = true;
 	}
 }

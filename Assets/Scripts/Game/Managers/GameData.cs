@@ -15,6 +15,8 @@ public class GameData:Singleton<GameData> {
 
 	public bool tutorialFinished;
 
+	public bool menuVisited;
+
 	void Start() {
 		LoadData();
 	}

@@ -49,9 +49,9 @@ public class Trigger:MonoBehaviour {
 			if(throwable != null) {
 				if(throwable.CompareTag("FireItem")) {
 					OnFireDungeonItemCollision(throwable.gameObject);
-				} else {
-					OnPlayerCollision();
 				}
+			} else {
+				OnPlayerCollision();
 			}
 			break;
 		case "PushableObject":

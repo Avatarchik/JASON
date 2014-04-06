@@ -728,6 +728,7 @@ MonoBehaviour:
   musicEnabled: 0
   sfxEnabled: 0
   tutorialFinished: 0
+  menuVisited: 0
 --- !u!1 &720135490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb75927410b0872408765aadbb5108fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Fire Dungeon
+  sceneToLoad: Menu
 --- !u!4 &2039726021
 Transform:
   m_ObjectHideFlags: 0

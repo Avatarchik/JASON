@@ -5,8 +5,11 @@ using SGUI;
 public class MenuMain:GUIBehaviour {
 	[SerializeField] private Transform creditsCamera;
 
-	[SerializeField] private SGUITexture[] textures;
-	[SerializeField] private SGUIButton[] buttons;
+	[SerializeField] private Texture logo;
+
+	[SerializeField] private GUIStyle playButton;
+	[SerializeField] private GUIStyle optionsButton;
+	[SerializeField] private GUIStyle creditsButton;
 
 	private MenuOptions menuOptions;
 	private MenuCredits menuCredits;
@@ -14,16 +17,6 @@ public class MenuMain:GUIBehaviour {
 	private bool opened = false;
 
 	void Start() {
-		foreach(SGUITexture texture in textures) {
-			texture.Create();
-			texture.Activated = false;
-		}
-
-		foreach(SGUIButton button in buttons) {
-			button.Create();
-			button.Activated = false;
-		}
-
 		menuOptions = GetComponent<MenuOptions>();
 		menuCredits = GetComponent<MenuCredits>();
 	}
@@ -34,27 +27,29 @@ public class MenuMain:GUIBehaviour {
 
 		base.OnGUI();
 
-		if(buttons[0].OnClick) {
+		GUI.DrawTexture(new Rect(707, 25, 496.5f, 512), logo);
+
+		if(GUI.Button(new Rect(20, 915, 517.5f, 158.25f), new GUIContent("Play"), playButton)) {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
 			ExitApplication.Instance.GameStarted = true;
 
 			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
-			
+
 			Application.LoadLevel("Normal Dungeon");
 		}
 
-		if(buttons[1].OnClick) {
+		if(GUI.Button(new Rect(697, 915, 517.5f, 158.25f), new GUIContent("Options"), optionsButton)) {
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
+			menuOptions.Open();
+		}
+
+		if(GUI.Button(new Rect(1381, 915, 517.5f, 158.25f), new GUIContent("Credits"), creditsButton)) {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
 
 			Camera.main.transform.position = creditsCamera.position;
 			Camera.main.transform.rotation = creditsCamera.rotation;
 
 			menuCredits.Open();
-		}
-
-		if(buttons[2].OnClick) {
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
-			menuOptions.Open();
 		}
 	}
 
@@ -64,29 +59,11 @@ public class MenuMain:GUIBehaviour {
 		menuCredits.Close();
 
 		opened = true;
-
-		StartCoroutine("ButtonDelay");
 	}
 
 	/** Close this GUI */
 	public void Close() {
 		opened = false;
-
-		foreach(SGUITexture texture in textures)
-			texture.Activated = false;
-
-		foreach(SGUIButton button in buttons)
-			button.Activated = false;
-	}
-
-	private IEnumerator ButtonDelay() {
-		yield return new WaitForSeconds(0.001f);
-
-		foreach(SGUITexture texture in textures)
-			texture.Activated = true;
-
-		foreach(SGUIButton button in buttons)
-			button.Activated = true;
 	}
 
 	public bool IsOpen {

@@ -4096,7 +4096,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: de98f3208a8b99747aa939042f7aa70b, type: 2}
+  - {fileID: 2100000, guid: 7d46a10d4e5b71f45b81d96ad22038eb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -4488,7 +4488,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: de98f3208a8b99747aa939042f7aa70b, type: 2}
+  - {fileID: 2100000, guid: 7d46a10d4e5b71f45b81d96ad22038eb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -6067,7 +6067,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: de98f3208a8b99747aa939042f7aa70b, type: 2}
+  - {fileID: 2100000, guid: 7d46a10d4e5b71f45b81d96ad22038eb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -7553,7 +7553,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: de98f3208a8b99747aa939042f7aa70b, type: 2}
+  - {fileID: 2100000, guid: 7d46a10d4e5b71f45b81d96ad22038eb, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -13214,37 +13214,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalCamera: {fileID: 1969607745}
-  textures:
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 181.699997
-      y: -6.0999999
-      width: 1536
-      height: 850.5
-    texture: {fileID: 2800000, guid: 6e2bbcea6093f2948a8e5fde4a0fed5d, type: 3}
-    text: 
-    textFont: {fileID: 0}
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    textSize: 0
-    textAnchor: 0
-  buttons:
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 697
-      y: 915
-      width: 517.5
-      height: 158.25
-    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
-    textureHover: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    textureActive: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    text: Back
-    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 65
-    textAnchor: 4
-  labels: []
+  credits: {fileID: 2800000, guid: 6e2bbcea6093f2948a8e5fde4a0fed5d, type: 3}
+  back:
+    m_Name: Back Button
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 65
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!114 &2025330995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13256,93 +13285,302 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0689b6f5c50474698143bcec898e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textures:
-  - activated: 0
-    bounds:
-      serializedVersion: 2
-      x: 707
-      y: 25
-      width: 496.5
-      height: 512
-    texture: {fileID: 2800000, guid: 70ae2cdea9efe1648b67442e34ee7a8c, type: 3}
-    text: 
-    textFont: {fileID: 0}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 0
-    textAnchor: 0
-  buttons:
-  - activated: 0
-    bounds:
-      serializedVersion: 2
-      x: 20
-      y: 915
-      width: 517.5
-      height: 158.25
-    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
-    textureHover: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    textureActive: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    text: Reset progress
-    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 50
-    textAnchor: 4
-  - activated: 0
-    bounds:
-      serializedVersion: 2
-      x: 1381
-      y: 915
-      width: 517.5
-      height: 158.25
-    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
-    textureHover: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    textureActive: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    text: Back
-    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 50
-    textAnchor: 4
-  - activated: 0
-    bounds:
-      serializedVersion: 2
-      x: 220
-      y: 650
-      width: 387.75
-      height: 118.6875
-    textureNormal: {fileID: 0}
-    textureHover: {fileID: 0}
-    textureActive: {fileID: 0}
-    text: Particles
-    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    textColor: {r: 1, g: .921568632, b: .0156862754, a: 1}
-    textSize: 65
-    textAnchor: 4
-  - activated: 0
-    bounds:
-      serializedVersion: 2
-      x: 1270
-      y: 650
-      width: 387.75
-      height: 118.6875
-    textureNormal: {fileID: 0}
-    textureHover: {fileID: 0}
-    textureActive: {fileID: 0}
-    text: Lights
-    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 65
-    textAnchor: 4
-  labels:
-  - activated: 0
-    bounds:
-      serializedVersion: 2
-      x: 820
-      y: 650
-      width: 500
-      height: 50
-    text: Contrast
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    fontSize: 65
+  logo: {fileID: 2800000, guid: 70ae2cdea9efe1648b67442e34ee7a8c, type: 3}
+  resetProgress:
+    m_Name: Reset Progress
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  back:
+    m_Name: Back Button
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 65
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  particles:
+    m_Name: Particles Button
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  lights:
+    m_Name: Lights Button
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  label:
+    m_Name: Contrast Label
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 65
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
   sliderBar:
     m_Name: 
     m_Normal:
@@ -13473,66 +13711,184 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditsCamera: {fileID: 1589391553}
-  textures:
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 707
-      y: 25
-      width: 496.5
-      height: 512
-    texture: {fileID: 2800000, guid: 70ae2cdea9efe1648b67442e34ee7a8c, type: 3}
-    text: 
-    textFont: {fileID: 0}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 0
-    textAnchor: 0
-  buttons:
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 20
-      y: 915
-      width: 517.5
-      height: 158.25
-    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
-    textureHover: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    textureActive: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    text: Play Game
-    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 65
-    textAnchor: 4
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 1381
-      y: 915
-      width: 517.5
-      height: 158.25
-    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
-    textureHover: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    textureActive: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    text: Credits
-    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 65
-    textAnchor: 4
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 697
-      y: 915
-      width: 517.5
-      height: 158.25
-    textureNormal: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
-    textureHover: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    textureActive: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
-    text: Options
-    textFont: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
-    textColor: {r: 1, g: 1, b: 1, a: 1}
-    textSize: 65
-    textAnchor: 4
+  logo: {fileID: 2800000, guid: 70ae2cdea9efe1648b67442e34ee7a8c, type: 3}
+  playButton:
+    m_Name: Play Button
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 65
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  optionsButton:
+    m_Name: Options Button
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 65
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
+  creditsButton:
+    m_Name: Credits Button
+    m_Normal:
+      m_Background: {fileID: 2800000, guid: c4c12a35cd8d23948a6a6b899bbee306, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Hover:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
+    m_Active:
+      m_Background: {fileID: 2800000, guid: cc8f6f1b787be3347bc767ba5edf1ceb, type: 3}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: cbf72ad47aa0e36499ec958c87b5e8f7, type: 3}
+    m_FontSize: 65
+    m_FontStyle: 0
+    m_Alignment: 4
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!4 &2025330997
 Transform:
   m_ObjectHideFlags: 0
@@ -13556,20 +13912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalCamera: {fileID: 1969607745}
-  textures:
-  - activated: 1
-    bounds:
-      serializedVersion: 2
-      x: 495
-      y: 25
-      width: 930.9375
-      height: 960
-    texture: {fileID: 2800000, guid: 70ae2cdea9efe1648b67442e34ee7a8c, type: 3}
-    text: 
-    textFont: {fileID: 0}
-    textColor: {r: 0, g: 0, b: 0, a: 0}
-    textSize: 0
-    textAnchor: 0
+  logo: {fileID: 2800000, guid: 70ae2cdea9efe1648b67442e34ee7a8c, type: 3}
 --- !u!1 &2027161098
 GameObject:
   m_ObjectHideFlags: 0
