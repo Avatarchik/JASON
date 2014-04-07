@@ -41,9 +41,12 @@ public class CameraManager:Singleton<CameraManager> {
 
 	/** <summary>Handle a camera event</summary>
 	 * <param name="eventTarget">The target the camera should focus on</param>
+	 * <param name="startDelay">The delay before the event starts</param>
 	 * <param name="duration">The duration of the event</param>
 	 * <param name="callback">The callback event, must implement an <code>OnEvent</code> method</param> */
-	public IEnumerator CameraEvent(Transform eventTarget, float duration, Action<string> callback) {
+	public IEnumerator CameraEvent(Transform eventTarget, float startDelay, float duration, Action<string> callback) {
+		yield return new WaitForSeconds(startDelay);
+		
 		if(cameraEventActive)
 			yield break;
 

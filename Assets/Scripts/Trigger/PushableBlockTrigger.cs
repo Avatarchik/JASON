@@ -26,7 +26,7 @@ public class PushableBlockTrigger:Trigger, ITrigger {
 			col.GetComponent<PushableBlock>().Lock(true);
 		}
 
-		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 3, delegate(string s) {
+		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 0.25f, 3, delegate(string s) {
 			foreach(DoorTrigger door in doors)
 				door.Open();
 		}));

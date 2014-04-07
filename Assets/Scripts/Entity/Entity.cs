@@ -13,7 +13,7 @@ public abstract class Entity:MonoBehaviour {
 	public virtual void Damage(float amount) {
 		entityData.health -= amount;
 
-		DisplayCombatText(amount.ToString(), Color.yellow, 0.4f, 3);
+		DisplayCombatText(amount.ToString(), Color.red, 0.4f, 3);
 
 		if(entityData.Health <= 0)
 			Kill();

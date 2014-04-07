@@ -16,7 +16,7 @@ public class PlayerTrigger:Trigger, ITrigger {
 		if(triggerType == TriggerType.Once && triggeredOnce)
 			return;
 
-		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 3, delegate(string s) {
+		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 0.25f, 3, delegate(string s) {
 			foreach(DoorTrigger door in doors)
 				door.Open();
 		}));
