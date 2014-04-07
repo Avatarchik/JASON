@@ -62,12 +62,10 @@ public class Brazier:MonoBehaviour, IInteractable {
 		collider.enabled = true;
 	}
 
-	public void Throw(Vector3 forward, Vector3 up) {
+	public void Throw(Vector3 forward) {
 		Drop();
 
 		transform.forward = forward;
-		transform.up = up;
-
 		thrown = true;
 	}
 

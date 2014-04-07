@@ -4,6 +4,7 @@ using System.Collections;
 public class Arrow:MonoBehaviour {
 	[SerializeField] private float damage;
 	[SerializeField] private float speed;
+	[SerializeField] private float fadePerUpdate;
 
 	[SerializeField] private ParticleSystem[] particles;
 
@@ -17,7 +18,7 @@ public class Arrow:MonoBehaviour {
 		if(fading) {
 			Color oldColor = renderer.material.color;
 
-			renderer.material.color = new Color(oldColor.r, oldColor.g, oldColor.b, oldColor.a - 0.01f);
+			renderer.material.color = new Color(oldColor.r, oldColor.g, oldColor.b, oldColor.a - fadePerUpdate);
 		}
 	}
 

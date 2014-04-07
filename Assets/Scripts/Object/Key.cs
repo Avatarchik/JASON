@@ -30,7 +30,7 @@ public class Key:MonoBehaviour, IInteractable {
 		transform.rotation = new Quaternion(0.5f, -0.5f, -0.5f, -0.5f);
 	}
 
-	public void Throw(Vector3 forward, Vector3 up) {
+	public void Throw(Vector3 forward) {
 		Drop();
 	}
 

@@ -5,7 +5,6 @@ public abstract class Trigger:MonoBehaviour {
 	public enum TriggerType {
 		Normal,
 		Once,
-		Toggle
 	}
 
 	[SerializeField] protected TriggerType triggerType;

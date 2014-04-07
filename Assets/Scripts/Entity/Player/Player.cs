@@ -76,7 +76,7 @@ public class Player:Entity {
 		}
 
 		if(throwObject) {
-			interactable.Throw(transform.forward, transform.up);
+			interactable.Throw(transform.forward);
 		} else {
 			interactable.Drop();
 		}

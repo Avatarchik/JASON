@@ -11,7 +11,7 @@ public abstract class Entity:MonoBehaviour {
 	/** <summary>Damage the entity, <code>Kill()</code> is called when the entity's health reaches 0</summary>
 	 * <param name="amount">The amount of damage dealt to the entity</param> */
 	public virtual void Damage(float amount) {
-		entityData.Health -= amount;
+		entityData.health -= amount;
 
 		DisplayCombatText(amount.ToString(), Color.yellow, 0.4f, 3);
 
@@ -50,14 +50,14 @@ public abstract class Entity:MonoBehaviour {
 
 [Serializable]
 public class EntityData {
-	[SerializeField] private float health;
+	[SerializeField] internal float health;
 
-	[SerializeField] private float walkSpeed;
-	[SerializeField] private float runSpeed;
+	[SerializeField] internal float walkSpeed;
+	[SerializeField] internal float runSpeed;
 
-	[SerializeField] private float attackDamage;
-	[SerializeField] private float attackSpeed;
-	[SerializeField] private float attackRange;
+	[SerializeField] internal float attackDamage;
+	[SerializeField] internal float attackSpeed;
+	[SerializeField] internal float attackRange;
 
 	/** <summary>Set or get the health of the entity</summary> */
 	public float Health {

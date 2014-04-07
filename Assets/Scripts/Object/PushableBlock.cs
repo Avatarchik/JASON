@@ -29,12 +29,14 @@ public class PushableBlock:MonoBehaviour, IInteractable {
 		targetPosition = null;
 	}
 
-	public void Throw(Vector3 forward, Vector3 up) {
+	public void Throw(Vector3 forward) {
 		Drop();
 	}
 
 	public void Lock(bool locked) {
 		this.locked = locked;
+		
+		rigidbody.isKinematic = locked;
 
 		Drop();
 	}

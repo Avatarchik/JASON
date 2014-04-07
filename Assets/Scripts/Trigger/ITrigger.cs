@@ -6,7 +6,6 @@ public enum TriggerActivator {
 	PushableBlock,
 	Brazier,
 	Arrow,
-	TimedArrow
 }
 
 public interface ITrigger {

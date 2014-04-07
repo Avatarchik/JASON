@@ -17,7 +17,7 @@ public interface IInteractable {
 	/** <summary>Throw the object, always moves in the forward direction</summary>
 	 * <param name="forward">The forward direction</param>
 	 * <param name="up">The up direction</param> */
-	void Throw(Vector3 forward, Vector3 up);
+	void Throw(Vector3 forward);
 
 	/** <summary>Lock or unlock the object, if it's locked it can't be picked up or move</summary>
 	 * <param name="locked">Whether or not the object is locked</param> */

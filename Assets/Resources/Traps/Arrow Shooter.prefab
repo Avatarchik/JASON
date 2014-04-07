@@ -101,8 +101,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
-  m_LocalRotation: {x: 0, y: -.70710665, z: 0, w: .707106948}
-  m_LocalPosition: {x: -2.91682291, y: 1.56183505, z: -.667853415}
+  m_LocalRotation: {x: .707106411, y: -5.6633894e-07, z: 4.5590113e-07, w: .707107186}
+  m_LocalPosition: {x: -3.70759106, y: -5.71866608, z: -9.80201149}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -113,8 +113,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 1.08007073, y: -.00449419022, z: -.005530925}
+  m_LocalRotation: {x: 1.99837828e-07, y: -1.36025236e-07, z: 1.19195384e-07, w: 1}
+  m_LocalPosition: {x: 1.08009434, y: -.00415214617, z: -.00390911708}
   m_LocalScale: {x: .0299999993, y: .0299999993, z: .0299999993}
   m_Children:
   - {fileID: 400000}
@@ -227,6 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   speed: .800000012
+  fadePerUpdate: .0199999996
   particles:
   - {fileID: 19800000}
   - {fileID: 19800002}
