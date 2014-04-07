@@ -14,12 +14,12 @@ PlayerSettings:
   productName: JASON
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
-  defaultScreenWidth: 1024
-  defaultScreenHeight: 768
-  defaultScreenWidthWeb: 960
-  defaultScreenHeightWeb: 600
+  defaultScreenWidth: 1280
+  defaultScreenHeight: 720
+  defaultScreenWidthWeb: 1280
+  defaultScreenHeightWeb: 720
   m_RenderingPath: 1
-  m_MobileRenderingPath: 1
+  m_MobileRenderingPath: 0
   m_ActiveColorSpace: 0
   m_MTRendering: 1
   m_MobileMTRendering: 0
@@ -34,7 +34,7 @@ PlayerSettings:
   useOSAutorotation: 1
   use32BitDisplayBuffer: 1
   use24BitDepthBuffer: 1
-  defaultIsFullScreen: 1
+  defaultIsFullScreen: 0
   defaultIsNativeResolution: 1
   runInBackground: 0
   captureSingleScreen: 0
@@ -77,8 +77,8 @@ PlayerSettings:
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: fe0426d4a0cc81049846b8641c605cab
-  iPhoneBundleVersion: 1.0
-  AndroidBundleVersionCode: 1
+  iPhoneBundleVersion: 1.2
+  AndroidBundleVersionCode: 12
   AndroidMinSdkVersion: 10
   AndroidPreferredInstallLocation: 0
   aotOptions: 
@@ -112,25 +112,41 @@ PlayerSettings:
   m_BuildTargetIcons:
   - m_BuildTarget: 
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 7922b84d4ad9bfa449e829c51dbcd060, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 883875301a452e042af1ed3931dbf430, type: 3}
       m_Size: 128
   - m_BuildTarget: Android
     m_Icons:
-    - m_Icon: {fileID: 2800000, guid: 7922b84d4ad9bfa449e829c51dbcd060, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 883875301a452e042af1ed3931dbf430, type: 3}
       m_Size: 144
-    - m_Icon: {fileID: 2800000, guid: c903d4e7c0862444695dcb2e7de2a90d, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 23a90606b2d86c5428fb0da7c9390041, type: 3}
       m_Size: 96
-    - m_Icon: {fileID: 2800000, guid: 7034fa9fceb4ac84cb0193b96292ef5e, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 9ab426ad7ebd7e54eaa041aeb94b3aef, type: 3}
       m_Size: 72
-    - m_Icon: {fileID: 2800000, guid: 76450e10be574f1449068d24396ce3fe, type: 3}
+    - m_Icon: {fileID: 2800000, guid: 30bc8aa6a4db98947872bdcacf94c182, type: 3}
       m_Size: 48
-    - m_Icon: {fileID: 2800000, guid: a4f1ac9300861c645add00ed508fa4ca, type: 3}
+    - m_Icon: {fileID: 2800000, guid: b7926e17f136ee244b736783b135f2a9, type: 3}
       m_Size: 36
+  - m_BuildTarget: Standalone
+    m_Icons:
+    - m_Icon: {fileID: 2800000, guid: d7b8b5f011934f24589d172a1d393e0f, type: 3}
+      m_Size: 1024
+    - m_Icon: {fileID: 0}
+      m_Size: 512
+    - m_Icon: {fileID: 0}
+      m_Size: 256
+    - m_Icon: {fileID: 0}
+      m_Size: 128
+    - m_Icon: {fileID: 0}
+      m_Size: 48
+    - m_Icon: {fileID: 0}
+      m_Size: 32
+    - m_Icon: {fileID: 0}
+      m_Size: 16
   m_BuildTargetBatching:
   - m_BuildTarget: Android
     m_StaticBatching: 1
     m_DynamicBatching: 1
-  webPlayerTemplate: APPLICATION:Default
+  webPlayerTemplate: APPLICATION:Black Background
   m_TemplateCustomTags: {}
   wiiRegion: 1
   wiiGameCode: RABA
