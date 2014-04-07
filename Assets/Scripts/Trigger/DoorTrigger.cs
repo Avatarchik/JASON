@@ -40,6 +40,14 @@ public class DoorTrigger:MonoBehaviour {
 		animation.Play();
 	}
 
+	/** <summary>Close the door</summary> */
+	public void Close() {
+		collider.enabled = true;
+
+		animation.enabled = true;
+		animation.Play();
+	}
+
 	/** <returns>The type of the door</returns> */
 	public DoorType Type {
 		get { return doorType; }

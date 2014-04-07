@@ -15,8 +15,10 @@ public class BrazierTrigger:Trigger, ITrigger {
 
 		col.GetComponent<Brazier>().Lock(true);
 
-		foreach(DoorTrigger door in doors)
-			door.Open();
+		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 3, delegate(string s) {
+			foreach(DoorTrigger door in doors)
+				door.Open();
+		}));
 
 		triggeredOnce = true;
 		triggered = true;

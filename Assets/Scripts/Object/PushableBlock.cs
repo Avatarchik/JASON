@@ -7,11 +7,17 @@ public class PushableBlock:MonoBehaviour, IInteractable {
 	private bool locked;
 
 	void FixedUpdate() {
+		if(!rigidbody.isKinematic)
+			rigidbody.velocity = Vector3.zero;
+
 		if(locked)
 			return;
 
-		if(targetPosition != null) {
-			transform.position = targetPosition.position;
+		if(targetPosition != null && transform.position != targetPosition.position) {
+			rigidbody.isKinematic = false;
+			rigidbody.AddForce(-(transform.position - targetPosition.position) * (Time.deltaTime * 35000));
+		} else {
+			rigidbody.isKinematic = true;
 		}
 	}
 
@@ -23,7 +29,7 @@ public class PushableBlock:MonoBehaviour, IInteractable {
 		targetPosition = null;
 	}
 
-	public void Throw() {
+	public void Throw(Vector3 forward, Vector3 up) {
 		Drop();
 	}
 

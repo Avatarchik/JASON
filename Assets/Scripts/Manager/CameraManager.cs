@@ -47,6 +47,9 @@ public class CameraManager:Singleton<CameraManager> {
 		if(cameraEventActive)
 			yield break;
 
+		PlayerMovement playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+		playerMovement.TargetPosition = playerMovement.transform.position;
+
 		Transform oldTarget = target;
 		target = eventTarget;
 		cameraEventActive = true;

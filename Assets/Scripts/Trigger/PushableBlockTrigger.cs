@@ -8,7 +8,13 @@ public class PushableBlockTrigger:Trigger, ITrigger {
 	[SerializeField] private DoorTrigger[] doors;
 
 	void OnTriggerEnter(Collider col) {
-		if(!col.CompareTag("Interactable Object") || (triggerType == TriggerType.Once && triggeredOnce) || (col.GetComponent(typeof(IInteractable)) as IInteractable).GetInteractableType() != InteractableType.PushableBlock)
+		if(!col.CompareTag("Interactable Object") || (col.GetComponent(typeof(IInteractable)) as IInteractable).GetInteractableType() != InteractableType.PushableBlock)
+			return;
+
+		triggered = true;
+		pressArea.Translate(new Vector3(0, 0, -0.1f));
+
+		if(triggerType == TriggerType.Once && triggeredOnce)
 			return;
 
 		if(triggerType == TriggerType.Once) {
@@ -20,13 +26,12 @@ public class PushableBlockTrigger:Trigger, ITrigger {
 			col.GetComponent<PushableBlock>().Lock(true);
 		}
 
-		pressArea.Translate(new Vector3(0, 0, -0.1f));
-
-		foreach(DoorTrigger door in doors)
-			door.Open();
+		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 3, delegate(string s) {
+			foreach(DoorTrigger door in doors)
+				door.Open();
+		}));
 
 		triggeredOnce = true;
-		triggered = true;
 	}
 
 	void OnTriggerExit(Collider col) {

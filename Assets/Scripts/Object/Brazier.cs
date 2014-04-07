@@ -31,7 +31,7 @@ public class Brazier:MonoBehaviour, IInteractable {
 		}
 
 		if(thrown)
-			rigidbody.AddForce(Vector3.forward * Time.deltaTime * speed);
+			rigidbody.AddForce(transform.forward * (Time.deltaTime * speed));
 	}
 
 	void OnCollisionEnter(Collision col) {
@@ -62,8 +62,11 @@ public class Brazier:MonoBehaviour, IInteractable {
 		collider.enabled = true;
 	}
 
-	public void Throw() {
+	public void Throw(Vector3 forward, Vector3 up) {
 		Drop();
+
+		transform.forward = forward;
+		transform.up = up;
 
 		thrown = true;
 	}

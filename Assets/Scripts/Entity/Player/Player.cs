@@ -76,41 +76,37 @@ public class Player:Entity {
 		}
 
 		if(throwObject) {
-			interactable.Throw();
+			interactable.Throw(transform.forward, transform.up);
 		} else {
 			interactable.Drop();
 		}
 
 		interactable = null;
 	}
-
+	
 	/** <summary>Determine which animation to play depending on the movement direction</summary> */
 	private void DetermineAnimationDirection() {
-		Vector3 moveDirection = playerMovement.MoveDirection;
+		float forward = Vector3.Dot(transform.forward, playerMovement.MoveDirection);
+		float back = -forward;
+		float right = Vector3.Dot(transform.right, playerMovement.MoveDirection);
+		float left = Mathf.Abs(right);
 
-		float highestDir = Mathf.Max(moveDirection.x, moveDirection.z);
-		float lowestDir = Mathf.Min(moveDirection.x, moveDirection.z);
+		float highest = Mathf.Max(new float[] { forward, back, right, left });
 
-		if(moveDirection == Vector3.zero) {
+		if(forward == 0 && back == 0 && right == 0 && left == 0) {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, false);
 			animator.SetInteger("MoveDirection", 0);
 		} else {
-			if(Mathf.Abs(highestDir) > Mathf.Abs(lowestDir)) {
-				if(highestDir == moveDirection.x) {
-					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
-					animator.SetInteger("MoveDirection", 4);
-				} else if(highestDir == moveDirection.z) {
-					animator.SetInteger("MoveDirection", 1);
-					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
-				}
-			} else {
-				if(lowestDir == moveDirection.x) {
-					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
-					animator.SetInteger("MoveDirection", 3);
-				} else if(lowestDir == moveDirection.z) {
-					AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
-					animator.SetInteger("MoveDirection", 2);
-				}
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.BlockMove, true);
+
+			if(forward == highest) {
+				animator.SetInteger("MoveDirection", 1);
+			} else if(back == highest) {
+				animator.SetInteger("MoveDirection", 2);
+			} else if(right == highest) {
+				animator.SetInteger("MoveDirection", 4);
+			} else if(left == highest) {
+				animator.SetInteger("MoveDirection", 3);
 			}
 		}
 	}

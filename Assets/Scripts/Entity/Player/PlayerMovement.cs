@@ -6,9 +6,10 @@ public class PlayerMovement:MonoBehaviour {
 
 	private GameObject pickupWhenColliding;
 
+	private Vector3 previousPosition;
 	private Vector3 targetPosition;
 	private Vector3 moveDirection;
-
+	
 	private float lastClickTime;
 
 	private int layerMask = ~(1 << 8);
@@ -27,26 +28,27 @@ public class PlayerMovement:MonoBehaviour {
 
 	void FixedUpdate() {
 		rigidbody.velocity = Vector3.zero;
+		
+		if(player.Interactable != null && player.Interactable.GetInteractableType() == InteractableType.PushableBlock) {
+			float distance = Vector3.Distance(transform.position, (player.Interactable as PushableBlock).transform.position);
 
+			if(distance > 3.0f) {
+				transform.position = previousPosition;
+			} else if(distance < 2.99f) {
+				previousPosition = transform.position;
+			}
+		}
+		
 		if(Vector3.Distance(transform.position, targetPosition) > 0.1f) {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps, true);
 			player.Animator.SetBool("IsRunning", true);
 
-			moveDirection = -(transform.position - targetPosition).normalized;
+			moveDirection = -(transform.position - targetPosition);
 			rigidbody.AddForce(-(transform.position - targetPosition).normalized * player.EntityData.WalkSpeed);
 
-			if(player.Interactable == null || player.Interactable.GetInteractableType() != InteractableType.PushableBlock) {
-				if((transform.position - targetPosition) != Vector3.zero) {
-					Quaternion targetRotation = Quaternion.identity;
-
-					targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
-
-					targetRotation.x = 0;
-					targetRotation.z = 0;
-
-					transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 30);
-				}
-			}
+			if(player.Interactable == null || player.Interactable.GetInteractableType() != InteractableType.PushableBlock)
+				if((transform.position - targetPosition) != Vector3.zero)
+					RotateToTargetPosition();
 		} else {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps, false);
 			player.Animator.SetBool("IsRunning", false);
@@ -62,11 +64,34 @@ public class PlayerMovement:MonoBehaviour {
 	void OnCollisionStay(Collision col) {
 		HandleCollision(col);
 	}
-	
+		
 	/** <summary>Move the player to the specified position</summary>
 	 * <param name="position">The position to move to</param> */
 	private void Move(Vector3 position) {
 		targetPosition = new Vector3(position.x, 0.667f, position.z);
+	}
+
+	/** <summary>Rotate towards the target position</summary> */
+	private void RotateToTargetPosition() {
+		Quaternion targetRotation = Quaternion.identity;
+
+		targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
+
+		targetRotation.x = 0;
+		targetRotation.z = 0;
+
+		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 30);
+	}
+
+	/** <summary>Rotate towards the specified position</summary>
+	 * <param name="position">The position to rotate to</param> */
+	private void RotateToPosition(Vector3 position) {
+		Vector3 oldPosition = targetPosition;
+
+		targetPosition = position;
+		RotateToTargetPosition();
+
+		targetPosition = oldPosition;
 	}
 
 	/** <summary>Handle <code>OnCollisionEnter</code> and <code>OnCollisionStay</code> calls</summary>
@@ -115,13 +140,22 @@ public class PlayerMovement:MonoBehaviour {
 		if(hit.collider == null)
 			return;
 
+		RotateToPosition(hit.point);
+
 		if(player.Interactable != null) {
 			player.Drop(true);
 		}
 	}
 
+	/** <returns>The move direction</returns> */
 	public Vector3 MoveDirection {
 		get { return moveDirection; }
+	}
+
+	/** <summary>Set or get the target position</summary> */
+	public Vector3 TargetPosition {
+		set { targetPosition = value; }
+		get { return targetPosition; }
 	}
 
 #if UNITY_EDITOR || !UNITY_ANDROID

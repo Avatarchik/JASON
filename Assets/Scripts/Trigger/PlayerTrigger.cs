@@ -7,15 +7,22 @@ public class PlayerTrigger:Trigger, ITrigger {
 	[SerializeField] private DoorTrigger[] doors;
 
 	void OnTriggerEnter(Collider col) {
-		if(!col.CompareTag("Player") || (triggerType == TriggerType.Once && triggeredOnce))
+		if(!col.CompareTag("Player"))
 			return;
 
-		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 3, CameraEventCallback));
-
+		triggered = true;
 		pressArea.Translate(new Vector3(0, 0, -0.05f));
 
+		if(triggerType == TriggerType.Once && triggeredOnce)
+			return;
+
+		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 3, delegate(string s) {
+			foreach(DoorTrigger door in doors)
+				door.Open();
+		}));
+
 		triggeredOnce = true;
-		triggered = true;
+		
 	}
 
 	void OnTriggerExit(Collider col) {
@@ -25,11 +32,6 @@ public class PlayerTrigger:Trigger, ITrigger {
 		pressArea.Translate(new Vector3(0, 0, 0.05f));
 
 		triggered = false;
-	}
-
-	private void CameraEventCallback(string message) {
-		foreach(DoorTrigger door in doors)
-			door.Open();
 	}
 
 	public TriggerActivator GetTriggerActivator() {

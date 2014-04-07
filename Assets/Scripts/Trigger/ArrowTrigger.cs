@@ -8,8 +8,10 @@ public class ArrowTrigger:Trigger, ITrigger {
 		if(!col.collider.CompareTag("Arrow") || (triggerType == TriggerType.Once && triggeredOnce))
 			return;
 
-		foreach(DoorTrigger door in doors)
-			door.Open();
+		StartCoroutine(CameraManager.Instance.CameraEvent(cameraEventTarget, 3, delegate(string s) {
+			foreach(DoorTrigger door in doors)
+				door.Open();
+		}));
 
 		triggeredOnce = true;
 		triggered = true;

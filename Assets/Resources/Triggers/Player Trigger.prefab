@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08aaaeb41a97a8e48ba2afbcf7b756a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerType: 0
+  triggerType: 1
   cameraEventTarget: {fileID: 400006}
   pressArea: {fileID: 400000}
   doors:
