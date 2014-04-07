@@ -48,7 +48,8 @@ public class PlayerMovement:MonoBehaviour {
 
 			if(player.Interactable == null || player.Interactable.GetInteractableType() != InteractableType.PushableBlock)
 				if((transform.position - targetPosition) != Vector3.zero)
-					RotateToTargetPosition();
+					transform.rotation = Utils.RotateTowards(transform.position, transform.rotation, targetPosition);
+					
 		} else {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.FootSteps, false);
 			player.Animator.SetBool("IsRunning", false);
@@ -70,30 +71,7 @@ public class PlayerMovement:MonoBehaviour {
 	private void Move(Vector3 position) {
 		targetPosition = new Vector3(position.x, 0.667f, position.z);
 	}
-
-	/** <summary>Rotate towards the target position</summary> */
-	private void RotateToTargetPosition() {
-		Quaternion targetRotation = Quaternion.identity;
-
-		targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
-
-		targetRotation.x = 0;
-		targetRotation.z = 0;
-
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 30);
-	}
-
-	/** <summary>Rotate towards the specified position</summary>
-	 * <param name="position">The position to rotate to</param> */
-	private void RotateToPosition(Vector3 position) {
-		Vector3 oldPosition = targetPosition;
-
-		targetPosition = position;
-		RotateToTargetPosition();
-
-		targetPosition = oldPosition;
-	}
-
+	
 	/** <summary>Handle <code>OnCollisionEnter</code> and <code>OnCollisionStay</code> calls</summary>
 	 * <param name="col">The collision</param>  */
 	private void HandleCollision(Collision col) {
@@ -140,7 +118,7 @@ public class PlayerMovement:MonoBehaviour {
 		if(hit.collider == null)
 			return;
 
-		RotateToPosition(hit.point);
+		transform.rotation = Utils.RotateTowards(transform.position, transform.rotation, hit.point);
 
 		if(player.Interactable != null) {
 			player.Drop(true);
