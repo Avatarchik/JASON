@@ -33,7 +33,7 @@ public class SplashScreen:GUIBehaviour {
 			Camera.main.transform.position = normalCamera.position;
 			Camera.main.transform.rotation = normalCamera.rotation;
 
-			GetComponent<MenuMain>().Open();
+			GetComponent<Old_MenuMain>().Open();
 		} else if(!fadingOut && alpha >= 1) {
 			StartCoroutine(Wait());
 		}

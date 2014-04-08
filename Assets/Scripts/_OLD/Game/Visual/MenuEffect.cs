@@ -8,8 +8,8 @@ public class MenuEffect:MonoBehaviour {
 	[SerializeField] private Material[] normalMaterials;
 	[SerializeField] private Material[] fireMaterials;
 
-	private MenuMain menuMain;
-	private MenuOptions menuOptions;
+	private Old_MenuMain menuMain;
+	private Old_MenuOptions menuOptions;
 
 	private float blendfloat;
 
@@ -20,8 +20,8 @@ public class MenuEffect:MonoBehaviour {
 
 		GameObject gui = GameObject.Find("GUI");
 
-		menuMain = gui.GetComponent<MenuMain>();
-		menuOptions = gui.GetComponent<MenuOptions>();
+		menuMain = gui.GetComponent<Old_MenuMain>();
+		menuOptions = gui.GetComponent<Old_MenuOptions>();
 	}
 	
 	void FixedUpdate() {

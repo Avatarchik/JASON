@@ -2,14 +2,15 @@
 using System.Collections;
 using SGUI;
 
-public class MenuCredits:GUIBehaviour {
-	[SerializeField] private Transform normalCamera;
-
+public class Old_MenuOptions:GUIBehaviour {
 	[SerializeField] private SGUITexture[] textures;
 	[SerializeField] private SGUIButton[] buttons;
 	[SerializeField] private SGUILabel[] labels;
 
-	private MenuMain menuMain;
+	[SerializeField] private GUIStyle sliderBar;
+	[SerializeField] private GUIStyle sliderButton;
+
+	private Old_MenuMain menuMain;
 
 	private bool opened = false;
 
@@ -29,7 +30,10 @@ public class MenuCredits:GUIBehaviour {
 			label.Activated = false;
 		}
 
-		menuMain = GetComponent<MenuMain>();
+		menuMain = GetComponent<Old_MenuMain>();
+
+		buttons[2].TextColor = GameData.Instance.particlesEnabled ? Color.yellow : Color.white;
+		buttons[3].TextColor = GameData.Instance.lightEnabled ? Color.yellow : Color.white;
 	}
 
 	protected override void OnGUI() {
@@ -38,14 +42,39 @@ public class MenuCredits:GUIBehaviour {
 
 		base.OnGUI();
 
+		GameData data = GameData.Instance;
+
+		// Reset Save Data
 		if(buttons[0].OnClick) {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
+			data.fireDungeonCleared = false;
+			data.normalDungeonCleared = false;
+		}
 
-			Camera.main.transform.position = normalCamera.position;
-			Camera.main.transform.rotation = normalCamera.rotation;
-
+		// Back
+		if(buttons[1].OnClick) {
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
 			menuMain.Open();
 		}
+
+		// Particles
+		if(buttons[2].OnClick) {
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
+			data.particlesEnabled = !data.particlesEnabled;
+
+			buttons[2].TextColor = data.particlesEnabled ? Color.yellow : Color.white;
+		}
+
+		// Dynamic Lights
+		if(buttons[3].OnClick) {
+			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
+			data.lightEnabled = !data.lightEnabled;
+
+			buttons[3].TextColor = data.lightEnabled ? Color.yellow : Color.white;
+		}
+
+		data.contrast = GUI.HorizontalSlider(new Rect(745, 710, 419.625f, 69.75f), data.contrast, 0, 1, sliderBar, sliderButton);
+		data.SaveData();
 	}
 
 	/** Open this GUI */
@@ -82,5 +111,9 @@ public class MenuCredits:GUIBehaviour {
 
 		foreach(SGUILabel label in labels)
 			label.Activated = true;
+	}
+
+	public bool IsOpen {
+		get { return opened; }
 	}
 }

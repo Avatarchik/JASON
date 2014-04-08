@@ -2,14 +2,14 @@
 using System.Collections;
 using SGUI;
 
-public class MenuMain:GUIBehaviour {
-	[SerializeField] private Transform creditsCamera;
+public class Old_MenuCredits:GUIBehaviour {
+	[SerializeField] private Transform normalCamera;
 
 	[SerializeField] private SGUITexture[] textures;
 	[SerializeField] private SGUIButton[] buttons;
+	[SerializeField] private SGUILabel[] labels;
 
-	private MenuOptions menuOptions;
-	private MenuCredits menuCredits;
+	private Old_MenuMain menuMain;
 
 	private bool opened = false;
 
@@ -24,8 +24,12 @@ public class MenuMain:GUIBehaviour {
 			button.Activated = false;
 		}
 
-		menuOptions = GetComponent<MenuOptions>();
-		menuCredits = GetComponent<MenuCredits>();
+		foreach(SGUILabel label in labels) {
+			label.Create();
+			label.Activated = false;
+		}
+
+		menuMain = GetComponent<Old_MenuMain>();
 	}
 
 	protected override void OnGUI() {
@@ -36,32 +40,17 @@ public class MenuMain:GUIBehaviour {
 
 		if(buttons[0].OnClick) {
 			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
-			ExitApplication.Instance.GameStarted = true;
 
-			GameObject.Find("SGUI Manager").GetComponent<SGUIManager>().RemoveAll();
-			
-			Application.LoadLevel("Normal Dungeon");
-		}
+			Camera.main.transform.position = normalCamera.position;
+			Camera.main.transform.rotation = normalCamera.rotation;
 
-		if(buttons[1].OnClick) {
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
-
-			Camera.main.transform.position = creditsCamera.position;
-			Camera.main.transform.rotation = creditsCamera.rotation;
-
-			menuCredits.Open();
-		}
-
-		if(buttons[2].OnClick) {
-			AudioManager.Instance.SetAudio(AudioManager.AudioFiles.ButtonClick, true);
-			menuOptions.Open();
+			menuMain.Open();
 		}
 	}
 
 	/** Open this GUI */
 	public void Open() {
-		menuOptions.Close();
-		menuCredits.Close();
+		menuMain.Close();
 
 		opened = true;
 
@@ -77,6 +66,9 @@ public class MenuMain:GUIBehaviour {
 
 		foreach(SGUIButton button in buttons)
 			button.Activated = false;
+
+		foreach(SGUILabel label in labels)
+			label.Activated = false;
 	}
 
 	private IEnumerator ButtonDelay() {
@@ -87,9 +79,8 @@ public class MenuMain:GUIBehaviour {
 
 		foreach(SGUIButton button in buttons)
 			button.Activated = true;
-	}
 
-	public bool IsOpen {
-		get { return opened; }
+		foreach(SGUILabel label in labels)
+			label.Activated = true;
 	}
 }
