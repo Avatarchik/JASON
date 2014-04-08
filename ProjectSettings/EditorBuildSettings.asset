@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/Start.unity
+    path: Assets/Scenes/_OLD/Start.unity
   - enabled: 0
-    path: Assets/Scenes/Boss Door.unity
+    path: Assets/Scenes/_OLD/Boss Door.unity
   - enabled: 0
-    path: Assets/Scenes/Menu.unity
+    path: Assets/Scenes/_OLD/Menu.unity
   - enabled: 0
-    path: Assets/Scenes/Normal Dungeon.unity
+    path: Assets/Scenes/_OLD/Normal Dungeon.unity
   - enabled: 0
-    path: Assets/Scenes/Fire Dungeon.unity
+    path: Assets/Scenes/_OLD/Fire Dungeon.unity
   - enabled: 1
-    path: Assets/Scenes/test.unity
+    path: Assets/Scenes/Assets Test.unity
